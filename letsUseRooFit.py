@@ -25,6 +25,7 @@ def integrate(h,x,y):
 mu = ROOT.RooRealVar("mu","#mu",0,-1,5)
 ONE = ROOT.RooConstVar("One","",1)
 allNuisancePdfs = []
+allNuisanceParameters = ROOT.RooArgSet();
 
 data = fi.Get("data")
 nbins = data.GetNbinsX()
@@ -57,6 +58,7 @@ hjesd = fi.Get("jes_dn_bkg")
 nuis_JES    = ROOT.RooRealVar("nuis_JES","nuis_JES",0,-5,5)
 nuis_JES_In = ROOT.RooRealVar("nuis_JES_In","nuis_JES_In",0,-5,5); nuis_JES_In.setConstant()
 nuis_JES_pdf = ROOT.RooGaussian("nuis_JES_PDF","",nuis_JES,nuis_JES_In,ONE)
+allNuisanceParameters.add(nuis_JES)
 allNuisancePdfs.append(nuis_JES_pdf)
 
 allSysdF_JES = []
@@ -94,6 +96,7 @@ hisrd = fi.Get("isr_dn_bkg")
 nuis_ISR = ROOT.RooRealVar("nuis_ISR","nuis_ISR",0,-5,5)
 nuis_ISR_In = ROOT.RooRealVar("nuis_ISR_In","nuis_ISR_In",0,-5,5); nuis_ISR_In.setConstant()
 nuis_ISR_pdf = ROOT.RooGaussian("nuis_ISR_PDF","",nuis_ISR,nuis_ISR_In,ONE)
+allNuisanceParameters.add(nuis_ISR)
 allNuisancePdfs.append(nuis_ISR_pdf)
 allSysdF_ISR = []
 allSysdN_ISR = []
@@ -154,6 +157,7 @@ for b in range(nbins):
 
     allNuisIn_MC.append(nuis_MC_In)
     allNuis_MC.append(nuis_MC)
+    allNuisanceParameters.add(nuis_MC)
     nuis_MC_pdf = ROOT.RooGaussian("nuis_MC_PDF_b%d"%b,"",allNuis_MC[-1],allNuisIn_MC[-1],ONE)
     allNuisancePdfs.append(nuis_MC_pdf)
     dB = ROOT.RooFormulaVar("dB_mcstat_B%d"%(b),"TMath::Power((1+%g),@0)"%fo,ROOT.RooArgList(allNuis_MC[-1]))
@@ -209,5 +213,6 @@ wks = ROOT.RooWorkspace("w","w")
 getattr(wks,"import")(combined_pdf)
 getattr(wks,"import")(nuisancePdf)
 getattr(wks,"import")(listPdfs,listPdfs.GetName())
+getattr(wks,"import")(allNuisanceParameters,"nuisances")
 getattr(wks,"import")(obsdata)
 output.WriteTObject(wks)
