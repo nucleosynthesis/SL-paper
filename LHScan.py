@@ -17,8 +17,8 @@ pdf.Print()
 nll = pdf.createNLL(data,ROOT.RooFit.ExternalConstraints(ROOT.RooArgSet(con)))
 minim = ROOT.RooMinimizer(nll)
 # do a scan
-rmin = -2.
-rmax = 6
+rmin = -1.
+rmax = 2
 np = 20
 
 R = numpy.linspace(rmin, rmax, np)
@@ -27,6 +27,26 @@ for r in R:
   mu.setVal(r)
   minim.minimize("Minuit","minimize")
   C.append(2*nll.getVal())
+
+# also make the usual tree 
+fout = ROOT.TFile("full-LH.root","RECREATE")
+tree = ROOT.TTree("limit","limit")
+
+dnll = array.array('d',[0])
+r    = array.array('d',[0])
+
+tree.Branch("r",r,"r/D")
+tree.Branch("deltaNLL",dnll,"deltaNLL/D")
+
+nll0 = min(C)
+for i in range(len(R)) :
+  dnll[0]= (C[i]-nll0)/2
+  r[0]=R[i]
+  tree.Fill()
+
+fout.cd()
+tree.Write()
+  
 
 plt.plot(R,C)
 plt.ylabel("-2 Log(L)")
