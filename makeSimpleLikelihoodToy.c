@@ -111,7 +111,7 @@ void makeSimpleLikelihoodToy(){
       double b = a+DX;
 
       double nominal, jesu,jesd,isru,isrd, s, d;
-
+      
       if (i<30) { 
       	nominal = N1*integrateExp(s1,a,b)/integrateExp(s1,XMIN,XMAX);
       	jesu    = lnN1*N1*integrateExp(s1+es1,a,b)/integrateExp(s1+es1,XMIN,XMAX);
@@ -139,16 +139,17 @@ void makeSimpleLikelihoodToy(){
 	s       = S3*integrateExp(si3,a,b)/integrateExp(si3,XMIN,XMAX);
       }
     //MC Unc
-      nominal = (double) rMC->Poisson(nominal*mcUncMult)/mcUncMult;
+      double nominal_fluc = (double) rMC->Poisson(nominal*mcUncMult)/mcUncMult;
       mcUnc[i] = nominal*TMath::Sqrt(nominal*mcUncMult)/(nominal*mcUncMult);
+      double msc = nominal_fluc/nominal;
 
       if (j<15) s*=double(j)/15;
       d = (double)r->Poisson(nominal);
-      nominal_bkg[i]=nominal;
-      JES_up_bkg[i]=jesu;
-      JES_dn_bkg[i]=jesd;
-      ISR_up_bkg[i]=isru;
-      ISR_dn_bkg[i]=isrd;
+      nominal_bkg[i]=nominal*msc;
+      JES_up_bkg[i]=jesu*msc;
+      JES_dn_bkg[i]=jesd*msc;
+      ISR_up_bkg[i]=isru*msc;
+      ISR_dn_bkg[i]=isrd*msc;
       data[i]=d;
       signal[i]=s;
 

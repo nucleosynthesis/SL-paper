@@ -1,5 +1,5 @@
 import ROOT
-
+ROOT.gROOT.SetBatch(1)
 # open the file which contains all the info 
 fi = ROOT.TFile.Open("histos.root")
 
@@ -39,6 +39,11 @@ for b in range(nbins):
 
 obsargset = ROOT.RooArgSet(observation,sampleType)
 obsdata = ROOT.RooDataSet("obsdata","Data in all Bins",obsargset)
+
+# Interpolation !
+def interpString(B,C): 
+
+ return  "TMath::Max(0, (TMath::Abs(@0)<=1)*(1+%g*@0+%g*@0*@0) + (@0<-1)*(%g+%g*@0) + (@0>1)*(%g+%g*@0)  )"%(B,C,1-C,B-2*C,1-C,B+2*C)
 
 # Fill the dataset
 for b in range(1,nbins+1):
@@ -84,7 +89,13 @@ for c in range(3):
      B = (fu-fd)/(2*fo)
      C = 1 - fu/(2*fo) - fd/(2*fo)
 
-     df = ROOT.RooFormulaVar("df_JES_c%d_b%d"%(c,b),"1+%g*@0+%g*@0*@0"%(B,C),ROOT.RooArgList(nuis_JES))
+     #df = ROOT.RooFormulaVar("df_JES_c%d_b%d"%(c,b),"TMath::Max(0,1+%g*@0+%g*@0*@0)"%(B,C),ROOT.RooArgList(nuis_JES))
+     df = ROOT.RooFormulaVar("df_JES_c%d_b%d"%(c,b),interpString(B,C),ROOT.RooArgList(nuis_JES))
+     plot = nuis_JES.frame()
+     df.plotOn(plot)
+     cv = ROOT.TCanvas();
+     plot.Draw()
+     cv.SaveAs("plot_df_JES_c%d_b%d.png"%(c,b))
      allSysdF_JES.append(df) 
    
 #####################################################################################
@@ -121,7 +132,14 @@ for c in range(3):
      B = (fu-fd)/(2*fo)
      C = 1 - fu/(2*fo) - fd/(2*fo)
 
-     df = ROOT.RooFormulaVar("df_ISR_c%d_b%d"%(c,b),"1+%g*@0+%g*@0*@0"%(B,C),ROOT.RooArgList(nuis_ISR))
+     df = ROOT.RooFormulaVar("df_ISR_c%d_b%d"%(c,b),interpString(B,C),ROOT.RooArgList(nuis_ISR))
+     # ok why not make a plot of each of these guys too?
+     plot = nuis_ISR.frame()
+     df.plotOn(plot)
+     cv = ROOT.TCanvas();
+     plot.Draw()
+     cv.SaveAs("plot_df_ISR_c%d_b%d.png"%(c,b))
+
      allSysdF_ISR.append(df) 
    
 #####################################################################################
