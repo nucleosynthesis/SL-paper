@@ -161,7 +161,7 @@ void makeSimpleLikelihoodToy(){
 
     TH1F *h_signal = (TH1F*)vectorToHisto("signal",signal,90); h_signal->SetLineColor(2);
     TH1F *h_data   = (TH1F*)vectorToHisto("data",data,90);
-    TH1F *h_bkg    = (TH1F*)vectorToHisto("nominal_bkg",nominal_bkg,mcUnc,90); h_bkg->SetLineColor(4);
+    TH1F *h_bkg    = (TH1F*)vectorToHisto("nominal_bkg",nominal_bkg,mcUnc,90); h_bkg->SetLineColor(4); h_bkg->SetFillColor(kAzure+2); h_bkg->SetMarkerSize(0);
     
     TH1F *h_bkg_JES_up_bkg    = (TH1F*)vectorToHisto("jes_up_bkg",JES_up_bkg,90); h_bkg_JES_up_bkg->SetLineColor(1);
     TH1F *h_bkg_JES_dn_bkg    = (TH1F*)vectorToHisto("jes_dn_bkg",JES_dn_bkg,90); h_bkg_JES_dn_bkg->SetLineColor(1);
@@ -172,14 +172,24 @@ void makeSimpleLikelihoodToy(){
 
     //h_data->SetMinimum(0.001);
     h_data->Draw("P");
-    h_bkg->Draw("histsamee");
+    h_bkg->Draw("E2L");
+    h_bkg->Draw("Lsame");
     h_bkg_JES_dn_bkg->Draw("histsame");
     h_bkg_JES_up_bkg->Draw("histsame");
     h_bkg_ISR_dn_bkg->Draw("histsame");
     h_bkg_ISR_up_bkg->Draw("histsame");
     h_signal->Draw("histsame");
     h_data->Draw("Psame");
-    
+   
+    TLegend *leg = new TLegend(0.65,0.5,0.89,0.89);
+    leg->SetBorderSize(0);
+    leg->AddEntry(h_data,"Observed data","P");
+    leg->AddEntry(h_bkg,"Nominal background (#pm stat unc..)","LFE");
+    leg->AddEntry(h_bkg_JES_up_bkg,"Energy scale up/down","L");
+    leg->AddEntry(h_bkg_ISR_up_bkg,"Theory uncertainty up/down","L");
+    leg->AddEntry(h_signal,"BSM signal","L");
+    leg->Draw();
+
     TLine l1(30,h_data->GetMinimum(),30,0.75*h_data->GetMaximum());l1.SetLineColor(1);l1.SetLineStyle(3);
     TLine l2(60,h_data->GetMinimum(),60,0.75*h_data->GetMaximum());l2.SetLineColor(1);l2.SetLineStyle(3);
     l1.Draw();
