@@ -184,7 +184,7 @@ void makeSimpleLikelihoodToy(){
     TLegend *leg = new TLegend(0.65,0.5,0.89,0.89);
     leg->SetBorderSize(0);
     leg->AddEntry(h_data,"Observed data","P");
-    leg->AddEntry(h_bkg,"Nominal background (#pm stat unc..)","LFE");
+    leg->AddEntry(h_bkg,"Nominal background (#pm stat unc.)","LFE");
     leg->AddEntry(h_bkg_JES_up_bkg,"Energy scale up/down","L");
     leg->AddEntry(h_bkg_ISR_up_bkg,"Theory uncertainty up/down","L");
     leg->AddEntry(h_signal,"BSM signal","L");
