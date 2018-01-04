@@ -28,7 +28,11 @@ allNuisancePdfs = []
 allNuisanceParameters = ROOT.RooArgSet();
 
 data = fi.Get("data")
-nbins = data.GetNbinsX()
+#ncat = 3
+#nbinpercat = 30
+ncat = 3
+nbinpercat = 30
+nbins = ncat*nbinpercat#data.GetNbinsX()
 # next we play the usual game of making RooDataHist for *all* the bins. 
 sampleType  = ROOT.RooCategory("bin_number","Bin Number");
 observation = ROOT.RooRealVar("observed","Observed Events bin",1);
@@ -68,7 +72,7 @@ allNuisancePdfs.append(nuis_JES_pdf)
 
 allSysdF_JES = []
 allSysdN_JES = []
-for c in range(3):
+for c in range(ncat):
   
   nco = integrate(bkg,c*30,c*30+29)
   ncu = integrate(hjesu,c*30,c*30+29)
@@ -80,8 +84,8 @@ for c in range(3):
   dN = ROOT.RooFormulaVar("dN_JES_c%d"%(c)," ","TMath::Power(1+%g,@0)*(@0>=0) + TMath::Power(1+%g,-1*@0)*(@0<0)"%(ku,kd),ROOT.RooArgList(nuis_JES))
   allSysdN_JES.append(dN)
 
-  for x in range(30):
-     b = c*30+x
+  for x in range(nbinpercat):
+     b = c*nbinpercat+x
      fo = bkg.GetBinContent(b+1)/nco
      fu = hjesu.GetBinContent(b+1)/ncu
      fd = hjesd.GetBinContent(b+1)/ncd
@@ -111,7 +115,7 @@ allNuisanceParameters.add(nuis_ISR)
 allNuisancePdfs.append(nuis_ISR_pdf)
 allSysdF_ISR = []
 allSysdN_ISR = []
-for c in range(3):
+for c in range(ncat):
   
   nco = integrate(bkg,c*30,c*30+29)
   ncu = integrate(hisru,c*30,c*30+29)
@@ -123,8 +127,8 @@ for c in range(3):
   dN = ROOT.RooFormulaVar("dN_ISR_c%d"%(c),"TMath::Power(1+%g,@0)*(@0>=0) + TMath::Power(1+%g,-1*@0)*(@0<0)"%(ku,kd),ROOT.RooArgList(nuis_ISR))
   allSysdN_ISR.append(dN)
 
-  for x in range(30):
-     b = c*30+x
+  for x in range(nbinpercat):
+     b = c*nbinpercat+x
      fo = bkg.GetBinContent(b+1)/nco
      fu = hisru.GetBinContent(b+1)/ncu
      fd = hisrd.GetBinContent(b+1)/ncd
@@ -146,13 +150,13 @@ for c in range(3):
 # Next we make the "fraction in each category" 
 fractions = []
 sumFrac   = []
-for c in range(3):
+for c in range(ncat):
   
-  nco = integrate(bkg,c*30,c*30+29)
+  nco = integrate(bkg,c*nbinpercat,c*nbinpercat+nbinpercat-1)
   sums = ROOT.RooArgList()
 
-  for x in range(30):
-    b = c*30+x
+  for x in range(nbinpercat):
+    b = c*nbinpercat+x
     fo = bkg.GetBinContent(b+1)/nco
 
     f = ROOT.RooFormulaVar("f_c%d_b%d"%(c,b),"%g*@0*@1"%fo,ROOT.RooArgList(allSysdF_JES[b],allSysdF_ISR[b]))
@@ -170,15 +174,15 @@ allNuisIn_MC = []
 
 for b in range(nbins):
     
-    nuis_MC = ROOT.RooRealVar("nuis_MC_b%d"%b,"nuis_MC_b%d"%b,0,-5,5)
-    nuis_MC_In = ROOT.RooRealVar("nuis_MC_In_b%d"%b,"nuis_MC_In_b%d"%b,0,-5,5); nuis_MC_In.setConstant()
+    nuis_MC = ROOT.RooRealVar("nuis_MC_b%d"%(b+1),"nuis_MC_b%d"%b,0,-5,5)
+    nuis_MC_In = ROOT.RooRealVar("nuis_MC_In_b%d"%(b+1),"nuis_MC_In_b%d"%b,0,-5,5); nuis_MC_In.setConstant()
 
     allNuisIn_MC.append(nuis_MC_In)
     allNuis_MC.append(nuis_MC)
     allNuisanceParameters.add(nuis_MC)
     nuis_MC_pdf = ROOT.RooGaussian("nuis_MC_PDF_b%d"%b,"",allNuis_MC[-1],allNuisIn_MC[-1],ONE)
     allNuisancePdfs.append(nuis_MC_pdf)
-    dB = ROOT.RooFormulaVar("dB_mcstat_B%d"%(b),"TMath::Power((1+%g),@0)"%fo,ROOT.RooArgList(allNuis_MC[-1]))
+    dB = ROOT.RooFormulaVar("dB_mcstat_B%d"%(b+1),"TMath::Power((1+%g),@0)"%fo,ROOT.RooArgList(allNuis_MC[-1]))
     allSysdB_MC.append(dB)
 #####################################################################################
 # make a prodPdf of the nuisances 
@@ -194,16 +198,16 @@ expected_Signals     = []
 expected_Totals      = []
 all_poissons 	     = []
 combined_pdf = ROOT.RooSimultaneous("combined_pdf","combined_pdf",sampleType);
-for c in range(3):
+for c in range(ncat):
   
-  nco = integrate(bkg,c*30,c*30+29)
+  nco = integrate(bkg,c*nbinpercat,c*nbinpercat+nbinpercat-1)
   dNISR = allSysdN_ISR[c]
   dNJES = allSysdN_JES[c]
   sumFracNorm = sumFrac[c]
 
-  for x in range(30):
+  for x in range(nbinpercat):
     
-    b = c*30+x
+    b = c*nbinpercat+x
 
     dfMC  = allSysdB_MC[b]
     dfJES = allSysdF_JES[b]
@@ -212,17 +216,17 @@ for c in range(3):
     
     ns = signal.GetBinContent(b+1)
 
-    expectation_b = ROOT.RooFormulaVar("expected_background_bin%d"%b,"(%g*@0*@1*@2)*(%g/@3)*@4*@5"%(nco,fo),ROOT.RooArgList(dNISR,dNJES,dfMC,sumFracNorm,dfJES,dfISR))
-    expectation_s = ROOT.RooFormulaVar("expectation_signal_bin%d"%b,"%g*@0"%ns,ROOT.RooArgList(mu)) 
+    expectation_b = ROOT.RooFormulaVar("expected_background_bin%d"%(b+1),"(%g*@0*@1*@2)*(%g/@3)*@4*@5"%(nco,fo),ROOT.RooArgList(dNISR,dNJES,dfMC,sumFracNorm,dfJES,dfISR))
+    expectation_s = ROOT.RooFormulaVar("expectation_signal_bin%d"%(b+1),"%g*@0"%ns,ROOT.RooArgList(mu)) 
     expected_Backgrounds.append(expectation_b)
     expected_Signals.append(expectation_s)
 
-    expectation   = ROOT.RooAddition("total_expected_bin_%d"%b,"",ROOT.RooArgList(expectation_s,expectation_b))
+    expectation   = ROOT.RooAddition("total_expected_bin_%d"%(b+1),"",ROOT.RooArgList(expectation_s,expectation_b))
     expected_Totals.append(expectation)
     
-    pois = ROOT.RooPoisson("pdf_bin_%d"%b,"Poisson in bin %d"%b,observation,expectation); 
+    pois = ROOT.RooPoisson("pdf_bin_%d"%(b+1),"Poisson in bin %d"%(b+1),observation,expectation); 
     all_poissons.append(pois)
-    combined_pdf.addPdf(pois,"%d"%b)
+    combined_pdf.addPdf(pois,"%d"%(b+1))
   
 combined_pdf.Print("v")
 

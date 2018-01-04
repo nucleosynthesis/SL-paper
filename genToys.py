@@ -13,13 +13,13 @@ nuis = ws.genobj("nuisances")
 fout = ROOT.TFile("toy_trees.root","RECREATE");
 tree = ROOT.TTree("toys","toys");
 
-ntoys = 1000
+ntoys = 5000
 nbins = 90
 
 bV    = [array.array('d',[0]) for it in range(nbins)] 
 
 for b in range(nbins):
-  tree.Branch("b_%d"%b,bV[b],"b_%d/D"%b)
+  tree.Branch("b_%d"%(b+1),bV[b],"b_%d/D"%(b+1))
 
 for i in range(ntoys): 
  
@@ -30,7 +30,7 @@ for i in range(ntoys):
    ws.var(n.GetName()).setVal(genData.get(0).getRealValue(n.GetName()))
    #iprint "Setting ", n.GetName(), ws.var(n.GetName()).getVal()
    for b in range(nbins):
-     bV[b][0] = ws.function("expected_background_bin%d"%b).getVal()
+     bV[b][0] = ws.function("expected_background_bin%d"%(b+1)).getVal()
    
  tree.Fill()
 fout.cd()
