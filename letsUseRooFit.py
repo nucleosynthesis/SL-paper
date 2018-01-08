@@ -57,6 +57,7 @@ for b in range(1,nbins+1):
 
 signal = fi.Get("signal")
 bkg = fi.Get("nominal_bkg")
+mc_unc = fi.Get("mc_unc")
 # Ok, that was easy, now we want to make an "expectation" for each of the bins 0->89
 
 # 1, for the JES and ISR systematics, lets make the template variations 
@@ -182,6 +183,8 @@ for b in range(nbins):
     allNuisanceParameters.add(nuis_MC)
     nuis_MC_pdf = ROOT.RooGaussian("nuis_MC_PDF_b%d"%b,"",allNuis_MC[-1],allNuisIn_MC[-1],ONE)
     allNuisancePdfs.append(nuis_MC_pdf)
+    fo = mc_unc.GetBinContent(b+1)/bkg.GetBinContent(b+1)
+    print fo 
     dB = ROOT.RooFormulaVar("dB_mcstat_B%d"%(b+1),"TMath::Power((1+%g),@0)"%fo,ROOT.RooArgList(allNuis_MC[-1]))
     allSysdB_MC.append(dB)
 #####################################################################################

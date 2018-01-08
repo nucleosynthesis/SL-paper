@@ -76,6 +76,9 @@ def skew(tree,x,mx):
 
 def plotCompare(tree,b,mean,var,skew):
   
+  tree.GetEntry(0)
+  mle = getattr(tree,"mle_b_%d"%(b))
+
   ROOT.gStyle.SetOptStat(0)
   tree.Draw("b_%d>>h_%d"%(b,b));
   h = ROOT.gROOT.FindObject("h_%d"%b);  h.SetLineColor(1)
@@ -114,6 +117,23 @@ def plotCompare(tree,b,mean,var,skew):
   tlat.SetTextFont(42)
   tlat.DrawLatex(0.1,0.94,"#mu_{1}=%g, #mu_{2}=%g, #mu_{3}=%g"%(mean,var,skew))
 
+  lmle = ROOT.TLine(mle,h.GetMinimum(),mle,h.GetMaximum())
+  lmle.SetLineStyle(2)
+  lmle.SetLineWidth(2)
+  lmle.Draw()
+  
+  lgle = ROOT.TLine(mean,h.GetMinimum(),mean,h.GetMaximum())
+  lgle.SetLineStyle(2)
+  lgle.SetLineWidth(2)
+  lgle.SetLineColor(2)
+  lgle.Draw()
+  
+  lple = ROOT.TLine(A,h.GetMinimum(),A,h.GetMaximum())
+  lple.SetLineStyle(2)
+  lple.SetLineWidth(2)
+  lple.SetLineColor(ROOT.kGreen+2)
+  lple.Draw()
+  
   pad = ROOT.TPad("p1%d"%b,"p1",0.72,0.72,0.99,0.99)
   pad.Draw()
   pad.cd()
