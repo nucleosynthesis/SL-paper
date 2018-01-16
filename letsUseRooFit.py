@@ -62,8 +62,8 @@ mc_unc = fi.Get("mc_unc")
 
 # 1, for the JES and ISR systematics, lets make the template variations 
 # JES SYSTEMATIC ####################################################################
-hjesu = fi.Get("jes_up_bkg")
-hjesd = fi.Get("jes_dn_bkg")
+hjesu = fi.Get("nominal_bkg_JESUp")
+hjesd = fi.Get("nominal_bkg_JESDown")
 
 nuis_JES    = ROOT.RooRealVar("nuis_JES","nuis_JES",0,-5,5)
 nuis_JES_In = ROOT.RooRealVar("nuis_JES_In","nuis_JES_In",0,-5,5); nuis_JES_In.setConstant()
@@ -92,7 +92,7 @@ for c in range(ncat):
      fd = hjesd.GetBinContent(b+1)/ncd
 
      B = (fu-fd)/(2*fo)
-     C = 1 - fu/(2*fo) - fd/(2*fo)
+     C =  fu/(2*fo) + fd/(2*fo) - 1
 
      #df = ROOT.RooFormulaVar("df_JES_c%d_b%d"%(c,b),"TMath::Max(0,1+%g*@0+%g*@0*@0)"%(B,C),ROOT.RooArgList(nuis_JES))
      df = ROOT.RooFormulaVar("df_JES_c%d_b%d"%(c,b),interpString(B,C),ROOT.RooArgList(nuis_JES))
@@ -100,13 +100,21 @@ for c in range(ncat):
      df.plotOn(plot)
      cv = ROOT.TCanvas();
      plot.Draw()
+     gpts = ROOT.TGraph()
+     gpts.SetMarkerSize(1.2)
+     gpts.SetMarkerStyle(20)
+     gpts.SetMarkerColor(2)
+     gpts.SetPoint(0,-1,fd/fo)
+     gpts.SetPoint(1,0,fo/fo)
+     gpts.SetPoint(2,1,fu/fo)
+     gpts.Draw("P")
      cv.SaveAs("plot_df_JES_c%d_b%d.png"%(c,b))
      allSysdF_JES.append(df) 
    
 #####################################################################################
 # ISR SYSTEMATIC ####################################################################
-hisru = fi.Get("isr_up_bkg")
-hisrd = fi.Get("isr_dn_bkg")
+hisru = fi.Get("nominal_bkg_ISRUp")
+hisrd = fi.Get("nominal_bkg_ISRDown")
 
 
 nuis_ISR = ROOT.RooRealVar("nuis_ISR","nuis_ISR",0,-5,5)
@@ -135,7 +143,7 @@ for c in range(ncat):
      fd = hisrd.GetBinContent(b+1)/ncd
 
      B = (fu-fd)/(2*fo)
-     C = 1 - fu/(2*fo) - fd/(2*fo)
+     C =  fu/(2*fo) + fd/(2*fo) - 1
 
      df = ROOT.RooFormulaVar("df_ISR_c%d_b%d"%(c,b),interpString(B,C),ROOT.RooArgList(nuis_ISR))
      # ok why not make a plot of each of these guys too?
@@ -143,6 +151,15 @@ for c in range(ncat):
      df.plotOn(plot)
      cv = ROOT.TCanvas();
      plot.Draw()
+     # Draw the tree points also - divided by the nominal value 
+     gpts = ROOT.TGraph()
+     gpts.SetMarkerSize(1.2)
+     gpts.SetMarkerStyle(20)
+     gpts.SetMarkerColor(2)
+     gpts.SetPoint(0,-1,fd/fo)
+     gpts.SetPoint(1,0,fo/fo)
+     gpts.SetPoint(2,1,fu/fo)
+     gpts.Draw("P")
      cv.SaveAs("plot_df_ISR_c%d_b%d.png"%(c,b))
 
      allSysdF_ISR.append(df) 
@@ -226,13 +243,13 @@ for c in range(ncat):
 
     expectation   = ROOT.RooAddition("total_expected_bin_%d"%(b+1),"",ROOT.RooArgList(expectation_s,expectation_b))
     expected_Totals.append(expectation)
-    
+   
+    observation.setVal(data.GetBinContent(b+1));
     pois = ROOT.RooPoisson("pdf_bin_%d"%(b+1),"Poisson in bin %d"%(b+1),observation,expectation); 
     all_poissons.append(pois)
-    combined_pdf.addPdf(pois,"%d"%(b+1))
+    combined_pdf.addPdf(pois,"%d"%(b))
   
 combined_pdf.Print("v")
-
 output = ROOT.TFile("workspace.root","RECREATE")
 wks = ROOT.RooWorkspace("w","w")
 getattr(wks,"import")(combined_pdf)
