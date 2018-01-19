@@ -1,6 +1,7 @@
 import ROOT 
 import sys 
-import numpy
+import numpy as np
+from scipy import stats
 import array
 
 # read in a TTree and calculate moments to be spat out in the SL pythom model file - :)
@@ -8,18 +9,18 @@ import array
 
 def getCoefficients(m1,m2,m3):
 
-  inside = numpy.complex(m3*m3 - 8*m2*m2*m2,0)
+  inside = np.complex(m3*m3 - 8*m2*m2*m2,0)
   root = inside**0.5;
-  c_m3 = numpy.complex(-m3,0);
+  c_m3 = np.complex(-m3,0);
   k3   = c_m3+root;
   k    = k3**(1./3);
 
-  j2 = numpy.complex(1,(3)**0.5);
-  j  = numpy.complex(1,-(3)**0.5);
+  j2 = np.complex(1,(3)**0.5);
+  j  = np.complex(1,-(3)**0.5);
       
   c = -j*m2/k-0.5*j2*k;
 
-  C = numpy.real(c);
+  C = np.real(c);
   if (m2 < (C*C)/2): 
   	B = m2**0.5
 	C = 0
@@ -153,10 +154,24 @@ def plotCompare(tree,b,mean,var,skew):
 fi = ROOT.TFile.Open(sys.argv[1])
 tree = fi.Get("toys")
 nbins = 90
+allData = []
+for iEntry in range(tree.GetEntries()):
+    tree.GetEntry(iEntry)
+    allDataTemp = []
+    for branch in ["b_%d"%(i+1) for i in range(nbins)]:
+        allDataTemp.append(getattr(tree,branch))
+    allData.append(allDataTemp)
+allData = np.array(allData)
+allData = allData
+means = allData.mean(0)
+cov = np.cov(allData.T)
+allDataMinusMean = allData - means
+allDataMinusMean3 = allDataMinusMean**3
+skews = allDataMinusMean3.mean(0)
 
-means        = [ mean(tree,"b_%d"%(i+1)) for i in range(nbins) ]
-covariance2D = [ [covariance(tree,"b_%d"%(i+1),means[i],"b_%d"%(j+1),means[j]) for j in range(nbins)] for i in range(nbins) ]
-skews        = [ skew(tree,"b_%d"%(i+1),means[i]) for i in range(nbins) ]
+means        = list(means)
+covariance2D = [ [cov[i,j] for j in range(nbins)] for i in range(nbins) ]
+skews        = list(skews)
 covariance   = [ covariance2D[i][j] for i in range(nbins) for j in range(nbins) ]
 
 fother = ROOT.TFile.Open("histos.root")
@@ -168,9 +183,9 @@ signal = [signalH.GetBinContent(b+1) for b in range(nbins)]
 
 # now, for each bin, lets make a plot comparing the toys, a gaussian and the quadratic
 
-for b in range(nbins): plotCompare(tree,b+1,means[b],covariance2D[b][b],skews[b])
+# for b in range(nbins): plotCompare(tree,b+1,means[b],covariance2D[b][b],skews[b])
 
-print "import numpy"
+print "import numpy as np"
 print "import array"
 print "name = 'Generated Model' "
 print "nbins = %d"%nbins
@@ -179,4 +194,5 @@ print "background = array.array('d',",means,")"
 print "covariance   = array.array('d',",covariance,")"
 print "third_moment = array.array('d',",skews,")"
 print "signal = array.array('d',",signal,")"
+
 
