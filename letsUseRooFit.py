@@ -15,6 +15,10 @@ TFile**		histos.root
   KEY: TH1F	isr_up_bkg;1
   KEY: TH1F	mc_unc;1
 """
+# Interpolation !
+def interpString(B,C): 
+
+ return  "TMath::Max(0, (TMath::Abs(@0)<=1)*(1+%g*@0+%g*@0*@0) + (@0<-1)*(%g+%g*@0) + (@0>1)*(%g+%g*@0)  )"%(B,C,1-C,B-2*C,1-C,B+2*C)
 
 def integrate(h,x,y):
  I = 0
@@ -37,23 +41,6 @@ nbins = ncat*nbinpercat#data.GetNbinsX()
 sampleType  = ROOT.RooCategory("bin_number","Bin Number");
 observation = ROOT.RooRealVar("observed","Observed Events bin",1);
 
-for b in range(nbins):
-  sampleType.defineType("%d"%b,b)
-  sampleType.setIndex(b)
-
-obsargset = ROOT.RooArgSet(observation,sampleType)
-obsdata = ROOT.RooDataSet("obsdata","Data in all Bins",obsargset)
-
-# Interpolation !
-def interpString(B,C): 
-
- return  "TMath::Max(0, (TMath::Abs(@0)<=1)*(1+%g*@0+%g*@0*@0) + (@0<-1)*(%g+%g*@0) + (@0>1)*(%g+%g*@0)  )"%(B,C,1-C,B-2*C,1-C,B+2*C)
-
-# Fill the dataset
-for b in range(1,nbins+1):
-  sampleType.setIndex(b-1)
-  observation.setVal(data.GetBinContent(b));
-  obsdata.add(ROOT.RooArgSet(observation,sampleType));
 
 signal = fi.Get("signal")
 bkg = fi.Get("nominal_bkg")
@@ -212,11 +199,30 @@ for pdf in allNuisancePdfs: listPdfs.add(pdf)
 listPdfs.setName("constraintPdfs")
 nuisancePdf = ROOT.RooProdPdf("nuisance_pdf","",listPdfs)
 
-# Ok finally, we are ready to make the expectation per bin and make a Poisson PDF  
+# Ok finally, we are ready to make the expectation per bin and make a Poisson PDF 
+# Now we redefine the number of bins for the ones we want to KEEP in the model (for testing)
+ncat=3 
+nbinpercat=30
+nbins = ncat*nbinpercat
+
 expected_Backgrounds = []
 expected_Signals     = []
 expected_Totals      = []
 all_poissons 	     = []
+
+for b in range(nbins):
+  sampleType.defineType("%d"%b,b)
+  sampleType.setIndex(b)
+
+obsargset = ROOT.RooArgSet(observation,sampleType)
+obsdata = ROOT.RooDataSet("obsdata","Data in all Bins",obsargset)
+
+# Fill the dataset
+for b in range(1,nbins+1):
+  sampleType.setIndex(b-1)
+  observation.setVal(data.GetBinContent(b));
+  obsdata.add(ROOT.RooArgSet(observation,sampleType));
+
 combined_pdf = ROOT.RooSimultaneous("combined_pdf","combined_pdf",sampleType);
 for c in range(ncat):
   
@@ -234,7 +240,8 @@ for c in range(ncat):
     dfISR = allSysdF_ISR[b]
     fo = bkg.GetBinContent(b+1)/nco
     
-    ns = signal.GetBinContent(b+1)
+    # NS == 1 for testing
+    ns =  signal.GetBinContent(b+1)
 
     expectation_b = ROOT.RooFormulaVar("expected_background_bin%d"%(b+1),"(%g*@0*@1*@2)*(%g/@3)*@4*@5"%(nco,fo),ROOT.RooArgList(dNISR,dNJES,dfMC,sumFracNorm,dfJES,dfISR))
     expectation_s = ROOT.RooFormulaVar("expectation_signal_bin%d"%(b+1),"%g*@0"%ns,ROOT.RooArgList(mu)) 
@@ -248,7 +255,8 @@ for c in range(ncat):
     pois = ROOT.RooPoisson("pdf_bin_%d"%(b+1),"Poisson in bin %d"%(b+1),observation,expectation); 
     all_poissons.append(pois)
     combined_pdf.addPdf(pois,"%d"%(b))
-  
+
+
 combined_pdf.Print("v")
 output = ROOT.TFile("workspace.root","RECREATE")
 wks = ROOT.RooWorkspace("w","w")
@@ -258,3 +266,40 @@ getattr(wks,"import")(listPdfs,listPdfs.GetName())
 getattr(wks,"import")(allNuisanceParameters,"nuisances")
 getattr(wks,"import")(obsdata)
 output.WriteTObject(wks)
+
+#ho = fi.Get("nomonal_bkg")
+
+for b in range(nbins): 
+
+   #for each nuiance parametere, plot the expected value of b 
+   nuisances = ["nuis_JES","nuis_ISR","nuis_MC_b%d"%(b+1)]
+   h         = ["JES","ISR"]
+   cv = ROOT.TCanvas("c_%d"%b,"c",2400,800)
+   cv.Divide(3)
+   fo = bkg.GetBinContent(b+1) 
+
+   grtmp = []
+   for i,nuis in enumerate(nuisances):
+     plot = wks.var(nuis).frame()
+     wks.function("expected_background_bin%d"%(b+1)).plotOn(plot)
+     cv.cd(i+1)
+     plot.Draw()
+     if i < len(nuisances)-1:
+
+       fu = fi.Get("nominal_bkg_%sUp"%h[i]).GetBinContent(b+1)
+       fd = fi.Get("nominal_bkg_%sDown"%h[i]).GetBinContent(b+1)
+       gpts = ROOT.TGraph()
+       gpts.SetMarkerSize(1.2)
+       gpts.SetMarkerStyle(20)
+       gpts.SetMarkerColor(2)
+       gpts.SetPoint(0,-1,fd)
+       gpts.SetPoint(1,0,fo)
+       gpts.SetPoint(2,1,fu)
+       grtmp.append(gpts)
+
+   for i,gpts in enumerate(grtmp):
+   	cv.cd(i+1)
+   	gpts.Draw("P")
+
+   cv.SaveAs("interpolation_bin_%d.png"%(b+1))
+ 

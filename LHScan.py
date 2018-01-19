@@ -9,6 +9,10 @@ ws = fi.Get("w")
 
 nbins = 90
 
+rMinimum = -5
+rMaximum = 5
+np = 100
+
 if noSys: 
   allN = ws.genobj("nuisances")
   iterN = allN.createIterator()
@@ -22,6 +26,8 @@ data = ws.data("obsdata")
 pdf  = ws.pdf("combined_pdf")
 con  = ws.pdf("nuisance_pdf")
 
+mu.setRange(rMinimum,rMaximum)
+
 data.Print()
 con.Print()
 pdf.Print()
@@ -31,24 +37,24 @@ mu.setConstant(False)
 minimF = ROOT.RooMinimizer(nll)
 minimF.minimize("Minuit","minimize")
 nll0 = nll.getVal()
+rmin = mu.getVal()
 
 mu.setConstant(True)
 minim = ROOT.RooMinimizer(nll)
 # do a scan
-rmin = -1.
-rmax = 2
-np = 20
 
-R = numpy.linspace(rmin, rmax, np)
+myR = [float(rMinimum)+i*float(rMaximum-rMinimum)/np for i in range(np)]
 C = []
 B = []
-for r in R:
+
+for r in myR:
   mu.setVal(r)
   minim.minimize("Minuit","minimize")
   C.append(nll.getVal()-nll0)
   thisB = []
   for b in range(nbins): thisB.append(ws.function("expected_background_bin%d"%(b+1)).getVal())
   B.append(thisB)
+
 
 # also make the usual tree 
 fout = ROOT.TFile("full-LH.root","RECREATE")
@@ -64,9 +70,10 @@ tree.Branch("deltaNLL",dnll,"deltaNLL/D")
 for i in range(nbins) : tree.Branch("bkg_bin_%d"%(i+1),BS[i],"bkg_bin_%d/D"%(i+1))
 
 #nll0 = min(C)
-for i in range(len(R)) :
+for i in range(len(myR)) :
   dnll[0]= C[i]
-  r[0]=R[i]
+  r[0]=myR[i]
+  print r[0],dnll[0]
   for b in range(nbins): BS[b][0]=B[i][b]
   tree.Fill()
 
@@ -74,7 +81,7 @@ fout.cd()
 tree.Write()
   
 
-plt.plot(R,C)
+plt.plot(myR,C)
 plt.ylabel("-Log(L)")
 plt.xlabel("$\mu$")
 plt.show()

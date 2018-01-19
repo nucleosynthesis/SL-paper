@@ -8,12 +8,28 @@ double integrateExp(double s, double a, double b){
 }
 
 
-TH1F *vectorToHisto(std::string name, double *v, int n){
-   
-   TH1F *h = new TH1F(name.c_str(),"",n,0,n);
-   for (int i=1;i<=n;i++){
-     h->SetBinContent(i,v[i-1]);
-     h->GetXaxis()->SetBinLabel(i,Form("%d",i));
+TH1F *vectorToHisto(std::string name, double *v, int n, int nmin=-1, int nmax=-1){
+
+   TH1F *h; 
+   if (nmin>=0 && nmax >=0){
+     h = new TH1F(name.c_str(),"",nmax-nmin,0,nmax-nmin);
+     int count=1;
+     for (int i=nmin;i<nmax;i++){
+       h->SetBinContent(count,v[i-1]);
+       h->GetXaxis()->SetBinLabel(count,Form("%d",i));
+       h->GetXaxis()->SetBinLabel(count,Form("%d",i));
+       count++;
+     }
+
+
+   } else{ 
+     h = new TH1F(name.c_str(),"",n,0,n);
+
+     for (int i=1;i<=n;i++){
+       h->SetBinContent(i,v[i-1]);
+       h->GetXaxis()->SetBinLabel(i,Form("%d",i));
+       h->GetXaxis()->SetBinLabel(i,Form("%d",i));
+     }
    }
    h->GetXaxis()->SetTitle("Signal Region");
    h->GetYaxis()->SetTitle("Number of events");
@@ -163,13 +179,18 @@ void makeSimpleLikelihoodToy(){
     TH1F *h_data   = (TH1F*)vectorToHisto("data",data,90);
     TH1F *h_bkg    = (TH1F*)vectorToHisto("nominal_bkg",nominal_bkg,mcUnc,90); h_bkg->SetLineColor(4); h_bkg->SetFillColor(kAzure+2); h_bkg->SetMarkerSize(0);
     
-    TH1F *h_bkg_JES_up_bkg    = (TH1F*)vectorToHisto("jes_up_bkg",JES_up_bkg,90); h_bkg_JES_up_bkg->SetLineColor(1);
-    TH1F *h_bkg_JES_dn_bkg    = (TH1F*)vectorToHisto("jes_dn_bkg",JES_dn_bkg,90); h_bkg_JES_dn_bkg->SetLineColor(1);
-    TH1F *h_bkg_ISR_up_bkg    = (TH1F*)vectorToHisto("isr_up_bkg",ISR_up_bkg,90); h_bkg_ISR_up_bkg->SetLineColor(1),h_bkg_ISR_up_bkg->SetLineStyle(2);
-    TH1F *h_bkg_ISR_dn_bkg    = (TH1F*)vectorToHisto("isr_dn_bkg",ISR_dn_bkg,90); h_bkg_ISR_dn_bkg->SetLineColor(1),h_bkg_ISR_dn_bkg->SetLineStyle(2) ;
+    TH1F *h_bkg_JES_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_JESUp",JES_up_bkg,90); h_bkg_JES_up_bkg->SetLineColor(1);
+    TH1F *h_bkg_JES_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_JESDown",JES_dn_bkg,90); h_bkg_JES_dn_bkg->SetLineColor(1);
+    TH1F *h_bkg_ISR_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_ISRUp",ISR_up_bkg,90); h_bkg_ISR_up_bkg->SetLineColor(1),h_bkg_ISR_up_bkg->SetLineStyle(2);
+    TH1F *h_bkg_ISR_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_ISRDown",ISR_dn_bkg,90); h_bkg_ISR_dn_bkg->SetLineColor(1),h_bkg_ISR_dn_bkg->SetLineStyle(2) ;
     
     TH1F *h_bkg_MCUNC         = (TH1F*)vectorToHisto("mc_unc",mcUnc,90); h_bkg_MCUNC->SetLineColor(1),h_bkg_MCUNC->SetLineStyle(2) ;
 
+    for (int i=0;i<h_bkg->GetNbinsX();i++){
+	h_bkg->SetBinError(i+1,h_bkg_MCUNC->GetBinContent(i+1));
+    }
+    
+    h_data->GetXaxis()->LabelsOption("v");
     //h_data->SetMinimum(0.001);
     h_data->Draw("P");
     h_bkg->Draw("E2L");
@@ -207,6 +228,37 @@ void makeSimpleLikelihoodToy(){
     h_bkg_ISR_dn_bkg->Write();
     h_bkg_ISR_up_bkg->Write();
     h_bkg_MCUNC->Write();
+
+// DO the same in 3 categories 
+    for (int c=1;c<4;c++){
+      int min = (c-1)*30 + 1;
+      int max = (c-1)*30+31;
+      h_signal = (TH1F*)vectorToHisto(Form("C%d_signal",c),signal,90,min,max); h_signal->SetLineColor(2);
+      h_data   = (TH1F*)vectorToHisto(Form("C%d_data",c),data,90,min,max);
+      h_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg",c),nominal_bkg,90,min,max); h_bkg->SetLineColor(4); h_bkg->SetFillColor(kAzure+2); h_bkg->SetMarkerSize(0);
+      
+      h_bkg_JES_up_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_JESUp",c),JES_up_bkg,90,min,max); h_bkg_JES_up_bkg->SetLineColor(1);
+      h_bkg_JES_dn_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_JESDown",c),JES_dn_bkg,90,min,max); h_bkg_JES_dn_bkg->SetLineColor(1);
+      h_bkg_ISR_up_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_ISRUp",c),ISR_up_bkg,90,min,max); h_bkg_ISR_up_bkg->SetLineColor(1),h_bkg_ISR_up_bkg->SetLineStyle(2);
+      h_bkg_ISR_dn_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_ISRDown",c),ISR_dn_bkg,90,min,max); h_bkg_ISR_dn_bkg->SetLineColor(1),h_bkg_ISR_dn_bkg->SetLineStyle(2);
+
+      TH1F *h_bkg_MCUNC         = (TH1F*)vectorToHisto(Form("mc_unc_c%d",c),mcUnc,90,min,max); h_bkg_MCUNC->SetLineColor(1),h_bkg_MCUNC->SetLineStyle(2) ;
+      for (int i=0;i<h_bkg->GetNbinsX();i++){
+         h_bkg->SetBinError(i+1,h_bkg_MCUNC->GetBinContent(i+1));
+      }
+      h_data->Write();
+      h_bkg->Write();
+      h_signal->Write();
+      h_bkg_JES_dn_bkg->Write();
+      h_bkg_JES_up_bkg->Write();
+      h_bkg_ISR_dn_bkg->Write();
+      h_bkg_ISR_up_bkg->Write();
+
+    }
+
+
+
+
     fout->Close();
 
 
