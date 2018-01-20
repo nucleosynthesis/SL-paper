@@ -3,9 +3,11 @@ import sys
 import numpy as np
 from scipy import stats
 import array
+ROOT.gROOT.SetBatch(1)
 
 # read in a TTree and calculate moments to be spat out in the SL pythom model file - :)
 # Run with -> python toys2ModelFile.py in.root > out.py 
+makePlots = True
 
 def getCoefficients(m1,m2,m3):
 
@@ -182,8 +184,8 @@ data   = [dataH.GetBinContent(b+1) for b in range(nbins)]
 signal = [signalH.GetBinContent(b+1) for b in range(nbins)]
 
 # now, for each bin, lets make a plot comparing the toys, a gaussian and the quadratic
-
-# for b in range(nbins): plotCompare(tree,b+1,means[b],covariance2D[b][b],skews[b])
+if makePlots:
+    for b in range(nbins): plotCompare(tree,b+1,means[b],covariance2D[b][b],skews[b])
 
 print "import numpy as np"
 print "import array"
