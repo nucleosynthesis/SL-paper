@@ -9,9 +9,9 @@ ws = fi.Get("w")
 
 nbins = 90
 
-rMinimum = -5
-rMaximum = 5
-np = 100
+rMinimum = -1.2
+rMaximum = 1.2
+np = 10
 
 if noSys: 
   allN = ws.genobj("nuisances")
@@ -25,7 +25,6 @@ mu   = ws.var("mu"); mu.setConstant()
 data = ws.data("obsdata")
 pdf  = ws.pdf("combined_pdf")
 con  = ws.pdf("nuisance_pdf")
-
 mu.setRange(rMinimum,rMaximum)
 
 data.Print()
@@ -36,6 +35,7 @@ nll = pdf.createNLL(data,ROOT.RooFit.ExternalConstraints(ROOT.RooArgSet(con)))
 mu.setConstant(False)
 minimF = ROOT.RooMinimizer(nll)
 minimF.minimize("Minuit","minimize")
+fitResultS = minimF.save("fitResult_fits","fitResult_fits")
 nll0 = nll.getVal()
 rmin = mu.getVal()
 
@@ -43,7 +43,7 @@ mu.setConstant(True)
 minim = ROOT.RooMinimizer(nll)
 # do a scan
 
-myR = [float(rMinimum)+i*float(rMaximum-rMinimum)/np for i in range(np)]
+myR = [float(rMinimum)+i*float(rMaximum-rMinimum)/np for i in range(np+1)]
 C = []
 B = []
 
@@ -54,6 +54,10 @@ for r in myR:
   thisB = []
   for b in range(nbins): thisB.append(ws.function("expected_background_bin%d"%(b+1)).getVal())
   B.append(thisB)
+
+mu.setVal(0)
+minim.minimize("Minuit","minimize")
+fitResultB = minim.save("fitResult_fitb","fitResult_fitb")
 
 
 # also make the usual tree 
@@ -69,7 +73,6 @@ tree.Branch("r",r,"r/D")
 tree.Branch("deltaNLL",dnll,"deltaNLL/D")
 for i in range(nbins) : tree.Branch("bkg_bin_%d"%(i+1),BS[i],"bkg_bin_%d/D"%(i+1))
 
-#nll0 = min(C)
 for i in range(len(myR)) :
   dnll[0]= C[i]
   r[0]=myR[i]
@@ -79,6 +82,9 @@ for i in range(len(myR)) :
 
 fout.cd()
 tree.Write()
+fitResultB.Write()
+fitResultS.Write()
+
   
 
 plt.plot(myR,C)
