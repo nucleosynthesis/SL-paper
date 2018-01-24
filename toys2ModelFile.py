@@ -7,7 +7,7 @@ ROOT.gROOT.SetBatch(1)
 
 # read in a TTree and calculate moments to be spat out in the SL pythom model file - :)
 # Run with -> python toys2ModelFile.py in.root > out.py 
-makePlots = True
+makePlots = False
 
 def getCoefficients(m1,m2,m3):
 
@@ -153,8 +153,13 @@ def plotCompare(tree,b,mean,var,skew):
   c.cd()
   c.SaveAs("distribution_%d.png"%(b))
 
+if len(sys.argv) != 3:
+    print "Usage python toys2ModelFile.py inputFile.root outputFile.py"
+    exit()
+
 fi = ROOT.TFile.Open(sys.argv[1])
 tree = fi.Get("toys")
+fo = sys.argv[2]
 nbins = 90
 allData = []
 for iEntry in range(tree.GetEntries()):
@@ -187,14 +192,18 @@ signal = [signalH.GetBinContent(b+1) for b in range(nbins)]
 if makePlots:
     for b in range(nbins): plotCompare(tree,b+1,means[b],covariance2D[b][b],skews[b])
 
-print "import numpy as np"
-print "import array"
-print "name = 'Generated Model' "
-print "nbins = %d"%nbins
-print "data = array.array('d',",data,")"
-print "background = array.array('d',",means,")"
-print "covariance   = array.array('d',",covariance,")"
-print "third_moment = array.array('d',",skews,")"
-print "signal = array.array('d',",signal,")"
+outString = []
+outString.append( "import numpy as np")
+outString.append( "import array")
+outString.append( "name = 'Generated Model' ")
+outString.append( "nbins = %d"%nbins)
+outString.append( "data = array.array('d',\t"+str(data)+"\t)")
+outString.append( "background = array.array('d',\t"+str(means)+"\t)")
+outString.append( "covariance   = array.array('d',\t"+str(covariance)+"\t)")
+outString.append( "third_moment = array.array('d',\t"+str(skews)+"\t)")
+outString.append( "signal = array.array('d',\t"+str(signal)+"\t)")
 
+outString = "\n".join(outString)
+with open(fo,'w') as f:
+    f.write(outString)
 
