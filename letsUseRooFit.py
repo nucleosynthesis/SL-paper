@@ -46,9 +46,56 @@ signal = fi.Get("signal")
 bkg = fi.Get("nominal_bkg")
 mc_unc = fi.Get("mc_unc")
 # Ok, that was easy, now we want to make an "expectation" for each of the bins 0->89
+# for the CR and LV systematics, make the norm vars (no fractional variations)
 
+hcru = fi.Get("nominal_bkg_CRUp")
+hcrd = fi.Get("nominal_bkg_CRDown")
+
+nuis_CR    = ROOT.RooRealVar("nuis_CR","nuis_CR",0,-5,5)
+nuis_CR_In = ROOT.RooRealVar("nuis_CR_In","nuis_CR_In",0,-5,5); nuis_CR_In.setConstant()
+nuis_CR_pdf = ROOT.RooGaussian("nuis_CR_PDF","",nuis_CR,nuis_CR_In,ONE)
+allNuisanceParameters.add(nuis_CR)
+allNuisancePdfs.append(nuis_CR_pdf)
+
+allSysdF_CR = []
+allSysdN_CR = []
+for c in range(ncat):
+  
+  nco = integrate(bkg,c*30,c*30+29)
+  ncu = integrate(hcru,c*30,c*30+29)
+  ncd = integrate(hcrd,c*30,c*30+29)
+
+  ku = (ncu/nco)-1
+  kd = (ncd/nco)-1
+  
+  dN = ROOT.RooFormulaVar("dN_CR_c%d"%(c)," ","TMath::Power(1+%g,@0)*(@0>=0) + TMath::Power(1+%g,-1*@0)*(@0<0)"%(ku,kd),ROOT.RooArgList(nuis_CR))
+  allSysdN_CR.append(dN)
+
+hlvu = fi.Get("nominal_bkg_LVUp")
+hlvd = fi.Get("nominal_bkg_LVDown")
+
+nuis_LV    = ROOT.RooRealVar("nuis_LV","nuis_LV",0,-5,5)
+nuis_LV_In = ROOT.RooRealVar("nuis_LV_In","nuis_LV_In",0,-5,5); nuis_LV_In.setConstant()
+nuis_LV_pdf = ROOT.RooGaussian("nuis_LV_PDF","",nuis_LV,nuis_LV_In,ONE)
+allNuisanceParameters.add(nuis_LV)
+allNuisancePdfs.append(nuis_LV_pdf)
+
+allSysdF_LV = []
+allSysdN_LV = []
+for c in range(ncat):
+  
+  nco = integrate(bkg,c*30,c*30+29)
+  ncu = integrate(hlvu,c*30,c*30+29)
+  ncd = integrate(hlvd,c*30,c*30+29)
+
+  ku = (ncu/nco)-1
+  kd = (ncd/nco)-1
+  
+  dN = ROOT.RooFormulaVar("dN_LV_c%d"%(c)," ","TMath::Power(1+%g,@0)*(@0>=0) + TMath::Power(1+%g,-1*@0)*(@0<0)"%(ku,kd),ROOT.RooArgList(nuis_LV))
+  allSysdN_LV.append(dN)
 # 1, for the JES and ISR systematics, lets make the template variations 
 # JES SYSTEMATIC ####################################################################
+
 hjesu = fi.Get("nominal_bkg_JESUp")
 hjesd = fi.Get("nominal_bkg_JESDown")
 
@@ -229,6 +276,8 @@ for c in range(ncat):
   nco = integrate(bkg,c*nbinpercat,c*nbinpercat+nbinpercat-1)
   dNISR = allSysdN_ISR[c]
   dNJES = allSysdN_JES[c]
+  dNLV = allSysdN_LV[c]
+  dNCR = allSysdN_CR[c]
   sumFracNorm = sumFrac[c]
 
   for x in range(nbinpercat):
@@ -243,7 +292,7 @@ for c in range(ncat):
     # NS == 1 for testing
     ns =  signal.GetBinContent(b+1)
 
-    expectation_b = ROOT.RooFormulaVar("expected_background_bin%d"%(b+1),"(%g*@0*@1*@2)*(%g/@3)*@4*@5"%(nco,fo),ROOT.RooArgList(dNISR,dNJES,dfMC,sumFracNorm,dfJES,dfISR))
+    expectation_b = ROOT.RooFormulaVar("expected_background_bin%d"%(b+1),"(%g*@0*@1*@2*@3*@4)*(%g/@5)*@6*@7"%(nco,fo),ROOT.RooArgList(dNISR,dNJES,dNLV,dNCR,dfMC,sumFracNorm,dfJES,dfISR))
     expectation_s = ROOT.RooFormulaVar("expectation_signal_bin%d"%(b+1),"%g*@0"%ns,ROOT.RooArgList(mu)) 
     expected_Backgrounds.append(expectation_b)
     expected_Signals.append(expectation_s)

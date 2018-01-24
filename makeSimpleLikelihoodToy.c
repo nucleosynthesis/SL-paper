@@ -54,7 +54,11 @@ TH1F *vectorToHisto(std::string name, double *v, double *e, int n){
 void makeSimpleLikelihoodToy(){
 
     gStyle->SetOptStat(0);
-
+    //category norm variations
+    //leptonVeto
+    double lnNLV[3] = {1.05,1.1,1.2};
+    //controlRegionUnc
+    double lnNCR[3] = {1.02,1.15,0.8};
     
     RooRealVar JES("JES","",0);
 
@@ -106,6 +110,11 @@ void makeSimpleLikelihoodToy(){
     double *ISR_up_bkg  = new double[90];
     double *ISR_dn_bkg  = new double[90];
 
+    double *LV_up_bkg  = new double[90];
+    double *LV_dn_bkg  = new double[90];
+    double *CR_up_bkg  = new double[90];
+    double *CR_dn_bkg  = new double[90];
+
     double *data          = new double[90];
     double *mcUnc          = new double[90];
     double *signal        = new double[90];
@@ -115,7 +124,7 @@ void makeSimpleLikelihoodToy(){
     TRandom3 *r = new TRandom3();
     TRandom3 *rMC = new TRandom3();
 
-    double mcUncMult = 20.;
+    double mcUncMult = 40.;
 
     int j=0;
 
@@ -162,6 +171,10 @@ void makeSimpleLikelihoodToy(){
       if (j<15) s*=double(j)/15;
       d = (double)r->Poisson(nominal);
       nominal_bkg[i]=nominal*msc;
+      LV_up_bkg[i] = nominal*lnNLV[i/30];
+      LV_dn_bkg[i] = nominal/lnNLV[i/30];
+      CR_up_bkg[i] = nominal*lnNCR[i/30];
+      CR_dn_bkg[i] = nominal/lnNCR[i/30];
       JES_up_bkg[i]=jesu*msc;
       JES_dn_bkg[i]=jesd*msc;
       ISR_up_bkg[i]=isru*msc;
@@ -183,6 +196,10 @@ void makeSimpleLikelihoodToy(){
     TH1F *h_bkg_JES_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_JESDown",JES_dn_bkg,90); h_bkg_JES_dn_bkg->SetLineColor(1);
     TH1F *h_bkg_ISR_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_ISRUp",ISR_up_bkg,90); h_bkg_ISR_up_bkg->SetLineColor(1),h_bkg_ISR_up_bkg->SetLineStyle(2);
     TH1F *h_bkg_ISR_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_ISRDown",ISR_dn_bkg,90); h_bkg_ISR_dn_bkg->SetLineColor(1),h_bkg_ISR_dn_bkg->SetLineStyle(2) ;
+    TH1F *h_bkg_LV_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_LVUp",LV_up_bkg,90); h_bkg_LV_up_bkg->SetLineColor(1),h_bkg_LV_up_bkg->SetLineStyle(3);
+    TH1F *h_bkg_LV_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_LVDown",LV_dn_bkg,90); h_bkg_LV_dn_bkg->SetLineColor(1),h_bkg_LV_dn_bkg->SetLineStyle(3) ;
+    TH1F *h_bkg_CR_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_CRUp",CR_up_bkg,90); h_bkg_CR_up_bkg->SetLineColor(1),h_bkg_CR_up_bkg->SetLineStyle(4);
+    TH1F *h_bkg_CR_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_CRDown",CR_dn_bkg,90); h_bkg_CR_dn_bkg->SetLineColor(1),h_bkg_CR_dn_bkg->SetLineStyle(4) ;
     
     TH1F *h_bkg_MCUNC         = (TH1F*)vectorToHisto("mc_unc",mcUnc,90); h_bkg_MCUNC->SetLineColor(1),h_bkg_MCUNC->SetLineStyle(2) ;
 
@@ -199,6 +216,10 @@ void makeSimpleLikelihoodToy(){
     h_bkg_JES_up_bkg->Draw("histsame");
     h_bkg_ISR_dn_bkg->Draw("histsame");
     h_bkg_ISR_up_bkg->Draw("histsame");
+    h_bkg_LV_dn_bkg->Draw("histsame");
+    h_bkg_LV_up_bkg->Draw("histsame");
+    h_bkg_CR_dn_bkg->Draw("histsame");
+    h_bkg_CR_up_bkg->Draw("histsame");
     h_signal->Draw("histsame");
     h_data->Draw("Psame");
    
@@ -208,6 +229,8 @@ void makeSimpleLikelihoodToy(){
     leg->AddEntry(h_bkg,"Nominal background (#pm stat unc.)","LFE");
     leg->AddEntry(h_bkg_JES_up_bkg,"Energy scale up/down","L");
     leg->AddEntry(h_bkg_ISR_up_bkg,"Theory uncertainty up/down","L");
+    leg->AddEntry(h_bkg_LV_up_bkg,"Lepton veto uncertainty up/down (norm only)","L");
+    leg->AddEntry(h_bkg_CR_up_bkg,"CR uncertainty up/down (norm only)","L");
     leg->AddEntry(h_signal,"BSM signal","L");
     leg->Draw();
 
@@ -227,6 +250,10 @@ void makeSimpleLikelihoodToy(){
     h_bkg_JES_up_bkg->Write();
     h_bkg_ISR_dn_bkg->Write();
     h_bkg_ISR_up_bkg->Write();
+    h_bkg_LV_dn_bkg->Write();
+    h_bkg_LV_up_bkg->Write();
+    h_bkg_CR_dn_bkg->Write();
+    h_bkg_CR_up_bkg->Write();
     h_bkg_MCUNC->Write();
 
 // DO the same in 3 categories 
@@ -241,6 +268,10 @@ void makeSimpleLikelihoodToy(){
       h_bkg_JES_dn_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_JESDown",c),JES_dn_bkg,90,min,max); h_bkg_JES_dn_bkg->SetLineColor(1);
       h_bkg_ISR_up_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_ISRUp",c),ISR_up_bkg,90,min,max); h_bkg_ISR_up_bkg->SetLineColor(1),h_bkg_ISR_up_bkg->SetLineStyle(2);
       h_bkg_ISR_dn_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_ISRDown",c),ISR_dn_bkg,90,min,max); h_bkg_ISR_dn_bkg->SetLineColor(1),h_bkg_ISR_dn_bkg->SetLineStyle(2);
+      h_bkg_LV_up_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_LVUp",c),LV_up_bkg,90,min,max); h_bkg_LV_up_bkg->SetLineColor(1),h_bkg_LV_up_bkg->SetLineStyle(2);
+      h_bkg_LV_dn_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_LVDown",c),LV_dn_bkg,90,min,max); h_bkg_LV_dn_bkg->SetLineColor(1),h_bkg_LV_dn_bkg->SetLineStyle(2);
+      h_bkg_CR_up_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_CRUp",c),CR_up_bkg,90,min,max); h_bkg_CR_up_bkg->SetLineColor(1),h_bkg_CR_up_bkg->SetLineStyle(2);
+      h_bkg_CR_dn_bkg    = (TH1F*)vectorToHisto(Form("C%d_nominal_bkg_CRDown",c),CR_dn_bkg,90,min,max); h_bkg_CR_dn_bkg->SetLineColor(1),h_bkg_CR_dn_bkg->SetLineStyle(2);
 
       TH1F *h_bkg_MCUNC         = (TH1F*)vectorToHisto(Form("mc_unc_c%d",c),mcUnc,90,min,max); h_bkg_MCUNC->SetLineColor(1),h_bkg_MCUNC->SetLineStyle(2) ;
       for (int i=0;i<h_bkg->GetNbinsX();i++){
@@ -253,6 +284,10 @@ void makeSimpleLikelihoodToy(){
       h_bkg_JES_up_bkg->Write();
       h_bkg_ISR_dn_bkg->Write();
       h_bkg_ISR_up_bkg->Write();
+      h_bkg_LV_dn_bkg->Write();
+      h_bkg_LV_up_bkg->Write();
+      h_bkg_CR_dn_bkg->Write();
+      h_bkg_CR_up_bkg->Write();
 
     }
 
