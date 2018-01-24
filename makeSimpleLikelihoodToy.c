@@ -67,12 +67,12 @@ void makeSimpleLikelihoodToy(){
     double S3 = 50;
 
     // say JES has 10%,-20%,20%  uncertainty on the normalisations lnN ~ 1.1, 1./1.2, 1.2!
-    double lnN1 = 1.1;
-    double lnN2 = 1./1.2;
-    double lnN3 = 1.2;
+    double lnN1 = 1.05;
+    double lnN2 = 1./1.05;
+    double lnN3 = 1.1;
 
-    double lnNIsr1 = 1/1.3;
-    double lnNIsr2 = 1.1;
+    double lnNIsr1 = 1/1.05;
+    double lnNIsr2 = 1.05;
     double lnNIsr3 = 1.1;
 
     // background slopes
@@ -85,13 +85,13 @@ void makeSimpleLikelihoodToy(){
     double si2 = -0.01;
     double si3 = -0.004;
 
-    double isr1 = 0.1;
-    double isr2 = 0.05;
+    double isr1 = 0.04;
+    double isr2 = 0.06;
     double isr3 = 0.05;
 
-    double es1 = 0.005;
-    double es2 = -0.01;
-    double es3 = 0.004;
+    double es1 = 0.001;
+    double es2 = -0.002;
+    double es3 = 0.0008;
     
     // bounds will be between 100 and 1000, 30 bins per cat (30 GeV)
     double XMIN = 10;
