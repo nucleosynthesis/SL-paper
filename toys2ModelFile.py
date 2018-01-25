@@ -1,9 +1,11 @@
 import ROOT 
 import sys 
 import numpy as np
-from scipy import stats
+import scipy.stats as stats
+from scipy import mean as MEAN
 import array
 ROOT.gROOT.SetBatch(1)
+import math
 
 # read in a TTree and calculate moments to be spat out in the SL pythom model file - :)
 # Run with -> python toys2ModelFile.py in.root > out.py 
@@ -11,6 +13,7 @@ makePlots = False
 
 def getCoefficients(m1,m2,m3):
 
+  """
   inside = np.complex(m3*m3 - 8*m2*m2*m2,0)
   root = inside**0.5;
   c_m3 = np.complex(-m3,0);
@@ -29,6 +32,13 @@ def getCoefficients(m1,m2,m3):
   else:
         B = (m2 - (C*C)/2)**0.5;
   A = m1 - C/2;
+  """
+
+  #try again 
+
+  C = -2 * ((2*m2)**0.5 * math.cos( 4.*math.pi/3 + (1./3)*math.atan(( (8*m2*m2*m2 - m3*m3 )**0.5)/m3 ) ))
+  B = (m2-C*C/2)**0.5
+  A = m1-C/2
 
   return A,B,C
 
@@ -96,10 +106,18 @@ def plotCompare(tree,b,mean,var,skew):
   
   A,B,C = getCoefficients(mean,var,skew)
 
-  for i in range(10000):
+  mynewcalc = []
+  for i in range(100000):
     rx = r.Gaus(0,1)
     hg.Fill(mean*(1+rx*(var**0.5)/mean))
-    hq.Fill(A+B*rx+(C/2)*rx*rx)
+    mvq = A+B*rx+(C/2)*rx*rx
+    mynewcalc.append(mvq)
+    hq.Fill(mvq)
+
+  #mean2 = MEAN(mynewcalc)
+  #var2  = stats.moment(mynewcalc,moment=2)
+  #skew2  = stats.moment(mynewcalc,moment=3)
+  #print "Bin = ",b, "means = ", mean,mean2, "var = ", var, var2, "skew = ", skew,skew2
 
   h.SetTitle("")
   h.GetXaxis().SetTitle("Bin - %d"%(b))
