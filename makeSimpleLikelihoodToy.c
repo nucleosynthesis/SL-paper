@@ -229,9 +229,9 @@ void makeSimpleLikelihoodToy(){
     leg->AddEntry(h_bkg,"Nominal background (#pm stat unc.)","LFE");
     leg->AddEntry(h_bkg_JES_up_bkg,"Energy scale up/down","L");
     leg->AddEntry(h_bkg_ISR_up_bkg,"Theory uncertainty up/down","L");
-    leg->AddEntry(h_bkg_LV_up_bkg,"Lepton veto uncertainty up/down (norm only)","L");
-    leg->AddEntry(h_bkg_CR_up_bkg,"CR uncertainty up/down (norm only)","L");
-    leg->AddEntry(h_signal,"BSM signal","L");
+    leg->AddEntry(h_bkg_LV_up_bkg,"Efficiency up/down (norm only)","L");
+    leg->AddEntry(h_bkg_CR_up_bkg,"Scale factor up/down (norm only)","L");
+    leg->AddEntry(h_signal,"New physics signal","L");
     leg->Draw();
 
     TLine l1(30,h_data->GetMinimum(),30,0.75*h_data->GetMaximum());l1.SetLineColor(1);l1.SetLineStyle(3);
