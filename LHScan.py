@@ -9,7 +9,7 @@ ws = fi.Get("w")
 
 nbins = 90
 
-rMinimum = -1.2
+rMinimum = -1.35
 rMaximum = 1.2
 np = 10
 

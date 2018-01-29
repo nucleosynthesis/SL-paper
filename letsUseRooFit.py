@@ -1,5 +1,6 @@
 import ROOT
 ROOT.gROOT.SetBatch(1)
+makePlots = False
 # open the file which contains all the info 
 fi = ROOT.TFile.Open("histos.root")
 
@@ -26,7 +27,7 @@ def integrate(h,x,y):
    I+=h.GetBinContent(i+1)
  return I
 
-mu = ROOT.RooRealVar("mu","#mu",0,-1,5)
+mu = ROOT.RooRealVar("mu","#mu",0,-5,5)
 ONE = ROOT.RooConstVar("One","",1)
 allNuisancePdfs = []
 allNuisanceParameters = ROOT.RooArgSet();
@@ -317,38 +318,38 @@ getattr(wks,"import")(obsdata)
 output.WriteTObject(wks)
 
 #ho = fi.Get("nomonal_bkg")
+if makePlots:
+    for b in range(nbins): 
 
-for b in range(nbins): 
+       #for each nuiance parametere, plot the expected value of b 
+       nuisances = ["nuis_JES","nuis_ISR","nuis_MC_b%d"%(b+1)]
+       h         = ["JES","ISR"]
+       cv = ROOT.TCanvas("c_%d"%b,"c",2400,800)
+       cv.Divide(3)
+       fo = bkg.GetBinContent(b+1) 
 
-   #for each nuiance parametere, plot the expected value of b 
-   nuisances = ["nuis_JES","nuis_ISR","nuis_MC_b%d"%(b+1)]
-   h         = ["JES","ISR"]
-   cv = ROOT.TCanvas("c_%d"%b,"c",2400,800)
-   cv.Divide(3)
-   fo = bkg.GetBinContent(b+1) 
+       grtmp = []
+       for i,nuis in enumerate(nuisances):
+         plot = wks.var(nuis).frame()
+         wks.function("expected_background_bin%d"%(b+1)).plotOn(plot)
+         cv.cd(i+1)
+         plot.Draw()
+         if i < len(nuisances)-1:
 
-   grtmp = []
-   for i,nuis in enumerate(nuisances):
-     plot = wks.var(nuis).frame()
-     wks.function("expected_background_bin%d"%(b+1)).plotOn(plot)
-     cv.cd(i+1)
-     plot.Draw()
-     if i < len(nuisances)-1:
+           fu = fi.Get("nominal_bkg_%sUp"%h[i]).GetBinContent(b+1)
+           fd = fi.Get("nominal_bkg_%sDown"%h[i]).GetBinContent(b+1)
+           gpts = ROOT.TGraph()
+           gpts.SetMarkerSize(1.2)
+           gpts.SetMarkerStyle(20)
+           gpts.SetMarkerColor(2)
+           gpts.SetPoint(0,-1,fd)
+           gpts.SetPoint(1,0,fo)
+           gpts.SetPoint(2,1,fu)
+           grtmp.append(gpts)
 
-       fu = fi.Get("nominal_bkg_%sUp"%h[i]).GetBinContent(b+1)
-       fd = fi.Get("nominal_bkg_%sDown"%h[i]).GetBinContent(b+1)
-       gpts = ROOT.TGraph()
-       gpts.SetMarkerSize(1.2)
-       gpts.SetMarkerStyle(20)
-       gpts.SetMarkerColor(2)
-       gpts.SetPoint(0,-1,fd)
-       gpts.SetPoint(1,0,fo)
-       gpts.SetPoint(2,1,fu)
-       grtmp.append(gpts)
+       for i,gpts in enumerate(grtmp):
+            cv.cd(i+1)
+            gpts.Draw("P")
 
-   for i,gpts in enumerate(grtmp):
-   	cv.cd(i+1)
-   	gpts.Draw("P")
-
-   cv.SaveAs("interpolation_bin_%d.png"%(b+1))
- 
+       cv.SaveAs("interpolation_bin_%d.png"%(b+1))
+     

@@ -56,9 +56,12 @@ void makeSimpleLikelihoodToy(){
     gStyle->SetOptStat(0);
     //category norm variations
     //leptonVeto
-    double lnNLV[3] = {1.05,1.1,1.2};
+    double lnNLVup[3] = {1.05,1.1,1.2};
+    double lnNLVdown[3] = {1.1,1.3,1.4};
     //controlRegionUnc
-    double lnNCR[3] = {1.2,1.3,0.3};
+    double lnNCRup[3] = {1.2,1.3,0.6};
+    double lnNCRdown[3] = {1.05,1.2,0.9};
+
     
     RooRealVar JES("JES","",0);
 
@@ -73,11 +76,11 @@ void makeSimpleLikelihoodToy(){
     // say JES has 10%,-20%,20%  uncertainty on the normalisations lnN ~ 1.1, 1./1.2, 1.2!
     double lnN1 = 1.3;
     double lnN2 = 1./1.2;
-    double lnN3 = 1.7;
+    double lnN3 = 1.3;
 
     double lnNIsr1 = 1/1.2;
     double lnNIsr2 = 1.2;
-    double lnNIsr3 = 1.8;
+    double lnNIsr3 = 1.3;
 
     // background slopes
     double s1 = -0.05;
@@ -171,10 +174,10 @@ void makeSimpleLikelihoodToy(){
       if (j<15) s*=double(j)/15;
       d = (double)r->Poisson(nominal);
       nominal_bkg[i]=nominal*msc;
-      LV_up_bkg[i] = nominal*lnNLV[i/30];
-      LV_dn_bkg[i] = nominal/lnNLV[i/30];
-      CR_up_bkg[i] = nominal*lnNCR[i/30];
-      CR_dn_bkg[i] = nominal/lnNCR[i/30];
+      LV_up_bkg[i] = nominal*lnNLVup[i/30];
+      LV_dn_bkg[i] = nominal/lnNLVdown[i/30];
+      CR_up_bkg[i] = nominal*lnNCRup[i/30];
+      CR_dn_bkg[i] = nominal/lnNCRdown[i/30];
       JES_up_bkg[i]=jesu*msc;
       JES_dn_bkg[i]=jesd*msc;
       ISR_up_bkg[i]=isru*msc;
