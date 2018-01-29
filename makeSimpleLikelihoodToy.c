@@ -58,7 +58,7 @@ void makeSimpleLikelihoodToy(){
     //leptonVeto
     double lnNLV[3] = {1.05,1.1,1.2};
     //controlRegionUnc
-    double lnNCR[3] = {1.02,1.15,0.8};
+    double lnNCR[3] = {1.2,1.3,0.3};
     
     RooRealVar JES("JES","",0);
 
@@ -71,13 +71,13 @@ void makeSimpleLikelihoodToy(){
     double S3 = 50;
 
     // say JES has 10%,-20%,20%  uncertainty on the normalisations lnN ~ 1.1, 1./1.2, 1.2!
-    double lnN1 = 1.05;
-    double lnN2 = 1./1.05;
-    double lnN3 = 1.1;
+    double lnN1 = 1.3;
+    double lnN2 = 1./1.2;
+    double lnN3 = 1.7;
 
-    double lnNIsr1 = 1/1.05;
-    double lnNIsr2 = 1.05;
-    double lnNIsr3 = 1.1;
+    double lnNIsr1 = 1/1.2;
+    double lnNIsr2 = 1.2;
+    double lnNIsr3 = 1.8;
 
     // background slopes
     double s1 = -0.05;
@@ -121,8 +121,8 @@ void makeSimpleLikelihoodToy(){
 
 
 
-    TRandom3 *r = new TRandom3();
-    TRandom3 *rMC = new TRandom3();
+    TRandom3 *r = new TRandom3(2);
+    TRandom3 *rMC = new TRandom3(2);
 
     double mcUncMult = 40.;
 
