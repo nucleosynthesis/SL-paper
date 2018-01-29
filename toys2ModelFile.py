@@ -75,8 +75,11 @@ def plotCompare(tree,b,mean,var,skew):
   ROOT.gStyle.SetOptStat(0)
   tree.Draw("b_%d>>h_%d"%(b,b));
   h = ROOT.gROOT.FindObject("h_%d"%b);  h.SetLineColor(1)
+  h.Rebin(4)
   hg = h.Clone(); hg.SetName("hg_%d"%(b)); hg.SetLineColor(2)
   hq = h.Clone(); hq.SetName("hq_%d"%(b)); hq.SetLineColor(ROOT.kGreen+2)
+  hg.SetLineWidth(2)
+  hq.SetLineWidth(2)
   for ib in range(h.GetNbinsX()):
     hg.SetBinContent(ib,0)
     hq.SetBinContent(ib,0)
@@ -100,15 +103,25 @@ def plotCompare(tree,b,mean,var,skew):
   #print "Bin = ",b, "means = ", mean,mean2, "var = ", var, var2, "skew = ", skew,skew2
 
   h.SetTitle("")
-  h.GetXaxis().SetTitle("Bin - %d"%(b))
+  h.GetXaxis().SetTitle("#hat{#it{n}}_{%d}"%(b))
   h.GetYaxis().SetTitleOffset(1.4)
   h.GetYaxis().SetTitle("Arbitrary units")
+  h.GetXaxis().SetTitleSize(0.05)
+  h.GetXaxis().SetTitleOffset(0.82)
+  h.GetYaxis().SetTitleOffset(1.6)
   h.Scale(1./h.Integral())
   hq.Scale(1./hq.Integral())
   hg.Scale(1./hg.Integral())
   c = ROOT.TCanvas("x%d"%b,"x",900,800)
+  c.SetLeftMargin(0.12)
+  c.SetRightMargin(0.05)
   h.SetMaximum(h.GetMaximum()*1.2)
-  h.Draw()
+  h.SetMinimum(0.0)
+  h.SetLineWidth(2)
+  #for bi in range(h.GetNbinsX()): h.SetBinError(bi+1,0);
+  h.SetMarkerStyle(20)
+  #h.Draw("Psame")
+  h.Draw("P")
   hg.Draw("samehist")
   hq.Draw("samehist")
 
@@ -116,40 +129,49 @@ def plotCompare(tree,b,mean,var,skew):
   tlat.SetTextSize(0.032)
   tlat.SetNDC()
   tlat.SetTextFont(42)
-  tlat.DrawLatex(0.1,0.94,"#mu_{1}=%g, #mu_{2}=%g, #mu_{3}=%g"%(mean,var,skew))
+  tlat.DrawLatex(0.12,0.92,"#it{m}_{1}=%.2f, #it{m}_{2}=%.2f, #it{m}_{3}=%.2f"%(mean,var,skew))
 
   lmle = ROOT.TLine(mle,h.GetMinimum(),mle,h.GetMaximum())
   lmle.SetLineStyle(2)
   lmle.SetLineWidth(2)
-  lmle.Draw()
+  #lmle.Draw()
   
   lgle = ROOT.TLine(mean,h.GetMinimum(),mean,h.GetMaximum())
   lgle.SetLineStyle(2)
   lgle.SetLineWidth(2)
   lgle.SetLineColor(2)
-  lgle.Draw()
+  #lgle.Draw()
   
   lple = ROOT.TLine(A,h.GetMinimum(),A,h.GetMaximum())
   lple.SetLineStyle(2)
   lple.SetLineWidth(2)
   lple.SetLineColor(ROOT.kGreen+2)
-  lple.Draw()
+  #lple.Draw()
   
-  pad = ROOT.TPad("p1%d"%b,"p1",0.72,0.72,0.99,0.99)
+  pad = ROOT.TPad("p1%d"%b,"p1",0.6,0.6,0.99,0.99)
+  pad.SetRightMargin(0.05)
+  pad.SetTopMargin(0.01)
+  pad.SetLeftMargin(0.2)
+  pad.SetBottomMargin(0.2)
   pad.Draw()
   pad.cd()
   # draw the polynomial
   f1 = ROOT.TF1("myf_%d"%b,"%g+%g*x+%g*x*x"%(A,B,C/2),-5,5)
   f1.GetXaxis().SetNdivisions(511)
-  f1.GetXaxis().SetLabelSize(0.06)
+  f1.GetXaxis().SetLabelSize(0.07)
   f1.GetYaxis().SetNdivisions(511)
   f1.GetYaxis().SetLabelSize(0.06)
+  f1.GetYaxis().SetTitleSize(0.06)
   f1.Draw("L")
+  f1.SetLineColor(ROOT.kGreen+2)
 
+  f1.SetTitle("");
   f1.GetXaxis().SetTitleSize(0.06)
-  f1.GetXaxis().SetTitle("x = #theta_{%d}"%(b))
+  f1.GetXaxis().SetTitle("#it{#theta}")
+  f1.GetYaxis().SetTitle("#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta} + %.2f#it{#theta}^{2}"%(A,B,C/2))
   c.cd()
   c.SaveAs("distribution_%d.png"%(b))
+  c.SaveAs("distribution_%d.pdf"%(b))
 
 if len(sys.argv) != 3:
     print "Usage python toys2ModelFile.py inputFile.root outputFile.py"
@@ -188,7 +210,7 @@ signal = [signalH.GetBinContent(b+1) for b in range(nbins)]
 
 # now, for each bin, lets make a plot comparing the toys, a gaussian and the quadratic
 if makePlots:
-    for b in range(nbins): plotCompare(tree,b+1,means[b],covariance2D[b][b],skews[b])
+    for b in range(nbins): plotCompare(tree,b+1,means[b],covariance2D[b][b],skews[b]) 
 
 outString = []
 outString.append( "import numpy as np")
