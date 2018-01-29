@@ -12,31 +12,11 @@ import math
 makePlots = False
 
 def getCoefficients(m1,m2,m3):
+  pi  = math.pi;
 
-  """
-  inside = np.complex(m3*m3 - 8*m2*m2*m2,0)
-  root = inside**0.5;
-  c_m3 = np.complex(-m3,0);
-  k3   = c_m3+root;
-  k    = k3**(1./3);
-
-  j2 = np.complex(1,(3)**0.5);
-  j  = np.complex(1,-(3)**0.5);
-      
-  c = -j*m2/k-0.5*j2*k;
-
-  C = np.real(c);
-  if (m2 < (C*C)/2): 
-  	B = m2**0.5
-	C = 0
-  else:
-        B = (m2 - (C*C)/2)**0.5;
-  A = m1 - C/2;
-  """
-
-  #try again 
-
-  C = -2 * ((2*m2)**0.5 * math.cos( 4.*math.pi/3 + (1./3)*math.atan(( (8*m2*m2*m2 - m3*m3 )**0.5)/m3 ) ))
+  if (8*m2*m2*m2 >= m3*m3) :C = -2*((2*m2)**0.5)*math.cos(4*pi/3. + (1./3.)*math.atan(((8*m2*m2*m2-m3*m3)/(m3*m3))**0.5) );
+  else: C = -2*((2*m2)**0.5)*math.cosh((-1./3)*math.atanh(((-8*m2*m2*m2+m3*m3)/(m3*m3))**0.5)) ;
+  if (m2 < (C)*(C)/2.) : print "Oh No! ?"#*B = TMath::Sqrt(m2-(*C)*(*C)/2.);
   B = (m2-C*C/2)**0.5
   A = m1-C/2
 
