@@ -148,9 +148,9 @@ def plotCompare(tree,b,mean,var,skew):
   lple.SetLineColor(ROOT.kGreen+2)
   #lple.Draw()
   
-  pad = ROOT.TPad("p1%d"%b,"p1",0.6,0.6,0.99,0.99)
+  pad = ROOT.TPad("p1%d"%b,"p1",0.59,0.44,0.99,0.99)
   pad.SetRightMargin(0.05)
-  pad.SetTopMargin(0.01)
+  pad.SetTopMargin(0.16)
   pad.SetLeftMargin(0.2)
   pad.SetBottomMargin(0.2)
   pad.Draw()
@@ -161,14 +161,26 @@ def plotCompare(tree,b,mean,var,skew):
   f1.GetXaxis().SetLabelSize(0.07)
   f1.GetYaxis().SetNdivisions(511)
   f1.GetYaxis().SetLabelSize(0.06)
-  f1.GetYaxis().SetTitleSize(0.06)
-  f1.Draw("L")
+  f1.GetYaxis().SetTitleSize(0.08)
+  f1.GetXaxis().SetTitleSize(0.08)
+  f1.GetYaxis().SetTitleOffset(1.3)
   f1.SetLineColor(ROOT.kGreen+2)
 
   f1.SetTitle("");
-  f1.GetXaxis().SetTitleSize(0.06)
   f1.GetXaxis().SetTitle("#it{#theta}")
-  f1.GetYaxis().SetTitle("#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta} + %.2f#it{#theta}^{2}"%(A,B,C/2))
+  f1.GetYaxis().SetTitle("#it{n}(#it{#theta})")
+  
+  f1.Draw("L")
+  f2 = ROOT.TF1("myf2_%d"%b,"%g+%g*x"%(mean,var**0.5),-5,5)
+  f2.SetLineColor(2)
+  
+  tlat.SetTextSize(0.055)
+  tlat.SetTextColor(2); tlat.DrawLatex(0.2,0.93,"#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta}"%(mean,var**0.5))
+  tlat.SetTextColor(ROOT.kGreen+2); tlat.DrawLatex(0.2,0.88,"#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta} + %.2f#it{#theta}^{2}"%(A,B,C/2))
+  #f1.GetYaxis().SetTitle("#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta} + %.2f#it{#theta}^{2}"%(A,B,C/2))
+
+  f2.Draw("Lsame")
+
   c.cd()
   c.SaveAs("distribution_%d.png"%(b))
   c.SaveAs("distribution_%d.pdf"%(b))
