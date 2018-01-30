@@ -31,11 +31,18 @@ TH1F *vectorToHisto(std::string name, double *v, int n, int nmin=-1, int nmax=-1
        h->GetXaxis()->SetBinLabel(i,Form("%d",i));
      }
    }
-   h->GetXaxis()->SetTitle("Signal Region");
+   h->GetXaxis()->SetTitle("Bin index");
    h->GetYaxis()->SetTitle("Number of events");
+   h->GetXaxis()->SetTitleSize(0.052);
+   h->GetYaxis()->SetTitleSize(0.052);
+   h->GetXaxis()->SetTitleOffset(0.95);
+   h->GetYaxis()->SetTitleOffset(0.52);
+   h->GetXaxis()->SetLabelSize(0.055);
+   h->GetYaxis()->SetLabelSize(0.035);
+
 
    h->SetMarkerSize(0.8);
-   h->SetMarkerStyle(20);
+   h->SetMarkerStyle(5);
    h->SetLineWidth(1);
    h->SetLineColor(1);
 
@@ -49,6 +56,13 @@ TH1F *vectorToHisto(std::string name, double *v, double *e, int n){
      h->SetBinError(i,e[i-1]);
    }
    return h;
+}
+double integral(TH1F* h,int x,int y){
+ double I = 0;
+ for (int i=x;i<=y;i++){
+   I+=h->GetBinContent(i+1);
+ }
+ return I;
 }
 
 void makeSimpleLikelihoodToy(){
@@ -188,17 +202,20 @@ void makeSimpleLikelihoodToy(){
       j++;
     }
 
-    TCanvas *can = new TCanvas("canvas","",900,400);
+    TCanvas *can = new TCanvas("canvas","",1200,400);
+    can->SetLeftMargin(0.06);
+    can->SetRightMargin(0.02);
+    can->SetBottomMargin(0.12);
     can->SetLogy();
 
     TH1F *h_signal = (TH1F*)vectorToHisto("signal",signal,90); h_signal->SetLineColor(2);
     TH1F *h_data   = (TH1F*)vectorToHisto("data",data,90);
-    TH1F *h_bkg    = (TH1F*)vectorToHisto("nominal_bkg",nominal_bkg,mcUnc,90); h_bkg->SetLineColor(4); h_bkg->SetFillColor(kAzure+2); h_bkg->SetMarkerSize(0);
+    TH1F *h_bkg    = (TH1F*)vectorToHisto("nominal_bkg",nominal_bkg,mcUnc,90); h_bkg->SetLineColor(4); h_bkg->SetFillColor(kAzure+8); h_bkg->SetMarkerSize(0);
     
-    TH1F *h_bkg_JES_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_JESUp",JES_up_bkg,90); h_bkg_JES_up_bkg->SetLineColor(1);
-    TH1F *h_bkg_JES_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_JESDown",JES_dn_bkg,90); h_bkg_JES_dn_bkg->SetLineColor(1);
-    TH1F *h_bkg_ISR_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_ISRUp",ISR_up_bkg,90); h_bkg_ISR_up_bkg->SetLineColor(1),h_bkg_ISR_up_bkg->SetLineStyle(2);
-    TH1F *h_bkg_ISR_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_ISRDown",ISR_dn_bkg,90); h_bkg_ISR_dn_bkg->SetLineColor(1),h_bkg_ISR_dn_bkg->SetLineStyle(2) ;
+    TH1F *h_bkg_JES_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_JESUp",JES_up_bkg,90); h_bkg_JES_up_bkg->SetLineColor(kMagenta);
+    TH1F *h_bkg_JES_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_JESDown",JES_dn_bkg,90); h_bkg_JES_dn_bkg->SetLineColor(kMagenta);
+    TH1F *h_bkg_ISR_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_ISRUp",ISR_up_bkg,90); h_bkg_ISR_up_bkg->SetLineColor(kGreen+1),h_bkg_ISR_up_bkg->SetLineStyle(2);
+    TH1F *h_bkg_ISR_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_ISRDown",ISR_dn_bkg,90); h_bkg_ISR_dn_bkg->SetLineColor(kGreen+1),h_bkg_ISR_dn_bkg->SetLineStyle(2) ;
     TH1F *h_bkg_LV_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_LVUp",LV_up_bkg,90); h_bkg_LV_up_bkg->SetLineColor(1),h_bkg_LV_up_bkg->SetLineStyle(3);
     TH1F *h_bkg_LV_dn_bkg    = (TH1F*)vectorToHisto("nominal_bkg_LVDown",LV_dn_bkg,90); h_bkg_LV_dn_bkg->SetLineColor(1),h_bkg_LV_dn_bkg->SetLineStyle(3) ;
     TH1F *h_bkg_CR_up_bkg    = (TH1F*)vectorToHisto("nominal_bkg_CRUp",CR_up_bkg,90); h_bkg_CR_up_bkg->SetLineColor(1),h_bkg_CR_up_bkg->SetLineStyle(4);
@@ -209,38 +226,62 @@ void makeSimpleLikelihoodToy(){
     for (int i=0;i<h_bkg->GetNbinsX();i++){
 	h_bkg->SetBinError(i+1,h_bkg_MCUNC->GetBinContent(i+1));
     }
+   
     
+    TH1F *h_bkg_errs = (TH1F*)h_bkg->Clone(); // ROOT SUCKS so very very badly
+    h_bkg->SetFillColor(0);
+
     h_data->GetXaxis()->LabelsOption("v");
     //h_data->SetMinimum(0.001);
     h_data->Draw("P");
-    h_bkg->Draw("E2L");
-    h_bkg->Draw("Lsame");
+    h_bkg_errs->Draw("E2");
+    h_bkg->Draw("histsame");
     h_bkg_JES_dn_bkg->Draw("histsame");
     h_bkg_JES_up_bkg->Draw("histsame");
     h_bkg_ISR_dn_bkg->Draw("histsame");
     h_bkg_ISR_up_bkg->Draw("histsame");
-    h_bkg_LV_dn_bkg->Draw("histsame");
-    h_bkg_LV_up_bkg->Draw("histsame");
-    h_bkg_CR_dn_bkg->Draw("histsame");
-    h_bkg_CR_up_bkg->Draw("histsame");
+    //h_bkg_LV_dn_bkg->Draw("histsame");
+    //h_bkg_LV_up_bkg->Draw("histsame");
+    //h_bkg_CR_dn_bkg->Draw("histsame");
+    //h_bkg_CR_up_bkg->Draw("histsame");
     h_signal->Draw("histsame");
     h_data->Draw("Psame");
    
-    TLegend *leg = new TLegend(0.65,0.5,0.89,0.89);
+    TLegend *leg = new TLegend(0.69,0.42,0.97,0.89);
     leg->SetBorderSize(0);
     leg->AddEntry(h_data,"Observed data","P");
-    leg->AddEntry(h_bkg,"Nominal background (#pm stat unc.)","LFE");
+    leg->AddEntry(h_bkg_errs,"Nominal background (#pm stat unc.)","LF");
     leg->AddEntry(h_bkg_JES_up_bkg,"Energy scale up/down","L");
     leg->AddEntry(h_bkg_ISR_up_bkg,"Theory uncertainty up/down","L");
-    leg->AddEntry(h_bkg_LV_up_bkg,"Lepton veto uncertainty up/down (norm only)","L");
-    leg->AddEntry(h_bkg_CR_up_bkg,"CR uncertainty up/down (norm only)","L");
-    leg->AddEntry(h_signal,"BSM signal","L");
+    //leg->AddEntry(h_bkg_LV_up_bkg,"Efficiency up/down (norm only)","L");
+    //leg->AddEntry(h_bkg_CR_up_bkg,"Scale factor up/down (norm only)","L");
+    leg->AddEntry(h_signal,"New physics signal","L");
     leg->Draw();
 
     TLine l1(30,h_data->GetMinimum(),30,0.75*h_data->GetMaximum());l1.SetLineColor(1);l1.SetLineStyle(3);
     TLine l2(60,h_data->GetMinimum(),60,0.75*h_data->GetMaximum());l2.SetLineColor(1);l2.SetLineStyle(3);
     l1.Draw();
     l2.Draw();
+
+    TLatex *lat = new TLatex();
+    lat->SetTextFont(42);
+    lat->SetTextSize(0.04);
+    //lat->SetNDC();
+    
+    for (int c=1;c<4;c++){
+
+      double NBtot = integral(h_bkg,(c-1)*30,(c-1)*30+29);
+      double eULV  = integral(h_bkg_LV_up_bkg,(c-1)*30,(c-1)*30+29)  -NBtot;
+      double eDLV  = NBtot - integral(h_bkg_LV_dn_bkg,(c-1)*30,(c-1)*30+29);
+     
+      double eUCR  = integral(h_bkg_CR_up_bkg,(c-1)*30,(c-1)*30+29)-NBtot;
+      double eDCR  = NBtot - integral(h_bkg_CR_dn_bkg,(c-1)*30,(c-1)*30+29);
+
+      lat->DrawLatex((c-1)*30+1,h_data->GetMaximum()*2.4,Form("Category %d",c));
+
+      lat->DrawLatex((c-1)*30+10,h_data->GetMaximum()*2.4,Form("#it{N} = %.2f ^{+%.2f}_{-%.2f} (eff.) ^{+%.2f}_{-%.2f} (s.f.)",NBtot,eULV,eDLV,eUCR,eDCR));
+    }
+
     can->SaveAs("t.pdf");
 
     // now lets make a ROOT file with the histograms 
