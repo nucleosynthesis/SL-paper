@@ -17,7 +17,7 @@ def getCoefficients(m1,m2,m3):
   if (8*m2*m2*m2 >= m3*m3) :C = -2*((2*m2)**0.5)*math.cos(4*pi/3. + (1./3.)*math.atan(((8*m2*m2*m2-m3*m3)/(m3*m3))**0.5) );
   else: C = -2*((2*m2)**0.5)*math.cosh((-1./3)*math.atanh(((-8*m2*m2*m2+m3*m3)/(m3*m3))**0.5)) ;
   if (m2 < (C)*(C)/2.) : print "Oh No! ?"#*B = TMath::Sqrt(m2-(*C)*(*C)/2.);
-  B = (m2-C*C/2)**0.5
+  B = (abs(m2-C*C/2))**0.5
   A = m1-C/2
 
   return A,B,C
