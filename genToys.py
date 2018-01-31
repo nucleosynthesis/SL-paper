@@ -13,7 +13,7 @@ nuis = ws.genobj("nuisances")
 fout = ROOT.TFile("toy_trees.root","RECREATE");
 tree = ROOT.TTree("toys","toys");
 
-ntoys = 5000
+ntoys = 10000
 nbins = 90
 
 bV       = [array.array('d',[0]) for it in range(nbins)] 
