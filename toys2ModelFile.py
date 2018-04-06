@@ -14,11 +14,12 @@ makePlots = False
 def getCoefficients(m1,m2,m3):
   pi  = math.pi;
 
-  if (8*m2*m2*m2 >= m3*m3) :C = -2*((2*m2)**0.5)*math.cos(4*pi/3. + (1./3.)*math.atan(((8*m2*m2*m2-m3*m3)/(m3*m3))**0.5) );
-  else: C = -2*((2*m2)**0.5)*math.cosh((-1./3)*math.atanh(((-8*m2*m2*m2+m3*m3)/(m3*m3))**0.5)) ;
-  if (m2 < (C)*(C)/2.) : print "Oh No! ?"#*B = TMath::Sqrt(m2-(*C)*(*C)/2.);
-  B = (abs(m2-C*C/2))**0.5
-  A = m1-C/2
+  #if (8*m2*m2*m2 >= m3*m3) :C = -2*((2*m2)**0.5)*math.cos(4*pi/3. + (1./3.)*math.atan(((8*m2*m2*m2-m3*m3)/(m3*m3))**0.5) );
+  #if (8*m2*m2*m2)/(m3*m3) < 1 : C = 0
+
+  C = -1*(m3/abs(m3))*((2*m2)**0.5)*math.cos( (4./3)*pi + (1./3)*math.atan( (8.*(m2*m2*m2)/(m3*m3)-1.0)**0.5) ) ;
+  B = (m2-2*C*C)**0.5
+  A = m1-C
 
   return A,B,C
 
@@ -90,7 +91,8 @@ def plotCompare(tree,b,mean,var,skew):
   A,B,C = getCoefficients(mean,var,skew)
 
   mynewcalc = []
-  for i in range(100000):
+  nfillers = 100000
+  for i in range(nfillers):
     rx = r.Gaus(0,1)
     hg.Fill(mean*(1+rx*(var**0.5)/mean))
     mvq = A+B*rx+(C/2)*rx*rx
@@ -110,8 +112,8 @@ def plotCompare(tree,b,mean,var,skew):
   h.GetXaxis().SetTitleOffset(0.82)
   h.GetYaxis().SetTitleOffset(1.6)
   h.Scale(1./h.Integral())
-  hq.Scale(1./hq.Integral())
-  hg.Scale(1./hg.Integral())
+  hq.Scale(1./nfillers)
+  hg.Scale(1./nfillers)
   c = ROOT.TCanvas("x%d"%b,"x",900,800)
   c.SetLeftMargin(0.12)
   c.SetRightMargin(0.05)
