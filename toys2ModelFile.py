@@ -9,16 +9,17 @@ import math
 
 # read in a TTree and calculate moments to be spat out in the SL pythom model file - :)
 # Run with -> python toys2ModelFile.py in.root > out.py 
-makePlots = False
+makePlots = True
 
 def getCoefficients(m1,m2,m3):
   pi  = math.pi;
-
-  if (8*m2*m2*m2 >= m3*m3) :C = -2*((2*m2)**0.5)*math.cos(4*pi/3. + (1./3.)*math.atan(((8*m2*m2*m2-m3*m3)/(m3*m3))**0.5) );
-  else: C = -2*((2*m2)**0.5)*math.cosh((-1./3)*math.atanh(((-8*m2*m2*m2+m3*m3)/(m3*m3))**0.5)) ;
-  if (m2 < (C)*(C)/2.) : print "Oh No! ?"#*B = TMath::Sqrt(m2-(*C)*(*C)/2.);
-  B = (abs(m2-C*C/2))**0.5
-  A = m1-C/2
+ 
+  if (8*m2*m2*m2 >= m3*m3) : C = (ROOT.TMath.Sqrt(2*m2))*ROOT.TMath.Cos(4*pi/3. + (1./3.) * ROOT.TMath.ATan(ROOT.TMath.Sqrt((8*m2*m2*m2-m3*m3)/(m3*m3))) );
+  else: C = (ROOT.TMath.Sqrt(2*m2))*ROOT.TMath.CosH((1/3.)*ROOT.TMath.ATanH(ROOT.TMath.Sqrt((-8*m2*m2*m2+m3*m3)/(m3*m3)))) ;
+  #if (m2 < (C)*(C)/2.) : print "Oh No! ?"#*B = TMath::Sqrt(m2-(*C)*(*C)/2.);
+  #C = -1*C 
+  B = (abs(m2-2*C*C))**0.5
+  A = m1-C
 
   return A,B,C
 
@@ -93,7 +94,7 @@ def plotCompare(tree,b,mean,var,skew):
   for i in range(100000):
     rx = r.Gaus(0,1)
     hg.Fill(mean*(1+rx*(var**0.5)/mean))
-    mvq = A+B*rx+(C/2)*rx*rx
+    mvq = A+B*rx+C*rx*rx
     mynewcalc.append(mvq)
     hq.Fill(mvq)
 
@@ -156,7 +157,7 @@ def plotCompare(tree,b,mean,var,skew):
   pad.Draw()
   pad.cd()
   # draw the polynomial
-  f1 = ROOT.TF1("myf_%d"%b,"%g+%g*x+%g*x*x"%(A,B,C/2),-5,5)
+  f1 = ROOT.TF1("myf_%d"%b,"%g+%g*x+%g*x*x"%(A,B,C),-5,5)
   f1.GetXaxis().SetNdivisions(511)
   f1.GetXaxis().SetLabelSize(0.07)
   f1.GetYaxis().SetNdivisions(511)
@@ -176,7 +177,7 @@ def plotCompare(tree,b,mean,var,skew):
   
   tlat.SetTextSize(0.055)
   tlat.SetTextColor(2); tlat.DrawLatex(0.2,0.93,"#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta}"%(mean,var**0.5))
-  tlat.SetTextColor(ROOT.kGreen+2); tlat.DrawLatex(0.2,0.88,"#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta} + %.2f#it{#theta}^{2}"%(A,B,C/2))
+  tlat.SetTextColor(ROOT.kGreen+2); tlat.DrawLatex(0.2,0.88,"#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta} + %.2f#it{#theta}^{2}"%(A,B,C))
   #f1.GetYaxis().SetTitle("#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta} + %.2f#it{#theta}^{2}"%(A,B,C/2))
 
   f2.Draw("Lsame")
