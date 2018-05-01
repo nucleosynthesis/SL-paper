@@ -82,7 +82,7 @@
 }
 \par\vspace*{20mm}\par
 
-{\large \bf Andy~Buckley$^{\,a}$, Matthew~Citron$^{\,b}$,  Sylvain~Fichet$^{\,c}$, Sabine~Kraml$^{\,d}$, Wolfgang Waltenberger$^{\,e}$, Nicholas~Wardle$^{\,f}$}
+{\large \bf Andy~Buckley$^{\,a}$, Matthew~Citron$^{\,b}$,  Sylvain~Fichet$^{\,c}$, Sabine~Kraml$^{\,d}$, Wolfgang~Waltenberger$^{\,e}$, Nicholas~Wardle$^{\,f}$}
 
 \bigskip
 
@@ -514,16 +514,15 @@ $a_{I},~b_{I}$ and $c_{I}$ are determined from the first three moments, which ar
 assuming a linear form ($\hat{n}_{I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$) is shown by the red line.
 
 \begin{figure}[hbt!]
-\begin{center}
-\includegraphics[width=0.32\textwidth]{figures/distribution_4.pdf}
-\includegraphics[width=0.32\textwidth]{figures/distribution_50.pdf}
-\includegraphics[width=0.32\textwidth]{figures/distribution_86.pdf}
+\centering
+\includegraphics[width=0.32\textwidth]{figures/distribution_4}
+\includegraphics[width=0.32\textwidth]{figures/distribution_50}
+\includegraphics[width=0.32\textwidth]{figures/distribution_86}
 \caption{Distributions of $\hat{n}_{I}$ for $I=4$ (left) $I=50$ (center) and $I=86$ (right) in pseudo-datasets generated from the experimental toy search (black points) as described in the text.
 %The error bars on the points indicate the statistical uncertainty from generating 10,000 toys.
 The functions $n_{I}(\theta_{I}$) assuming a quadratic form (green line), or a linear form (red line), are shown in the inset panels.
 The distributions of $\hat{n}_{I}$ for the two cases (quadratic in green and linear in red) with $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$ are shown.\textbf{TO BE UPDATED WITH FINAL TOY MODEL}}
 \label{fig:distributions}
-\end{center}
 \end{figure}
 
 In the case where the skew of the distribution, defined as $m_{3,I}/(m_{2,II})^{\frac{3}{2}}$, is small,
@@ -532,12 +531,27 @@ Instead, for large values of the skew, the linear form leads to a shift of the p
 agreement than the quadratic form. Moreover, in the quadratic form, the probability for $\hat{n}_{I}<0$
 is much smaller when $n^{0}_{I}$ is small, as in the tails of the distributions (eg bin $86$), compared to the linear form.
 
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=0.32\textwidth]{figures/corr-0-61}
+\includegraphics[width=0.32\textwidth]{figures/corr-0-85}
+\includegraphics[width=0.32\textwidth]{figures/corr-61-85}
+\caption{2D distributions of $\hat{n}_{I}$ against $\hat{n}_{J}$ for $I=1,J=62$
+  (left) $I=1,J=86$ (center) and $I=62,J=86$ (right) in pseudo-datasets
+  generated from the experimental toy search (black points) as described in the
+  text. The background heat map is generated from 100,000 samples from the true
+  toy model, the dashed pink countours from the linear SL form, and the solid
+  light-blue contours from the quadratic SL form. In the low-statistics, large-$I,J$
+  bins, the significant asymmetry in the true distribution is seen echoed in the
+  quadratic SL parametrisation contours, while the linear SL form has a significant
+  probability density fraction in the negative-yield region.}
+\end{figure}
 
  \section*{Acknowledgements}
 
  This work has been initiated at the \textit{LHC Chapter II: The Run for New Physics} workshop held at IIP
+ AB's work is supported by a Royal Society University Research Fellowship grant.
  SF's work is supported by the S\~ao Paulo Research Foundation (FAPESP) under grants \#2011/11973 and \#2014/21477-2.
-
 
 
 \appendix
