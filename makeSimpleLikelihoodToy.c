@@ -76,13 +76,15 @@ void makeSimpleLikelihoodToy(){
     
     RooRealVar JES("JES","",0);
 
-    double N1 = 2000;
-    double N2 = 500;
-    double N3 = 100;
+    double Luminosity = 0.5;
+
+    double N1 = Luminosity*2000;
+    double N2 = Luminosity*500;
+    double N3 = Luminosity*100;
     
-    double S1 = 200;
-    double S2 = 70;
-    double S3 = 50;
+    double S1 = Luminosity*200;
+    double S2 = Luminosity*70;
+    double S3 = Luminosity*50;
 
     // say JES has 10%,-20%,20%  uncertainty on the normalisations lnN ~ 1.1, 1./1.2, 1.2!
     double lnN1 = 1.05;
@@ -138,7 +140,7 @@ void makeSimpleLikelihoodToy(){
     TRandom3 *r = new TRandom3();
     TRandom3 *rMC = new TRandom3();
 
-    double mcUncMult = 40.;
+    double mcUncMult = 10.;
 
     int j=0;
 
