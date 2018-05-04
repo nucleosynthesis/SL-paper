@@ -394,7 +394,7 @@ Typically the distributions are binned into histograms, where the bin widths are
 
 As the event counts in each bin (\textit{i.e.} each piece of phase space) are independent from each other, the simplified likelihood framework can be applied to these kinds of analyses, where the $P$ independent measurements are the event counts in each bin (see also Refs.~\cite{Fichet:2016gvx,SL_note}). In this case, the  probabilities $Pr$ in the simplified likelihood function of Eqn.~\ref{eq:SL_LHC} become Poisson probabilities for each bin $I$,
 \be
-\textrm{Pr}(o_{I}|n_{I}) \rightarrow \dfrac{(n_{I})^{o_{I}} e^{-n_{I}}}{o_{I}!} \, .
+\textrm{Pr}(o_{I}|n_{I}) \rightarrow \dfrac{(n_{I})^{o_{I}} \mathrm{e}^{-n_{I}}}{o_{I}!} \, .
 \ee
 
 In the following section, we describe a toy search for new physics, inspired by those performed at the LHC, and derive the simplified likelihood parameters for it.
@@ -620,7 +620,7 @@ Z=\theta+\frac{c}{2\sqrt{N}}\theta^2+O\left(\frac{1}{N}\right)\,.
 Let us now compare the characteristic function of  this expansion to Eq.~\eqref{eq:CF_CLT}.
 We find that the characteristic function is given by
 \be
-\varphi_Z(t)={\bf E} \left[ e^{it \left(\theta+\frac{c}{2\sqrt{N}}\theta^2+O\left(\frac{1}{N}\right)\right)} \right]
+\varphi_Z(t)={\bf E} \left[ \mathrm{e}^{it \left(\theta+\frac{c}{2\sqrt{N}}\theta^2+O\left(\frac{1}{N}\right)\right)} \right]
 %=\exp\left(-\frac{\sigma^2}{1-\frac{i c t}{\sqrt{n}}  +O(n^{-1})}\frac{t^2}{2}\right)
 =\exp\left(-\frac{\sigma^2 t^2}{2}-i \frac{c t^3}{ 2 \sqrt{N}} +O\left(\frac{1}{N}\right)\right)
 \label{eq:CF_exp}
