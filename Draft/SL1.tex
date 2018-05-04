@@ -189,10 +189,10 @@ In the simplified likelihood framework, we derive a set of \textit{combined} nui
 
 The key result at the basis of  the simplified likelihood framework is the approximation
 \begin{align}
-L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta}) & =
-\prod_{I=1}^P{\rm Pr}\Big(  \hat n_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\ & \approx
-\prod_{I=1}^P{\rm Pr}\Big(\hat n_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big)
-\frac{ e^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1}(\bm \alpha) \bm \theta}}}{\sqrt{(2\pi)^P }} \,, \label{eq:SL_master}
+  L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})
+  & = \prod_{I=1}^P \mathrm{Pr}Big(  \hat n_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
+  & \approx \prod_{I=1}^P \mathrm{Pr}\Big( \hat n_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big) \cdot
+    \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1}(\bm \alpha) \bm \theta}}}{\sqrt{(2\pi)^P }} \,, \label{eq:SL_master}
 \end{align}
 where the first line is the exact experimental likelihood and the second line is the simplified likelihood. Here $\pi(\bm \delta)$ is the joint probability density distribution for the elementary nuisance parameters. In our assumptions  these are independent from each other, hence the prior factorises as $\pi(\bm \delta)=\prod_{i=1}^N \pi_i(\delta_i)$.
 
@@ -200,8 +200,9 @@ The $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix $\bm{\rho}=\r
 In the simplified likelihood, neglecting the systematic uncertainties affecting the signal implies in turn that the parameters of the simplified likelihood are independent of $\bm \alpha$. Hence the simplified likelihood Eq.~\eqref{eq:SL_master} takes the form\,\footnote{We have substituted
 $a_I(\alpha)\rightarrow a_I+n_{s,I}(\alpha),~b_I(\alpha)\rightarrow b_I$ and $c_I(\alpha)\rightarrow c_I$.}
 \be
-L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})  \approx L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) = \prod_{I=1}^P{\rm Pr}\Big(o_I\,\Big|\,n_{s,I}(\bm \alpha)+a_I+ b_I\theta_I+c_I\theta_I^2  \Big)
-\frac{ e^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1} \bm \theta}}}{\sqrt{(2\pi)^P }},
+L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})  \approx L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) =
+\prod_{I=1}^P \mathrm{Pr}\Big( o_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
+\frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
 \ee
 which is the expression we use in the rest of this paper.
@@ -415,9 +416,9 @@ backgrounds, in a correlated way. The effects of these uncertainties are indicat
 which effect only the overall expected rate of the backgrounds. These are indicated in each category as uncertainties on the normalisation $N$ of the background. These uncertainties are correlated between the three categories
 and represent two typical experimental uncertainties; a veto efficiency uncertainty (eff.) and the uncertainty from some data-simulation scale-factor (s.f.) which has been applied to the simulation.
 
-\begin{figure}[hbt!]
+\begin{figure}%[hbt!]
 \begin{center}
-\includegraphics[scale=0.8]{figures/t}
+\includegraphics[width=\textwidth]{figures/t}
 \end{center}
 \caption{Toy search for new physics. The search is performed across three event categories, each divided into 30 bins to make a total of 90 search regions. The nominal expected contribution in each bin from the
 background and from the new physics signal is shown by the blue and red lines, respectively. The solid and dashed lines show the $\pm1\sigma$ correlated variation in each bin expected due to an experimental and theoretical
