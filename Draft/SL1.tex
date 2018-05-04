@@ -92,7 +92,7 @@
 
 {\em $^a$ School of Physics \& Astronomy, University of Glasgow, Glasgow, Scotland, UK}
 \\
-{\em $^b$ }
+{\em $^b$ University of California, Santa Barbara, California, USA}
 \\
 {\em $^c$ ICTP-SAIFR \& IFT-UNESP, R. Dr. Bento Teobaldo Ferraz 271, S\~ao Paulo, Brazil}
 \\
@@ -521,7 +521,7 @@ assuming a linear form ($\hat{n}_{I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$)
 \includegraphics[width=0.32\textwidth]{figures/distribution_86}
 \caption{Distributions of $\hat{n}_{I}$ for $I=4$ (left), $I=62$ (center), and $I=86$ (right) in 100,000 pseudo-datasets generated from the experimental toy search (black points) as described in the text.
   % The error bars on the points indicate the statistical uncertainty from generating 10,000 toys.
-  The functions $n_{I}(\theta_{I}$) assuming a quadratic form (green line), or a linear form (red line), are shown in the inset panels.
+    The functions $n_{I}(\theta_{I})$ assuming a quadratic form (green line), or a linear form (red line), are shown in the inset panels.
   The distributions of $\hat{n}_{I}$ for the two cases (quadratic in green and linear in red) with $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$ are shown.
 }
 \label{fig:distributions}
@@ -532,6 +532,21 @@ both the linear and quadratic form produce a similar distribution as those from 
 Instead, for large values of the skew, the linear form leads to a shift of the peak in the distribution and overall poorer
 agreement than the quadratic form. Moreover, in the quadratic form, the probability for $\hat{n}_{I}<0$
 is much smaller when $n^{0}_{I}$ is small, as in the tails of the distributions (eg bin $86$), compared to the linear form.
+
+Figure~\ref{fig:SLConvergence} shows the RMS of the simplified likelihood coefficients for the three bins, $i=4,50$ and $86$ 
+relative to the values determined from 100,000 pseudo-datasets.
+
+\begin{figure}%[hbt!]
+\centering
+\includegraphics[width=0.32\textwidth]{figures/varAll_A}
+\includegraphics[width=0.32\textwidth]{figures/varAll_B}
+\includegraphics[width=0.32\textwidth]{figures/varAll_C}
+\caption{RMS of the simplfied likelihood coefficients relative to the mean coefficient value determined from 100,000 pseudo-datasets
+    for $a_{I}$ (left), $b_{I}$ (center), and $c_{I}$ (right). The distributions are shown for $I=4$ (black line), $I=62$ (red line) and $I=86$ (blue line).
+\label{fig:SLConvergence}
+}
+\end{figure}
+
 
 \begin{figure}%[hbt!]
 \centering
