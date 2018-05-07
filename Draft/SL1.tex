@@ -515,16 +515,17 @@ $a_{I},~b_{I}$ and $c_{I}$ are determined from the first three moments, which ar
 assuming a linear form ($\hat{n}_{I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$) is shown by the red line.
 
 \begin{figure}%[hbt!]
-\centering
-\includegraphics[width=0.32\textwidth]{figures/distribution_4}
-\includegraphics[width=0.32\textwidth]{figures/distribution_62}
-\includegraphics[width=0.32\textwidth]{figures/distribution_86}
-\caption{Distributions of $\hat{n}_{I}$ for $I=4$ (left), $I=62$ (center), and $I=86$ (right) in 100,000 pseudo-datasets generated from the experimental toy search (black points) as described in the text.
-  % The error bars on the points indicate the statistical uncertainty from generating 10,000 toys.
-    The functions $n_{I}(\theta_{I})$ assuming a quadratic form (green line), or a linear form (red line), are shown in the inset panels.
-  The distributions of $\hat{n}_{I}$ for the two cases (quadratic in green and linear in red) with $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$ are shown.
-}
-\label{fig:distributions}
+  \centering
+  \includegraphics[width=0.32\textwidth]{figures/distribution_4}
+  \includegraphics[width=0.32\textwidth]{figures/distribution_62}
+  \includegraphics[width=0.32\textwidth]{figures/distribution_86}
+  \caption{Distributions of $\hat{n}_{I}$ for $I=4$ (left), $I=62$ (center), and $I=86$ (right) in 100,000 pseudo-datasets generated from the experimental toy search (black points) as described in the text.
+    % The error bars on the points indicate the statistical uncertainty from generating 10,000 toys.
+    The functions $n_{I}(\theta_{I})$ assuming a quadratic form (green line), or
+    a linear form (red line), are shown in the inset panels.  The distributions
+    of $\hat{n}_{I}$ for the two cases (quadratic in green and linear in red)
+    with $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$ are shown.  }
+  \label{fig:distributions}
 \end{figure}
 
 In the case where the skew of the distribution, defined as $m_{3,I}/(m_{2,II})^{\frac{3}{2}}$, is small,
@@ -533,65 +534,80 @@ Instead, for large values of the skew, the linear form leads to a shift of the p
 agreement than the quadratic form. Moreover, in the quadratic form, the probability for $\hat{n}_{I}<0$
 is much smaller when $n^{0}_{I}$ is small, as in the tails of the distributions (eg bin $86$), compared to the linear form.
 
-Figure~\ref{fig:SLConvergence} shows the RMS of the simplified likelihood coefficients for the three bins, $i=4,50$ and $86$ 
-relative to the values determined from 100,000 pseudo-datasets.
 
 \begin{figure}%[hbt!]
-\centering
-\includegraphics[width=0.32\textwidth]{figures/varAll_A}
-\includegraphics[width=0.32\textwidth]{figures/varAll_B}
-\includegraphics[width=0.32\textwidth]{figures/varAll_C}
-\caption{RMS of the simplfied likelihood coefficients relative to the mean coefficient value determined from 100,000 pseudo-datasets
-    for $a_{I}$ (left), $b_{I}$ (center), and $c_{I}$ (right). The distributions are shown for $I=4$ (black line), $I=62$ (red line) and $I=86$ (blue line).
-\label{fig:SLConvergence}
-}
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/corr-4-7}
+  \includegraphics[width=0.45\textwidth]{figures/corr-4-62}\\
+  \includegraphics[width=0.45\textwidth]{figures/corr-4-86}
+  \includegraphics[width=0.45\textwidth]{figures/corr-62-86}
+  \caption{2D distributions of $\hat{n}_{I}$ against $\hat{n}_{J}$ for
+    % $I=4,J=62$ (left), $I=1,J=86$ (center) and $I=62,J=86$ (right)
+    $I=4,J=7$ (top left), $I=4,J=62$ (top right), $I=4,J=86$ (bottom left), and
+    $I=62,J=86$ (bottom right) in pseudo-datasets generated from the
+    experimental toy search (black points) as described in the text. The
+    background heat map is generated from 100,000 samples from the true toy
+    model, the dashed pink countours from the linear SL form, and the solid
+    light-blue contours from the quadratic SL form. In the pair of
+    high-statistics bins in the top-left plot, clear agreement is seen between
+    the linear and quadratic SL forms; in the top-right, deviations start to
+    appear, and in the low-statistics bin~$J=86$ of the bottom plot the
+    asymmetry is seen to become very significant, and the linear SL form has a
+    significant probability density fraction in the negative-yield region.}
+  \label{fig:distributions2d}
+\end{figure}
+
+In Figure~\ref{fig:distributions2d} 2D projections of the background
+distributions are shown between four pairs of signal-region bins: bin pair
+$(4,7)$ shows a projection for high-statistics bins where both the linear and
+quadratic forms of the SL agree closely with the true distribution; the true
+distribution in $(4,62)$ starts to display deviations from the multivariate
+normal approximation which are well captured by the quadratic approximation; and
+in the bottom pair of plots with bins~4 and~62 joint with the low-statistics
+bin~86, the proximity of the mean rate to zero induces a highly asymmetric
+Poisson distribution which neither approximation can model well. In these last
+two plots, it can be seen that the quadratic-order SL peaks at too low a value,
+near a sudden cutoff also seen in Figure~\ref{fig:distributions}, while the
+linear form peaks at too high a value.  Systematic relaxation of the
+quadratic-form cutoff to more closely model the true pdf would require
+evaluation of higher-order coefficients (and/or off-diagonal skew terms) and
+hence higher moments of the experimental distributions.
+
+An advantage of the quadratic form cutoff is that a strictly positive
+approximate distribution can be guaranteed, while the linear form can have a
+significant negative yield fraction as seen in the figures for bin~86. Sampling
+from the linear SL form, e.g.~for likelihood marginalisation, requires that the
+background rates be positive since they are propagated through the Poisson
+distribution. The quadratic SL provides a controlled solution to this issue,
+as opposed to \emph{ad hoc} methods like use of a log-normal distribution or
+setting negative-rate samples to zero or an infinitessimal value: the toy model
+linear approximation has a negative fraction of $\sim\!11.6\%$, while the
+quadratic form has a negative fraction of exactly zero.
+
+Figure~\ref{fig:SLConvergence} shows the RMS of the simplified likelihood
+coefficients for the three bins, $i=4,50$ and $86$ relative to the values
+determined from 100,000 pseudo-datasets.
+
+\begin{figure}%[hbt!]
+  \centering
+  \includegraphics[width=0.32\textwidth]{figures/varAll_A}
+  \includegraphics[width=0.32\textwidth]{figures/varAll_B}
+  \includegraphics[width=0.32\textwidth]{figures/varAll_C}
+  \caption{RMS of the simplfied likelihood coefficients relative to the mean
+    coefficient value determined from 100,000 pseudo-datasets for $a_{I}$
+    (left), $b_{I}$ (center), and $c_{I}$ (right). The distributions are shown
+    for $I=4$ (black line), $I=62$ (red line) and $I=86$ (blue line).}
+  \label{fig:SLConvergence}
 \end{figure}
 
 
-\begin{figure}%[hbt!]
-\centering
-\includegraphics[width=0.45\textwidth]{figures/corr-4-7}
-\includegraphics[width=0.45\textwidth]{figures/corr-4-62}\\
-\includegraphics[width=0.45\textwidth]{figures/corr-4-86}
-\includegraphics[width=0.45\textwidth]{figures/corr-62-86}
-\caption{2D distributions of $\hat{n}_{I}$ against $\hat{n}_{J}$ for
-  %$I=4,J=62$ (left), $I=1,J=86$ (center) and $I=62,J=86$ (right)
-  $I=4,J=7$ (top left), $I=4,J=62$ (top right), $I=4,J=86$ (bottom left), and
-  $I=62,J=86$ (bottom right) in pseudo-datasets generated from the experimental
-  toy search (black points) as described in the text. The background heat map is
-  generated from 100,000 samples from the true toy model, the dashed pink
-  countours from the linear SL form, and the solid light-blue contours from the
-  quadratic SL form. In the pair of high-statistics bins in the top-left plot,
-  clear agreement is seen between the linear and quadratic SL forms; in the
-  top-right, deviations start to appear, and in the low-statistics bin~$J=86$ of
-  the bottom plot the asymmetry is seen to become very significant, and the
-  linear SL form has a significant probability density fraction in the
-  negative-yield region.}
-\end{figure}
-
-% \fixme{ANDY: discuss truncation and positivity: any-negative fraction of
-%   $\sim 11.6\%$ estimated for this toy model from 500k samples from the linear
-%   SL form, reduced to exactly zero with the quadratic form. Note the quadratic
-%   form's better ability to model the max-likelihood point in the true
-%   % $\{\hat{n}\}$
-%   $\hat{\bm{n}}$ distribution, but at the cost of the very sudden cutoff and
-%   corresponding contour distortion. Systematic relaxation of this cutoff to more closely
-%   model the true pdf would require evaluation of higher-order coefficients
-%   (and/or off-diagonal skew terms) and hence higher moments of the experimental
-%   distributions. These shapes are propagated through the composite Poisson
-%   component of the likelihood (see the benchmarks against exclusion limits), but
-%   the elimination of negative yields --- a problem for Poisson evaluation,
-%   currently solved by \emph{ad hoc} and uncontrolled means --- is a major
-%   advantage of the SL method.}
-
-\fixme{MATTHEW, SYLVAIN: Plots showing moment-extraction convergence}
-
-\fixme{WOLFGANG: Plots showing profile \& marginalisation upper-limit extractions between true, symm/linear, and asymm/quadratic forms}
+\fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
+  extractions between true, symm/linear, and asymm/quadratic forms}
 
 
 \section{Distribution of Simplified Likelihood data}
 
-\fixme{ANDY: small extension to existing practice. Representation in HepData and data formats.}
+\fxfatal{ANDY: small extension to existing practice. Representation in HepData and data formats.}
 
 
 \section*{Acknowledgements}
