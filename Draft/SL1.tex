@@ -190,7 +190,7 @@ In the simplified likelihood framework, we derive a set of \textit{combined} nui
 The key result at the basis of  the simplified likelihood framework is the approximation
 \begin{align}
   L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})
-  & = \prod_{I=1}^P \mathrm{Pr}Big(  \hat n_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
+  & = \prod_{I=1}^P \mathrm{Pr}\Big(  \hat n_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
   & \approx \prod_{I=1}^P \mathrm{Pr}\Big( \hat n_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big) \cdot
     \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1}(\bm \alpha) \bm \theta}}}{\sqrt{(2\pi)^P }} \,, \label{eq:SL_master}
 \end{align}
@@ -584,6 +584,19 @@ setting negative-rate samples to zero or an infinitessimal value: the toy model
 linear approximation has a negative fraction of $\sim\!11.6\%$, while the
 quadratic form has a negative fraction of exactly zero.
 
+
+\fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
+  extractions between true, symm/linear, and asymm/quadratic forms}
+
+
+\section{Construction and distribution of Simplified Likelihood data}
+
+\fxfatal{Give an introduction to the experimental/stats issues in extraction of
+  stable and consistent 2nd and 3rd order correlation moments. Note the
+  necessity of cross-checking and sanity-checking moment estimates: covariances
+  have previously been published which, due to numerical rounding issues, are
+  singular and hence unusable.}
+
 Figure~\ref{fig:SLConvergence} shows the RMS of the simplified likelihood
 coefficients for the three bins, $i=4,50$ and $86$ relative to the values
 determined from 100,000 pseudo-datasets.
@@ -600,14 +613,51 @@ determined from 100,000 pseudo-datasets.
   \label{fig:SLConvergence}
 \end{figure}
 
+Key to the usefulness of any likelihood data for analysis reinterpretation is
+the availability of that data in a standard format. For global fits, where tens
+or hundreds of analyses may be used simultaneously, it is crucial that this
+format be unambiguously parseable by algorithms without human assistance. A
+standard location is also necessary, for which the obvious choice is the longstanding
+HEP data repository, HepData~\cite{hepdata}.
 
-\fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
-  extractions between true, symm/linear, and asymm/quadratic forms}
+Unfortunately, at present there is no standard semantic representation of second
+order (i.e.~covariance) correlation data, let alone the third order ``skew''
+information. At present a review of the correlation information in HepData and
+on the experiments' analysis websites reveals a mixture of second-order data
+presentation styles:
+%
+\begin{itemize}
+\item 2D histograms of either covariance or correlation matrices. This has the
+  difficulties that the convention used is not made clear (other than by
+  inspection of the matrix diagonal), and without a structural association with
+  a ``primary'' dataset of values/first moments it is impossible for computer
+  codes to unambiguously construct the relevant likelihood. In the case of a
+  normalised correlation representation cf.~$\rho$, the primary dataset must
+  also provide the diagonal variances.
+\item A breakdown by error-source, e.g. a series of labelled $\pm$ terms for
+  each value in the primary dataset. From this, with some conventions (e.g.~a
+  ''stat'' label to be a purely diagonal contribution, a ``lumi'' label to be
+  100\% correlated across all bins, and all other labelled uncertainties treated
+  as orthogonal) the correlation or covariance matrices can be constructed.
+\item auxiliary files in arbitrary format: the \emph{ad hoc} nature of these
+  makes them impossible to be handled by unsupervised algorithms. This includes
+  2D histograms in ROOT data files, since variations in path structure and the
+  ambiguity between covariance or correlation forms are an impeditment to
+  automated use.
+\end{itemize}
 
+We offer two compatible proposals for this: augmentation of HepData table
+headers to express relationships between tables, i.e.~identifying the second
+(and third) moment data table associated with a primary dataset in a standard
+and parseable fashion; and representation of SL covariance matrices in
+error-source form, with each bin $I$ reporting $N$ different error sources of
+value $\sqrt{m_{2,IJ}}$. Both would require some keyword standardisation: in the
+first case to express the semantic type of a dataset and the relationships
+between them, and in the second case to identify the diagonal error
+term. Diagonal third-order moments can also be handled in both schemes,
+trivially in the case of linked datasets, and by introduction of a new and
+special ``skew'' label in the error-source scheme.
 
-\section{Distribution of Simplified Likelihood data}
-
-\fxfatal{ANDY: small extension to existing practice. Representation in HepData and data formats.}
 
 
 \section*{Acknowledgements}
