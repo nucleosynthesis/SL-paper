@@ -483,19 +483,19 @@ and hence some uncertainty is associated. As these uncertainties will be uncorre
 Systematic uncertainties which only affect the overall normalization, are also interpolated using exponent functions,
 %
 \begin{equation}
- N(\bm{\delta})  =   N^{0} \cdot \prod_{j} (1+K_{Ij})^{\delta_{j}},
+ N(\bm{\delta})  =   N^{0} \cdot \prod_{j} (1+K_{j})^{\delta_{j}},
  \label{eqn:norm_function}
 \end{equation}
 %
 where $N^{0} = N(\bm{\delta}=0)$ and $j$ runs over the elementary nuisance parameters.  A simple extension to this arises if the uncertainty is `asymmetric', as in our toy search;
-the value of $K_{Ij}$ is set to $K^{+}_{Ij}$ for $\delta_{j}\geq0$ and to $K^{-}_{Ij}$ for $\delta_{j} < 0$. Furthermore, any uncertainty which affects both the
+the value of $K_{j}$ is set to $K^{+}_{j}$ for $\delta_{j}\geq0$ and to $K^{-}_{j}$ for $\delta_{j} < 0$. Furthermore, any uncertainty which affects both the
 shape and the normalization can be incorporated by including terms such as those in Eqn~\ref{eqn:frac_function} in addition to one of these normalization terms.
 In our toy search, there will be a separate $N(\bm{\delta})$ term for each category which provides the total expected background rate summing over the 30 bins of that category.
 
 Combining Eqns~\ref{eqn:frac_function},~\ref{eqn:bin_function} and~\ref{eqn:norm_function} yields the full parameterization,
 %
 \begin{equation}
- n_{I}(\bm{\delta}) = N^{0}\cdot \prod_{j}(1+K_{Ij})^{\delta_{j}} \cdot f^{0}_{I} \cdot\frac{1}{F(\bm{\delta})} \prod_{j} p_{Ij}(\delta_{j}) \cdot \prod_{j} (1+\epsilon_{Ij}\delta_{j}).
+ n_{I}(\bm{\delta}) = N^{0}\cdot \prod_{j}(1+K_{j})^{\delta_{j}} \cdot f^{0}_{I} \cdot\frac{1}{F(\bm{\delta})} \prod_{j} p_{Ij}(\delta_{j}) \cdot \prod_{j} (1+\epsilon_{Ij}\delta_{j}).
 \label{eqn:expt_param}
 \end{equation}
 

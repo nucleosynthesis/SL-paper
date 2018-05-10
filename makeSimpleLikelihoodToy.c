@@ -233,25 +233,35 @@ void makeSimpleLikelihoodToy(){
     h_data->GetXaxis()->LabelsOption("v");
     //h_data->SetMinimum(0.001);
     h_data->Draw("P");
+
     h_bkg_errs->Draw("E2");
     h_bkg->Draw("histsame");
+
     h_bkg_JES_dn_bkg->Draw("histsame");
     h_bkg_JES_up_bkg->Draw("histsame");
     h_bkg_ISR_dn_bkg->Draw("histsame");
     h_bkg_ISR_up_bkg->Draw("histsame");
+    
     //h_bkg_LV_dn_bkg->Draw("histsame");
     //h_bkg_LV_up_bkg->Draw("histsame");
     //h_bkg_CR_dn_bkg->Draw("histsame");
     //h_bkg_CR_up_bkg->Draw("histsame");
+    
     h_signal->Draw("histsame");
     h_data->Draw("Psame");
    
     TLegend *leg = new TLegend(0.69,0.42,0.97,0.89);
     leg->SetBorderSize(0);
     leg->AddEntry(h_data,"Observed data","P");
+   
+    TH1F* hwhite = new TH1F("hw","hw",1,0,1);
+    hwhite->SetLineColor(0);
+
+
     leg->AddEntry(h_bkg_errs,"Nominal background (#pm stat unc.)","LF");
     leg->AddEntry(h_bkg_JES_up_bkg,"Energy scale up/down","L");
     leg->AddEntry(h_bkg_ISR_up_bkg,"Theory uncertainty up/down","L");
+
     //leg->AddEntry(h_bkg_LV_up_bkg,"Efficiency up/down (norm only)","L");
     //leg->AddEntry(h_bkg_CR_up_bkg,"Scale factor up/down (norm only)","L");
     leg->AddEntry(h_signal,"New physics signal","L");
@@ -278,7 +288,8 @@ void makeSimpleLikelihoodToy(){
 
       lat->DrawLatex((c-1)*30+1,h_data->GetMaximum()*2.4,Form("Category %d",c));
 
-      lat->DrawLatex((c-1)*30+10,h_data->GetMaximum()*2.4,Form("#it{N} = %.2f ^{+%.2f}_{-%.2f} (eff.) ^{+%.2f}_{-%.2f} (s.f.)",NBtot,eULV,eDLV,eUCR,eDCR));
+      if (c==3) lat->DrawLatex((c-1)*30+10,h_data->GetMaximum()*2.4,Form("#it{N} = %.2f ^{+%.2f}_{-%.2f} (eff.) ^{%.2f}_{%.2f} (s.f.)",NBtot,eULV,eDLV,eUCR,eDCR));
+      else  lat->DrawLatex((c-1)*30+10,h_data->GetMaximum()*2.4,Form("#it{N} = %.2f ^{+%.2f}_{-%.2f} (eff.) ^{+%.2f}_{-%.2f} (s.f.)",NBtot,eULV,eDLV,eUCR,eDCR));
     }
 
     can->SaveAs("t.pdf");
