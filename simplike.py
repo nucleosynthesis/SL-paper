@@ -131,6 +131,7 @@ class SLParams(object):
         self.thetadbn = st.multivariate_normal(np.zeros(self.size), self.rhoparams)
         #
         self.llmax = None #< for caching of unconditional max LL
+        self.llnosig = None #< for caching of no-signal LL
 
     @property
     def size(self):
@@ -229,30 +230,46 @@ class SLParams(object):
         #     pass
         if mu is None:
             if self.llmax is not None: #< return cached value if available
-                return self.llmax
-            def calc_optll_unconditional(mu_thetas):
-                return -self.loglike(mu_thetas[0], mu_thetas[1:])
-            minres = minimize(calc_optll_unconditional, [0 for _ in range(self.size+1)])
-            llopt = -calc_optll_unconditional(minres.x)
-            self.llmax = llopt
+                minres, llopt = self.llmax
+            else:
+                def calc_optll_unconditional(mu_thetas):
+                    return -self.loglike(mu_thetas[0], mu_thetas[1:])
+                minres = minimize(calc_optll_unconditional, [0 for _ in range(self.size+1)])
+                llopt = -calc_optll_unconditional(minres.x)
+                self.llmax = (minres, llopt)
         else:
-            def calc_optll_conditional(thetas, mu): #< capture mu?
-                return -self.loglike(mu, thetas)
-            minres = minimize(calc_optll_conditional, np.zeros(self.size), args=(mu,))
-            llopt = -calc_optll_conditional(minres.x, mu)
+            if mu == 0 and self.llnosig is not None:
+                minres, llopt = self.llnosig #< use mu=0 cache
+            else:
+                def calc_optll_conditional(thetas, mu): #< capture mu?
+                    return -self.loglike(mu, thetas)
+                minres = minimize(calc_optll_conditional, np.zeros(self.size), args=(mu,))
+                llopt = -calc_optll_conditional(minres.x, mu)
+                if mu == 0:
+                    self.llnosig = (minres, llopt) #< mu=0 caching
         # print llopt
         if rtnparams:
             return llopt, minres.x
         else:
             return llopt
 
-    def tmu(self, mu):
-        """Calculate profile likelihood chi2-distributed test statistic, t_mu = -2 ln lambda_mu"""
-        return -2 * (self.maxloglike(mu) - self.maxloglike()) #< NB. use of cached unconditional maxLL
+    def deltaloglike(self, mu, wrtnosig=False):
+        """Calculate profile likelihood log-likelihood difference, ln lambda_mu.
 
-    def lambdamu(self, mu):
+        If wrtnosig is True, calculate the delta with respect to the no-signal mu=0
+        profile likelihood rather than the unconditional max likelihood.
+        """
+        ll_mu = self.maxloglike(mu)
+        ll_0 = self.maxloglike(0 if wrtnosig else None) #< NB. use of cached maxLLs
+        return ll_mu - ll_0
+
+    def tmu(self, mu, wrtnosig=False):
+        """Calculate profile likelihood chi2-distributed test statistic, t_mu = -2 ln lambda_mu"""
+        return -2 * self.deltaloglike(mu, wrtnosig)
+
+    def likeratio(self, mu, wrtnosig=False):
         """Calculate profile likelihood ratio, lambda_mu = L(mu, theta_hathat)/L(mu_hat, theta_hat)"""
-        return np.exp(self.tmu(mu))
+        return np.exp(self.deltaloglike(mu, wrtnosig))
 
     def avgloglike(self, mu, nsamp=10000):
         """Calculate marginalised LL = ln <p_SL>, using nsamp samples
