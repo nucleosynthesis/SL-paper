@@ -32,6 +32,7 @@
 \usepackage{nicefrac}
 \usepackage{bbm}
 \usepackage{geometry}
+\usepackage{subdepth}
 \geometry{a4paper}
 
 \usepackage{jheppub}
@@ -188,6 +189,7 @@ In the simplified likelihood framework, we derive a set of \textit{combined} nui
 
 
 The key result at the basis of  the simplified likelihood framework is the approximation
+\fxnote{Need to define all symbols, esp $\hat{n}$}
 \begin{align}
   L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})
   & = \prod_{I=1}^P \mathrm{Pr}\Big(  \hat n_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
@@ -199,12 +201,12 @@ where the first line is the exact experimental likelihood and the second line is
 The $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix $\bm{\rho}=\rho_{IJ}$ define the simplified likelihood and are in general functions of the parameters of interest. However in concrete cases, this dependence will often be negligible. This is in particular the case in particle physics searches for new physics when the expected event number decomposes into signal ($n_s$) plus background ($n_b$) contributions. The parameters of interest that model the new physics enter in $n_s$ while $n_b$ is independent from them.  Whenever the expected signal is small with respect to the background, the dominant uncertainties in searches for new physics are those related to the background.
 In the simplified likelihood, neglecting the systematic uncertainties affecting the signal implies in turn that the parameters of the simplified likelihood are independent of $\bm \alpha$. Hence the simplified likelihood Eq.~\eqref{eq:SL_master} takes the form\,\footnote{We have substituted
 $a_I(\alpha)\rightarrow a_I+n_{s,I}(\alpha),~b_I(\alpha)\rightarrow b_I$ and $c_I(\alpha)\rightarrow c_I$.}
-\be
+\begin{equation}
 L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})  \approx L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) =
 \prod_{I=1}^P \mathrm{Pr}\Big( o_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
 \frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
-\ee
+\end{equation}
 which is the expression we use in the rest of this paper.
 
 The parameters of the simplified likelihood ($a_I, b_I, c_I, \rho_{IJ}$) have analytical expressions
@@ -712,15 +714,40 @@ Z\rightarrow \theta+\frac{\gamma}{3\sqrt{N}}\theta^2\,,\,\,N\rightarrow \infty  
 \ee
 When the quadratic term becomes negligible the distribution becomes symmetric, and we recover the usual CLT.
 As expected, for finite $N$, we can see that  the support of $Z$ is not $\bf R$. For example for $\gamma>0$, we have
-$Z>-\frac{3}{4}\frac{\sqrt{N}}{\gamma}$.
+$Z > -3\sqrt{N}/4\gamma$.
 %This normal expansion will be very useful in the simplified likelihood framework and
 %will be extensively used in the following.
 
-\input{reference_code}
+\section{Reference Code}
+\label{sec:reference_code}
+
+A reference implementation in Python code is provided in
+\url{https://github.com/nucleosynthesis/SL-paper}.  This provides functions to
+calculate the SL $a_I$, $b_I$, $c_I$, and $\rho_{IJ}$ coefficients, and an
+\texttt{SLParams} class which computes these and applies them in combination
+with observed and expected signal yields to calculate profile and marginal
+likelihoods, log likelihood-ratios, and limit-setting test statistics. For
+convergence efficiency, the profile likelihood computation makes use of the
+gradients of the SL log-likelihood with respect to the signal strength $\mu$ and
+nuisance parameters $\bm{\theta}$, which we reproduce here to assist independent
+implementations:
+%
+\begin{align}
+  \ln \big( L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) \big) &=
+  \sum_I^P \ln \mathrm{Poiss}(o_I|\bm{\alpha},\theta_I) - \frac{1}{2} \bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} - \frac{P}{2} \ln 2\pi \\
+  %
+  \Rightarrow \qquad
+  \frac{\mathrm{d}\ln L}{\mathrm{d}\mu} &= \sum_I^P \left( \frac{o_I}{n_I(\bm{\alpha}, \theta_I)} - 1 \right) \cdot s_I(\bm{\alpha}) \\
+  %
+  \frac{\mathrm{d}\ln L}{\mathrm{d}\theta_{\!A}} &= \left( \frac{o_A}{n_A(\bm{\alpha}, \theta_{\!A})} - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \theta_I ~.
+\label{eq:SL_LHC}
+\end{align}
+
 
 
 %For simplicity, in our upcoming toy models, we will consider a single parameter-of-interest, the ratio of the observed to the predicted signal production cross-section $\mu=\sigma/\sigma_{\mathrm{TH}}$ (or `signal strength').
 %This is very commonly used in experimental searches for some hypothetical new signal processes and demonstrates the simplified likelihood formalism without loss of generality.
+
 \bibliographystyle{jhep}
 
 \bibliography{biblio}
