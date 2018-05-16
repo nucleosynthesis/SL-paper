@@ -151,7 +151,7 @@ today's experiments  can be of large scale and can contain a huge number of thes
 
 Although sources of systematic uncertainty can be numerous and of very different nature, a general feature they share is that they are almost always independent of each other. This property of independence between the systematic uncertainties has profound consequences, and, as we will discuss soon, is the reason why the approach presented in this work is so efficient. Namely, independence of the uncertainties can be used in order to drastically simplify the experimental likelihood function, to the price of an often-negligible error that will be discussed at length in this paper.
 
-The \textit{Simplified Likelihood} framework we present in this paper is a well-defined approximation scheme for experimental likelihoods. It can be used both to simplify subsequent experimental analyses and to ease the transmission of results between an experiment and the scientific community.
+The \textit{Simplified Likelihood} framework we present in this paper is a well-defined approximation scheme for experimental likelihoods. It can be used to simplify subsequent experimental analyses, to allow a uniform statistical treatment of published search-analysis data, and to ease the transmission of results between an experiment and the scientific community.
 We build on the proposals for approximating likelihoods recently suggested in Refs.~\cite{Fichet:2016gvx,SL_note}, in which promising preliminary results have been shown.
 
 In the context of the LHC, communicating the full experimental likelihoods via the \texttt{RooFit/Roostats} software framework~\cite{Verkerke:2003ir,Moneta:2010pm} has been suggested in Refs.~\cite{Kraml:2012sg,Boudjema:2013qla}. The presentation method we propose in this paper is complementary in that it is technically straightforward to carry out, without relying on any
@@ -651,8 +651,10 @@ first case to express the semantic type of a dataset and the relationships
 between them, and in the second case to identify the diagonal error
 term. Diagonal third-order moments can also be handled in both schemes,
 trivially in the case of linked datasets, and by introduction of a new and
-special ``skew'' label in the error-source scheme.
-
+special ``skew'' label in the error-source scheme. Finally, a dataset annotation
+would be required to indicate that the Poisson--Gaussian likelihood form
+presented in this paper is the appropriate one to use, as opposed to e.g.~a pure
+multivariate Gaussian cf.~$\chi^2$ testing.
 
 
 \section*{Acknowledgements}
