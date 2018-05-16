@@ -168,11 +168,6 @@ an interesting result about the next-to-leading term of the CLT and the derivati
 % To have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, hence the skew has to be taken into account.
 
 
-
-
-
-
-
 \section{From the Experimental Likelihood to the Simplified Likelihood}
 \label{se:EL_SL}
 
@@ -199,11 +194,22 @@ The key result at the basis of  the simplified likelihood framework is the appro
 where the first line is the exact experimental likelihood and the second line is the simplified likelihood. Here $\pi(\bm \delta)$ is the joint probability density distribution for the elementary nuisance parameters. In our assumptions  these are independent from each other, hence the prior factorises as $\pi(\bm \delta)=\prod_{i=1}^N \pi_i(\delta_i)$.
 
 The $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix $\bm{\rho}=\rho_{IJ}$ define the simplified likelihood and are in general functions of the parameters of interest. However in concrete cases, this dependence will often be negligible. This is in particular the case in particle physics searches for new physics when the expected event number decomposes into signal ($n_s$) plus background ($n_b$) contributions. The parameters of interest that model the new physics enter in $n_s$ while $n_b$ is independent from them.  Whenever the expected signal is small with respect to the background, the dominant uncertainties in searches for new physics are those related to the background.
+
+In searches for new physics, often the observations $\hat{n}_{I}$ are integer counts of events in bins of distributed along observables 
+such as particle transverse momentum.
+This provides improved sensitivity over more simple `cut-and-count' approaches which do not take into account the power of these observables to 
+separate the signal from the background.
+
+As the event counts in each bin (\textit{i.e.} each piece of the distribution) are independent from each other, the simplified likelihood framework is applied to these kinds of analyses (see also Refs.~\cite{Fichet:2016gvx,SL_note}) by identifying the $P$ independant measurements as event counts $o_{I}$ and defining the probabilities $Pr$ of Eqn.~\ref{eq:SL_LHC} as Poisson probabilities for each bin $I$,
+\be
+\textrm{Pr}(o_{I}|n_{I}) \rightarrow \textrm{Poisson}(o_{I}|n_{I}) = \dfrac{(n_{I})^{o_{I}} \mathrm{e}^{-n_{I}}}{o_{I}!} \, .
+\ee
+
 In the simplified likelihood, neglecting the systematic uncertainties affecting the signal implies in turn that the parameters of the simplified likelihood are independent of $\bm \alpha$. Hence the simplified likelihood Eq.~\eqref{eq:SL_master} takes the form\,\footnote{We have substituted
 $a_I(\alpha)\rightarrow a_I+n_{s,I}(\alpha),~b_I(\alpha)\rightarrow b_I$ and $c_I(\alpha)\rightarrow c_I$.}
 \begin{equation}
 L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})  \approx L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) =
-\prod_{I=1}^P \mathrm{Pr}\Big( o_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
+\prod_{I=1}^P \mathrm{Poisson}\Big( o_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
 \frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
 \end{equation}
@@ -386,20 +392,8 @@ so that  $n_I= a_I+b_I \theta_I+c_I \theta_I^2$.
 This section contains LHC-specific comments and details related to the simplified likelihood framework.
 
 As already mentioned in Sec.~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. Indeed, any mis-estimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
-There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of the variations observed in a given process when some underlying parameter of the simulation model, theory, detector resolution etc.
- Estimates of the contribution from background processes are obtained either from simulation or through some data-driven method. Often such methods are accompanied by associated  uncertainties which reduce the ability to make precise statements about the expectation from the background.
-These systematic uncertainties are important for new physics searches.
-
-In searches for new physics at the LHC, it is common to analyze the event rates distributions along observables such as particle transverse momentum.
-This provides improved sensitivity over more simple `cut-and-count' approaches which do not take into account the details of phase space.
-Typically the distributions are binned into histograms, where the bin widths are chosen so as to optimize some metric. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides the separation needed to identify a potential signal.
-
-As the event counts in each bin (\textit{i.e.} each piece of phase space) are independent from each other, the simplified likelihood framework can be applied to these kinds of analyses, where the $P$ independent measurements are the event counts in each bin (see also Refs.~\cite{Fichet:2016gvx,SL_note}). In this case, the  probabilities $Pr$ in the simplified likelihood function of Eqn.~\ref{eq:SL_LHC} become Poisson probabilities for each bin $I$,
-\be
-\textrm{Pr}(o_{I}|n_{I}) \rightarrow \dfrac{(n_{I})^{o_{I}} \mathrm{e}^{-n_{I}}}{o_{I}!} \, .
-\ee
-
-In the following section, we describe a toy search for new physics, inspired by those performed at the LHC, and derive the simplified likelihood parameters for it.
+There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of the variations observed in a given process when some underlying parameter of the simulation model, theory, detector resolution etc. Estimates of the contribution from background processes are obtained either from simulation or through some data-driven method. Often such methods are accompanied by associated  uncertainties which reduce the ability to make precise statements about the expectation from the background.
+These systematic uncertainties are important for new physics searches. In the following section, we describe a toy search for new physics, inspired by those performed at the LHC, and derive the simplified likelihood parameters for it.
 
 
 
@@ -409,8 +403,7 @@ In the following section, we describe a toy search for new physics, inspired by 
 \subsection{A toy search for new physics}
 \label{se:toy_search}
 
-In order to illustrate the construction of the simplified likelihood, a toy model has been constructed which is representative of a search for new physics at the LHC.
-
+In order to illustrate the construction of the simplified likelihood, a toy model has been constructed which is representative of a search for new physics at the LHC. Typically in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides the separation needed to identify a potential signal.
 Figure~\ref{fig:toy} shows the distribution of events, in each of the three categories along with the expected contribution from the background, along with its uncertainties, and from some new physics signal.
 The `nominal' background follows a typical exponential distribution where fluctuations are present, representing a scenario in which limited Monte Carlo simulation (or limited data in some control sample) was used
 to derive the expected background contribution. The uncertainties due to this, indicated by the blue band, are uncorrelated between the different bins. Additionally, there are two uncertainties which modify the `shape' of
