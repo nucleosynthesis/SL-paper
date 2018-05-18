@@ -200,7 +200,7 @@ such as particle transverse momentum.
 This provides improved sensitivity over more simple `cut-and-count' approaches which do not take into account the power of these observables to
 separate the signal from the background.
 
-As the event counts in each bin (\textit{i.e.} each piece of the distribution) are independent from each other, the simplified likelihood framework is applied to these kinds of analyses (see also Refs.~\cite{Fichet:2016gvx,SL_note}) by identifying the $P$ independant measurements as event counts $o_{I}$ and defining the probabilities $Pr$ of Eqn.~\ref{eq:SL_LHC} as Poisson probabilities for each bin $I$,
+As the event counts in each bin (\textit{i.e.} each piece of the distribution) are independent from each other, the simplified likelihood framework is applied to these kinds of analyses (see also Refs.~\cite{Fichet:2016gvx,SL_note}) by identifying the $P$ independent measurements as event counts $o_{I}$ and defining the probabilities $\mathrm{Pr}$ of Eqn.~\ref{eq:SL_LHC} as Poisson probabilities for each bin $I$,
 \be
 \textrm{Pr}(o_{I}|n_{I}) \rightarrow \textrm{Poisson}(o_{I}|n_{I}) = \dfrac{(n_{I})^{o_{I}} \mathrm{e}^{-n_{I}}}{o_{I}!} \, .
 \ee
@@ -725,20 +725,21 @@ likelihoods, log likelihood-ratios, and limit-setting test statistics. For
 convergence efficiency, the profile likelihood computation makes use of the
 gradients of the SL log-likelihood with respect to the signal strength $\mu$ and
 nuisance parameters $\bm{\theta}$, which we reproduce here to assist independent
-implementations,
+implementations:
 %
 \begin{align}
-  \ln \big( L(\mu,\bm{\theta} )\pi(\bm{\theta}) \big) &=
-  \sum_I^P \left[ o_{I} \ln \left(\mu n_{s,I} + n_{I}(\theta_{I}) \right) - \left( \mu n_{s,I} + n_{I}(\theta_{I}) \right) - o_{I}! \right]
+  \ln\! \big( L(\mu,\bm{\theta} )\pi(\bm{\theta}) \big) &=
+  \sum_I^P \Big[ o_{I} \ln \left(\mu n_{s,I} + n_{I}(\theta_{I}) \right) - \left( \mu n_{s,I} + n_{b,I}(\theta_{I}) \right) - o_{I}! \Big]
   - \frac{1}{2} \bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} - \frac{P}{2} \ln 2\pi \\
   %
   \Rightarrow \qquad
-  \frac{\mathrm{d}\ln L}{\mathrm{d}\mu} &= \sum_I^P \left( \frac{o_I}{n_I(\bm{\alpha}, \theta_I)} - 1 \right) \cdot s_I(\bm{\alpha}) \\
+  \frac{\mathrm{d}\ln L}{\mathrm{d}\mu} &= \sum_I^P \left( \frac{o_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot s_I(\bm{\alpha}) \\
   %
-  \frac{\mathrm{d}\ln L}{\mathrm{d}\theta_{\!A}} &= \left( \frac{o_A}{n_A(\bm{\alpha}, \theta_{\!A})} - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \theta_I ~,
+  \frac{\mathrm{d}\ln L}{\mathrm{d}\theta_{\!A}} &= \left( \frac{o_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
 \label{eq:SL_LHC}
 \end{align}
-where $n_{I}(\theta_{I}) = a_{I}+b_{I}\theta_{I}+c_{I}\theta_{I}^{2}$.
+%
+where $n_{b,I}(\theta_{I}) = a_{I} + b_{I}\theta_{I} + c_{I}\theta_{I}^{2}$.
 
 %For simplicity, in our upcoming toy models, we will consider a single parameter-of-interest, the ratio of the observed to the predicted signal production cross-section $\mu=\sigma/\sigma_{\mathrm{TH}}$ (or `signal strength').
 %This is very commonly used in experimental searches for some hypothetical new signal processes and demonstrates the simplified likelihood formalism without loss of generality.
