@@ -428,11 +428,11 @@ It is typical in experimental searches of this type to classify systematic uncer
 `shape' or `distribution' of events of that process in addition to its normalization, and those which affect only a small number of bins or single bin in the distribution and are largely uncorrelated with the other
 bins (eg uncertainties due to limited Monte Carlo simulation).
 
-The expected (or nominal)\footnote{It should be noted that the expectation value for $n_{I}$ is \emph{not} necessarily the same as the mean value. For this reason, we typically refer
-to this as the `nominal' value since it is the value attained when the elementary nuisance parameters are equal to their expectation values $\underline{\delta}=0$.} number of events due to a particular process in a given bin ($I$) in Eqn~\ref{se:EL_SL} is denoted by
+The expected (or nominal)\footnote{It should be noted that the expectation value for $n_{b,I}$ is \emph{not} necessarily the same as the mean value. For this reason, we typically refer
+to this as the `nominal' value since it is the value attained when the elementary nuisance parameters are equal to their expectation values $\underline{\delta}=0$.} number of background events, due to a particular process, in a given bin ($I$) in Eqn~\ref{se:EL_SL} is denoted by
 %
 \begin{equation}
-  n_{I}(\bm{\delta}) \equiv %\coloneqq
+  n_{b,I}(\bm{\delta}) \equiv %\coloneqq
   f_{I}(\bm{\delta}) N(\bm{\delta}),
 \end{equation}
 %
@@ -468,11 +468,11 @@ For uncertainties which directly modify the expected number of events $n_{i}$ of
 This is advantageous since the number of events, in any given bin, for this process is always greater than 0 for any value of $\delta_{j}$. For a relative uncertainty $\epsilon_{Ij}$, the fraction varies as
 %
 \begin{equation}
- \frac{n_{I}(\bm{\delta})}{n_{I}^{0}}  =  \prod_{j} (1+\epsilon_{Ij})^{\delta_{j}}.
+ \frac{n_{b,I}(\bm{\delta})}{n_{b,I}^{0}}  =  \prod_{j} (1+\epsilon_{Ij})^{\delta_{j}}.
   \label{eqn:bin_function}
 \end{equation}
 %
-This is most common in the scenario where a limited number of Monte Carlo simulation events are used to determine the value of $n_{I}^{0}$
+This is most common in the scenario where a limited number of Monte Carlo simulation events are used to determine the value of $n_{b,I}^{0}$
 and hence some uncertainty is associated. As these uncertainties will be uncorrelated between bins of the distributions, most of the terms $\epsilon_{Ij}$ will be 0.
 
 Systematic uncertainties which only affect the overall normalization, are also interpolated using exponent functions,
@@ -490,12 +490,12 @@ In our toy search, there will be a separate $N(\bm{\delta})$ term for each categ
 Combining Eqns~\ref{eqn:frac_function},~\ref{eqn:bin_function} and~\ref{eqn:norm_function} yields the full parameterization,
 %
 \begin{equation}
- n_{I}(\bm{\delta}) = N^{0}\cdot \prod_{j}(1+K_{j})^{\delta_{j}} \cdot f^{0}_{I} \cdot\frac{1}{F(\bm{\delta})} \prod_{j} p_{Ij}(\delta_{j}) \cdot \prod_{j} (1+\epsilon_{Ij}\delta_{j}).
+ n_{b,I}(\bm{\delta}) = N^{0}\cdot \prod_{j}(1+K_{j})^{\delta_{j}} \cdot f^{0}_{I} \cdot\frac{1}{F(\bm{\delta})} \prod_{j} p_{Ij}(\delta_{j}) \cdot \prod_{j} (1+\epsilon_{Ij}\delta_{j}).
 \label{eqn:expt_param}
 \end{equation}
 
 As already mentioned, a typical search for new physics will have contributions from multiple background processes, each with their own associated systematic uncertainties.
-Only by summing over all of these backgrounds (i.e $n_{I}=\sum_{\text{bkg}}n_{\text{bkg},I}$ for different background processes $b$) is the likelihood fully specified.
+Only by summing over all of these backgrounds (i.e $n_{b,I}=\sum_{p}n_{b,p,I}$ for different background processes $p$) is the likelihood fully specified.
 
 
 \subsection{Validation of the simplified likelihood}
@@ -504,17 +504,17 @@ Using our toy search, we compare the experimental and simplified likelihoods. \f
 
 Figure~\ref{fig:distributions} shows a comparison of the distribution of $\hat{n}_{i}$, for three of the bins, $i=4,50$ and $86$, between the experimental setup and the simplified one.
 We constructed 100,000 pseudo-datasets by taking random values $\underline{\hat{\delta}}$, generated according to $\pi(\bm{\delta})$, and evaluating
-$n_{I}(\hat{\bm{\delta}})$ for each dataset according to the Eqn~\ref{eqn:expt_param}. The black points show the projection of these toy datasets onto each bin index. The green line shows the
-distribution of $\hat{n}_{I}$ when $\hat{n}_{I} = a_{I}+b_{I}\hat{\theta}_{I}+c_{I}\hat{\theta}_{I}^{2}$  and $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$. The simplified likelihood coefficients
+$n_{b,I}(\hat{\bm{\delta}})$ for each dataset according to the Eqn~\ref{eqn:expt_param}. The black points show the projection of these toy datasets onto each bin index. The green line shows the
+distribution of $\hat{n}_{b,I}$ when $\hat{n}_{b,I} = a_{I}+b_{I}\hat{\theta}_{I}+c_{I}\hat{\theta}_{I}^{2}$  and $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$. The simplified likelihood coefficients
 $a_{I},~b_{I}$ and $c_{I}$ are determined from the first three moments, which are calculated from the pseudo-datasets, and the resulting quadratic form shown in the inset panels. Additionally, the distribution
-assuming a linear form ($\hat{n}_{I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$) is shown by the red line.
+assuming a linear form ($\hat{n}_{b,I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$) is shown by the red line.
 
 \begin{figure}%[hbt!]
   \centering
   \includegraphics[width=0.32\textwidth]{figures/distribution_4}
   \includegraphics[width=0.32\textwidth]{figures/distribution_62}
   \includegraphics[width=0.32\textwidth]{figures/distribution_86}
-  \caption{Distributions of $\hat{n}_{I}$ for $I=4$ (left), $I=62$ (center), and $I=86$ (right) in 100,000 pseudo-datasets generated from the experimental toy search (black points) as described in the text.
+  \caption{Distributions of $\hat{n}_{b,I}$ for $I=4$ (left), $I=62$ (center), and $I=86$ (right) in 100,000 pseudo-datasets generated from the experimental toy search (black points) as described in the text.
     % The error bars on the points indicate the statistical uncertainty from generating 10,000 toys.
     The functions $n_{I}(\theta_{I})$ assuming a quadratic form (green line), or
     a linear form (red line), are shown in the inset panels.  The distributions
@@ -527,7 +527,7 @@ In the case where the skew of the distribution, defined as $m_{3,I}/(m_{2,II})^{
 both the linear and quadratic form produce a similar distribution as those from the pseudo-data.
 Instead, for large values of the skew, the linear form leads to a shift of the peak in the distribution and overall poorer
 agreement than the quadratic form. Moreover, in the quadratic form, the probability for $\hat{n}_{I}<0$
-is much smaller when $n^{0}_{I}$ is small, as in the tails of the distributions (eg bin $86$), compared to the linear form.
+is much smaller when $n^{0}_{b,I}$ is small, as in the tails of the distributions (eg bin $86$), compared to the linear form.
 
 
 \begin{figure}%[hbt!]
@@ -536,7 +536,7 @@ is much smaller when $n^{0}_{I}$ is small, as in the tails of the distributions 
   \includegraphics[width=0.45\textwidth]{figures/corr-4-62}\\
   \includegraphics[width=0.45\textwidth]{figures/corr-4-86}
   \includegraphics[width=0.45\textwidth]{figures/corr-62-86}
-  \caption{2D distributions of $\hat{n}_{I}$ against $\hat{n}_{J}$ for
+  \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{J}$ for
     % $I=4,J=62$ (left), $I=1,J=86$ (center) and $I=62,J=86$ (right)
     $I=4,J=7$ (top left), $I=4,J=62$ (top right), $I=4,J=86$ (bottom left), and
     $I=62,J=86$ (bottom right) in pseudo-datasets generated from the
