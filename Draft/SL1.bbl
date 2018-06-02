@@ -1,0 +1,63 @@
+
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{10}
+
+\bibitem{Fichet:2016gvx}
+S.~Fichet, \emph{{Taming systematic uncertainties at the LHC with the central
+  limit theorem}},
+  \href{https://doi.org/10.1016/j.nuclphysb.2016.08.029}{\emph{Nucl. Phys.}
+  {\bfseries B911} (2016) 623}
+  [\href{https://arxiv.org/abs/1603.03061}{{\ttfamily 1603.03061}}].
+
+\bibitem{SL_note}
+{The CMS Collaboration}, \emph{{Simplified likelihood for the re-interpretation
+  of public CMS results}},  Tech. Rep. CMS-NOTE-2017-001.
+  CERN-CMS-NOTE-2017-001, CERN, Geneva, Jan, 2017.
+
+\bibitem{Verkerke:2003ir}
+W.~Verkerke and D.~P. Kirkby, \emph{{The RooFit toolkit for data modeling}},
+  {\emph{eConf} {\bfseries C0303241} (2003) MOLT007}
+  [\href{https://arxiv.org/abs/physics/0306116}{{\ttfamily physics/0306116}}].
+
+\bibitem{Moneta:2010pm}
+L.~Moneta, K.~Belasco, K.~S. Cranmer, S.~Kreiss, A.~Lazzaro, D.~Piparo et~al.,
+  \emph{{The RooStats Project}}, {\emph{PoS} {\bfseries ACAT2010} (2010) 057}
+  [\href{https://arxiv.org/abs/1009.1003}{{\ttfamily 1009.1003}}].
+
+\bibitem{Kraml:2012sg}
+S.~Kraml et~al., \emph{{Searches for New Physics: Les Houches Recommendations
+  for the Presentation of LHC Results}},
+  \href{https://doi.org/10.1140/epjc/s10052-012-1976-3}{\emph{Eur. Phys. J.}
+  {\bfseries C72} (2012) 1976}
+  [\href{https://arxiv.org/abs/1203.2489}{{\ttfamily 1203.2489}}].
+
+\bibitem{Boudjema:2013qla}
+F.~Boudjema et~al., \emph{{On the presentation of the LHC Higgs Results}},  in
+  \emph{{Workshop on Likelihoods for the LHC Searches Geneva, Switzerland,
+  January 21-23, 2013}}, 2013,
+  \href{https://arxiv.org/abs/1307.5865}{{\ttfamily 1307.5865}},
+  \href{http://inspirehep.net/record/1244142/files/arXiv:1307.5865.pdf}{http://inspirehep.net/record/1244142/files/arXiv:1307.5865.pdf}.
+
+\bibitem{Cranmer:2013hia}
+K.~Cranmer, S.~Kreiss, D.~Lopez-Val and T.~Plehn, \emph{{Decoupling Theoretical
+  Uncertainties from Measurements of the Higgs Boson}},
+  \href{https://doi.org/10.1103/PhysRevD.91.054032}{\emph{Phys. Rev.}
+  {\bfseries D91} (2015) 054032}
+  [\href{https://arxiv.org/abs/1401.0080}{{\ttfamily 1401.0080}}].
+
+\bibitem{Arbey:2016kqi}
+A.~Arbey, S.~Fichet, F.~Mahmoudi and G.~Moreau, \emph{{The correlation matrix
+  of Higgs rates at the LHC}},
+  \href{https://doi.org/10.1007/JHEP11(2016)097}{\emph{JHEP} {\bfseries 11}
+  (2016) 097} [\href{https://arxiv.org/abs/1606.0455}{{\ttfamily 1606.0455}}].
+
+\bibitem{Billingsley}
+P.~Billingsley, \emph{Probability and Measure}. Wiley, 2012.
+
+\bibitem{hepdata}
+E.~Maguire, L.~Heinrich and G.~Watt, \emph{{HEPData: a repository for high
+  energy physics data}},
+  \href{https://doi.org/10.1088/1742-6596/898/10/102006}{\emph{J. Phys. Conf.
+  Ser.} {\bfseries 898} (2017) 102006}
+  [\href{https://arxiv.org/abs/1704.05473}{{\ttfamily 1704.05473}}].
+
+\end{thebibliography}\endgroup

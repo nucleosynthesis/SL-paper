@@ -147,7 +147,7 @@ We present an efficient method to compute the parameters of the simplified likel
 
 Scientific observations of the real world are by nature imperfect in the sense that they always contain some amount of
  uncertainty unrelated to data, the \textit{systematic}   uncertainty. Identifying, measuring and modeling all the sources of systematic uncertainty is an important part of running a scientific experiment. A thorough treatment of such uncertainties is especially important in exploratory fields like Particle Physics and Cosmology. In these fields of research,  %where one often searches for a small unexpected signal hidden in a large background.
-today's experiments  can be of large scale and can contain a huge number of these  uncertainties. For instance in the case of the Large Hadron Collider (LHC) experiments, the experimental likelihood likelihood functions used in standard model measurements and searches for new physics can contain several thousands of systematic uncertainties.
+today's experiments  can be of large scale and can contain a huge number of these  uncertainties. For instance in the case of the Large Hadron Collider (LHC) experiments, the experimental likelihood functions used in standard model measurements and searches for new physics can contain several thousands of systematic uncertainties.
 
 Although sources of systematic uncertainty can be numerous and of very different nature, a general feature they share is that they are almost always independent of each other. This property of independence between the systematic uncertainties has profound consequences, and, as we will discuss soon, is the reason why the approach presented in this work is so efficient. Namely, independence of the uncertainties can be used in order to drastically simplify the experimental likelihood function, to the price of an often-negligible error that will be discussed at length in this paper.
 
@@ -172,75 +172,83 @@ an interesting result about the next-to-leading term of the CLT and the derivati
 \label{se:EL_SL}
 
 This section introduces the formalism, presents the main theoretical results and an efficient Monte-Carlo based calculation method. We will focus on the typical experimental likelihood used in searches for new phenomena at particle physics experiments. However we stress that the simplified likelihood approach can be easily generalized to other physics contexts.
-The data collected in particle physics usually originate from random (quantum) processes, and have thus have an intrinsic \textit{statistical} uncertainty--which vanishes in the limit of large data sets. Our interest rather lies in the \textit{systematic} uncertainties, which are typically independent of the amount of data.
+The data collected in particle physics usually originate from random (quantum) processes, and have thus have an intrinsic \textit{statistical} uncertainty--which vanishes in the limit of large data sets. Our interest rather lies in the \textit{systematic} uncertainties, which are independent of the amount of data.
 
 
 A likelihood function $L$ is related to the probability to observe the data given a model $\cal M$, specified by some parameters,
 \be L({\rm parameters})={\rm Pr}({\rm data}|{\cal M},{\rm parameters})\,.\ee
-We can denote the observed quantities and those expected under some specific values of the parameter set as $o$ and $n$, respectively. For example, in the case of
-a particle physics experiment, these could be the observed and expected number of events that satisfy some selection criteria.
+We denote the observed  quantity as $\hat{n}$ and the expected quantity by $n$, where $n$ depends on the model parameters.   For example, in the case of
+a particle physics experiment, these quantities can be the observed and expected number of events that satisfy some selection criteria. 
 The full set of parameters includes parameters of interest, here collectively denoted by $\bm{\alpha}$, and \textit{elementary} nuisance parameters $\bm{\delta}=(\delta_1,\ldots,\delta_{j}\ldots,\delta_N)^{\rm{T}}$, which model the systematic uncertainties.
 In the simplified likelihood framework, we derive a set of \textit{combined} nuisance parameters $\bm{\theta}$. For $P$ independent measurements, there will be $P$ combined nuisance parameters, $\bm{\theta}=(\theta_1,\ldots,\theta_{I},\ldots,\theta_P)^{\rm{T}}$.
 
 
 The key result at the basis of  the simplified likelihood framework is the approximation
-\fxnote{Need to define all symbols, esp $\hat{n}$}
+%\fxnote{Need to define all symbols, esp $\hat{n}$}
 \begin{align}
   L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})
-  & = \prod_{I=1}^P \mathrm{Pr}\Big(  \hat n_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
-  & \approx \prod_{I=1}^P \mathrm{Pr}\Big( \hat n_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big) \cdot
+  & = \prod_{I=1}^P \mathrm{Pr}\Big(  \hat{n}_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
+  & \approx \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big) \cdot
     \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1}(\bm \alpha) \bm \theta}}}{\sqrt{(2\pi)^P }} \,, \label{eq:SL_master}
 \end{align}
 where the first line is the exact experimental likelihood and the second line is the simplified likelihood. Here $\pi(\bm \delta)$ is the joint probability density distribution for the elementary nuisance parameters. In our assumptions  these are independent from each other, hence the prior factorises as $\pi(\bm \delta)=\prod_{i=1}^N \pi_i(\delta_i)$.
 
 The $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix $\bm{\rho}=\rho_{IJ}$ define the simplified likelihood and are in general functions of the parameters of interest. However in concrete cases, this dependence will often be negligible. This is in particular the case in particle physics searches for new physics when the expected event number decomposes into signal ($n_s$) plus background ($n_b$) contributions. The parameters of interest that model the new physics enter in $n_s$ while $n_b$ is independent from them.  Whenever the expected signal is small with respect to the background, the dominant uncertainties in searches for new physics are those related to the background.
-
-In searches for new physics, often the observations $\hat{n}_{I}$ are integer counts of events in bins of distributed along observables
-such as particle transverse momentum.
-This provides improved sensitivity over more simple `cut-and-count' approaches which do not take into account the power of these observables to
-separate the signal from the background.
-
-As the event counts in each bin (\textit{i.e.} each piece of the distribution) are independent from each other, the simplified likelihood framework is applied to these kinds of analyses (see also Refs.~\cite{Fichet:2016gvx,SL_note}) by identifying the $P$ independent measurements as event counts $o_{I}$ and defining the probabilities $\mathrm{Pr}$ of Eqn.~\ref{eq:SL_LHC} as Poisson probabilities for each bin $I$,
-\be
-\textrm{Pr}(o_{I}|n_{I}) \rightarrow \textrm{Poisson}(o_{I}|n_{I}) = \dfrac{(n_{I})^{o_{I}} \mathrm{e}^{-n_{I}}}{o_{I}!} \, .
-\ee
-
+% [SF: move this] In searches for new physics, often the observations $\hat{n}_{I}$ are integer counts of events in bins of distributed along observables
+%such as particle transverse momentum.
+%This provides improved sensitivity over more simple `cut-and-count' approaches which do not take into account the power of these observables to
+%separate the signal from the background.
+% [SF: move this]As the event counts in each bin (\textit{i.e.} each piece of the distribution) are independent from each other, the simplified likelihood framework is applied to these kinds of analyses (see also Refs.~\cite{Fichet:2016gvx,SL_note}) by identifying the $P$ independent measurements as event counts $\hat{n}_{I}$ and defining the probabilities $\mathrm{Pr}$ of Eqn.~\ref{eq:SL_LHC} as Poisson probabilities for each bin $I$,
+%\be
+%\textrm{Pr}(\hat{n}_{I}|n_{I}) \equiv \textrm{Pois}(\hat{n}_{I}|n_{I}) = \dfrac{(n_{I})^{\hat{n}_{I}} \mathrm{e}^{-n_{I}}}{\hat{n}_{I}!} \, .
+%\ee
 In the simplified likelihood, neglecting the systematic uncertainties affecting the signal implies in turn that the parameters of the simplified likelihood are independent of $\bm \alpha$. Hence the simplified likelihood Eq.~\eqref{eq:SL_master} takes the form\,\footnote{We have substituted
 $a_I(\alpha)\rightarrow a_I+n_{s,I}(\alpha),~b_I(\alpha)\rightarrow b_I$ and $c_I(\alpha)\rightarrow c_I$.}
 \begin{equation}
 L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) =
-\prod_{I=1}^P \mathrm{Poisson}\Big( o_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
+\prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
 \frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
 \end{equation}
-which is the expression we use in the rest of this paper.
+which is the expression we use in the rest of this paper. This expression is valid for data with any statistics of observation, however in particle physics event numbers always have Poisson statistics hence we will have
+\be
+\textrm{Pr}(\hat{n}_{I}|n_{I}) \equiv \textrm{Pois}(\hat{n}_{I}|n_{I}) = \dfrac{(n_{I})^{\hat{n}_{I}} \mathrm{e}^{-n_{I}}}{\hat{n}_{I}!} \, .
+\ee
+
+ 
+
+
+
 
 The parameters of the simplified likelihood ($a_I, b_I, c_I, \rho_{IJ}$) have analytical expressions
-as a function of the variance and the skew  of each elementary nuisance parameter. However, often the elementary uncertainties and the event yields are already coded in a Monte Carlo generator. In such case, %instead of using Eqs.~\eqref{eq:n_comb}- \eqref{eq:gam_comb},
+as a function of the variance and the skew  of each elementary nuisance parameter (see Sec.~\ref{se:analytic}). However, often the elementary uncertainties and the event yields are already coded in a Monte Carlo generator. In such case, %instead of using Eqs.~\eqref{eq:n_comb}- \eqref{eq:gam_comb},
 an elegant method to obtain the simplified likelihood parameters  is the following. From the estimators of the event yields $\hat n_I$, one can evaluate the three first moments of the $\hat n_I$ distribution and deduce the parameters of the simplified likelihood directly from these moments.
-What is needed is the mean $m_{1,I}$, the covariance matrix $m_{2,IJ}$ and the diagonal component of the skew $m_{3,I} \equiv m_{3,III}$. % for bin indices $I$ and $J$.
+What is needed is the mean $m_{1,I}$, the covariance matrix $m_{2,IJ}$ and the diagonal component of the third moment $m_{3,I} \equiv m_{3,III}$. % for bin indices $I$ and $J$.
 % The centered moments are denoted as $m_n$.
 
 Using the definition $ n_I= a_I+b_I \theta_I+c_I \theta_I^2 $, we have the relations
 %
-\begin{align}
+\begin{align} \label{eq:moments1}
   m_{1,I} &= \mathbf{E}[\hat n_I]= a_I+c_I\\
   % {\bf E}[(\hat n_I - {\bf E}[\hat n_I])^2 ]= n_{0,I}^2(\Delta_I^2+2\gamma_I^2)\,,
   m_{2,IJ} &= \mathbf{E}[(\hat n_I - \mathbf{E}[\hat n_I])(\hat n_J - \mathbf{E}[\hat n_J]) ]= b_I b_J \rho_{IJ}+2 c_I c_J\rho_{IJ}^2\\
   m_{3,I} &= \mathbf{E}[(\hat n_I - \mathbf{E}[\hat n_I])^3 ]=   6 b_I^2 c_I+8 c_I^3 \, ,
+  \label{eq:moments2}
 \end{align}
 %
-where $\mathbf{E}[\cdot]$ denotes the expectation value.
+where $\mathbf{E}$ denotes the expectation value.
 Inverting these relations --- while taking care to pick the relevant solutions to quadratic and cubic equations --- gives directly the parameters of the simplified likelihood.  We find
 %
 \begin{align}
-c_I &= \, -\mathrm{sign}(m_{3,I}) \, \sqrt{2 m_{2,II}} \, \cos\!\left(\frac{4\pi}{3}+\frac{1}{3}\arctan\left(\sqrt{8 \frac{m^3_{2,II}}{m^2_{3,I}}-1}\right)  \right)\\
+c_I &= \, -\mathrm{sign}(m_{3,I}) \, \sqrt{2 m_{2,II}} \, \cos\!\left(\frac{4\pi}{3}+\frac{1}{3}\arctan\left(\sqrt{8 \frac{m^3_{2,II}}{m^2_{3,I}}-1}\right)  \right) \label{eq:solutions1}
+\\ 
 b_I &= \, \sqrt{m_{2,II}-2 c_I^2 }\\
 a_I &= \, m_{1,I}- c_I\\
 \rho_{IJ} &= \, \frac{1}{4 c_I c_J}\left( \sqrt{(b_I b_J)^2+8 c_I c_J\,m_{2,IJ}}-b_I b_J \right) \, .
+\label{eq:solutions2}
 \end{align}
 %
-These formulae apply if the condition $8 m_{2,II}^3\geq m_{3,I}^2$ is satisfied. This limit is approached when the asymmetry becomes large. Near this limit, the approximation typically tends to become inaccurate because higher order terms $O(\theta_I^3)$  would need to be included in the expressions of the  simplified likelihood Eq.~\eqref{eq:SL_master}. In practice, however, this requires an extreme skewness of the nuisance parameters, and the Simplified Likelihood framework up to quadratic order is sufficient for most applications.
+These formulae apply if the condition $8 m_{2,II}^3\geq m_{3,I}^2$ is satisfied. This limit is approached when the asymmetry becomes large. Near this limit, the approximation typically tends to become inaccurate because higher order terms $O(\theta_I^3)$  would need to be included in the expressions of the  simplified likelihood Eq.~\eqref{eq:SL_master}. In practice, however, this requires a high skewness of the nuisance parameters, and the Simplified Likelihood framework up to quadratic order is sufficient for most applications.
 
 This method will be used in the examples shown in the rest of the paper. This means that if one is provided with the moments $m_{1}$ and $m_{3}$ for each bin and the covariance matrix $m_{2,IJ}$, the simplified likelihood parameters are completely defined. Moreover, in the case where the nuisance parameters are affecting only the background rate Eq.~\eqref{eq:SL_LHC}, this computation has to be realized once and the resulting likelihood can be used for any kind of signal by appropriate substitution of $n_{s}(\bm{\alpha})$.
 
@@ -257,7 +265,7 @@ The reader interested only in the practical aspects of the simplified likelihood
 \subsection{Asymmetries and CLT at next-to-leading order}
 \label{se:skew_CLT}
 
-The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large-$N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. But keeping the asymmetry is truely critical for a slightly different reason. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Hence having a nuisance parameter with a normal distribution can give inconsistencies, for instance a negative yield. This is a problem both conceptually and concretely when running the  analyses. This issue occurs because the  Gaussian limit of the CLT  loses information about the support. Using this limit is simply a too rough approximation.
+The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified likelihood framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large-$N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. But keeping the asymmetry is truely critical for a slightly different reason. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Hence having a nuisance parameter with a normal distribution can give inconsistencies, for instance a negative yield. This is a problem both conceptually and concretely when running the  analyses. This issue occurs because the  Gaussian limit of the CLT  loses information about the support. Using this limit is simply a too rough approximation.
   Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
 
 
@@ -269,14 +277,14 @@ can, up to higher order terms in the large-N expansion, be equivalently be expre
 \be
 Z= \theta+\frac{\gamma}{3\sqrt{N}}\theta^2\,,  \quad \textrm{with } \quad \theta\sim{\cal N}(0,\sigma^2)\,. \label{eq:ZskewCLT}
 \ee
-Details about the derivation are given in App.~\ref{app:skew}.
+We will refer to this type of expression as ``normal expansion''. Details about the derivation are given in App.~\ref{app:skew}.
 
 
 Equation~\eqref{eq:ZskewCLT}  readily gives the most basic CLT at next-to-leading order when assuming $Z=N^{-1/2}\sum_{j=1}^N \delta_j$, where the $\delta_j$ are  independent identically distributed centred nuisance parameters  of variance $\sigma^2$ and third moment $\gamma$. The trick applies similarly to the Lyapunov CLT, \textit{i.e.} when the $\delta_j$ are not identical, in which case one has defined $\sigma^2=N^{-1}\sum_{j=1}^N \sigma_j^2$, $\gamma=N^{-1}\sum_{j=1}^N \gamma_j$,
 
 Finally, our trick applies similarly to the multidimensional case where various linear combinations of the $\delta_j$ give rise to various $Z_I$. The $Z_I$ have covariance matrix $\Sigma_{IJ}$ and a skewness tensor $\gamma_{IJK}={\rm E}[Z_IZ_JZ_K]$. For our purposes, we neglect the non-diagonal elements of $\gamma$, keeping only  the diagonal elements, noted $\gamma_{III}\equiv \gamma_I$. These diagonal elements encode the leading information about asymmetry, while the non-diagonal ones contain subleading information about asymmetry and correlations. With this approximation, we obtain the multidimensional CLT at next-to-leading order,
 \be
-Z_I\rightarrow \theta_I+\frac{\gamma_{I}}{3\sqrt{N}}\theta_I^2\,,\,\,N\rightarrow \infty  \quad \textrm{with } \quad \theta_I\sim{\cal N}(0,\Sigma)\,.
+Z_I\rightarrow \theta_I+\frac{\gamma_{I}}{3\sqrt{N}}\theta_I^2\,,\,\,N\rightarrow \infty  \quad \textrm{with } \quad \theta_I\sim{\cal N}(0,\Sigma)\,. \label{eq:NLCFT}
 \ee
  This  result will be used in the following. Again, for $\gamma_I\rightarrow 0$, one recovers the standard multivariate CLT.
 
@@ -289,6 +297,11 @@ Z_I\rightarrow \theta_I+\frac{\gamma_{I}}{3\sqrt{N}}\theta_I^2\,,\,\,N\rightarro
 
 Here we prove Eq.~\eqref{eq:SL_master}.  The dependence on the parameters of interest $\bm{\alpha}$ is left implicit in this section. We will first perform a step of  propagation of the uncertainties, then a step of combination. This is a generalization of the approach of \cite{Fichet:2016gvx}. Here we take into account the skew, hence there is no need to use an exponential parameterization like in \cite{Fichet:2016gvx}.
 
+In this section the elementary nuisance parameters $\delta_i$ are independent, centered, have unit variance, and have skew $\gamma_i$, \textit{i.e.}
+\be
+{\bf E}[\delta_i]=0\,,\quad {\bf E}[\delta_i^2]=1 \,,\quad {\bf E}[\delta_i^3]=\gamma_i\,.
+\ee
+It is  convenient to use a vector notation for the set of these elementary nuisance parameters, $(\delta_i)\equiv \boldsymbol{\delta} $.
 
 
 
@@ -317,7 +330,7 @@ The propagation amounts to performing a Taylor expansion with respect to $\Delta
 %For example, for elementary systematic uncertainties that do not exceed $\Delta \sim 10\%$, keeping the expansion up to second degree implies that the neglected higher order terms are  $O(0.1\%)$.
 
 For multiple sources of uncertainty, we have a vector $\boldsymbol{\delta}$ and the relative uncertainties propagated to $n$ are written as
-\be n\equiv n^{0}\left( 1+ \Delta_{1}^t\cdot \, \boldsymbol{\delta}+\boldsymbol{\delta}^{\rm T}\cdot\Delta_{2} \cdot \boldsymbol{\delta} +O\left(\frac{n^{(3)}}{n^{0}}\Delta_Q^3\right)
+\be n\equiv n^{0}\left( 1+ \Delta_{1}^T\cdot \, \boldsymbol{\delta}+\boldsymbol{\delta}^{\rm T}\cdot\Delta_{2} \cdot \boldsymbol{\delta} +O\left(\frac{n^{(3)}}{n^{0}}\Delta_Q^3\right)
 \right)\,
 \label{eq:propmult}
 \ee
@@ -326,6 +339,7 @@ with
 \Delta_1=\frac{1}{n^{0}}\left(\frac{\partial n }{\partial \delta_{1}}\Delta_{Q,1},\ldots,
 \frac{ \partial n }{\partial \delta_{p}}\Delta_{Q,p} \right)_{\boldsymbol{\delta}=0}^{\rm T} \,, \label{eq:stdDelta1} \quad \Delta_2=\frac{1}{2n^{0}}\left(\frac{\partial^2 n}{\partial \delta_{i}\partial \delta_{j}}\Delta_{Q,i}\Delta_{Q,j}  \right)_{\boldsymbol{\delta}=0}\,.
 \ee
+The $n^{(3)}$ denotes schematically the third derivatives of $n$.
 
 %After this step of error propagation, the likelihood takes the form
 %\be
@@ -335,55 +349,152 @@ with
 %\ee
 %All the $n_{0,I}$, $\Delta_{1,I}$, $\Delta_{2,I}$  depend in principle on the parameters of interest $\theta$.
 
-The second step is to combine the elementary nuisance parameters. We introduce the combined nuisance parameters $\theta$ as
+The second step is to combine the elementary nuisance parameters. We introduce combined nuisance parameters $\theta_I$ which  are chosen to be centered and with unit variance without loss of generality, and whose correlation matrix  is denoted $\rho_{IJ}$, \textit{i.e.}
+\be
+ {\bf E}[\theta_I]=0\,, \quad{\bf E}[\theta^2_I]=1\,,\quad{\bf E}[\theta_I \theta_J]=\rho_{IJ}\,.
+\ee
+Moreover we define the expected event number in terms of the combined nuisance parameters as
+%\be
+%n_I=n^{0}_{I}(1+\Delta_{1,I}\cdot\boldsymbol{\delta}+\boldsymbol{\delta}\cdot\Delta_{2,I}\cdot\boldsymbol{\delta}) \equiv
+%\bar n^{0}_{I}(1+\Delta_{I}\theta_I+ \gamma_I\theta_I^2) \label{eq:comb_def}\,.
+%\ee
 \be
 n_I=n^{0}_{I}(1+\Delta_{1,I}\cdot\boldsymbol{\delta}+\boldsymbol{\delta}\cdot\Delta_{2,I}\cdot\boldsymbol{\delta}) \equiv
-\bar n^{0}_{I}(1+\Delta_{I}\theta_I+ \gamma_I\theta_I^2) \label{eq:comb_def}
+a_I+b_{I}\theta_I+ c_I\theta_I^2 \label{eq:comb_def}\,.
 \ee
-and the correlation matrix $\rho_{IJ}=({\bf E}[n_I n_J]-{\bf E}[n_I] {\bf E}[n_J])/\Delta_I \Delta_J$. The complete covariance matrix between the event numbers is given by $\Sigma_{IJ}=\rho_{IJ} \Delta_I\Delta_J$.
+The $a_I, b_I, c_I$ parameters together with  the correlation matrix $\rho_{IJ}$ fully describe the combined effect of the elementary uncertainties.  
 
-To determine $\bar{n}^{0}_{I}$, $\Delta_{I}$, $\rho_{IJ}$ and $\gamma_I$, we identify the three first moments on each side of Eq.~\eqref{eq:comb_def}. We obtain
-\be
-\bar{n}^{0}_{I}=n^{0}_{I}\left(
-1+\tr \Delta_{2,I}-\frac{1}{6}\sum_{i=1}^N \gamma_i\Delta_{1,I,i}^3+O(\Delta^4) \right) \label{eq:n_comb}
+To determine them we shall identify the three first moments on each side of Eq.~\eqref{eq:comb_def}. 
+%. The complete covariance matrix between the event numbers is given by $\Sigma_{IJ}=\rho_{IJ} \Delta_I\Delta_J$.
+%
+%
+%
+%To determine $\bar{n}^{0}_{I}$, $\Delta_{I}$, $\rho_{IJ}$ and $\gamma_I$, we identify the three first moments on each side of Eq.~\eqref{eq:comb_def}.
+ We obtain
+ \be
+a_{I}=n^{0}_{I}\left(
+1+\tr \Delta_{2,I}-\frac{1}{6}\sum_{i=1}^N \gamma_i(\Delta_{1,I,i})^3+O(\Delta^4) \right) \label{eq:n_comb}
 \,,
 \ee
 \be
-\Delta_{I}=\left(\Delta_{1,I}^{\rm T}.\Delta_{1,I}  +2\sum_{i=1}^N \gamma_i\Delta_{1,I,i}\Delta_{2,I,i}+O(\Delta^4)\right)^{1/2}\,,
+b_I=a_I\left(\Delta_{1,I}^{\rm T}.\Delta_{1,I}  +2\sum_{i=1}^N \gamma_i\Delta_{1,I,i}\Delta_{2,I,i}+O(\Delta^4)\right)^{1/2}\,,
 \ee
 \be
-\rho_{IJ}= \frac{1}{\Delta_I \Delta_J}\left(\Delta_{1,I}^{\rm T}.\Delta_{1,J}  +\sum_{i=1}^N \gamma_i(\Delta_{1,I,i}\Delta_{2,J,i}+\Delta_{1,J,i}\Delta_{2,I,i})\right)+O(\Delta^4)
+\rho_{IJ}= \frac{a_I a_J}{b_I b_J}\left(\Delta_{1,I}^{\rm T}.\Delta_{1,J}  +\sum_{i=1}^N \gamma_i(\Delta_{1,I,i}\Delta_{2,J,i}+\Delta_{1,J,i}\Delta_{2,I,i})\right)+O(\Delta^4)
 \,,
 \ee
 \be
-\gamma_I=\frac{1}{6}\sum_{i=1}^N \gamma_i\Delta_{1,i}^3+O(\Delta^4) \label{eq:gam_comb}
+c_I=\frac{a_I}{6}\sum_{i=1}^N \gamma_i(\Delta_{1,i})^3+O(\Delta^4) \label{eq:gam_comb}
 \ee
-where the $O(\Delta^4)$ denotes higher order terms like $\tr(\Delta_{2,I}^{\rm T}\cdot\Delta_{2,I})$, $(\tr\Delta_{2,I})^2$, $\Delta_{1,I}^{\rm T}\cdot\Delta_{1,I}\tr\Delta_{2,I}$.
-When $\gamma_i\rightarrow 0$  one recovers the expressions obtained in \cite{Fichet:2016gvx}.
+%\be
+%\bar{n}^{0}_{I}=n^{0}_{I}\left(
+%1+\tr \Delta_{2,I}-\frac{1}{6}\sum_{i=1}^N \gamma_i\Delta_{1,I,i}^3+O(\Delta^4) \right) \label{eq:n_comb}
+%\,,
+%\ee
+%\be
+%\Delta_{I}=\left(\Delta_{1,I}^{\rm T}.\Delta_{1,I}  +2\sum_{i=1}^N \gamma_i\Delta_{1,I,i}\Delta_{2,I,i}+O(\Delta^4)\right)^{1/2}\,,
+%\ee
+%\be
+%\rho_{IJ}= \frac{1}{\Delta_I \Delta_J}\left(\Delta_{1,I}^{\rm T}.\Delta_{1,J}  +\sum_{i=1}^N \gamma_i(\Delta_{1,I,i}\Delta_{2,J,i}+\Delta_{1,J,i}\Delta_{2,I,i})\right)+O(\Delta^4)
+%\,,
+%\ee
+%\be
+%\gamma_I=\frac{1}{6}\sum_{i=1}^N \gamma_i\Delta_{1,i}^3+O(\Delta^4) \label{eq:gam_comb}
+%\ee
+where the $O(\Delta^4)$ denotes higher order terms like $\tr(\Delta_{2,I}^{\rm T}\cdot\Delta_{2,I})$, $(\tr\Delta_{2,I})^2$, $\Delta_{1,I}^{\rm T}\cdot\Delta_{1,I}\tr\Delta_{2,I}$ which are neglected.
+When $\gamma_i\rightarrow 0$  one recovers the expressions obtained in Ref.~\cite{Fichet:2016gvx}.\footnote{For simplicity we show here the expressions assuming $c_I\ll b_I$, as it is sufficient in the scope of the proof. 
+ For sizeable $c_I$ one should instead solve the system  shown in Eqs.~\eqref{eq:moments1}-\eqref{eq:moments2}, \eqref{eq:solutions1}-\eqref{eq:solutions2}.  }
 
 
-Importantly,    the $\Delta_2$ term contributes at leading order only in the mean value $\bar n_{0,I}$ and always gives subleading contributions to higher moments.
+Importantly,    the $\Delta_2$ term contributes at leading order only in the mean value 
+%$\bar n_{0,I}$
+$a_I$
+ and always gives subleading contributions to higher moments.
  Hence, for considerations on higher moments -- which define the  shape of the combined distribution, we can safely take the approximation
 \be
-n_{I}\approx \bar{n}^{0}_{I}\left(1+ \Delta_{1,I}\cdot \boldsymbol{\delta}\right)\, \label{eq:n_approx}
+n_{I}\approx n^{0}_{I}\left(1+ \Delta_{1,I}\cdot \boldsymbol{\delta}\right)\, \label{eq:n_approx}
 \ee
 from Eq.~\eqref{eq:comb_def}.
-We now make  the key observation that this quantity is a sum of a large number of independent random variables. These are exactly the conditions for a central limit theorem to apply.
-As all the elementary uncertainties have in principle different shape and magnitudes we apply Lyapunov's CLT \cite{Billingsley}: If
+We now make  the key observation that this quantity is a sum of a large number of independent random variables. These are exactly the conditions for a central limit theorem to apply. 
+As all the elementary uncertainties have in principle different shape and magnitudes we apply Lyapunov's CLT \cite{Billingsley}. We can for instance use Lyapunov's condition on the third moment, and the theorem  reads: If
 \be
-\frac{\gamma_I}{(\Delta_I)^3}\rightarrow 0 \quad \,\textrm{for} \quad N\rightarrow \infty
+\quad\frac{{\bf E}[(n_I-{\bf E}[n_I])^3]}{{\bf E}[(n_I-{\bf E}[n_I])^2]^{3/2}}\sim\frac{6 c_I}{b_I}\rightarrow 0 \quad \,\textrm{for} \quad N\rightarrow \infty
 \ee
 then
 \be
 \theta_I\sim {\cal N }(0,\rho) \quad \,\textrm{for} \quad N\rightarrow \infty \,.
 \ee
 
+Furthermore we can see that the expression of $n_I$ in terms of the combined nuisance parameters, $n_I=a_I+b_{I}\theta_I+ c_I\theta_I^2$ (first defined in Eq.~\eqref{eq:comb_def}), takes the form of a normal expansion as defined  in  subsection \ref{se:skew_CLT}  (see Eq.~\eqref{eq:NLCFT}). This means that the $c_I \theta_I^2$ term  corresponds  precisely to the leading deformation  described by the next-to-leading term of the CLT.  This deformation encodes the skewness induced by the asymmetric elementary uncertainties. We have therefore obtained  a  description of the main collective effects of asymmetric elementary uncertainties, which is dictated by  the CLT. The resulting  simplified likelihood is given in Eq.~\eqref{eq:SL_master}. 
 
-This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}, where we  introduced a simpler notation
+
+% use the result of the previous section (see Eq.~\eqref{eq:NLCFT}) to see that
+%the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) 
+%
+% which tells that the $c_I \theta_I^2$ term in the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) corresponds  precisely to the leading deformation away from the Gaussian described by the next-to-leading term of the CLT.  This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}. 
+
+%Furthermore we can use the result of the previous section (see Eq.~\eqref{eq:NLCFT}),
+% which tells that the $c_I \theta_I^2$ term in the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) corresponds  precisely to the leading deformation away from the Gaussian described by the next-to-leading term of the CLT.  This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}. 
+
+
+%We remind that the next-to-leading term of the CLT is tied to asymmetry. We have therefore obtained an expression which encodes the asymmetries from the elementary sources of  uncertainties in a way directly dictated by the CLT. For symmetric elementary uncertainties, $\gamma_i\rightarrow 0$, hence $c_I\rightarrow 0$. Interestingly the Lyapunov condition is automatically satisfied in that case. 
+%
+
+
+
+ 
+%\footnote{If the asymmetries of the elementary uncertainties are vanishing,  $\gamma_i\rightarrow 0$, then $c_I=0$. Inteerstingly the Lyapunov condition is automatically satisfied in this case.}
+
+
+
+% where we  introduced a simpler notation
+%\be
+%a_I=n^{0}_{I}\,, b_I=n^{0}_{I}\Delta_{I}\,, c_I = n^{0}_{I}\gamma_{I}
+%\ee
+%so that  $n_I= a_I+b_I \theta_I+c_I \theta_I^2$.
+
+\subsection{Precision of the normal expansion}
+
+The accuracy of the normal expansion $n =  a+ b \theta+ c \theta^2$ with $\theta\sim {\cal N}(0,1)$ --- and thus of the  simplified likelihood --- is expected to drop when only a few elementary  uncertainties are present and these depart substantially from the Gaussian shape. This is the combination of conditions for which the 
+ next-to-leading CLT Eq.~\eqref{eq:NLCFT} tends to fail.  It is instructive to check  on a simple distribution how the normal expansion  approximates the true distribution, and in which way the discrepancies tend to appear.   
+ 
+We consider the realistic  case of     a log-normal distribution with parameters $\mu, \sigma$. We fix $\mu=0$ without loss of generality. The three first centered moments are
 \be
-a_I=n^{0}_{I}\,, b_I=n^{0}_{I}\Delta_{I}\,, c_I = n^{0}_{I}\gamma_{I}
+m_1=e^{\frac{\sigma^2}{2}}\,,\quad m_2=e^{2\sigma^2}-e^{\sigma^2}\,,\quad
+m_3=e^{\frac{9\sigma^2}{2}}-3 e^{\frac{5\sigma^2}{2}}+2 e^{\frac{3\sigma^2}{2}}
 \ee
-so that  $n_I= a_I+b_I \theta_I+c_I \theta_I^2$.
+and  $a,b,c$ are obtained  using  Eqs.~\eqref{eq:solutions1}-\eqref{eq:solutions2}. 
+
+For $\sigma\sim 0.69$, the bound $8m_2^3\approx m_3^2$  is reached (see Sec.~\ref{se:EL_SL}). This is the bound where 
+the distribution is so asymmetric that the variance comes entirely from the $\theta^2$ term. Beyond this bound the  normal expansion cannot be used at all as Eqs.~\eqref{eq:solutions1}-\eqref{eq:solutions2} have no solutions.  
+ The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$. It turns out that apart near the above mentioned limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield. 
+ 
+ Let us finally check how well the approximation performs. The true and approximate densities are shown in Fig.~\ref{fig:approxs}.   When the true density is vanishing in the region $n<0.5$, the approximation is excellent.  For larger asymmetry, $\sigma \sim 0.35-0.4$, the true density starts to be sizeable in the region $n<0.5$. The approximate density is still reasonably good away from $n\sim 0.5$. However near this boundary, the approximate density tends to increase and possibly peak, somehow to account for  the area at $n<0.5$ that it cannot reproduce.  
+ This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the realistic toy search implemented in next section.
+ 
+   Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100-150\%$. This is a moderate value, however one should keep in mind that these considerations apply to the combined uncertainties, for which small skewness is typical. The accuracy of the simplified likelihood framework will be tested in next section in a realistic setup.
+
+
+   
+
+
+ 
+  
+
+
+ 
+
+%For the Poisson the three third centered moments are equal to $\lambda$. For the lognormal the  moments are equal to $$. 
+
+\begin{figure}%[hbt!]
+\begin{center}
+%\includegraphics[width=7.5cm]{figures/PlotPoisson.pdf}
+\includegraphics[width=7.5cm]{figures/PlotLogNormal.pdf}
+\end{center}
+\caption{\label{fig:approxs}
+The normal approximation for a Poisson and a log-normal distribution. Black curves show the true distributions, red curve show the approximate one. 
+}
+\end{figure}
 
 
 \section{Simplified likelihoods for LHC searches for new physics}
