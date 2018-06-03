@@ -178,7 +178,7 @@ The data collected in particle physics usually originate from random (quantum) p
 A likelihood function $L$ is related to the probability to observe the data given a model $\cal M$, specified by some parameters,
 \be L({\rm parameters})={\rm Pr}({\rm data}|{\cal M},{\rm parameters})\,.\ee
 We denote the observed  quantity as $\hat{n}$ and the expected quantity by $n$, where $n$ depends on the model parameters.   For example, in the case of
-a particle physics experiment, these quantities can be the observed and expected number of events that satisfy some selection criteria. 
+a particle physics experiment, these quantities can be the observed and expected number of events that satisfy some selection criteria.
 The full set of parameters includes parameters of interest, here collectively denoted by $\bm{\alpha}$, and \textit{elementary} nuisance parameters $\bm{\delta}=(\delta_1,\ldots,\delta_{j}\ldots,\delta_N)^{\rm{T}}$, which model the systematic uncertainties.
 In the simplified likelihood framework, we derive a set of \textit{combined} nuisance parameters $\bm{\theta}$. For $P$ independent measurements, there will be $P$ combined nuisance parameters, $\bm{\theta}=(\theta_1,\ldots,\theta_{I},\ldots,\theta_P)^{\rm{T}}$.
 
@@ -215,7 +215,7 @@ which is the expression we use in the rest of this paper. This expression is val
 \textrm{Pr}(\hat{n}_{I}|n_{I}) \equiv \textrm{Pois}(\hat{n}_{I}|n_{I}) = \dfrac{(n_{I})^{\hat{n}_{I}} \mathrm{e}^{-n_{I}}}{\hat{n}_{I}!} \, .
 \ee
 
- 
+
 
 
 
@@ -241,7 +241,7 @@ Inverting these relations --- while taking care to pick the relevant solutions t
 %
 \begin{align}
 c_I &= \, -\mathrm{sign}(m_{3,I}) \, \sqrt{2 m_{2,II}} \, \cos\!\left(\frac{4\pi}{3}+\frac{1}{3}\arctan\left(\sqrt{8 \frac{m^3_{2,II}}{m^2_{3,I}}-1}\right)  \right) \label{eq:solutions1}
-\\ 
+\\
 b_I &= \, \sqrt{m_{2,II}-2 c_I^2 }\\
 a_I &= \, m_{1,I}- c_I\\
 \rho_{IJ} &= \, \frac{1}{4 c_I c_J}\left( \sqrt{(b_I b_J)^2+8 c_I c_J\,m_{2,IJ}}-b_I b_J \right) \, .
@@ -362,9 +362,9 @@ Moreover we define the expected event number in terms of the combined nuisance p
 n_I=n^{0}_{I}(1+\Delta_{1,I}\cdot\boldsymbol{\delta}+\boldsymbol{\delta}\cdot\Delta_{2,I}\cdot\boldsymbol{\delta}) \equiv
 a_I+b_{I}\theta_I+ c_I\theta_I^2 \label{eq:comb_def}\,.
 \ee
-The $a_I, b_I, c_I$ parameters together with  the correlation matrix $\rho_{IJ}$ fully describe the combined effect of the elementary uncertainties.  
+The $a_I, b_I, c_I$ parameters together with  the correlation matrix $\rho_{IJ}$ fully describe the combined effect of the elementary uncertainties.
 
-To determine them we shall identify the three first moments on each side of Eq.~\eqref{eq:comb_def}. 
+To determine them we shall identify the three first moments on each side of Eq.~\eqref{eq:comb_def}.
 %. The complete covariance matrix between the event numbers is given by $\Sigma_{IJ}=\rho_{IJ} \Delta_I\Delta_J$.
 %
 %
@@ -402,11 +402,11 @@ c_I=\frac{a_I}{6}\sum_{i=1}^N \gamma_i(\Delta_{1,i})^3+O(\Delta^4) \label{eq:gam
 %\gamma_I=\frac{1}{6}\sum_{i=1}^N \gamma_i\Delta_{1,i}^3+O(\Delta^4) \label{eq:gam_comb}
 %\ee
 where the $O(\Delta^4)$ denotes higher order terms like $\tr(\Delta_{2,I}^{\rm T}\cdot\Delta_{2,I})$, $(\tr\Delta_{2,I})^2$, $\Delta_{1,I}^{\rm T}\cdot\Delta_{1,I}\tr\Delta_{2,I}$ which are neglected.
-When $\gamma_i\rightarrow 0$  one recovers the expressions obtained in Ref.~\cite{Fichet:2016gvx}.\footnote{For simplicity we show here the expressions assuming $c_I\ll b_I$, as it is sufficient in the scope of the proof. 
+When $\gamma_i\rightarrow 0$  one recovers the expressions obtained in Ref.~\cite{Fichet:2016gvx}.\footnote{For simplicity we show here the expressions assuming $c_I\ll b_I$, as it is sufficient in the scope of the proof.
  For sizeable $c_I$ one should instead solve the system  shown in Eqs.~\eqref{eq:moments1}-\eqref{eq:moments2}, \eqref{eq:solutions1}-\eqref{eq:solutions2}.  }
 
 
-Importantly,    the $\Delta_2$ term contributes at leading order only in the mean value 
+Importantly,    the $\Delta_2$ term contributes at leading order only in the mean value
 %$\bar n_{0,I}$
 $a_I$
  and always gives subleading contributions to higher moments.
@@ -415,7 +415,7 @@ $a_I$
 n_{I}\approx n^{0}_{I}\left(1+ \Delta_{1,I}\cdot \boldsymbol{\delta}\right)\, \label{eq:n_approx}
 \ee
 from Eq.~\eqref{eq:comb_def}.
-We now make  the key observation that this quantity is a sum of a large number of independent random variables. These are exactly the conditions for a central limit theorem to apply. 
+We now make  the key observation that this quantity is a sum of a large number of independent random variables. These are exactly the conditions for a central limit theorem to apply.
 As all the elementary uncertainties have in principle different shape and magnitudes we apply Lyapunov's CLT \cite{Billingsley}. We can for instance use Lyapunov's condition on the third moment, and the theorem  reads: If
 \be
 \quad\frac{{\bf E}[(n_I-{\bf E}[n_I])^3]}{{\bf E}[(n_I-{\bf E}[n_I])^2]^{3/2}}\sim\frac{6 c_I}{b_I}\rightarrow 0 \quad \,\textrm{for} \quad N\rightarrow \infty
@@ -425,24 +425,24 @@ then
 \theta_I\sim {\cal N }(0,\rho) \quad \,\textrm{for} \quad N\rightarrow \infty \,.
 \ee
 
-Furthermore we can see that the expression of $n_I$ in terms of the combined nuisance parameters, $n_I=a_I+b_{I}\theta_I+ c_I\theta_I^2$ (first defined in Eq.~\eqref{eq:comb_def}), takes the form of a normal expansion as defined  in  subsection \ref{se:skew_CLT}  (see Eq.~\eqref{eq:NLCFT}). This means that the $c_I \theta_I^2$ term  corresponds  precisely to the leading deformation  described by the next-to-leading term of the CLT.  This deformation encodes the skewness induced by the asymmetric elementary uncertainties. We have therefore obtained  a  description of the main collective effects of asymmetric elementary uncertainties, which is dictated by  the CLT. The resulting  simplified likelihood is given in Eq.~\eqref{eq:SL_master}. 
+Furthermore we can see that the expression of $n_I$ in terms of the combined nuisance parameters, $n_I=a_I+b_{I}\theta_I+ c_I\theta_I^2$ (first defined in Eq.~\eqref{eq:comb_def}), takes the form of a normal expansion as defined  in  subsection \ref{se:skew_CLT}  (see Eq.~\eqref{eq:NLCFT}). This means that the $c_I \theta_I^2$ term  corresponds  precisely to the leading deformation  described by the next-to-leading term of the CLT.  This deformation encodes the skewness induced by the asymmetric elementary uncertainties. We have therefore obtained  a  description of the main collective effects of asymmetric elementary uncertainties, which is dictated by  the CLT. The resulting  simplified likelihood is given in Eq.~\eqref{eq:SL_master}.
 
 
 % use the result of the previous section (see Eq.~\eqref{eq:NLCFT}) to see that
-%the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) 
+%the expression of $n_I$ (Eq.~\eqref{eq:comb_def})
 %
-% which tells that the $c_I \theta_I^2$ term in the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) corresponds  precisely to the leading deformation away from the Gaussian described by the next-to-leading term of the CLT.  This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}. 
+% which tells that the $c_I \theta_I^2$ term in the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) corresponds  precisely to the leading deformation away from the Gaussian described by the next-to-leading term of the CLT.  This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}.
 
 %Furthermore we can use the result of the previous section (see Eq.~\eqref{eq:NLCFT}),
-% which tells that the $c_I \theta_I^2$ term in the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) corresponds  precisely to the leading deformation away from the Gaussian described by the next-to-leading term of the CLT.  This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}. 
+% which tells that the $c_I \theta_I^2$ term in the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) corresponds  precisely to the leading deformation away from the Gaussian described by the next-to-leading term of the CLT.  This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}.
 
 
-%We remind that the next-to-leading term of the CLT is tied to asymmetry. We have therefore obtained an expression which encodes the asymmetries from the elementary sources of  uncertainties in a way directly dictated by the CLT. For symmetric elementary uncertainties, $\gamma_i\rightarrow 0$, hence $c_I\rightarrow 0$. Interestingly the Lyapunov condition is automatically satisfied in that case. 
+%We remind that the next-to-leading term of the CLT is tied to asymmetry. We have therefore obtained an expression which encodes the asymmetries from the elementary sources of  uncertainties in a way directly dictated by the CLT. For symmetric elementary uncertainties, $\gamma_i\rightarrow 0$, hence $c_I\rightarrow 0$. Interestingly the Lyapunov condition is automatically satisfied in that case.
 %
 
 
 
- 
+
 %\footnote{If the asymmetries of the elementary uncertainties are vanishing,  $\gamma_i\rightarrow 0$, then $c_I=0$. Inteerstingly the Lyapunov condition is automatically satisfied in this case.}
 
 
@@ -455,36 +455,36 @@ Furthermore we can see that the expression of $n_I$ in terms of the combined nui
 
 \subsection{Precision of the normal expansion}
 
-The accuracy of the normal expansion $n =  a+ b \theta+ c \theta^2$ with $\theta\sim {\cal N}(0,1)$ --- and thus of the  simplified likelihood --- is expected to drop when only a few elementary  uncertainties are present and these depart substantially from the Gaussian shape. This is the combination of conditions for which the 
- next-to-leading CLT Eq.~\eqref{eq:NLCFT} tends to fail.  It is instructive to check  on a simple distribution how the normal expansion  approximates the true distribution, and in which way the discrepancies tend to appear.   
- 
+The accuracy of the normal expansion $n =  a+ b \theta+ c \theta^2$ with $\theta\sim {\cal N}(0,1)$ --- and thus of the  simplified likelihood --- is expected to drop when only a few elementary  uncertainties are present and these depart substantially from the Gaussian shape. This is the combination of conditions for which the
+ next-to-leading CLT Eq.~\eqref{eq:NLCFT} tends to fail.  It is instructive to check  on a simple distribution how the normal expansion  approximates the true distribution, and in which way the discrepancies tend to appear.
+
 We consider the realistic  case of     a log-normal distribution with parameters $\mu, \sigma$. We fix $\mu=0$ without loss of generality. The three first centered moments are
 \be
 m_1=e^{\frac{\sigma^2}{2}}\,,\quad m_2=e^{2\sigma^2}-e^{\sigma^2}\,,\quad
 m_3=e^{\frac{9\sigma^2}{2}}-3 e^{\frac{5\sigma^2}{2}}+2 e^{\frac{3\sigma^2}{2}}
 \ee
-and  $a,b,c$ are obtained  using  Eqs.~\eqref{eq:solutions1}-\eqref{eq:solutions2}. 
+and  $a,b,c$ are obtained  using  Eqs.~\eqref{eq:solutions1}-\eqref{eq:solutions2}.
 
-For $\sigma\sim 0.69$, the bound $8m_2^3\approx m_3^2$  is reached (see Sec.~\ref{se:EL_SL}). This is the bound where 
-the distribution is so asymmetric that the variance comes entirely from the $\theta^2$ term. Beyond this bound the  normal expansion cannot be used at all as Eqs.~\eqref{eq:solutions1}-\eqref{eq:solutions2} have no solutions.  
- The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$. It turns out that apart near the above mentioned limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield. 
- 
- Let us finally check how well the approximation performs. The true and approximate densities are shown in Fig.~\ref{fig:approxs}.   When the true density is vanishing in the region $n<0.5$, the approximation is excellent.  For larger asymmetry, $\sigma \sim 0.35-0.4$, the true density starts to be sizeable in the region $n<0.5$. The approximate density is still reasonably good away from $n\sim 0.5$. However near this boundary, the approximate density tends to increase and possibly peak, somehow to account for  the area at $n<0.5$ that it cannot reproduce.  
+For $\sigma\sim 0.69$, the bound $8m_2^3\approx m_3^2$  is reached (see Sec.~\ref{se:EL_SL}). This is the bound where
+the distribution is so asymmetric that the variance comes entirely from the $\theta^2$ term. Beyond this bound the  normal expansion cannot be used at all as Eqs.~\eqref{eq:solutions1}-\eqref{eq:solutions2} have no solutions.
+ The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$. It turns out that apart near the above mentioned limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield.
+
+ Let us finally check how well the approximation performs. The true and approximate densities are shown in Fig.~\ref{fig:approxs}.   When the true density is vanishing in the region $n<0.5$, the approximation is excellent.  For larger asymmetry, $\sigma \sim 0.35-0.4$, the true density starts to be sizeable in the region $n<0.5$. The approximate density is still reasonably good away from $n\sim 0.5$. However near this boundary, the approximate density tends to increase and possibly peak, somehow to account for  the area at $n<0.5$ that it cannot reproduce.
  This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the realistic toy search implemented in next section.
- 
-   Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100-150\%$. This is a moderate value, however one should keep in mind that these considerations apply to the combined uncertainties, for which small skewness is typical. The accuracy of the simplified likelihood framework will be tested in next section in a realistic setup.  
+
+   Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100-150\%$. This is a moderate value, however one should keep in mind that these considerations apply to the combined uncertainties, for which small skewness is typical. The accuracy of the simplified likelihood framework will be tested in next section in a realistic setup.
 
 
-   
 
 
- 
-  
 
 
- 
 
-%For the Poisson the three third centered moments are equal to $\lambda$. For the lognormal the  moments are equal to $$. 
+
+
+
+
+%For the Poisson the three third centered moments are equal to $\lambda$. For the lognormal the  moments are equal to $$.
 
 \begin{figure}%[hbt!]
 \begin{center}
@@ -492,7 +492,7 @@ the distribution is so asymmetric that the variance comes entirely from the $\th
 \includegraphics[width=7.5cm]{figures/PlotLogNormal.pdf}
 \end{center}
 \caption{\label{fig:approxs}
-The normal approximation for a Poisson and a log-normal distribution. Black curves show the true distributions, red curve show the approximate one. 
+The normal approximation for a Poisson and a log-normal distribution. Black curves show the true distributions, red curve show the approximate one.
 }
 \end{figure}
 
@@ -748,24 +748,31 @@ presentation styles:
 \item auxiliary files in arbitrary format: the \emph{ad hoc} nature of these
   makes them impossible to be handled by unsupervised algorithms. This includes
   2D histograms in ROOT data files, since variations in path structure and the
-  ambiguity between covariance or correlation forms are an impeditment to
+  ambiguity between covariance or correlation forms are an impediment to
   automated use.
 \end{itemize}
 
-We offer two compatible proposals for this: augmentation of HepData table
-headers to express relationships between tables, i.e.~identifying the second
-(and third) moment data table associated with a primary dataset in a standard
-and parseable fashion; and representation of SL covariance matrices in
-error-source form, with each bin $I$ reporting $N$ different error sources of
-value $\sqrt{m_{2,IJ}}$. Both would require some keyword standardisation: in the
-first case to express the semantic type of a dataset and the relationships
-between them, and in the second case to identify the diagonal error
-term. Diagonal third-order moments can also be handled in both schemes,
-trivially in the case of linked datasets, and by introduction of a new and
-special ``skew'' label in the error-source scheme. Finally, a dataset annotation
-would be required to indicate that the Poisson--Gaussian likelihood form
-presented in this paper is the appropriate one to use, as opposed to e.g.~a pure
-multivariate Gaussian cf.~$\chi^2$ testing.
+The first two of these forms may be readily extended for automated correlation
+handling. In the first case, the HepData table headers may be augmented to
+express relationships between tables, i.e.~identifying the second (and third)
+moment data tables associated with a primary dataset in a standardised
+fashion. And in the second case, the SL covariance matrices may be represented
+in error-source form, with each bin $I$ reporting $N$ different error sources of
+value $\sqrt{m_{2,IJ}}$ as well as specially identified skew and statistical
+error components.
+
+Both forms require some keyword standardisation: in the first case to express
+the semantic types of datasets and the relationships between them, and in the
+second case to identify the statistical and skew error sources which should be
+treated distinctly from the SL systematic uncertainties. The final scheme should
+be capable of equally applying to search-analysis signal regions as discussed
+here, and to bins of differential cross-section observables where correlations
+may also be available between the bins of different distributions/datasets.  For
+such observables, the Poisson--Gaussian likelihood form presented in this paper
+may not be the appropriate one to use -- e.g.~a pure multivariate Gaussian
+cf.~$\chi^2$ testing is more appropriate for normalised differential observables
+-- and so a further record annotation will be required to identify the
+appropriate likelihood family into which to cast the provided correlation data.
 
 
 \section*{Acknowledgements}
