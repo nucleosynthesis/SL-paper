@@ -201,7 +201,7 @@ void makeSimpleLikelihoodToy(){
       j++;
     }
 
-    TCanvas *can = new TCanvas("canvas","",1200,400);
+    TCanvas *can = new TCanvas("canvas","",1280,500);
     can->SetLeftMargin(0.06);
     can->SetRightMargin(0.02);
     can->SetBottomMargin(0.12);
@@ -274,7 +274,7 @@ void makeSimpleLikelihoodToy(){
 
     TLatex *lat = new TLatex();
     lat->SetTextFont(42);
-    lat->SetTextSize(0.04);
+    lat->SetTextSize(0.038);
     //lat->SetNDC();
     
     for (int c=1;c<4;c++){
@@ -286,10 +286,10 @@ void makeSimpleLikelihoodToy(){
       double eUCR  = integral(h_bkg_CR_up_bkg,(c-1)*30,(c-1)*30+29)-NBtot;
       double eDCR  = NBtot - integral(h_bkg_CR_dn_bkg,(c-1)*30,(c-1)*30+29);
 
-      lat->DrawLatex((c-1)*30+1,h_data->GetMaximum()*2.4,Form("Category %d",c));
+      lat->DrawLatex((c-1)*30+0.5,h_data->GetMaximum()*2.4,Form("C%d:",c));
 
-      if (c==3) lat->DrawLatex((c-1)*30+10,h_data->GetMaximum()*2.4,Form("#it{N} = %.2f ^{+%.2f}_{-%.2f} (eff.) ^{%.2f}_{%.2f} (s.f.)",NBtot,eULV,eDLV,eUCR,eDCR));
-      else  lat->DrawLatex((c-1)*30+10,h_data->GetMaximum()*2.4,Form("#it{N} = %.2f ^{+%.2f}_{-%.2f} (eff.) ^{+%.2f}_{-%.2f} (s.f.)",NBtot,eULV,eDLV,eUCR,eDCR));
+      if (c==3) lat->DrawLatex((c-1)*30+3,h_data->GetMaximum()*2.4,Form("#it{N} = %.1f +%.1f / -%.1f (eff.) %.1f / %.1f (s.f.)",NBtot,eULV,eDLV,eUCR,eDCR));
+      else  lat->DrawLatex((c-1)*30+3,h_data->GetMaximum()*2.4,Form("#it{N} = %.1f +%.1f / -%.1f (eff.) +%.1f / -%.1f (s.f.)",NBtot,eULV,eDLV,eUCR,eDCR));
     }
 
     can->SaveAs("t.pdf");
