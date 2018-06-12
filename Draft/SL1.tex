@@ -211,14 +211,11 @@ L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) =
 \frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
 \end{equation}
-which is the expression we use in the rest of this paper. This expression is valid for data with any statistics of observation, however in particle physics event numbers always have Poisson statistics hence we will have
+which is the expression we use in the rest of this paper. This expression is valid for data with any statistics of observation, however in particle physics, since often the data 
+are observed event counts $n_{I}^{\rm{obs}}$, the data will typically follow Poisson statistics such that,
 \be
-\textrm{Pr}(\hat{n}_{I}|n_{I}) \equiv \textrm{Pois}(\hat{n}_{I}|n_{I}) = \dfrac{(n_{I})^{\hat{n}_{I}} \mathrm{e}^{-n_{I}}}{\hat{n}_{I}!} \, .
+\textrm{Pr}(\hat{n}_{I}|n_{I}) \equiv \textrm{Pois}({n}^{\rm{obs}}_{I}|n_{I}) = \dfrac{(n_{I})^{{n}^{\rm{obs}}_{I}} \mathrm{e}^{-n_{I}}}{{n}^{\rm{obs}}_{I}!} \, .
 \ee
-
-
-
-
 
 
 The parameters of the simplified likelihood ($a_I, b_I, c_I, \rho_{IJ}$) have analytical expressions
@@ -615,11 +612,10 @@ Only by summing over all of these backgrounds (i.e $n_{b,I}=\sum_{p}n_{b,p,I}$ f
 Using our toy search, we compare the experimental and simplified likelihoods. \fxnote{Do we want a whole separate section for this after setting up the toy? We can compare 1. distributions (1D and 2D), 2. frequentist (profiled) and Bayesian (marginalised) likelihoods.}
 
 Figure~\ref{fig:distributions} shows a comparison of the distribution of $\hat{n}_{i}$, for three of the bins, $i=4,50$ and $86$, between the experimental setup and the simplified one.
-We constructed 100,000 pseudo-datasets by taking random values $\underline{\hat{\delta}}$, generated according to $\pi(\bm{\delta})$, and evaluating
-$n_{b,I}(\hat{\bm{\delta}})$ for each dataset according to the Eqn~\ref{eqn:expt_param}. The black points show the projection of these toy datasets onto each bin index. The green line shows the
-distribution of $\hat{n}_{b,I}$ when $\hat{n}_{b,I} = a_{I}+b_{I}\hat{\theta}_{I}+c_{I}\hat{\theta}_{I}^{2}$  and $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$. The simplified likelihood coefficients
+We constructed 100,000 pseudo-datasets by taking random values ${\hat{\bm{\delta}}}$, generated according to $\pi(\bm{\delta})$, and evaluating
+$n_{b,I}(\hat{\bm{\delta}})$ for each dataset according to the Eqn~\ref{eqn:expt_param}. The black points show the projection of these toy datasets onto each bin index. Instead, the green line shows the distribution of $\hat{n}_{b,I}$ when $\hat{n}_{b,I} = a_{I}+b_{I}\hat{\theta}_{I}+c_{I}\hat{\theta}_{I}^{2}$ and $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$. The simplified likelihood coefficients
 $a_{I},~b_{I}$ and $c_{I}$ are determined from the first three moments, which are calculated from the pseudo-datasets, and the resulting quadratic form shown in the inset panels. Additionally, the distribution
-assuming a linear form ($\hat{n}_{b,I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$) is shown by the red line.
+assuming a linear approximation ($\hat{n}_{b,I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$), which assumes the third moment is negligible, is shown by the red line.
 
 \begin{figure}%[hbt!]
   \centering
@@ -848,13 +844,13 @@ implementations:
 %
 \begin{align}
   \ln\! \big( L(\mu,\bm{\theta} )\pi(\bm{\theta}) \big) &=
-  \sum_I^P \Big[ o_{I} \ln \left(\mu n_{s,I} + n_{I}(\theta_{I}) \right) - \left( \mu n_{s,I} + n_{b,I}(\theta_{I}) \right) - o_{I}! \Big]
+  \sum_I^P \Big[ n^{\rm{obs}}_{I} \ln \left(\mu n_{s,I} + n_{I}(\theta_{I}) \right) - \left( \mu n_{s,I} + n_{b,I}(\theta_{I}) \right) - n^{\rm{obs}}_{I}! \Big]
   - \frac{1}{2} \bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} - \frac{P}{2} \ln 2\pi \\
   %
   \Rightarrow \qquad
-  \frac{\mathrm{d}\ln L}{\mathrm{d}\mu} &= \sum_I^P \left( \frac{o_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot \mu n_{s,I} \\
+  \frac{\mathrm{d}\ln L}{\mathrm{d}\mu} &= \sum_I^P \left( \frac{n^{\rm{obs}}_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot \mu n_{s,I} \\
   %
-  \frac{\mathrm{d}\ln L}{\mathrm{d}\theta_{\!A}} &= \left( \frac{o_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
+  \frac{\mathrm{d}\ln L}{\mathrm{d}\theta_{\!A}} &= \left( \frac{n^{\rm{obs}}_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
 \label{eq:SL_LHC}
 \end{align}
 %
