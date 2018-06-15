@@ -116,7 +116,6 @@
 
 
 
-
 \noindent
 \begin{abstract}
 
@@ -211,12 +210,11 @@ L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) =
 \frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
 \end{equation}
-which is the expression we use in the rest of this paper. This expression is valid for data with any statistics of observation, however in particle physics, since often the data 
+which is the expression we use in the rest of this paper. This expression is valid for data with any statistics of observation, however in particle physics, since often the data
 are observed event counts $n_{I}^{\rm{obs}}$, the data will typically follow Poisson statistics such that,
 \be
-\textrm{Pr}(\hat{n}_{I}|n_{I}) \equiv \textrm{Pois}({n}^{\rm{obs}}_{I}|n_{I}) = \dfrac{(n_{I})^{{n}^{\rm{obs}}_{I}} \mathrm{e}^{-n_{I}}}{{n}^{\rm{obs}}_{I}!} \, .
+\textrm{Pr}(\hat{n}_{I}|n_{I})\equiv \textrm{Pois}({n}^{\rm{obs}}_{I}|n_{I}) = \dfrac{(n_{I})^{{n}^{\rm{obs}}_{I}} \mathrm{e}^{-n_{I}}}{{n}^{\rm{obs}}_{I}!} \, ,
 \ee
-
 
 The parameters of the simplified likelihood ($a_I, b_I, c_I, \rho_{IJ}$) have analytical expressions
 as a function of the variance and the skew  of each elementary nuisance parameter (see Sec.~\ref{se:analytic}). However, often the elementary uncertainties and the event yields are already coded in a Monte Carlo generator. In such case, %instead of using Eqs.~\eqref{eq:n_comb}- \eqref{eq:gam_comb},
@@ -686,6 +684,48 @@ as opposed to \emph{ad hoc} methods like use of a log-normal distribution or
 setting negative-rate samples to zero or an infinitessimal value: the toy model
 linear approximation has a negative fraction of $\sim\!11.6\%$, while the
 quadratic form has a negative fraction of exactly zero.
+
+Typically in searches for new physics, limits on models for new physics
+are determined using ratios of the likelihood at different values of the parameters of interest.
+In the simplest case, a single parameter of interest is defined as $\mu$, often referred to
+as the signal strength, which multiplies the expected contribution, under some specific signal hypothesis,
+of the signal across all regions of the search, giving,
+
+\begin{equation}
+ n_{s,I}(\bm{\alpha}) = \mu n_{s,I},
+\end{equation}
+where the yields $n_{s,I}$ here refer explicitly to the expected contributions from signal for a specified hypothesis.
+In order to remove the dependance of the likelihood on the nuisance parameters, $\bm{\theta}$, two approaches are
+commonly adopted. The first, termed `profiling`, involves replacing the nuisance parameters with the values at which
+the likelihood attains it maximum for a given set of $n^{\rm{obs}_I}$.
+
+\begin{equation}
+L^{\rm{max}}(\mu) = \rm{max}_{\theta_{I}}\left\{ L(\mu,\bm{\theta}) \right\}.
+\end{equation}
+The test-statistic $t_{\mu}$ is then defined using the ratio,
+
+\begin{equation}
+t_{\mu} = -2\ln \frac{L^{\rm{max}}(\mu)}{L^{\rm{max}}},
+\end{equation}
+where $L^{\rm{max}}$ denotes the maximum value of $L_{\rm{max}}(\mu)$ for any value of $\mu$\footnote{The precise definition of the test-statistic used
+as searches at the LHC and the procedures used to determing limits are slightly different to that presented here and are detailed in Ref.~\cite{CMS-NOTE-2011-005}.}. Similarly, likelihood ratios are also used for quantifying some excess in the case of the discovery
+of new physics~\cite{CMS-NOTE-2011-005}.
+
+Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a function of $\mu$ for the toy search between the full (experimental)
+likelihood and the simplified likelihood. In addition, the result obtained using only the linear terms of the simplified is shown. As expected, the
+agreement between the full and simplified likelihood is greatly improved when including the quadratic term.
+
+\begin{figure}%[hbt!]
+  \centering
+  \includegraphics[width=\textwidth]{figures/testtoy-tmuscan}
+  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the toy search assuming the full likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quatratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
+  values for which the 68\% and 95\% CL exclusions can be determined, assuming certain asymptotic properties of the distribution of $t_{\mu}$.}
+  \label{fig:tmucompare}
+\end{figure}
+
+A horizontal line is drawn at the value of
+$t_{\mu}= 3.86$. The agreement in this region is particularly relevant due to the fact that asymptotic approximations for the distributions of $t_{\mu}$~\cite{Cowan:2010js} allow one to determine the 95\% confidence level (CL) upper limit on the signal strength, $\mu_{\rm{up}}$.
+The signal hypothesis is `excluded` at 95\% CL if $\mu_{\rm{up}} < 1$.
 
 
 \fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
