@@ -610,18 +610,18 @@ Only by summing over all of these backgrounds (i.e $n_{b,I}=\sum_{p}n_{b,p,I}$ f
 %Using our toy search, we compare the experimental and simplified likelihoods. \fxnote{Do we want a whole separate section for this after setting up the toy? We can compare 1. distributions (1D and 2D), 2. frequentist (profiled) and Bayesian (marginalised) likelihoods.}
 
 We constructed 100,000 pseudo-datasets by taking random values ${\hat{\bm{\delta}}}$, generated according to $\pi(\bm{\delta})$, and evaluating
-$n_{b,I}(\hat{\bm{\delta}})$ for each dataset according to the Eqn~\ref{eqn:expt_param}. Figure~\ref{fig:distributions} shows the distribution of $\hat{n}_{i}$, for an example bin, $i=62$, 
-from the simplified likelihood. The values of $m_{1},~m_{2}$ and $m_{3}$ are calculated using the pseudo-datasets and subsequently used to calculate the coefficients for the simplified likelihood. 
-For comparison, the distribution obtained if the third moment is neglected is also shown. 
+$n_{b,I}(\hat{\bm{\delta}})$ for each dataset according to the Eqn~\ref{eqn:expt_param}. Figure~\ref{fig:distributions} shows the distribution of $\hat{n}_{i}$, for an example bin, $i=62$,
+from the simplified likelihood. The values of $m_{1},~m_{2}$ and $m_{3}$ are calculated using the pseudo-datasets and subsequently used to calculate the coefficients for the simplified likelihood.
+For comparison, the distribution obtained if the third moment is neglected is also shown.
 %In this case, the In the case where the skew of the distribution, defined as $m_{3,I}/(m_{2,II})^{\frac{3}{2}}$, is small
 
 \begin{figure}%[hbt!]
   \centering
   \includegraphics[width=\textwidth]{figures/compare_62}
   \caption{Distributions of $\hat{n}_{I}$ for $I=62$ for the simplified likelihood.
-    The functions $n_{I}(\theta_{I})$ assuming the simplified likelihood form (green line), 
+    The functions $n_{I}(\theta_{I})$ assuming the simplified likelihood form (green line),
     and when neglecting the third moment (red line), are shown in the right panel while the distributions
-    of $\hat{n}_{I}$ obtained for these two cases letting $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$ are shown in the 
+    of $\hat{n}_{I}$ obtained for these two cases letting $\hat{\theta}_{I}\sim\mathcal{N}(0,1)$ are shown in the
     left panel.  }
   \label{fig:distributions}
 \end{figure}
@@ -634,23 +634,23 @@ For comparison, the distribution obtained if the third moment is neglected is al
 %is much smaller when $n^{0}_{b,I}$ is small, as in the tails of the distributions (eg bin $86$), compared to the linear form.
 
 %The simplified likelihood coefficients
-%$a_{I},~b_{I}$ and $c_{I}$ are determined from the first three moments, which are calculated from the pseudo-datasets, and the resulting quadratic form shown in the inset panels. 
+%$a_{I},~b_{I}$ and $c_{I}$ are determined from the first three moments, which are calculated from the pseudo-datasets, and the resulting quadratic form shown in the inset panels.
 
 
-%Figure~\ref{distributions2d} shows 
-%The color map shows the projection of the pseudo-datasets onto pairs of bins. 
-%The green contours show the distribution of $\hat{n}_{b,I}--\hat{n}_{b,J}$ 
-%when $\hat{n}_{b,I} = a_{I}+b_{I}\hat{\theta}_{I}+c_{I}\hat{\theta}_{I}^{2}$ and . 
-%The projections onto a single bin, comparing the distribution of the pseudo-datasets (black histogram)  and the simplified likelihood approximation (green histogram), are also shown. 
-%Additionally, the distributions assuming a linear approximation ($\hat{n}_{b,I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$), which assumes the third moment is negligible, is provided. 
+%Figure~\ref{distributions2d} shows
+%The color map shows the projection of the pseudo-datasets onto pairs of bins.
+%The green contours show the distribution of $\hat{n}_{b,I}--\hat{n}_{b,J}$
+%when $\hat{n}_{b,I} = a_{I}+b_{I}\hat{\theta}_{I}+c_{I}\hat{\theta}_{I}^{2}$ and .
+%The projections onto a single bin, comparing the distribution of the pseudo-datasets (black histogram)  and the simplified likelihood approximation (green histogram), are also shown.
+%Additionally, the distributions assuming a linear approximation ($\hat{n}_{b,I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$), which assumes the third moment is negligible, is provided.
 
 
 In Figure~\ref{fig:distributions2d} 2D projections of the background
 distributions are shown between four pairs of signal-region bins: bin pair
 $(4,7)$ shows a projection for high-statistics bins where both the linear and
-quadratic forms of the SL agree closely with the true distribution (that obtained in the pseudo-datasets); 
+quadratic forms of the SL agree closely with the true distribution (that obtained in the pseudo-datasets);
 the true distribution in $(4,62)$ starts to display deviations from the multivariate
-normal approximation which are well captured by the quadratic approximation. This is 
+normal approximation which are well captured by the quadratic approximation. This is
 expected when the skew, defined as $m_{3,I}/(m_{2,II})^{\frac{3}{2}}$, is small.
 However, in the bottom pair of plots with bins~4 and~62 joint with the low-statistics
 bin~86, the proximity of the mean rate to zero induces a highly asymmetric
@@ -684,6 +684,13 @@ hence higher moments of the experimental distributions.
   \label{fig:distributions2d}
 \end{figure}
 
+\begin{figure}%[hbt!]
+  \centering
+  \includegraphics[width=\textwidth]{figures/plotmatrix}
+  \label{fig:distributionmatrix}
+  \caption{1D and 2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{J}$ for $\{I,J\}=4,7,31,62,86$.}
+\end{figure}
+
 An advantage of the quadratic form cutoff is that a strictly positive
 approximate distribution can be guaranteed, while the linear form can have a
 significant negative yield fraction as seen in the figures for bin~86. Sampling
@@ -707,7 +714,7 @@ of the signal across all regions of the search, giving,
 where the yields $n_{s,I}$ here refer explicitly to the expected contributions from signal for a specified hypothesis.
 In order to remove the dependance of the likelihood on the nuisance parameters, $\bm{\theta}$, two approaches are
 commonly adopted. The first, termed `profiling`, involves replacing the nuisance parameters with the values at which
-the likelihood attains it maximum for a given set of $n^{\rm{obs}_I}$. \fxfatal{Note, here I am using L to mean the whole thing but in Eqn 1 we refer to L as only part of the likelihood, i.e we 
+the likelihood attains it maximum for a given set of $n^{\rm{obs}_I}$. \fxfatal{Note, here I am using L to mean the whole thing but in Eqn 1 we refer to L as only part of the likelihood, i.e we
 need to multiply by pi(d). I wonder if it makes sense to define $L_{\rm{simp}}$ as the production of these things and make it a function of the thetas ?}
 
 \begin{equation}
