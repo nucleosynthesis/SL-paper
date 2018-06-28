@@ -187,6 +187,50 @@ def plotCompare(tree,b,mean,var,skew):
   c.SaveAs("distribution_%d.png"%(b))
   c.SaveAs("distribution_%d.pdf"%(b))
 
+
+  # also make a plot of side by side thing 
+  c2=ROOT.TCanvas("x%d"%b,"x",900,500)
+
+  c2.Divide(2,1,0,0)
+  c2.GetPad(1).SetTopMargin(0.15)
+  c2.GetPad(1).SetLeftMargin(0.215)
+  c2.GetPad(1).SetBottomMargin(0.2)
+  c2.GetPad(1).SetRightMargin(0.05)
+  c2.GetPad(2).SetTopMargin(0.15)
+  c2.GetPad(2).SetLeftMargin(0.2)
+  c2.GetPad(2).SetBottomMargin(0.2)
+  c2.GetPad(2).SetRightMargin(0.025)
+
+  c2.cd(1)
+  h.GetXaxis().SetNdivisions(511)
+  f1.GetXaxis().SetLabelSize(0.06)
+  h.SetMinimum(0.0001)
+  h.GetXaxis().SetLabelSize(0.06)
+  h.GetYaxis().SetNdivisions(511)
+  h.GetYaxis().SetLabelSize(0.06)
+  h.GetYaxis().SetTitleSize(0.08)
+  h.GetXaxis().SetTitleSize(0.08)
+  h.GetYaxis().SetTitleOffset(1.3)
+  f1.GetXaxis().SetTitleOffset(1.)
+  h.GetXaxis().SetTitleOffset(1.)
+  h.Draw("axis")
+  hg.Draw("histsame")
+  hq.Draw("histsame")
+  tlat.SetTextColor(1)
+  #tlat.DrawLatex(0.2,0.88,"#it{m}_{1}=%.2f, #it{m}_{2}=%.2f, #it{m}_{3}=%.2f"%(mean,var,skew))
+
+  c2.cd(2)
+  f1.Draw("L")
+  f2.Draw("Lsame")
+  tlat.SetTextSize(0.055)
+  tlat.SetTextColor(2); tlat.DrawLatex(0.2,0.93,"#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta}"%(mean,var**0.5))
+  tlat.SetTextColor(ROOT.kGreen+2); tlat.DrawLatex(0.2,0.88,"#it{n}(#it{#theta}) = %.2f + %.2f#it{#theta} + %.2f#it{#theta}^{2}"%(A,B,C))
+  c2.SaveAs("compare_%d.png"%(b))
+  c2.SaveAs("compare_%d.pdf"%(b))
+
+  #sys.exit()
+
+
 if len(sys.argv) != 3:
     print "Usage python toys2ModelFile.py inputFile.root outputFile.py"
     exit()
