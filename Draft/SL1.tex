@@ -189,9 +189,9 @@ The key result at the basis of  the simplified likelihood framework is the appro
   L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})
   & = \prod_{I=1}^P \mathrm{Pr}\Big(  \hat{n}_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
   & \approx \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big) \cdot
-    \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1}(\bm \alpha) \bm \theta}}}{\sqrt{(2\pi)^P }} \,, \label{eq:SL_master}
+    \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1}(\bm \alpha) \bm \theta}}}{\sqrt{(2\pi)^P }}  \equiv L_{\rm{SL}}(\bm{\alpha},\bm{\theta})\,, \label{eq:SL_master}
 \end{align}
-where the first line is the exact experimental likelihood and the second line is the simplified likelihood. Here $\pi(\bm \delta)$ is the joint probability density distribution for the elementary nuisance parameters. In our assumptions  these are independent from each other, hence the prior factorises as $\pi(\bm \delta)=\prod_{i=1}^N \pi_i(\delta_i)$.
+where the first line is the exact ``experimental likelihood'' and the second line is the simplified likelihood. Here $\pi(\bm \delta)$ is the joint probability density distribution for the elementary nuisance parameters. In our assumptions  these are independent from each other, hence the prior factorises as $\pi(\bm \delta)=\prod_{i=1}^N \pi_i(\delta_i)$.
 
 The $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix $\bm{\rho}=\rho_{IJ}$ define the simplified likelihood and are in general functions of the parameters of interest. However in concrete cases, this dependence will often be negligible. This is in particular the case in particle physics searches for new physics when the expected event number decomposes into signal ($n_s$) plus background ($n_b$) contributions. The parameters of interest that model the new physics enter in $n_s$ while $n_b$ is independent from them.  Whenever the expected signal is small with respect to the background, the dominant uncertainties in searches for new physics are those related to the background.
 % [SF: move this] In searches for new physics, often the observations $\hat{n}_{I}$ are integer counts of events in bins of distributed along observables
@@ -205,7 +205,7 @@ The $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix $\bm{\rho}=\r
 In the simplified likelihood, neglecting the systematic uncertainties affecting the signal implies in turn that the parameters of the simplified likelihood are independent of $\bm \alpha$. Hence the simplified likelihood Eq.~\eqref{eq:SL_master} takes the form\,\footnote{We have substituted
 $a_I(\alpha)\rightarrow a_I+n_{s,I}(\alpha),~b_I(\alpha)\rightarrow b_I$ and $c_I(\alpha)\rightarrow c_I$.}
 \begin{equation}
-L(\bm{\alpha},\bm{\theta} )\pi(\bm{\theta}) =
+ L_{\rm{SL}}(\bm{\alpha},\bm{\theta})=
 \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
 \frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
@@ -664,18 +664,20 @@ hence higher moments of the experimental distributions.
 
 \begin{figure}%[hbt!]
   \centering
-  \includegraphics[width=0.45\textwidth]{figures/corr-4-7}
-  \includegraphics[width=0.45\textwidth]{figures/corr-4-62}\\
-  \includegraphics[width=0.45\textwidth]{figures/corr-4-86}
-  \includegraphics[width=0.45\textwidth]{figures/corr-62-86}
-  \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{J}$ for
-    % $I=4,J=62$ (left), $I=1,J=86$ (center) and $I=62,J=86$ (right)
-    $I=4,J=7$ (top left), $I=4,J=62$ (top right), $I=4,J=86$ (bottom left), and
-    $I=62,J=86$ (bottom right) in pseudo-datasets generated from the
+  %\includegraphics[width=0.45\textwidth]{figures/corr-4-7}
+  %\includegraphics[width=0.45\textwidth]{figures/corr-4-62}\\
+  %\includegraphics[width=0.45\textwidth]{figures/corr-4-86}
+  %\includegraphics[width=0.45\textwidth]{figures/corr-62-86}
+  \includegraphics[width=\textwidth]{figures/plotmatrix}
+  \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{b,J}$ for the toy 
+    % $I=4, 7, 31$ and 62 in pseudo-datasets generated from the
     experimental toy search (black points) as described in the text. The
     background heat map is generated from 100,000 samples from the true toy
-    model, the dashed pink countours from the linear SL form, and the solid
-    light-blue contours from the quadratic SL form. In the pair of
+    model, the dashed red countours from the linear SL form, and the solid
+    green contours from the quadratic SL form. The diagonal panels show the 
+    1D distribution in each of the bins for the toys (black histograms), and the 
+    symmetric (red histograms) and asymmetric (green histograms) simplified likelihood approximations. 
+    In the pair of
     high-statistics bins in the top-left plot, clear agreement is seen between
     the linear and quadratic SL forms; in the top-right, deviations start to
     appear, and in the low-statistics bin~$J=86$ of the bottom plot the
@@ -684,12 +686,12 @@ hence higher moments of the experimental distributions.
   \label{fig:distributions2d}
 \end{figure}
 
-\begin{figure}%[hbt!]
-  \centering
-  \includegraphics[width=\textwidth]{figures/plotmatrix}
-  \label{fig:distributionmatrix}
-  \caption{1D and 2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{J}$ for $\{I,J\}=4,7,31,62,86$.}
-\end{figure}
+%\begin{figure}%[hbt!]
+%  \centering
+%  \includegraphics[width=\textwidth]{figures/plotmatrix}
+%  \label{fig:distributionmatrix}
+%  \caption{1D and 2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{J}$ for $\{I,J\}=4,7,31,62,86$.}
+%\end{figure}
 
 An advantage of the quadratic form cutoff is that a strictly positive
 approximate distribution can be guaranteed, while the linear form can have a
@@ -710,24 +712,28 @@ of the signal across all regions of the search, giving,
 
 \begin{equation}
  n_{s,I}(\bm{\alpha}) = \mu n_{s,I},
+\label{eg:muscale}
 \end{equation}
 where the yields $n_{s,I}$ here refer explicitly to the expected contributions from signal for a specified hypothesis.
 In order to remove the dependance of the likelihood on the nuisance parameters, $\bm{\theta}$, two approaches are
 commonly adopted. The first, termed `profiling`, involves replacing the nuisance parameters with the values at which
-the likelihood attains it maximum for a given set of $n^{\rm{obs}_I}$. \fxfatal{Note, here I am using L to mean the whole thing but in Eqn 1 we refer to L as only part of the likelihood, i.e we
-need to multiply by pi(d). I wonder if it makes sense to define $L_{\rm{simp}}$ as the production of these things and make it a function of the thetas ?}
+the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$. 
 
 \begin{equation}
-L^{\rm{max}}(\mu) = \rm{max}_{\theta_{I}}\left\{ L(\mu,\bm{\theta}) \right\}.
+L_{\rm{SL}}^{\rm{max}}(\mu) = \rm{max}_{\theta_{I}}\left\{ L_{\rm{SL}}(\mu,\bm{\theta}) \right\}.
 \end{equation}
 The test-statistic $t_{\mu}$ is then defined using the ratio,
 
 \begin{equation}
-t_{\mu} = -2\ln \frac{L^{\rm{max}}(\mu)}{L^{\rm{max}}},
+t_{\mu} = -2\ln \frac{L_{\rm{SL}}^{\rm{max}}(\mu)}{L_{\rm{SL}}^{\rm{max}}},
 \end{equation}
-where $L^{\rm{max}}$ denotes the maximum value of $L_{\rm{max}}(\mu)$ for any value of $\mu$\footnote{The precise definition of the test-statistic used
-as searches at the LHC and the procedures used to determing limits are slightly different to that presented here and are detailed in Ref.~\cite{CMS-NOTE-2011-005}.}. Similarly, likelihood ratios are also used for quantifying some excess in the case of the discovery
+where $L_{\rm{SL}}^{\rm{max}}$ denotes the maximum value of $L_{\rm{SL}}^{\rm{max}}(\mu)$ for any value of $\mu$\footnote{The precise definition of the test-statistic used
+as searches at the LHC and the procedures used to determing limits are slightly different to that presented here and are detailed in Ref.~\cite{CMS-NOTE-2011-005}.}. 
+Similarly, such likelihood ratios are also used for quantifying some excess in the case of the discovery
 of new physics~\cite{CMS-NOTE-2011-005}.
+The test-statistic can also be constructed for the experimental likelihood $L(\mu,\bm{delta})\pi(\bm{\delta})$, where the same subsitution as in~\ref{eq:muscale} is applied, 
+by profiling the elementary 
+nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for the full and simplified likelihoods is therefore possible.
 
 Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a function of $\mu$ for the toy search between the full (experimental)
 likelihood and the simplified likelihood. In addition, the result obtained using only the linear terms of the simplified is shown. As expected, the
@@ -736,7 +742,7 @@ agreement between the full and simplified likelihood is greatly improved when in
 \begin{figure}%[hbt!]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/testtoy-tmuscan}
-  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the toy search assuming the full likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quatratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
+  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the toy search assuming the experimental likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quatratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
   values for which the 68\% and 95\% CL exclusions can be determined, assuming certain asymptotic properties of the distribution of $t_{\mu}$.}
   \label{fig:tmucompare}
 \end{figure}
@@ -901,14 +907,14 @@ nuisance parameters $\bm{\theta}$, which we reproduce here to assist independent
 implementations:
 %
 \begin{align}
-  \ln\! \big( L(\mu,\bm{\theta} )\pi(\bm{\theta}) \big) &=
+  \ln\! \big( L_{\rm{SL}}(\mu,\bm{\theta} )\pi(\bm{\theta}) \big) &=
   \sum_I^P \Big[ n^{\rm{obs}}_{I} \ln \left(\mu n_{s,I} + n_{I}(\theta_{I}) \right) - \left( \mu n_{s,I} + n_{b,I}(\theta_{I}) \right) - n^{\rm{obs}}_{I}! \Big]
   - \frac{1}{2} \bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} - \frac{P}{2} \ln 2\pi \\
   %
   \Rightarrow \qquad
-  \frac{\mathrm{d}\ln L}{\mathrm{d}\mu} &= \sum_I^P \left( \frac{n^{\rm{obs}}_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot \mu n_{s,I} \\
+  \frac{\mathrm{d}\ln L_{\rm{SL}}}{\mathrm{d}\mu} &= \sum_I^P \left( \frac{n^{\rm{obs}}_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot \mu n_{s,I} \\
   %
-  \frac{\mathrm{d}\ln L}{\mathrm{d}\theta_{\!A}} &= \left( \frac{n^{\rm{obs}}_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
+  \frac{\mathrm{d}\ln L_{\rm{SL}}}{\mathrm{d}\theta_{\!A}} &= \left( \frac{n^{\rm{obs}}_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
 \label{eq:SL_LHC}
 \end{align}
 %
