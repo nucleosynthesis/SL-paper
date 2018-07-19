@@ -66,7 +66,7 @@ def getCoeffsABC(m1, m2, m3=None, skew=True):
         As.append(A)
         Bs.append(B)
         Cs.append(C)
-    return As, Bs, Cs
+    return np.array(As), np.array(Bs), np.array(Cs)
 
 
 def getRhoIJ(m1i, m2ii, m3iii, m1j, m2jj, m3jjj, m2ij, skew=True):
@@ -128,6 +128,7 @@ class SLParams(object):
         #
         self.aparams, self.bparams, self.cparams = getCoeffsABC(self.bg_m1, self.bg_m2, self.bg_m3, skew=skew)
         self.rhoparams = getRho(self.bg_m1, self.bg_m2, self.bg_m3, skew=skew)
+        self.rhoinvparams = np.linalg.inv(self.rhoparams)
         self.thetadbn = st.multivariate_normal(np.zeros(self.size), self.rhoparams)
         #
         self.llmax = None #< for caching of unconditional max LL
@@ -144,6 +145,7 @@ class SLParams(object):
 
     def expbs(self, thetas):
         "Expected background rates in all bins, for SL nuisance vector thetas"
+        thetas = np.array(thetas)
         bs = np.array([self.expbi(i, th) for (i, th) in enumerate(thetas)])
         bs[bs <= 0] = 1e-3 #< force any negatives to ~0
         return bs
@@ -162,6 +164,7 @@ class SLParams(object):
 
     def expsbs(self, mu, thetas):
         "Expected s+b rates in all bins, for signal strength mu and SL nuisance vector thetas"
+        thetas = np.array(thetas)
         return self.expss(mu) + self.expbs(thetas)
 
     def sampleth(self, nsamp):
@@ -180,24 +183,8 @@ class SLParams(object):
     def samplesb(self, mu, nsamp):
         "Draw nsamp s+b arrays from the SL distribution and parametrisation, with signal strength mu"
         bs = self.sampleb(nsamp)
-        sbs = mu*self.sig + bs #< check broadcasting
+        sbs = mu*self.sig + bs
         return sbs
-
-    def like(self, mu, thetas):
-        """Calculate the simplified likelihood for the given (mu, {theta}) params
-
-        TODO:
-         * Broadcast across multidimensional numpy arrays of thetas and mus
-        """
-        import scipy.stats as st
-        assert self.obs is not None
-        assert mu == 0 or self.sig is not None
-        p_th = self.thetadbn.pdf(thetas)
-        counts = self.expsbs(mu, thetas)
-        ps_poiss = st.poisson.pmf(self.obs, counts)
-        p_poiss = np.prod(ps_poiss)
-        p_tot = p_th * p_poiss
-        return p_tot
 
     def loglike(self, mu, thetas):
         """Calculate the simplified log-likelihood for the given (mu, {theta}) params
@@ -205,6 +192,7 @@ class SLParams(object):
         TODO:
          * Broadcast across multidimensional numpy arrays of thetas and mus
         """
+        thetas = np.array(thetas)
         import scipy.stats as st
         assert self.obs is not None
         assert mu == 0 or self.sig is not None
@@ -215,6 +203,23 @@ class SLParams(object):
         ll_tot = ll_th + ll_poiss
         return ll_tot
 
+    def dloglike(self, mu, thetas):
+        """Calculate the gradient vector of the simplified log-likelihood for the given (mu, {theta}) params
+
+        TODO:
+         * Broadcast across multidimensional numpy arrays of thetas and mus
+        """
+        thetas = np.array(thetas)
+        grad = np.zeros(self.size+1)
+        ## mu direction first:
+        dlldmus = (self.obs/self.expsbs(mu, thetas) - 1) * self.expss(mu)
+        grad[0] = np.sum(dlldmus)
+        ## Now the thetas
+        dlldths = (self.obs/self.expsbs(mu, thetas) - 1) * (self.bparams + 2*self.cparams*thetas) \
+                  - np.sum(self.rhoinvparams*thetas, axis=1)
+        grad[1:] = dlldths
+        return grad
+
     def maxloglike(self, mu=None, rtnparams=False):
         """Calculate the conditional or unconditional maximum log likelihood
 
@@ -223,18 +228,19 @@ class SLParams(object):
         computed over {theta}.
 
         TODO:
-         * Speed up minimisation with analytic gradient function
+         * Use asymptotic formula (as starting point)?
         """
         from scipy.optimize import minimize
-        # def calc_gradll(mu_thetas):
-        #     pass
         if mu is None:
             if self.llmax is not None: #< return cached value if available
                 minres, llopt = self.llmax
             else:
                 def calc_optll_unconditional(mu_thetas):
                     return -self.loglike(mu_thetas[0], mu_thetas[1:])
-                minres = minimize(calc_optll_unconditional, [0 for _ in range(self.size+1)])
+                def calc_gradll_unconditional(mu_thetas):
+                    return -self.dloglike(mu_thetas[0], mu_thetas[1:])
+                minres = minimize(calc_optll_unconditional, [0 for _ in range(self.size+1)],
+                                  jac=calc_gradll_unconditional)
                 llopt = -calc_optll_unconditional(minres.x)
                 self.llmax = (minres, llopt)
         else:
@@ -243,7 +249,10 @@ class SLParams(object):
             else:
                 def calc_optll_conditional(thetas, mu): #< capture mu?
                     return -self.loglike(mu, thetas)
-                minres = minimize(calc_optll_conditional, np.zeros(self.size), args=(mu,))
+                def calc_gradll_conditional(thetas, mu):
+                    return -self.dloglike(mu, thetas)[1:]
+                minres = minimize(calc_optll_conditional, np.zeros(self.size),
+                                  jac=calc_gradll_conditional, args=(mu,))
                 llopt = -calc_optll_conditional(minres.x, mu)
                 if mu == 0:
                     self.llnosig = (minres, llopt) #< mu=0 caching
@@ -267,20 +276,59 @@ class SLParams(object):
         """Calculate profile likelihood chi2-distributed test statistic, t_mu = -2 ln lambda_mu"""
         return -2 * self.deltaloglike(mu, wrtnosig)
 
-    def likeratio(self, mu, wrtnosig=False):
-        """Calculate profile likelihood ratio, lambda_mu = L(mu, theta_hathat)/L(mu_hat, theta_hat)"""
-        return np.exp(self.deltaloglike(mu, wrtnosig))
 
-    def avgloglike(self, mu, nsamp=10000):
-        """Calculate marginalised LL = ln <p_SL>, using nsamp samples
+if __name__ == "__main__":
 
-        TODO:
-         * Sampling convergence is *very* slow...
-         * Automatic convergence checking (use doubling scheme)
-        """
-        ths = self.sampleth(nsamp)
-        p_avg = 0
-        for n in range(nsamp):
-            p_avg += self.like(mu, ths[n,:])/nsamp
-        ll_avg = np.log(p_avg)
-        return ll_avg
+    import numpy as np
+    from scipy import stats as st
+
+    # ## Load data sampled from elementary nuisances
+    # bs_true = np.loadtxt("toy_trees.dat.gz")
+    # BG_M1 = np.mean(bs_true, axis=0)
+    # BG_M2 = np.cov(bs_true, rowvar=False)
+    # BG_M3 = st.moment(bs_true, 3, axis=0)
+    # SIGNAL = np.array([0.0, 0.8760676383972168, 1.6500988006591797, 2.3310067653656006, 2.9270126819610596, 3.4456961154937744, 3.894041061401367, 4.278481483459473, 4.6049394607543945, 4.878864765167236, 5.105268955230713, 5.28875732421875, 5.433560848236084, 5.543562412261963, 5.622325420379639, 5.67311429977417, 5.342737674713135, 5.0316009521484375, 4.738583087921143, 4.462629795074463, 4.202746391296387, 3.9579975605010986, 3.727501630783081, 3.5104289054870605, 3.305997371673584, 3.113471031188965, 2.932156562805176, 2.7614011764526367, 2.6005897521972656, 2.449143171310425, 0.0, 0.2255440205335617, 0.43775638937950134, 0.6372280716896057, 0.824526846408844, 1.0001980066299438, 1.1647652387619019, 1.318731427192688, 1.4625794887542725, 1.5967729091644287, 1.7217568159103394, 1.8379583358764648, 1.9457874298095703, 2.045637369155884, 2.137885808944702, 2.2228946685791016, 2.157198190689087, 2.0934433937072754, 2.0315728187561035, 1.971530795097351, 1.913263201713562, 1.856717824935913, 1.8018434047698975, 1.7485909461975098, 1.6969122886657715, 1.6467609405517578, 1.5980918407440186, 1.5508610010147095, 1.5050262212753296, 1.4605458974838257, 0.0, 0.12994906306266785, 0.2567979693412781, 0.38060224056243896, 0.5014163851737976, 0.6192941665649414, 0.7342885136604309, 0.8464512825012207, 0.9558337926864624, 1.0624864101409912, 1.1664586067199707, 1.2677992582321167, 1.3665562868118286, 1.4627768993377686, 1.5565075874328613, 1.6477940082550049, 1.6281386613845825, 1.6087177991867065, 1.5895285606384277, 1.5705682039260864, 1.551833987236023, 1.5333232879638672, 1.5150333642959595, 1.4969615936279297, 1.4791053533554077, 1.4614622592926025, 1.444029450416565, 1.4268046617507935, 1.409785270690918, 1.392969012260437])
+    # DATA = np.array([281.0, 266.0, 205.0, 186.0, 171.0, 161.0, 116.0, 94.0, 89.0, 73.0, 67.0, 59.0, 54.0, 44.0, 37.0, 24.0, 30.0, 17.0, 20.0, 15.0, 16.0, 12.0, 10.0, 10.0, 9.0, 2.0, 6.0, 5.0, 4.0, 6.0, 59.0, 52.0, 33.0, 45.0, 31.0, 33.0, 18.0, 28.0, 33.0, 20.0, 20.0, 16.0, 10.0, 12.0, 19.0, 13.0, 11.0, 5.0, 12.0, 8.0, 10.0, 12.0, 12.0, 6.0, 7.0, 2.0, 7.0, 6.0, 3.0, 3.0, 4.0, 7.0, 4.0, 6.0, 2.0, 5.0, 5.0, 3.0, 7.0, 3.0, 4.0, 3.0, 3.0, 1.0, 0.0, 4.0, 4.0, 5.0, 1.0, 1.0, 5.0, 3.0, 4.0, 0.0, 3.0, 2.0, 5.0, 2.0, 1.0, 1.0])
+    # NBINS = len(BG_M1)
+
+    ## Load data from the model script
+    execfile("model-90_100000toys.py")
+    NBINS = nbins
+    BG_M1 = np.array(background)
+    BG_M2 = np.array(covariance).reshape([NBINS,NBINS]) #!
+    #print np.linalg.eigvals(BG_M2)
+    BG_M3 = np.array(third_moment)
+    SIGNAL = np.array(signal)
+    DATA = np.array(data)
+
+    ## Create the key SL params objects
+    slp1 = SLParams(BG_M1, BG_M2, obs=DATA, sig=SIGNAL)
+    slp2 = SLParams(BG_M1, BG_M2, BG_M3, obs=DATA, sig=SIGNAL)
+
+    ## Calculate t_mu values for a range of mu values
+    mus = np.linspace(0,1,30)
+    tmus1 = [slp1.tmu(mu) for mu in mus]
+    tmus2 = [slp2.tmu(mu) for mu in mus]
+
+    ## Compare to true t_mu values computed from full likelihood
+    mustrue = np.linspace(0,1,16+1)
+    tmustrue = [0.0009691, 0.0411193, 0.1329959, 0.2649894, 0.4527930, 0.6973918, 0.9997511, 1.3608103, 1.7814781, 2.2626238, 2.8050761, 3.4096148, 4.0769662, 4.8079994, 5.6025722, 6.4611683, 7.3840528]
+
+    ## Plot
+    from matplotlib import pyplot as plt
+    plt.figure()
+    plt.axhline(st.chi2.ppf(0.68, 1), linestyle=":", color="gray")
+    plt.annotate("68%", xy=(0.0, st.chi2.ppf(0.68,1)+0.2), color="gray")
+    plt.axhline(st.chi2.ppf(0.95, 1), linestyle=":", color="gray")
+    plt.annotate("95%", xy=(0.0, st.chi2.ppf(0.95,1)+0.2), color="gray")
+    #
+    plt.plot(mustrue, tmustrue, "-", color="black", label="Full likelihood")
+    plt.plot(mus, tmus1, "--", color="red", label="Simplified likelihood (linear)")
+    plt.plot(mus, tmus2, "--", color="green", label="Simplified likelihood (quadratic)")
+    plt.legend(loc="best")
+    #
+    plt.xlabel(r"Signal strength $\mu$")
+    plt.ylabel(r"$t_\mu = -2 \Delta \ln L$")
+    plt.tight_layout()
+    plt.savefig("testtoy-tmuscan.pdf")
+    plt.close()
