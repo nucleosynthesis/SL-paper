@@ -119,9 +119,9 @@
 \noindent
 \begin{abstract}
 
-We present the Simplified Likelihood framework, a systematic approximation scheme  for experimental likelihoods such as those originating from LHC experiments. 
+We present the Simplified Likelihood framework, a systematic approximation scheme  for experimental likelihoods such as those originating from LHC experiments.
 %This framework  is useful  to simplify data analyses and to transmit realistic experimental likelihoods to the community.
-We present an efficient method to compute the parameters of the simplified likelihood  from Monte Carlo simulations. The approach is validated using a realistic LHC-like toy search, and the limits of the approximation are explored. 
+We present an efficient method to compute the parameters of the simplified likelihood  from Monte Carlo simulations. The approach is validated using a realistic LHC-like toy search, and the limits of the approximation are explored.
  The simplified likelihood data can be easily released in   HepData tables and automatically built from them, making this framework a convenient %ideal
   tool to transmit realistic experimental likelihoods to the community.
 
@@ -183,7 +183,7 @@ A likelihood function $L$ is related to the probability to observe the data give
 We denote the observed  quantity as $\hat{n}$ and the expected quantity by $n$, where $n$ depends on the model parameters.   For example, in the case of
 a particle physics experiment, these quantities can be the observed and expected number of events that satisfy some selection criteria.
 The full set of parameters includes parameters of interest, here collectively denoted by $\bm{\alpha}$, and \textit{elementary} nuisance parameters $\bm{\delta}=(\delta_1,\ldots,\delta_{j}\ldots,\delta_N)^{\rm{T}}$, which model the systematic uncertainties.
-In the simplified likelihood framework, we derive a set of \textit{combined} nuisance parameters $\bm{\theta}$. For $P$ independent measurements, there will be $P$ combined nuisance parameters, $\bm{\theta}=(\theta_1,\ldots,\theta_{I},\ldots,\theta_P)^{\rm{T}}$. 
+In the simplified likelihood framework, we derive a set of \textit{combined} nuisance parameters $\bm{\theta}$. For $P$ independent measurements, there will be $P$ combined nuisance parameters, $\bm{\theta}=(\theta_1,\ldots,\theta_{I},\ldots,\theta_P)^{\rm{T}}$.
 
 
 The key result at the basis of  the simplified likelihood framework is the approximation
@@ -194,9 +194,9 @@ The key result at the basis of  the simplified likelihood framework is the appro
   & \approx \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big) \cdot
     \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1}(\bm \alpha) \bm \theta}}}{\sqrt{(2\pi)^P }}  \equiv L_{\rm{S}}(\bm{\alpha},\bm{\theta})\,, \label{eq:SL_master}
 \end{align}
-where the first line is the exact ``experimental likelihood'' and the second line is the simplified likelihood. Here $\pi(\bm \delta)$ is the joint probability density distribution for the elementary nuisance parameters. In our assumptions  these are independent from each other, hence the prior factorises as $\pi(\bm \delta)=\prod_{i=1}^N \pi_i(\delta_i)$. The simplified likelihood formalism  is relevant for $N>P$, which is the most common case.~\footnote{If $P<N$, there are more observed quantities than nuisance parameters. 
- In such case the use of combined uncertainties, although not formally wrong, is inappropriate. 
-  The formula Eq.~\eqref{eq:SL_master} still applies but the covariance matrix will be singular. 
+where the first line is the exact ``experimental likelihood'' and the second line is the simplified likelihood. Here $\pi(\bm \delta)$ is the joint probability density distribution for the elementary nuisance parameters. In our assumptions  these are independent from each other, hence the prior factorises as $\pi(\bm \delta)=\prod_{i=1}^N \pi_i(\delta_i)$. The simplified likelihood formalism  is relevant for $N>P$, which is the most common case.~\footnote{If $P<N$, there are more observed quantities than nuisance parameters.
+ In such case the use of combined uncertainties, although not formally wrong, is inappropriate.
+  The formula Eq.~\eqref{eq:SL_master} still applies but the covariance matrix will be singular.
 }
 
 The $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix $\bm{\rho}=\rho_{IJ}$ define the simplified likelihood and are in general functions of the parameters of interest. However in concrete cases, this dependence will often be negligible. This is in particular the case in particle physics searches for new physics when the expected event number decomposes into signal ($n_s$) plus background ($n_b$) contributions. The parameters of interest that model the new physics enter in $n_s$ while $n_b$ is independent from them.  Whenever the expected signal is small with respect to the background, the dominant uncertainties in searches for new physics are those related to the background.
@@ -676,14 +676,14 @@ hence higher moments of the experimental distributions.
   %\includegraphics[width=0.45\textwidth]{figures/corr-4-86}
   %\includegraphics[width=0.45\textwidth]{figures/corr-62-86}
   \includegraphics[width=\textwidth]{figures/plotmatrix}
-  \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{b,J}$ for the toy 
+  \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{b,J}$ for the toy
     % $I=4, 7, 31$ and 62 in pseudo-datasets generated from the
     experimental toy search (black points) as described in the text. The
     background heat map is generated from 100,000 samples from the true toy
     model, the dashed red countours from the linear SL form, and the solid
-    green contours from the quadratic SL form. The diagonal panels show the 
-    1D distribution in each of the bins for the toys (black histograms), and the 
-    symmetric (red histograms) and asymmetric (green histograms) simplified likelihood approximations. 
+    green contours from the quadratic SL form. The diagonal panels show the
+    1D distribution in each of the bins for the toys (black histograms), and the
+    symmetric (red histograms) and asymmetric (green histograms) simplified likelihood approximations.
     In the pair of
     high-statistics bins in the top-left plot, clear agreement is seen between
     the linear and quadratic SL forms; in the top-right, deviations start to
@@ -724,7 +724,7 @@ of the signal across all regions of the search, giving,
 where the yields $n_{s,I}$ here refer explicitly to the expected contributions from signal for a specified hypothesis.
 In order to remove the dependance of the likelihood on the nuisance parameters, $\bm{\theta}$, two approaches are
 commonly adopted. The first, termed `profiling`, involves replacing the nuisance parameters with the values at which
-the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$. 
+the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$.
 
 \begin{equation}
 L_{\rm{S}}^{\rm{max}}(\mu) = \rm{max}_{\theta_{I}}\left\{ L_{\rm{S}}(\mu,\bm{\theta}) \right\}.
@@ -735,11 +735,11 @@ The test-statistic $t_{\mu}$ is then defined using the ratio,
 t_{\mu} = -2\ln \frac{L_{\rm{S}}^{\rm{max}}(\mu)}{L_{\rm{S}}^{\rm{max}}},
 \end{equation}
 where $L_{\rm{S}}^{\rm{max}}$ denotes the maximum value of $L_{\rm{S}}^{\rm{max}}(\mu)$ for any value of $\mu$\footnote{The precise definition of the test-statistic used
-as searches at the LHC and the procedures used to determing limits are slightly different to that presented here and are detailed in Ref.~\cite{CMS-NOTE-2011-005}.}. 
+as searches at the LHC and the procedures used to determing limits are slightly different to that presented here and are detailed in Ref.~\cite{CMS-NOTE-2011-005}.}.
 Similarly, such likelihood ratios are also used for quantifying some excess in the case of the discovery
 of new physics~\cite{CMS-NOTE-2011-005}.
-The test-statistic can also be constructed for the experimental likelihood $L(\mu,\bm{delta})\pi(\bm{\delta})$, where the same subsitution as in~\ref{eq:muscale} is applied, 
-by profiling the elementary 
+The test-statistic can also be constructed for the experimental likelihood $L(\mu,\bm{delta})\pi(\bm{\delta})$, where the same subsitution as in~\ref{eq:muscale} is applied,
+by profiling the elementary
 nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for the full and simplified likelihoods is therefore possible.
 
 Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a function of $\mu$ for the toy search between the full (experimental)
@@ -793,7 +793,7 @@ determined from 100,000 pseudo-datasets.
 
 
 
-The most natural way to release the data needed to construct the simplified likelihood is in the form of the first three moments of the PDF of the combined nuisance parameters. These moments are the  $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ already defined in Eqs.~\eqref{eq:moments1}-\eqref{eq:moments2}, where $m_{3,I}$ is the diagonal part of the third-rank tensor $m_{3,IJK}$.  Evaluating these moments via MC toys is straightforward for the experiments. However their presentation needs to be discussed in great details, taking into account  the available tools and the current practices. This is the purpose of this section. 
+The most natural way to release the data needed to construct the simplified likelihood is in the form of the first three moments of the PDF of the combined nuisance parameters. These moments are the  $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ already defined in Eqs.~\eqref{eq:moments1}-\eqref{eq:moments2}, where $m_{3,I}$ is the diagonal part of the third-rank tensor $m_{3,IJK}$.  Evaluating these moments via MC toys is straightforward for the experiments. However their presentation needs to be discussed in great details, taking into account  the available tools and the current practices. This is the purpose of this section.
 
 
 
@@ -802,7 +802,7 @@ the availability of that data in a standard format. For global fits, where tens
 or hundreds of analyses may be used simultaneously, it is crucial that this
 format be unambiguously parseable by algorithms without human assistance. A
 standard location is also necessary, for which the obvious choice is the longstanding
-HEP data repository, HepData~\cite{hepdata}. 
+HEP data repository, HepData~\cite{hepdata}.
 
 
 
@@ -810,15 +810,15 @@ HEP data repository, HepData~\cite{hepdata}.
 
 
 %Before describing the current status of data release and our subsequent proposal,
-% to improve and normalize it in the context of the simplified likelihood framework, 
- Let us fix some terminology.  It is convenient to refer to the data in terms of the order of the moment from which they originate. We will use the term ``$n$-th order data'' to refer to information  coming from a moment of order $n$.  $n$ will go only up to $3$. Second order data includes covariance matrix, correlation matrix an diagonal uncertainties -- that can be given either in a relative or absolute parametrization. There is the same kind of freedom for third order data but this does not need to be discussed here. In addition to the moments of the combined systematic uncertainties, this terminology will also apply to the observed central values and statistical uncertainties usually presented by the experiments. 
- 
- 
+% to improve and normalize it in the context of the simplified likelihood framework,
+ Let us fix some terminology.  It is convenient to refer to the data in terms of the order of the moment from which they originate. We will use the term ``$n$-th order data'' to refer to information  coming from a moment of order $n$.  $n$ will go only up to $3$. Second order data includes covariance matrix, correlation matrix an diagonal uncertainties -- that can be given either in a relative or absolute parametrization. There is the same kind of freedom for third order data but this does not need to be discussed here. In addition to the moments of the combined systematic uncertainties, this terminology will also apply to the observed central values and statistical uncertainties usually presented by the experiments.
+
+
   %The origin of this information can be from the measurement described by the likelihood, by auxiliary measurements, or can even be of non-experimental origin, as in case of theoretical uncertainties.
-%First order data corresponds simply to mean values.  Concretely, the first order data that will be encountered here are  the observed event counts or (quantities derived from them),  and  contributions  to the expected event counts (\textit{i.e.} ``shifts'') induced by the combined systematic uncertainties.  
+%First order data corresponds simply to mean values.  Concretely, the first order data that will be encountered here are  the observed event counts or (quantities derived from them),  and  contributions  to the expected event counts (\textit{i.e.} ``shifts'') induced by the combined systematic uncertainties.
 %
 %Second order data  can be  the covariance matrix itself, or quantities derived from it: the diagonal uncertainties (which can be presented either in a relative or absolute form) and the correlation matrix.
-%The second order data that will be encountered here are the statistical uncertainties, 
+%The second order data that will be encountered here are the statistical uncertainties,
 %%(which for Poisson process are not independent of mean values, but are rather given for convenience)
 % and the covariance matrix describing the combined systematic uncertainties.
 %
@@ -826,9 +826,9 @@ HEP data repository, HepData~\cite{hepdata}.
 %Third order data  can be  the third moment tensor itself, or a normalized  version of it, for instance  the skew. Here we will encounter the third order data of the combined systematic uncertainties. Moreover, although the third moment is in general a rank-3 tensor, only its diagonal component will be used here.
 %
 
-Let us review the current formats of presentation of likelihood data. There is no problem of format with the  presentation of first order data and no third order data are usually presented. Regarding second order data there is unfortunately no standard representation currently established. 
+Let us review the current formats of presentation of likelihood data. There is no problem of format with the  presentation of first order data and no third order data are usually presented. Regarding second order data there is unfortunately no standard representation currently established.
  At present a review of the second order data in HepData and
-on the experiments' analysis websites reveals a mixture of 
+on the experiments' analysis websites reveals a mixture of
 presentation styles:
 %
 \begin{itemize}
@@ -842,8 +842,8 @@ presentation styles:
   ''stat'' label to be a purely diagonal contribution, a ``lumi'' label to be
   100\% correlated across all bins, and all other labelled uncertainties treated
   as orthogonal) the correlation or covariance matrices can be constructed.
-\textbf{[This case is supposed to be about diagonalized covariances but in fact it's not clear to me]}  
-  
+\textbf{[This case is supposed to be about diagonalized covariances but in fact it's not clear to me]}
+
 \item Auxiliary files in arbitrary format: the \emph{ad hoc} nature of these
   makes them impossible to be handled by unsupervised algorithms. This includes
   2D histograms in ROOT data files, since variations in path structure and the
@@ -855,10 +855,10 @@ presentation styles:
 
 The first two of these  presentation styles may be readily extended for automated data
 handling and are thus appropriate to release simplified likelihood data.
-In the first case, in addition to the observed central values and statistical uncertainties usually released, extra HepData tables 
-can encode the $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ moments describing the combined nuisance parameters. 
+In the first case, in addition to the observed central values and statistical uncertainties usually released, extra HepData tables
+can encode the $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ moments describing the combined nuisance parameters.
 The HepData table headers may be augmented to
-express relationships between tables, i.e.~identifying the moment data tables associated with a primary dataset in a standardised fashion. 
+express relationships between tables, i.e.~identifying the moment data tables associated with a primary dataset in a standardised fashion.
 
 \textbf{[I stopped here]}
 And in the second case, the SL covariance matrices may be represented
@@ -872,7 +872,7 @@ second case to identify the statistical and skew error sources which should be
 treated distinctly from the SL systematic uncertainties. The final scheme should
 be capable of equally applying to search-analysis signal regions as discussed
 here, and to bins of differential cross-section observables where correlations
-may also be available between the bins of different distributions/datasets. 
+may also be available between the bins of different distributions/datasets.
 % For
 %such observables, the Poisson--Gaussian likelihood form presented in this paper
 %may not be the appropriate one to use -- e.g.~a pure multivariate Gaussian
@@ -999,14 +999,14 @@ $Z > -3\sqrt{N}/4\gamma$.
 
 A reference implementation in Python code is provided in
 \url{https://github.com/nucleosynthesis/SL-paper}.  This provides functions to
-calculate the SL $a_I$, $b_I$, $c_I$, and $\rho_{IJ}$ coefficients, and an
-\texttt{SLParams} class which computes these and applies them in combination
-with observed and expected signal yields to calculate profile and marginal
-likelihoods, log likelihood-ratios, and limit-setting test statistics. For
-convergence efficiency, the profile likelihood computation makes use of the
-gradients of the SL log-likelihood with respect to the signal strength $\mu$ and
-nuisance parameters $\bm{\theta}$, which we reproduce here to assist independent
-implementations:
+calculate the SL $a_I$, $b_I$, $c_I$, and $\rho_{IJ}$ coefficients from provided
+moments $m_{1,I}$, $m_{2,IJ}$ and $m_{3,I}$; and an \texttt{SLParams} class
+which computes these and higher-level statistics such as profile likelihoods,
+log likelihood-ratios, and related limit-setting measures computed using
+observed and expected signal yields. For convergence efficiency, the profile
+likelihood computation makes use of the gradients of the SL log-likelihood with
+respect to the signal strength $\mu$ and nuisance parameters $\bm{\theta}$,
+which we reproduce here to assist independent implementations:
 %
 \begin{align}
   \ln\! \big( L_{\rm{S}}(\mu,\bm{\theta} )\pi(\bm{\theta}) \big) &=
@@ -1021,6 +1021,11 @@ implementations:
 \end{align}
 %
 where $n_{b,I}(\theta_{I}) = a_{I} + b_{I}\theta_{I} + c_{I}\theta_{I}^{2}$.
+
+The reference code has been written with reverse engineering and
+comprehensibility of the calculations explicitly in mind. While it computes
+likelihood statistics on a reasonable timescale, further (but less readable)
+optimisations can be added for production code.
 
 %For simplicity, in our upcoming toy models, we will consider a single parameter-of-interest, the ratio of the observed to the predicted signal production cross-section $\mu=\sigma/\sigma_{\mathrm{TH}}$ (or `signal strength').
 %This is very commonly used in experimental searches for some hypothetical new signal processes and demonstrates the simplified likelihood formalism without loss of generality.
