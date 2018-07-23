@@ -504,7 +504,10 @@ The normal approximation for a Poisson and a log-normal distribution. Black curv
 
 \subsection{Range of application}
 
-An important aspect of the simplified likelihood is that it is very flexible, because it does not need to be applied to the whole set of systematic uncertainties.  When applied to a subset of systematic uncertainties, the only requirement is that the subset be in the conditions of satisfying the central limit theorem conditions as described in Sec.~\ref{se:SL_theory}. 
+An important feature of the simplified likelihood is that it is flexible in the sense that the combination of the systematic uncertainties does not have to be applied to the whole set.  The only requirement to combine a subset of the  uncertainties is that it should have a convergent enough  CLT behaviour in order  for the simplified likelihood to be accurate. There is thus a freedom in partitioning the set of systematic uncertainties, giving rise to variants of the simplified likelihood that can be either equivalent or slightly different upon  marginalizing. 
+
+
+% described in Sec.~\ref{se:SL_theory}. 
 
 
 
@@ -525,12 +528,12 @@ Similarly, if two subsets of systematic uncertainties tend to  separately satisf
 
 The simplified likelihood naturally accommodates any such partitions. It is actually  commonplace in LHC analyses   to present systematic uncertainties combined in subsets, for example ``theoretical'', ``experimental'', ``luminosity'', ``MC'' uncertainties. This is useful for mere informative purpose but also for further reinterpretations. 
 For example the theoretical uncertainties can be improved later on, hence members of the community should be able to change them
- with no loss of consistency. Such combination of theoretical uncertainties  has been done in \cite{Arbey:2016kqi}  for the Higgs production and decay rates and can be implemented in a simplified likelihood. 
+ with no loss of consistency. \footnote{Such combination of theoretical uncertainties  has been done in \cite{Arbey:2016kqi}  for the Higgs production and decay rates and can be implemented in a Higgs simplified likelihood.} 
 Another reason to single out a nuisance parameter  from the combination (as shown in Eq.~\eqref{eq:SL_variants1})
-can  be if it has a large asymmetric distribution that one wants to take into account with no approximation. 
-In order to take profit from the  versatility of the simplified likelihood, an equally  versatile format is needed to release the simplified likelihood data. This is the topic of next subsection.  
+is if it has a large non-Gaussian PDF that one prefers to take into account exactly. 
+In order to take profit from the  versatility of the simplified likelihood, an equally  versatile format is needed to release the simplified likelihood data. This will be the topic of next subsection.  
 
-Finally, if systematic uncertainties on the \textit{signal} are taken into account, the $b,c,\rho$ parameters  become dependent on the parameter of interest ${\bm \alpha}$. While there is no conceptual difference with the case with respect to having only background systematics, there are important practical differences. Numerical evaluations  become heavier  because the parameters of the simplified likelihood -- especially $\rho_{IJ}(\alpha)$ which requires a matrix inversion -- have to be evaluated for each value of ${\bm \alpha}$. Presentation of the simplified likelihood data becomes also more evolved.
+Finally, if systematic uncertainties on the \textit{signal} are taken into account, the $b,c,\rho$ parameters  become dependent on the parameter of interest ${\bm \alpha}$. While there is no conceptual difference with the case  of background-only systematics, there are important practical differences. Numerical evaluations  become heavier  since  the parameters of the simplified likelihood -- especially $\rho_{IJ}(\alpha)$ which requires a matrix inversion -- have to be evaluated for each value of ${\bm \alpha}$. Presentation of the simplified likelihood data may also become more evolved.
 
 
 %\section{Presentation of Simplified Likelihood data}
@@ -548,7 +551,7 @@ Finally, if systematic uncertainties on the \textit{signal} are taken into accou
 
 
 There are in principle two ways of releasing the data needed to build the simplified likelihood. One way could be to release the whole set of elementary systematic uncertainties. The other is to release the three first moments of the PDF of the combined systematic uncertainties. While the former is in principle doable, we will focus only on the latter. Indeed, the elementary uncertainties are usually already  coded by the experimentalists in Monte Carlo generators, hence it is straightforward to evaluate these moments and one should take profit of it.  \footnote{
-Also, using the elementary uncertainties maybe more convenient when one wishes to include the systematic uncertainties on the signal, \textit{i.e.}  $\alpha$-dependent $b,c,\rho$. Since these systematics are not crucial for new physics searches we do not take this aspect into account here. 
+Using the elementary uncertainties maybe more convenient when one wishes to include the systematic uncertainties on the signal, \textit{i.e.}  $\alpha$-dependent $b,c,\rho$. Since these systematics are not crucial for new physics searches we do not take them into account here. 
 }
 
 
@@ -619,7 +622,7 @@ A vector of labeled $\pm$ terms associated to
 The table and error source formats  may be readily extended for automated data
 handling and are thus appropriate to release simplified likelihood data.
 
-In the case of table format, in addition to the observed central values and statistical uncertainties usually released, extra HepData tables
+In the case of the table format, in addition to the observed central values and statistical uncertainties usually released, extra HepData tables
 can encode the $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ moments describing the combined nuisance parameters.
 However the HepData table headers have to be augmented to
 express relationships between tables, i.e.~identifying the moment data tables associated with a first-order dataset in a standardised fashion. While the format is conceptually straightforward, introducing the semantic description of the tables is at present highly unpractical. We will rather prefer the error source format for which the semantic aspect is not an issue. 
