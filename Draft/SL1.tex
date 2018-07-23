@@ -121,8 +121,8 @@
 
 We present the Simplified Likelihood framework, a systematic approximation scheme  for experimental likelihoods such as those originating from LHC experiments.
 %This framework  is useful  to simplify data analyses and to transmit realistic experimental likelihoods to the community.
-We present an efficient method to compute the parameters of the simplified likelihood  from Monte Carlo simulations. The approach is validated using a realistic LHC-like toy search, and the limits of the approximation are explored.
- The simplified likelihood data can be easily released in   HepData tables and automatically built from them, making this framework a convenient %ideal
+We present an efficient method to compute the parameters of the simplified likelihood  from Monte Carlo simulations. The approach is validated using a realistic LHC-like analysis, and the limits of the approximation are explored.
+ The simplified likelihood data can be conveniently released in the  HepData error source format and automatically built from it, making this framework a convenient %ideal
   tool to transmit realistic experimental likelihoods to the community.
 
 
@@ -480,12 +480,6 @@ the distribution is so asymmetric that the variance comes entirely from the $\th
 
 
 
-
-
-
-
-
-
 %For the Poisson the three third centered moments are equal to $\lambda$. For the lognormal the  moments are equal to $$.
 
 \begin{figure}[t]
@@ -499,10 +493,199 @@ The normal approximation for a Poisson and a log-normal distribution. Black curv
 \end{figure}
 
 
-\section{Simplified likelihoods for LHC searches for new physics}
+
+
+
+
+
+
+\section{Practical aspects of the simplified likelihood framework}
+
+
+\subsection{Range of application}
+
+An important aspect of the simplified likelihood is that it is very flexible, because it does not need to be applied to the whole set of systematic uncertainties.  When applied to a subset of systematic uncertainties, the only requirement is that the subset be in the conditions of satisfying the central limit theorem conditions as described in Sec.~\ref{se:SL_theory}. 
+
+
+
+For instance if a single systematic uncertainty  is left apart from the combination, the simplified likelihood takes the form
+\be
+ L_{\rm{S}}(\bm{\alpha},\bm{\theta},\bm{\tilde \theta}) = \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm{\alpha})+b_I\theta_I+c_I\theta_I^2 + \Delta_I  \delta+   \Big) \cdot
+    \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1} \bm \theta}}}{\sqrt{(2\pi)^P }}
+    \cdot \pi(\delta)
+ \quad     \,. \label{eq:SL_variants1}
+\ee
+Similarly, if two subsets of systematic uncertainties tend to  separately satisfy the CLT conditions,  they can be separately combined, giving the simplified likelihood 
+\be
+ L_{\rm{S}}(\bm{\alpha},\bm{\theta},\bm{\tilde \theta}) = \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm{\alpha})+b_I\theta_I+c_I\theta_I^2 + \tilde b_I \tilde \theta_I+ \tilde c_I \tilde \theta_I^2  \Big) \cdot
+    \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1} \bm \theta}}}{\sqrt{(2\pi)^P }}
+\cdot \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm{ \tilde\theta^{\rm T}} \bm{\tilde \rho}^{-1} \bm{ \tilde\theta}}}}{\sqrt{(2\pi)^P }}    
+      \,. \label{eq:SL_variants2}
+\ee
+
+The simplified likelihood naturally accommodates any such partitions. It is actually  commonplace in LHC analyses   to present systematic uncertainties combined in subsets, for example ``theoretical'', ``experimental'', ``luminosity'', ``MC'' uncertainties. This is useful for mere informative purpose but also for further reinterpretations. 
+For example the theoretical uncertainties can be improved later on, hence members of the community should be able to change them
+ with no loss of consistency. Such combination of theoretical uncertainties  has been done in \cite{Arbey:2016kqi}  for the Higgs production and decay rates and can be implemented in a simplified likelihood. 
+Another reason to single out a nuisance parameter  from the combination (as shown in Eq.~\eqref{eq:SL_variants1})
+can  be if it has a large asymmetric distribution that one wants to take into account with no approximation. 
+In order to take profit from the  versatility of the simplified likelihood, an equally  versatile format is needed to release the simplified likelihood data. This is the topic of next subsection.  
+
+Finally, if systematic uncertainties on the \textit{signal} are taken into account, the $b,c,\rho$ parameters  become dependent on the parameter of interest ${\bm \alpha}$. While there is no conceptual difference with the case with respect to having only background systematics, there are important practical differences. Numerical evaluations  become heavier  because the parameters of the simplified likelihood -- especially $\rho_{IJ}(\alpha)$ which requires a matrix inversion -- have to be evaluated for each value of ${\bm \alpha}$. Presentation of the simplified likelihood data becomes also more evolved.
+
+
+%\section{Presentation of Simplified Likelihood data}
+
+%\fxfatal{Give an introduction to the experimental/stats issues in extraction of
+%  stable and consistent 2nd and 3rd order correlation moments. Note the
+%  necessity of cross-checking and sanity-checking moment estimates: covariances
+%  have previously been published which, due to numerical rounding issues, are
+%  singular and hence unusable.}
+
+
+\subsection{Construction and  presentation}
+
+
+
+
+There are in principle two ways of releasing the data needed to build the simplified likelihood. One way could be to release the whole set of elementary systematic uncertainties. The other is to release the three first moments of the PDF of the combined systematic uncertainties. While the former is in principle doable, we will focus only on the latter. Indeed, the elementary uncertainties are usually already  coded by the experimentalists in Monte Carlo generators, hence it is straightforward to evaluate these moments and one should take profit of it.  \footnote{
+Also, using the elementary uncertainties maybe more convenient when one wishes to include the systematic uncertainties on the signal, \textit{i.e.}  $\alpha$-dependent $b,c,\rho$. Since these systematics are not crucial for new physics searches we do not take this aspect into account here. 
+}
+
+
+
+
+We thus focus on the release of the  simplified likelihood data via the  $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$
+moments   of the PDF of the combined systematic uncertainties,  already defined in Eqs.~\eqref{eq:moments1}-\eqref{eq:moments2}, where $m_{3,I}$ is the diagonal part of the third-rank tensor $m_{3,IJK}$.  Evaluating these moments via MC toys is straightforward for the experimental analysis. However their presentation needs to be discussed in great details, taking into account  the available tools and the current practices. This is the purpose of this subsection.
+
+
+
+ Key to the usefulness of any likelihood data for analysis reinterpretation is
+the availability of that data in a standard format. For global fits, where tens
+or hundreds of analyses may be used simultaneously, it is crucial that this
+format be unambiguously parseable by algorithms without human assistance. A
+standard location is also necessary, for which the obvious choice is the longstanding
+HEP data repository, HepData~\cite{hepdata}.
+
+
+
+%In this section we will first review the current status of data presentation, then present our proposal  for the simplified likelihood data.
+
+
+%Before describing the current status of data release and our subsequent proposal,
+% to improve and normalize it in the context of the simplified likelihood framework,
+ Let us fix some terminology.  It is convenient to refer to the data in terms of the order of the moment from which they originate. We will use the term ``$n$-th order data'' to refer to information  coming from a moment of order $n$.  $n$ will go only up to $3$. Second order data includes covariance matrix, correlation matrix an diagonal uncertainties -- that can be given either in a relative or absolute parametrization. There is the same kind of freedom for third order data but this does not need to be discussed here. In addition to the moments of the combined systematic uncertainties, this terminology will also apply to the observed central values and statistical uncertainties usually presented by the experiments.
+
+
+  %The origin of this information can be from the measurement described by the likelihood, by auxiliary measurements, or can even be of non-experimental origin, as in case of theoretical uncertainties.
+%First order data corresponds simply to mean values.  Concretely, the first order data that will be encountered here are  the observed event counts or (quantities derived from them),  and  contributions  to the expected event counts (\textit{i.e.} ``shifts'') induced by the combined systematic uncertainties.
+%
+%Second order data  can be  the covariance matrix itself, or quantities derived from it: the diagonal uncertainties (which can be presented either in a relative or absolute form) and the correlation matrix.
+%The second order data that will be encountered here are the statistical uncertainties,
+%%(which for Poisson process are not independent of mean values, but are rather given for convenience)
+% and the covariance matrix describing the combined systematic uncertainties.
+%
+%
+%Third order data  can be  the third moment tensor itself, or a normalized  version of it, for instance  the skew. Here we will encounter the third order data of the combined systematic uncertainties. Moreover, although the third moment is in general a rank-3 tensor, only its diagonal component will be used here.
+%
+
+Let us review the current formats of presentation of likelihood data. There is no problem of format with the  presentation of first order data and no third order data are usually given. Regarding second order data there is unfortunately no standard representation currently established.
+ A review of the second order data in HepData and
+on the experiments' analysis websites reveals a mixture of
+presentation styles:
+%
+\begin{itemize}
+\item  \textit{Table format:}  2D histograms of either covariance or correlation matrices. This has the
+  difficulties that the convention used is not made clear (other than by
+  inspection of the matrix diagonal), and without a structural association with
+  first order dataset   it is impossible for computer
+  codes to unambiguously construct the relevant likelihood. In the case of the presentation of correlation matrix,    the diagonal variances must be provided with the first order dataset.
+  
+\item \textit{Error source format:}
+A vector of labeled $\pm$ terms associated to
+  each element of the first order dataset. The correlations between the error sources is indicated via the labels,  
+  (e.g.~a   ''{\tt stat}'' label to be a purely diagonal contribution, a ``{\tt lumi}'' label to be
+  100\% correlated across all bins, and all other labeled uncertainties treated
+  as orthogonal).
+   The correlation or covariance matrices can be constructed using \textbf{[]}.   
+  This format presents the second order data  in the form of 
+``effective''  elementary uncertainties. 
+
+\item Auxiliary files in arbitrary format: the \emph{ad hoc} nature of these
+  makes them impossible to be handled by unsupervised algorithms. This includes
+  2D histograms in ROOT data files, since variations in path structure and the
+  ambiguity between covariance or correlation matrices are an impediment to
+  automated use. This presentation style will be disregarded below.
+\end{itemize}
+The table and error source formats  may be readily extended for automated data
+handling and are thus appropriate to release simplified likelihood data.
+
+In the case of table format, in addition to the observed central values and statistical uncertainties usually released, extra HepData tables
+can encode the $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ moments describing the combined nuisance parameters.
+However the HepData table headers have to be augmented to
+express relationships between tables, i.e.~identifying the moment data tables associated with a first-order dataset in a standardised fashion. While the format is conceptually straightforward, introducing the semantic description of the tables is at present highly unpractical. We will rather prefer the error source format for which the semantic aspect is not an issue. 
+
+
+
+
+In the error source format, the $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$  moments are \textit{all} encoded in the form of labeled vectors. The $m_{2,IJ}$ matrix is reconstructed via a sum of the form 
+\be
+m_{2,IJ}= \sum {a_{I,i}a_{J,i}} \, 
+\ee
+where the $a_{I,i}$ are the released error sources. 
+%The statistical uncertainties as well as 
+The vector of third order data can be  indicated via a special label. 
+There is not limit in the number of labels associated to an element hence this format is very flexible. 
+%Current error source names are for instance ``{\tt stat}'' and ``{\tt sys,jesNp1}''. 
+For instance the $a_{I,i}$ error sources corresponding to the decomposed covariance  can just get bland names such as "{\tt sys,NP1}", but  can also be extended with \textit{e.g.} a ``{\tt th}'' prefix to allow separation of experimental and theory systematics (since the theory can in principle be improved on in future reinterpretations).
+
+
+This format requires some keyword standardization.  The final scheme should
+be capable of equally applying to any kind of experimental data and systematic uncertainties. In particular it should be valid for event counts,  differential cross-sections with bins correlated by the systematic uncertainties, correlations between  the bins of different distributions/datasets, and so on.
+
+
+%Can you thread in the thought I had a few emails ago about using prefixes to guide the structuring, e.g. current error source names look like "stat" and "sys,jesNp1" but we could extend this to e.g. a "th" prefix to allow separation of experimental and theory systematics (since the theory can in principle be improved on in future reinterpretations). Perhaps also "lumi" and "stat,MC" errors which could need to be treated differently. The decomposed covariance error sources would just get bland names like "sys,NP1" of course, but separating out classes of fundamental uncertainty origin will allow for more powerful combination -- separate & independent covariances can be coded for expt and theory systematics for example, and just added together if the simplest treatment is what's desired.
+
+
+Summarizing, our recommendation is to release the moments of the combined uncertainty distributions via the HepData error source format, which has built-in semantics of arbitrary complexity and can thus  make the most of the simplified likelihood framework. 
+
+
+
+
+%Both forms require some keyword standardisation: in the first case to express
+%the semantic types of datasets and the relationships between them, and in the
+%second case to identify the statistical and skew error sources which should be
+%treated distinctly from the SL systematic uncertainties. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Simplified likelihood in a  realistic LHC-like analysis }
 \label{se:SL_LHC}
 
-This section contains LHC-specific comments and details in relation to the simplified likelihood framework.
+
+In this section we introduce a realistic pseudo-analysis  which is representative of a search for new physics at the LHC. We use this analysis to validate the simplified likelihood method and test its validity in realistic conditions, and validate the simplified likelihood code of \textbf{[...]}. 
+ The analysis also provides an example of simplified likelihood data release via the HepData error source format.  
+The results of this pseudo-analysis can be reproduced using \textbf{[codes...]}. 
+ 
+
+
+
+%This section contains LHC-specific comments and details in relation to the simplified likelihood framework.
 
 As already mentioned in Sec.~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. Indeed, any mis-estimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
 There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of the variations observed in a given process when some underlying parameter of the simulation model, theory, detector resolution etc. Estimates of the contribution from background processes are obtained either from simulation or through some data-driven method. Often such methods are accompanied by associated  uncertainties which reduce the ability to make precise statements about the expectation from the background.
@@ -511,6 +694,7 @@ These systematic uncertainties are important for new physics searches. In the fo
 
 
 % \cite{SL_note,Fichet:2016gvx,Verkerke:2003ir,Moneta:2010pm,Kraml:2012sg,Boudjema:2013qla,Fichet:2015xla,Arbey:2016kqi,Cranmer:2013hia,Berry,Esseen,Feller,Billingsley}
+
 
 
 \subsection{A toy search for new physics}
@@ -610,6 +794,13 @@ Combining Eqns~\ref{eqn:frac_function},~\ref{eqn:bin_function} and~\ref{eqn:norm
 
 As already mentioned, a typical search for new physics will have contributions from multiple background processes, each with their own associated systematic uncertainties.
 Only by summing over all of these backgrounds (i.e $n_{b,I}=\sum_{p}n_{b,p,I}$ for different background processes $p$) is the likelihood fully specified.
+
+
+
+
+
+
+
 
 
 \subsection{Validation of the simplified likelihood}
@@ -726,6 +917,15 @@ In order to remove the dependance of the likelihood on the nuisance parameters, 
 commonly adopted. The first, termed `profiling`, involves replacing the nuisance parameters with the values at which
 the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/testtoy-tmuscan}
+  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the toy search assuming the experimental likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quatratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
+  values for which the 68\% and 95\% CL exclusions can be determined, assuming certain asymptotic properties of the distribution of $t_{\mu}$.}
+  \label{fig:tmucompare}
+\end{figure}
+
+
 \begin{equation}
 L_{\rm{S}}^{\rm{max}}(\mu) = \rm{max}_{\theta_{I}}\left\{ L_{\rm{S}}(\mu,\bm{\theta}) \right\}.
 \end{equation}
@@ -746,13 +946,6 @@ Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a fu
 likelihood and the simplified likelihood. In addition, the result obtained using only the linear terms of the simplified is shown. As expected, the
 agreement between the full and simplified likelihood is greatly improved when including the quadratic term.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.7\textwidth]{figures/testtoy-tmuscan}
-  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the toy search assuming the experimental likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quatratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
-  values for which the 68\% and 95\% CL exclusions can be determined, assuming certain asymptotic properties of the distribution of $t_{\mu}$.}
-  \label{fig:tmucompare}
-\end{figure}
 
 A horizontal line is drawn at the value of
 $t_{\mu}= 3.86$. The agreement in this region is particularly relevant due to the fact that asymptotic approximations for the distributions of $t_{\mu}$~\cite{Cowan:2010js} allow one to determine the 95\% confidence level (CL) upper limit on the signal strength, $\mu_{\rm{up}}$.
@@ -783,96 +976,6 @@ determined from 100,000 pseudo-datasets.
 
 %\section{Construction and distribution of Simplified Likelihood data}
 
-\section{Presentation of Simplified Likelihood data}
-
-%\fxfatal{Give an introduction to the experimental/stats issues in extraction of
-%  stable and consistent 2nd and 3rd order correlation moments. Note the
-%  necessity of cross-checking and sanity-checking moment estimates: covariances
-%  have previously been published which, due to numerical rounding issues, are
-%  singular and hence unusable.}
-
-
-
-The most natural way to release the data needed to construct the simplified likelihood is in the form of the first three moments of the PDF of the combined nuisance parameters. These moments are the  $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ already defined in Eqs.~\eqref{eq:moments1}-\eqref{eq:moments2}, where $m_{3,I}$ is the diagonal part of the third-rank tensor $m_{3,IJK}$.  Evaluating these moments via MC toys is straightforward for the experiments. However their presentation needs to be discussed in great details, taking into account  the available tools and the current practices. This is the purpose of this section.
-
-
-
- Key to the usefulness of any likelihood data for analysis reinterpretation is
-the availability of that data in a standard format. For global fits, where tens
-or hundreds of analyses may be used simultaneously, it is crucial that this
-format be unambiguously parseable by algorithms without human assistance. A
-standard location is also necessary, for which the obvious choice is the longstanding
-HEP data repository, HepData~\cite{hepdata}.
-
-
-
-%In this section we will first review the current status of data presentation, then present our proposal  for the simplified likelihood data.
-
-
-%Before describing the current status of data release and our subsequent proposal,
-% to improve and normalize it in the context of the simplified likelihood framework,
- Let us fix some terminology.  It is convenient to refer to the data in terms of the order of the moment from which they originate. We will use the term ``$n$-th order data'' to refer to information  coming from a moment of order $n$.  $n$ will go only up to $3$. Second order data includes covariance matrix, correlation matrix an diagonal uncertainties -- that can be given either in a relative or absolute parametrization. There is the same kind of freedom for third order data but this does not need to be discussed here. In addition to the moments of the combined systematic uncertainties, this terminology will also apply to the observed central values and statistical uncertainties usually presented by the experiments.
-
-
-  %The origin of this information can be from the measurement described by the likelihood, by auxiliary measurements, or can even be of non-experimental origin, as in case of theoretical uncertainties.
-%First order data corresponds simply to mean values.  Concretely, the first order data that will be encountered here are  the observed event counts or (quantities derived from them),  and  contributions  to the expected event counts (\textit{i.e.} ``shifts'') induced by the combined systematic uncertainties.
-%
-%Second order data  can be  the covariance matrix itself, or quantities derived from it: the diagonal uncertainties (which can be presented either in a relative or absolute form) and the correlation matrix.
-%The second order data that will be encountered here are the statistical uncertainties,
-%%(which for Poisson process are not independent of mean values, but are rather given for convenience)
-% and the covariance matrix describing the combined systematic uncertainties.
-%
-%
-%Third order data  can be  the third moment tensor itself, or a normalized  version of it, for instance  the skew. Here we will encounter the third order data of the combined systematic uncertainties. Moreover, although the third moment is in general a rank-3 tensor, only its diagonal component will be used here.
-%
-
-Let us review the current formats of presentation of likelihood data. There is no problem of format with the  presentation of first order data and no third order data are usually presented. Regarding second order data there is unfortunately no standard representation currently established.
- At present a review of the second order data in HepData and
-on the experiments' analysis websites reveals a mixture of
-presentation styles:
-%
-\begin{itemize}
-\item 2D histograms of either covariance or correlation matrices. This has the
-  difficulties that the convention used is not made clear (other than by
-  inspection of the matrix diagonal), and without a structural association with
-  first order data   it is impossible for computer
-  codes to unambiguously construct the relevant likelihood. In the case of the presentation of correlation matrix, the   the diagonal variances must be provided with the first order data.
-\item A breakdown by error-source, e.g. a series of labelled $\pm$ terms for
-  each value in the primary dataset. From this, with some conventions (e.g.~a
-  ''stat'' label to be a purely diagonal contribution, a ``lumi'' label to be
-  100\% correlated across all bins, and all other labelled uncertainties treated
-  as orthogonal) the correlation or covariance matrices can be constructed.
-\textbf{[This case is supposed to be about diagonalized covariances but in fact it's not clear to me]}
-
-\item Auxiliary files in arbitrary format: the \emph{ad hoc} nature of these
-  makes them impossible to be handled by unsupervised algorithms. This includes
-  2D histograms in ROOT data files, since variations in path structure and the
-  ambiguity between covariance or correlation matrices are an impediment to
-  automated use. This presentation style will be disregarded below.
-\end{itemize}
-
-
-
-The first two of these  presentation styles may be readily extended for automated data
-handling and are thus appropriate to release simplified likelihood data.
-In the first case, in addition to the observed central values and statistical uncertainties usually released, extra HepData tables
-can encode the $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ moments describing the combined nuisance parameters.
-The HepData table headers may be augmented to
-express relationships between tables, i.e.~identifying the moment data tables associated with a primary dataset in a standardised fashion.
-
-\textbf{[I stopped here]}
-And in the second case, the SL covariance matrices may be represented
-in error-source form, with each bin $I$ reporting $N$ different error sources of
-value $\sqrt{m_{2,IJ}}$ as well as specially identified skew and statistical
-error components.
-
-Both forms require some keyword standardisation: in the first case to express
-the semantic types of datasets and the relationships between them, and in the
-second case to identify the statistical and skew error sources which should be
-treated distinctly from the SL systematic uncertainties. The final scheme should
-be capable of equally applying to search-analysis signal regions as discussed
-here, and to bins of differential cross-section observables where correlations
-may also be available between the bins of different distributions/datasets.
 % For
 %such observables, the Poisson--Gaussian likelihood form presented in this paper
 %may not be the appropriate one to use -- e.g.~a pure multivariate Gaussian
@@ -937,6 +1040,8 @@ may also be available between the bins of different distributions/datasets.
 %-- and so a further record annotation will be required to identify the
 %appropriate likelihood family into which to cast the provided correlation data.
 
+
+\section{Conclusion}
 
 \section*{Acknowledgements}
 
@@ -1015,10 +1120,10 @@ which we reproduce here to assist independent implementations:
     &- \frac{1}{2} \bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} - \frac{P}{2} \ln 2\pi
   \end{split}\\[2ex]
   %
-  \Rightarrow \qquad
-  \frac{\mathrm{d}\ln L_{\rm{S}}}{\mathrm{d}\mu} =& \sum_I^P \left( \frac{n^{\rm{obs}}_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot n_{s,I} \\
+%  \Rightarrow \qquad
+  \frac{\partial\ln L_{\rm{S}}}{\partial\mu} =& \sum_I^P \left( \frac{n^{\rm{obs}}_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot n_{s,I} \\
   %
-  \frac{\mathrm{d}\ln L_{\rm{S}}}{\mathrm{d}\theta_{\!A}} =& \left( \frac{n^{\rm{obs}}_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
+  \frac{\partial\ln L_{\rm{S}}}{\partial\theta_{\!A}} =& \left( \frac{n^{\rm{obs}}_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
 \label{eq:SL_LHC}
 \end{align}
 %

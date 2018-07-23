@@ -4,10 +4,13 @@
 \BOOKMARK [2][-]{subsection.3.1}{Asymmetries and CLT at next-to-leading order}{section.3}% 4
 \BOOKMARK [2][-]{subsection.3.2}{Calculation of the simplified likelihood}{section.3}% 5
 \BOOKMARK [2][-]{subsection.3.3}{Precision of the normal expansion}{section.3}% 6
-\BOOKMARK [1][-]{section.4}{Simplified likelihoods for LHC searches for new physics}{}% 7
-\BOOKMARK [2][-]{subsection.4.1}{A toy search for new physics}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.2}{Parameterization of backgrounds}{section.4}% 9
-\BOOKMARK [2][-]{subsection.4.3}{Validation of the simplified likelihood}{section.4}% 10
-\BOOKMARK [1][-]{section.5}{Presentation of Simplified Likelihood data}{}% 11
-\BOOKMARK [1][-]{appendix.A}{The CLT at next-to-leading order}{}% 12
-\BOOKMARK [1][-]{appendix.B}{Reference Code}{}% 13
+\BOOKMARK [1][-]{section.4}{Practical aspects of the simplified likelihood framework}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Range of application}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Construction and presentation}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Simplified likelihood in a realistic LHC-like analysis }{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{A toy search for new physics}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Parameterization of backgrounds}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.3}{Validation of the simplified likelihood}{section.5}% 13
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 14
+\BOOKMARK [1][-]{appendix.A}{The CLT at next-to-leading order}{}% 15
+\BOOKMARK [1][-]{appendix.B}{Reference Code}{}% 16
