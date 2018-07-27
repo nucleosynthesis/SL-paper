@@ -472,7 +472,7 @@ the distribution is so asymmetric that the variance comes entirely from the $\th
  The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$. It turns out that apart near the above mentioned limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield.
 
  Let us finally check how well the approximation performs. The true and approximate densities are shown in Fig.~\ref{fig:approxs}.   When the true density is vanishing in the region $n<0.5$, the approximation is excellent.  For larger asymmetry, $\sigma \sim 0.35-0.4$, the true density starts to be sizeable in the region $n<0.5$. The approximate density is still reasonably good away from $n\sim 0.5$. However near this boundary, the approximate density tends to increase and possibly peak, somehow to account for  the area at $n<0.5$ that it cannot reproduce.
- This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the realistic toy search implemented in next section.
+ This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the LHC-like analysis implemented in next section.
 
    Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100-150\%$. This is a moderate value, however one should keep in mind that these considerations apply to the combined uncertainties, for which small skewness is typical. The accuracy of the simplified likelihood framework will be tested in next section in a realistic setup.
 
@@ -707,7 +707,7 @@ The results of this pseudo-analysis can be reproduced using \textbf{[codes...]}.
 
 As already mentioned in Sec.~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. Indeed, any mis-estimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
 There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of the variations observed in a given process when some underlying parameter of the simulation model, theory, detector resolution etc. Estimates of the contribution from background processes are obtained either from simulation or through some data-driven method. Often such methods are accompanied by associated  uncertainties which reduce the ability to make precise statements about the expectation from the background.
-These systematic uncertainties are important for new physics searches. In the following section, we describe a toy search for new physics, inspired by those performed at the LHC, and derive the simplified likelihood parameters for it.
+These systematic uncertainties are important for new physics searches. In the following section, we describe a pseudo-search for new physics, inspired by those performed at the LHC, and derive the simplified likelihood parameters for it.
 
 
 
@@ -715,10 +715,10 @@ These systematic uncertainties are important for new physics searches. In the fo
 
 
 
-\subsection{A toy search for new physics}
+\subsection{A LHC-like pseudo-search for new physics}
 \label{se:toy_search}
 
-In order to illustrate the construction of the simplified likelihood, a toy model has been constructed which is representative of a search for new physics at the LHC. Typically in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides the separation needed to identify a potential signal.
+In order to illustrate the construction of the simplified likelihood, a model has been constructed which is representative of a search for new physics at the LHC. Typically in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides the separation needed to identify a potential signal.
 Figure~\ref{fig:toy} shows the distribution of events, in each of the three categories along with the expected contribution from the background, along with its uncertainties, and from some new physics signal.
 The `nominal' background follows a typical exponential distribution where fluctuations are present, representing a scenario in which limited Monte Carlo simulation (or limited data in some control sample) was used
 to derive the expected background contribution. The uncertainties due to this, indicated by the blue band, are uncorrelated between the different bins. Additionally, there are two uncertainties which modify the `shape' of
@@ -730,7 +730,7 @@ and represent two typical experimental uncertainties; a veto efficiency uncertai
 \begin{center}
 \includegraphics[width=\textwidth]{figures/t}
 \end{center}
-\caption{Toy search for new physics. The search is performed across three event categories, each divided into 30 bins to make a total of 90 search regions. The nominal expected contribution in each bin from the
+\caption{LHC-like search for new physics. The search is performed across three event categories, each divided into 30 bins to make a total of 90 search regions. The nominal expected contribution in each bin from the
 background and from the new physics signal is shown by the blue and red lines, respectively. The solid and dashed lines show the $\pm1\sigma$ correlated variation in each bin expected due to an experimental and theoretical
 uncertainty while the blue shaded band shows the uncorrelated uncertainty in each bin due to limited Monte Carlo simulation. The observed number of events in data in each bin is indicated by the black points.}
 \label{fig:toy}
@@ -764,7 +764,7 @@ The interpolation is given by
  \label{eqn:frac_function}
 \end{equation}
 %
-where $f_{I}^{0}=f_{I}(\bm{\delta}=0)$ and $F(\bm{\delta})=\sum_{I}f_{I}(\bm{\delta})$ ensures that the fractions sum to 1. In our toy search, as there are three event categories,
+where $f_{I}^{0}=f_{I}(\bm{\delta}=0)$ and $F(\bm{\delta})=\sum_{I}f_{I}(\bm{\delta})$ ensures that the fractions sum to 1. In our pseudo-search, as there are three event categories,
 there are three of these summations, each of which runs over the 30 bins of that category. The polynomial $p_{Ij}(\delta_{j})$ is chosen to be quadratic between values of $-1 \leq \delta_{j} \leq 1$
 and linear outside that range such that,
 
@@ -798,10 +798,10 @@ Systematic uncertainties which only affect the overall normalization, are also i
  \label{eqn:norm_function}
 \end{equation}
 %
-where $N^{0} = N(\bm{\delta}=0)$ and $j$ runs over the elementary nuisance parameters.  A simple extension to this arises if the uncertainty is `asymmetric', as in our toy search;
+where $N^{0} = N(\bm{\delta}=0)$ and $j$ runs over the elementary nuisance parameters.  A simple extension to this arises if the uncertainty is `asymmetric', as in our pseudo-search;
 the value of $K_{j}$ is set to $K^{+}_{j}$ for $\delta_{j}\geq0$ and to $K^{-}_{j}$ for $\delta_{j} < 0$. Furthermore, any uncertainty which affects both the
 shape and the normalization can be incorporated by including terms such as those in Eqn~\ref{eqn:frac_function} in addition to one of these normalization terms.
-In our toy search, there will be a separate $N(\bm{\delta})$ term for each category which provides the total expected background rate summing over the 30 bins of that category.
+In our pseudo-search, there will be a separate $N(\bm{\delta})$ term for each category which provides the total expected background rate summing over the 30 bins of that category.
 
 Combining Eqns~\ref{eqn:frac_function},~\ref{eqn:bin_function} and~\ref{eqn:norm_function} yields the full parameterization,
 %
@@ -823,7 +823,7 @@ Only by summing over all of these backgrounds (i.e $n_{b,I}=\sum_{p}n_{b,p,I}$ f
 
 \subsection{Validation of the simplified likelihood}
 
-%Using our toy search, we compare the experimental and simplified likelihoods. \fxnote{Do we want a whole separate section for this after setting up the toy? We can compare 1. distributions (1D and 2D), 2. frequentist (profiled) and Bayesian (marginalised) likelihoods.}
+%Using our pseudo-search, we compare the experimental and simplified likelihoods. \fxnote{Do we want a whole separate section for this after setting up the toy? We can compare 1. distributions (1D and 2D), 2. frequentist (profiled) and Bayesian (marginalised) likelihoods.}
 
 We constructed 100,000 pseudo-datasets by taking random values ${\hat{\bm{\delta}}}$, generated according to $\pi(\bm{\delta})$, and evaluating
 $n_{b,I}(\hat{\bm{\delta}})$ for each dataset according to the Eqn~\ref{eqn:expt_param}. Figure~\ref{fig:distributions} shows the distribution of $\hat{n}_{i}$, for an example bin, $i=62$,
@@ -885,10 +885,10 @@ hence higher moments of the experimental distributions.
   %\includegraphics[width=0.45\textwidth]{figures/corr-4-86}
   %\includegraphics[width=0.45\textwidth]{figures/corr-62-86}
   \includegraphics[width=\textwidth]{figures/plotmatrix}
-  \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{b,J}$ for the toy
+  \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{b,J}$ for the LHC-like 
     % $I=4, 7, 31$ and 62 in pseudo-datasets generated from the
-    experimental toy search (black points) as described in the text. The
-    background heat map is generated from 100,000 samples from the true toy
+    experimental pseudo-search (black points) as described in the text. The
+    background heat map is generated from 100,000 samples from the true 
     model, the dashed red contours from the linear SL form, and the solid
     green contours from the quadratic SL form. The diagonal panels show the
     1D distribution in each of the bins for the toys (black histograms), and the
@@ -916,7 +916,7 @@ from the linear SL form, e.g.~for likelihood marginalisation, requires that the
 background rates be positive since they are propagated through the Poisson
 distribution. The quadratic SL provides a controlled solution to this issue,
 as opposed to \emph{ad hoc} methods like use of a log-normal distribution or
-setting negative-rate samples to zero or an infinitessimal value: the toy model
+setting negative-rate samples to zero or an infinitessimal value: the 
 linear approximation has a negative fraction of $\sim\!11.6\%$, while the
 quadratic form has a negative fraction of exactly zero.
 
@@ -938,7 +938,7 @@ the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$.
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.7\textwidth]{figures/testtoy-tmuscan}
-  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the toy search assuming the experimental likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quatratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
+  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the pseudo-search assuming the experimental likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quatratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
   values for which the 68\% and 95\% CL exclusions can be determined, assuming certain asymptotic properties of the distribution of $t_{\mu}$.}
   \label{fig:tmucompare}
 \end{figure}
@@ -956,23 +956,22 @@ where $L_{\rm{S}}^{\rm{max}}$ denotes the maximum value of $L_{\rm{S}}^{\rm{max}
 as searches at the LHC and the procedures used to determing limits are slightly different to that presented here and are detailed in Ref.~\cite{CMS-NOTE-2011-005}.}.
 Similarly, such likelihood ratios are also used for quantifying some excess in the case of the discovery
 of new physics~\cite{CMS-NOTE-2011-005}.
-The test-statistic can also be constructed for the experimental likelihood $L(\mu,\bm{delta})\pi(\bm{\delta})$, where the same subsitution as in~\ref{eq:muscale} is applied,
+The test-statistic can also be constructed for the experimental likelihood $L(\mu,\bm{\delta})\pi(\bm{\delta})$, where the same substitution as in~\ref{eq:muscale} is applied,
 by profiling the elementary
 nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for the full and simplified likelihoods is therefore possible.
 
-Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a function of $\mu$ for the toy search between the full (experimental)
+Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a function of $\mu$ for the pseudo-search between the full (experimental)
 likelihood and the simplified likelihood. In addition, the result obtained using only the linear terms of the simplified is shown. As expected, the
-agreement between the full and simplified likelihood is greatly improved when including the quadratic term.
-
-
-A horizontal line is drawn at the value of
+agreement between the full and simplified likelihood is greatly improved when including the quadratic term. A horizontal line is drawn at the value of
 $t_{\mu}= 3.86$. The agreement in this region is particularly relevant due to the fact that asymptotic approximations for the distributions of $t_{\mu}$~\cite{Cowan:2010js} allow one to determine the 95\% confidence level (CL) upper limit on the signal strength, $\mu_{\rm{up}}$.
 The signal hypothesis is `excluded` at 95\% CL if $\mu_{\rm{up}} < 1$.
 
-
-Figure~\ref{fig:SLConvergence} shows the RMS of the simplified likelihood
-coefficients for the three bins, $i=4,50$ and $86$ relative to the values
-determined from 100,000 pseudo-datasets.
+We performed a study of the rate of convergence of the simplified likelihood coefficients by calculating them using different numbers of pseudo-datasets. 
+The coefficients are calculated for three bins, $i=4,50$ and $86$, using independent sets of a fixed number of pseudo-datasets. The root mean square (RMS) 
+of the resulting distribution of each coefficient provides an estimate for how much variation can be expected in the calculation 
+of the coefficients given a limited pseudo-data sample size. The RMS values are normalised to the RMS of the distributions resulting from a sample size of 
+100,000 pseudo-datasets to give a relative RMS. Figure~\ref{fig:SLConvergence} shows the relative RMS of the distribution of the 
+coefficients calculated using increasing numbers of of pseudo-datasets. 
 
 \begin{figure}[t]
   \centering
@@ -986,7 +985,11 @@ determined from 100,000 pseudo-datasets.
   \label{fig:SLConvergence}
 \end{figure}
 
-
+The coefficients $a$ and $b$ can be calculated with relatively high precision using only 1000 pseudo-datasets in each case. The determination of 
+the $c$ coefficient for bin 4 
+however is slower to converge, requiring 5000--10,000 pseudo-datasets to calculate accurately. However, since the value of $m_{3}$ for this bin is 
+relatively small compared to $m_{2}$, the coefficient $c$ is less relevant in this case and so a poor accuracy will have little effect on the accuracy of 
+the simplified likelihood.
 
 \fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
   extractions between true, symm/linear, and asymm/quadratic forms}
@@ -1074,8 +1077,6 @@ determined from 100,000 pseudo-datasets.
 \label{app:skew}
 
 
-
-
 Let us show in a 1D example how the skew appears  in the asymptotic distribution. Consider $N$ independent centered nuisance parameters $\delta_j$ of variance $\sigma^2$ and third moment $\gamma$. Define \be Z=\frac{\sum_{j=1}^N \delta_j}{\sqrt{N}}\,.
 \ee
 The characteristic function of $Z$ is given by
@@ -1152,7 +1153,7 @@ comprehensibility of the calculations explicitly in mind. While it computes
 likelihood statistics on a reasonable timescale, further (but less readable)
 optimisations can be added for production code.
 
-%For simplicity, in our upcoming toy models, we will consider a single parameter-of-interest, the ratio of the observed to the predicted signal production cross-section $\mu=\sigma/\sigma_{\mathrm{TH}}$ (or `signal strength').
+%For simplicity, in our upcoming LHC-like analysis models, we will consider a single parameter-of-interest, the ratio of the observed to the predicted signal production cross-section $\mu=\sigma/\sigma_{\mathrm{TH}}$ (or `signal strength').
 %This is very commonly used in experimental searches for some hypothetical new signal processes and demonstrates the simplified likelihood formalism without loss of generality.
 
 \bibliographystyle{jhep}
