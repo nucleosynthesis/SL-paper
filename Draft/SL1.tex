@@ -163,8 +163,12 @@ particular software package. Additionally, the proposal of presenting LHC result
 In this paper we unify and extend the initial proposals of Refs.~\cite{Fichet:2016gvx,SL_note}, and thoroughly test the accuracy of the approximations using simulated LHC searches for new phenomena.
 Compared to Refs.~\cite{Fichet:2016gvx,SL_note}, an important progress accomplished is that we have been able to rigorously include asymmetries in the combined uncertainties, which is useful in order to avoid inconsistencies such as a negative event yield. Technically this is done by taking into account the next-to-leading term in the limit given by an appropriate version of the Central Limit Theorem (CLT).
 
-The paper is organized as follows. As summary of the main results is given in Section~\ref{se:EL_SL}. Section~\ref{se:SL_theory} contains the formal material, including
-an interesting result about the next-to-leading term of the CLT and the derivation of the simplified likelihood formula. Section~\ref{se:SL_LHC} contains details about LHC likelihoods. A first validation of the simplified likelihood framework is done in Section~\ref{se:toy_search}.
+The paper is organized as follows. A summary of the main results is given in Section~\ref{se:EL_SL}. Section~\ref{se:SL_theory} contains the formal material, including
+an interesting result about the next-to-leading term of the CLT and the derivation of the simplified likelihood formula.
+Practical considerations regarding the SL flexibility and the  release of the SL via HepData are given in 
+Section~\ref{se:practice}.
+Finally a validatation of the SL framework in a realistic pseudo-search at the LHC  is presented in  Section~\ref{se:SL_LHC}. 
+ 
 
 %The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified framework, however, there is a number of reasons to keep the next-to-leading
 % term in the large-$N$ expansion of the CLT. The next-to-leading term encodes skewness: it is the main information about asymmetry of the distribution. The asymmetry of the distribution can be a relevant feature for the analyses hence it is safer to keep this information. Moreover a normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. A normal distribution of the nuisance parameter can give inconsistencies, such as a negative yield. This is a problem both conceptually and at the level of the concrete analyses. This happens because the pure Gaussian approximation is too rough.
@@ -267,15 +271,15 @@ The reader interested only in the practical aspects of the simplified likelihood
 \subsection{Asymmetries and CLT at next-to-leading order}
 \label{se:skew_CLT}
 
-The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified likelihood framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large-$N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. But keeping the asymmetry is truely critical for a slightly different reason. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Hence having a nuisance parameter with a normal distribution can give inconsistencies, for instance a negative yield. This is a problem both conceptually and concretely when running the  analyses. This issue occurs because the  Gaussian limit of the CLT  loses information about the support. Using this limit is simply a too rough approximation.
+The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified likelihood framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. But keeping the asymmetry is truely critical for a slightly different reason. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Hence having a nuisance parameter with a normal distribution can give inconsistencies, for instance a negative yield. This is a problem both conceptually and concretely when running the  analyses. This issue occurs because the  Gaussian limit of the CLT  loses information about the support. Using this limit is simply a too rough approximation.
   Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
 
 
-The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. However, by using further the large-$N$  expansion, we have been able to develop a  trick to express the CLT at next-to-leading order in a very simple way. We realize that a random variable $Z$ with characteristic function
+The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. However, by using further the large $N$  expansion, we have been able to develop a  trick to express the CLT at next-to-leading order in a very simple way. We realize that a random variable $Z$ with characteristic function
 \be
 \varphi_Z(t)=\exp\left(-\frac{\sigma^2 t^2}{2}-i \frac{\gamma t^3}{6 \sqrt{N}} +O\left(\frac{t^4}{N}\right)\right) \label{eq:CF_CLT}
  \ee
-can, up to higher order terms in the large-N expansion, be equivalently be expressed in terms of an exactly Gaussian variable $\theta$ in the form
+can, up to higher order terms in the large $N$ expansion, be equivalently be expressed in terms of an exactly Gaussian variable $\theta$ in the form
 \be
 Z= \theta+\frac{\gamma}{3\sqrt{N}}\theta^2\,,  \quad \textrm{with } \quad \theta\sim{\cal N}(0,\sigma^2)\,. \label{eq:ZskewCLT}
 \ee
@@ -500,7 +504,7 @@ The normal approximation for a Poisson and a log-normal distribution. Black curv
 
 
 \section{Practical aspects of the simplified likelihood framework}
-
+\label{se:practice}
 
 \subsection{Range of application}
 
@@ -696,8 +700,8 @@ Summarizing, our recommendation is to release the moments of the combined uncert
 \label{se:SL_LHC}
 
 
-In this section we introduce a realistic pseudo-analysis  which is representative of a search for new physics at the LHC. We use this analysis to validate the simplified likelihood method and test its validity in realistic conditions, and validate the simplified likelihood code of \textbf{[...]}.
- The analysis also provides an example of simplified likelihood data release via the HepData error source format.
+In this section we introduce a realistic pseudo-analysis  which is representative of a search for new physics at the LHC. This analysis will be used to validate the simplified likelihood method and to test  its accuracy in realistic conditions. It is also used to validate the simplified likelihood reference code provided in \textbf{[...]}. 
+ Finally this pseudo-analysis  provides a concrete example  of  simplified likelihood data release via the HepData error source format. 
 The results of this pseudo-analysis can be reproduced using \textbf{[codes...]}.
 
 
@@ -718,7 +722,11 @@ These systematic uncertainties are important for new physics searches. In the fo
 \subsection{A LHC-like pseudo-search for new physics}
 \label{se:toy_search}
 
-In order to illustrate the construction of the simplified likelihood, a model has been constructed which is representative of a search for new physics at the LHC. Typically in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides the separation needed to identify a potential signal.
+In order to illustrate the construction of the simplified likelihood, a model has been constructed which is representative of a search for new physics at the LHC. Typically in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides crucial information to identify a potential signal.
+
+% provides the separation needed to identify a potential signal.
+
+Our pseudo-search requires to make  assumptions for an ``observed'' dataset, for the corresponding background, and for the new physics signal.  These ingredients are summarized in Figure~\ref{fig:toy}. 
 Figure~\ref{fig:toy} shows the distribution of events, in each of the three categories along with the expected contribution from the background, along with its uncertainties, and from some new physics signal.
 The `nominal' background follows a typical exponential distribution where fluctuations are present, representing a scenario in which limited Monte Carlo simulation (or limited data in some control sample) was used
 to derive the expected background contribution. The uncertainties due to this, indicated by the blue band, are uncorrelated between the different bins. Additionally, there are two uncertainties which modify the `shape' of
@@ -960,6 +968,20 @@ The test-statistic can also be constructed for the experimental likelihood $L(\m
 by profiling the elementary
 nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for the full and simplified likelihoods is therefore possible.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.49\textwidth]{figures/varAll_A}
+  \includegraphics[width=0.49\textwidth]{figures/varAll_B}\\
+  \includegraphics[width=0.49\textwidth]{figures/varAll_C}
+  \caption{RMS of the simplified likelihood coefficients relative to the mean
+    coefficient value determined from 100,000 pseudo-datasets for $a_{I}$
+    (left), $b_{I}$ (center), and $c_{I}$ (right). The distributions are shown
+    for $I=4$ (black line), $I=62$ (red line) and $I=86$ (blue line).}
+  \label{fig:SLConvergence}
+\end{figure}
+
+
+
 Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a function of $\mu$ for the pseudo-search between the full (experimental)
 likelihood and the simplified likelihood. In addition, the result obtained using only the linear terms of the simplified is shown. As expected, the
 agreement between the full and simplified likelihood is greatly improved when including the quadratic term. A horizontal line is drawn at the value of
@@ -973,26 +995,14 @@ of the coefficients given a limited pseudo-data sample size. The RMS values are 
 100,000 pseudo-datasets to give a relative RMS. Figure~\ref{fig:SLConvergence} shows the relative RMS of the distribution of the 
 coefficients calculated using increasing numbers of of pseudo-datasets. 
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.49\textwidth]{figures/varAll_A}
-  \includegraphics[width=0.49\textwidth]{figures/varAll_B}\\
-  \includegraphics[width=0.49\textwidth]{figures/varAll_C}
-  \caption{RMS of the simplified likelihood coefficients relative to the mean
-    coefficient value determined from 100,000 pseudo-datasets for $a_{I}$
-    (left), $b_{I}$ (center), and $c_{I}$ (right). The distributions are shown
-    for $I=4$ (black line), $I=62$ (red line) and $I=86$ (blue line).}
-  \label{fig:SLConvergence}
-\end{figure}
-
 The coefficients $a$ and $b$ can be calculated with relatively high precision using only 1000 pseudo-datasets in each case. The determination of 
 the $c$ coefficient for bin 4 
 however is slower to converge, requiring 5000--10,000 pseudo-datasets to calculate accurately. However, since the value of $m_{3}$ for this bin is 
 relatively small compared to $m_{2}$, the coefficient $c$ is less relevant in this case and so a poor accuracy will have little effect on the accuracy of 
 the simplified likelihood.
 
-\fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
-  extractions between true, symm/linear, and asymm/quadratic forms}
+%\fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
+%  extractions between true, symm/linear, and asymm/quadratic forms}
 
 
 %\section{Construction and distribution of Simplified Likelihood data}
@@ -1063,6 +1073,37 @@ the simplified likelihood.
 
 
 \section{Conclusion}
+
+
+The transmission of highly complex LHC likelihoods 
+from the experimental collaborations to the public
+ has been a long standing issue.  The simplified likelihood (SL) framework, besides having a sound theoretical basis, should satisfy both sides.
+
+
+Although the SL is  accurate, it is still a mere approximation of the actual experimental likelihood, hence experimentalists do not have to release their true likelihood. Meanwhile, for the public, having a good approximation of the true likelihood is arguably much enough for phenomenology purposes. 
+Moreover the SL is very simple to transmit  hence it is neither a big effort for the experimentalists to release it nor a big challenge for the user to construct it.  Besides, with some standardization effort, part of this transmission process can be automatized. 
+
+In this paper we have introduced the formalism for the asymmetric version the SL. 
+The formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: Asymmetry is recognized  as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
+The inclusion of asymmetry was missing in order to obtain a fully reliable SL framework, this question is now settled. 
+
+The asymmetric SL can be built either from the elementary systematic uncertainties themselves or from the three first moments  of the combination of the systematic uncertainties, which are easily obtained via MC generators. 
+In practice, for the transmission of the SL data from an experiment to the public, our recommendation is to simply release the three first moments of the combined uncertainties, much preferably via the HepData repository in the error source format.  The SL framework is flexible in the sense that it can apply to one or more subsets of the systematic uncertainties,  and the HepData error source format  has adequate flexibility to account for any partitions of the uncertainties
+the releaser wishes to make.
+
+
+
+The construction and use of the SL has been exemplified via  a realistic LHC-like pseudo-search for new physics, which is then used to validate the SL method and test its accuracy. 
+This realistic example makes clear that including asymmetry in the SL provides a sensible gain in accuracy, and  that it is unlikely that  higher moments be ever needed. Without surprise, we find the SL tends to become inaccurate in bins with only a few events. Finally, an example of SL data release is provided via this pseudo-search.  The SL data are available on the HepData repository at \textbf{[URL...]}.  
+
+
+
+
+
+
+
+
+
 
 \section*{Acknowledgements}
 
