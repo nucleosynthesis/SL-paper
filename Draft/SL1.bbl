@@ -53,6 +53,13 @@ A.~Arbey, S.~Fichet, F.~Mahmoudi and G.~Moreau, \emph{{The correlation matrix
 \bibitem{Billingsley}
 P.~Billingsley, \emph{Probability and Measure}. Wiley, 2012.
 
+\bibitem{hepdata}
+E.~Maguire, L.~Heinrich and G.~Watt, \emph{{HEPData: a repository for high
+  energy physics data}},
+  \href{https://doi.org/10.1088/1742-6596/898/10/102006}{\emph{J. Phys. Conf.
+  Ser.} {\bfseries 898} (2017) 102006}
+  [\href{https://arxiv.org/abs/1704.05473}{{\ttfamily 1704.05473}}].
+
 \bibitem{CMS-NOTE-2011-005}
 {The ATLAS Collaboration, The CMS Collaboration, The LHC Higgs Combination
   Group}, \emph{Procedure for the {LHC} {Higgs} boson search combination in
@@ -64,12 +71,5 @@ G.~Cowan, K.~Cranmer, E.~Gross and O.~Vitells, \emph{Asymptotic formulae for
   \href{https://doi.org/10.1140/epjc/s10052-011-1554-0}{\emph{Eur. Phys. J. C}
   {\bfseries 71} (2011) 1554}
   [\href{https://arxiv.org/abs/1007.1727}{{\ttfamily 1007.1727}}].
-
-\bibitem{hepdata}
-E.~Maguire, L.~Heinrich and G.~Watt, \emph{{HEPData: a repository for high
-  energy physics data}},
-  \href{https://doi.org/10.1088/1742-6596/898/10/102006}{\emph{J. Phys. Conf.
-  Ser.} {\bfseries 898} (2017) 102006}
-  [\href{https://arxiv.org/abs/1704.05473}{{\ttfamily 1704.05473}}].
 
 \end{thebibliography}\endgroup
