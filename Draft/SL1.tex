@@ -167,7 +167,7 @@ The paper is organized as follows. A summary of the main results is given in Sec
 an interesting result about the next-to-leading term of the CLT and the derivation of the simplified likelihood formula.
 Practical considerations regarding the SL flexibility and the release of the SL via HepData are given in 
 Section~\ref{se:practice}.
-Finally a validatation of the SL framework in a realistic pseudo-search at the LHC is presentedin Section~\ref{se:SL_LHC}. 
+Finally a validation of the SL framework in a realistic pseudo-search at the LHC is presented in Section~\ref{se:SL_LHC}. 
  
 
 %The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified framework, however, there is a number of reasons to keep the next-to-leading
@@ -270,7 +270,7 @@ The reader interested only in the practical aspects of the simplified likelihood
 \subsection{Asymmetries and CLT at next-to-leading order}
 \label{se:skew_CLT}
 
-The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified likelihood framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information, however, keeping the asymmetry is truely critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely when running the analyses. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
+The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified likelihood framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information, however, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely when running the analyses. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
 
 
 The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. However, by using the large $N$ expansion, we have been able to develop a  trick to express the CLT at next-to-leading order in a very simple way. We realize that a random variable $Z$ with characteristic function
@@ -707,7 +707,7 @@ The results of this pseudo-analysis can be reproduced using \textbf{[codes...]}.
 
 %This section contains LHC-specific comments and details in relation to the simplified likelihood framework.
 
-As already mentioned in Sec.~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. Indeed, any mis-estimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
+As already mentioned in Sec.~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. Indeed, any misestimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
 There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of the variations observed in a given process under variations of some underlying parameter of the simulation model, theory, detector resolution, etc. Estimates of the contribution from background processes are obtained either from simulation or through some data-driven method. Often such methods are accompanied by associated  uncertainties which reduce the ability to make precise statements about the expectation from the background.
 These systematic uncertainties are important for new physics searches. In the following section, we describe a pseudo-search for new physics, inspired by those performed at the LHC, and derive the simplified likelihood parameters for it.
 
@@ -795,7 +795,7 @@ This is advantageous since the number of events for this process in any given bi
 \end{equation}
 %
 This is most common in the scenario where a limited number of Monte Carlo simulation events are used to determine the value of $n_{b,I}^{0}$
-and hence there is an associated uncertainy. As these uncertainties will be uncorrelated between bins of the distributions, most of the terms $\epsilon_{Ij}$ will be 0.
+and hence there is an associated uncertainty. As these uncertainties will be uncorrelated between bins of the distributions, most of the terms $\epsilon_{Ij}$ will be 0.
 
 Systematic uncertainties that affect only the overall normalization are also interpolated using exponent functions,
 %
@@ -922,7 +922,7 @@ from the linear SL form, e.g.~for likelihood marginalisation, requires that the
 background rates be positive since they are propagated through the Poisson
 distribution. The quadratic SL provides a controlled solution to this issue,
 as opposed to \emph{ad hoc} methods like use of a log-normal distribution or
-setting negative-rate samples to zero or an infinitessimal value: the 
+setting negative-rate samples to zero or an infinitesimal value: the 
 linear approximation has a negative fraction of $\sim\!11.6\%$, while the
 quadratic form has a negative fraction of exactly zero.
 
@@ -937,14 +937,14 @@ of the signal across all regions of the search, giving,
 \label{eq:muscale}
 \end{equation}
 where the yields $n_{s,I}$ here refer explicitly to the expected contributions from signal for a specified hypothesis.
-In order to remove the dependance of the likelihood on the nuisance parameters, $\bm{\theta}$, two approaches are
+In order to remove the dependence of the likelihood on the nuisance parameters, $\bm{\theta}$, two approaches are
 commonly adopted. The first, termed `profiling`, involves replacing the nuisance parameters with the values at which
 the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.7\textwidth]{figures/testtoy-tmuscan}
-  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the pseudo-search assuming the experimental likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quatratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
+  \caption{Value of $t_{\mu}$ as a function of $\mu$ for the pseudo-search assuming the experimental likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quadratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
   values for which the 68\% and 95\% CL exclusions can be determined, assuming certain asymptotic properties of the distribution of $t_{\mu}$.}
   \label{fig:tmucompare}
 \end{figure}
@@ -959,10 +959,10 @@ The test-statistic $t_{\mu}$ is then defined using the ratio,
 t_{\mu} = -2\ln \frac{L_{\rm{S}}^{\rm{max}}(\mu)}{L_{\rm{S}}^{\rm{max}}},
 \end{equation}
 where $L_{\rm{S}}^{\rm{max}}$ denotes the maximum value of $L_{\rm{S}}^{\rm{max}}(\mu)$ for any value of $\mu$\footnote{The precise definition of the test-statistic used
-as searches at the LHC and the procedures used to determing limits are slightly different to that presented here and are detailed in Ref.~\cite{CMS-NOTE-2011-005}.}.
+as searches at the LHC and the procedures used to determine limits are slightly different to that presented here and are detailed in Ref.~\cite{CMS-NOTE-2011-005}.}.
 Similarly, such likelihood ratios are also used for quantifying some excess in the case of the discovery
 of new physics~\cite{CMS-NOTE-2011-005}.
-The test-statistic can also be constructed for the experimental likelihood $L(\mu,\bm{\delta})\pi(\bm{\delta})$, where the same substitution as ini Eqn.~\ref{eq:muscale} is applied,
+The test-statistic can also be constructed for the experimental likelihood $L(\mu,\bm{\delta})\pi(\bm{\delta})$, where the same substitution as in Eqn.~\ref{eq:muscale} is applied,
 by profiling the elementary
 nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for the full and simplified likelihoods is therefore possible.
 
@@ -1082,7 +1082,7 @@ Moreover, the SL is very simple to transmit requiring neither a big effort for t
 
 In this paper we have introduced the formalism of the asymmetric version of the SL. 
 The formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: asymmetry is recognized as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
-The includion of asymmetry completes the SL and provides a fully reliable framework.
+The inclusion of asymmetry completes the SL and provides a fully reliable framework.
 
 The asymmetric SL can be built either from the elementary systematic uncertainties themselves or from the three first moments  of the combination of the systematic uncertainties, which are easily obtained via Monte Carlo generators. 
 In practice, for the transmission of the SL data from an experiment to the public, our recommendation is to simply release the three first moments of the combined uncertainties, preferably via the HepData repository in the error source format.  The SL framework is flexible in the sense that it can apply to one or more subsets of the systematic uncertainties,  and the HepData error source format  has adequate flexibility to account for any partitions of the uncertainties
