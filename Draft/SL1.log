@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.5.28)  2 AUG 2018 16:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.5.28)  3 AUG 2018 10:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -578,10 +578,10 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 637.
  [11] [12]
-<figures/t.pdf, id=279, 569.12625pt x 177.66376pt>
+<figures/t.pdf, id=278, 569.12625pt x 177.66376pt>
 File: figures/t.pdf Graphic file (type pdf)
 <use figures/t.pdf>
-Package pdftex.def Info: figures/t.pdf  used on input line 761.
+Package pdftex.def Info: figures/t.pdf  used on input line 766.
 (pdftex.def)             Requested size: 639.32349pt x 199.59741pt.
 
 
@@ -590,50 +590,44 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [13] [14 <./figures/t.pdf, page is rotated 90 degrees>] [15
 
 ]
-<figures/compare_62.pdf, id=351, 569.12625pt x 300.12125pt>
+<figures/compare_62.pdf, id=350, 569.12625pt x 300.12125pt>
 File: figures/compare_62.pdf Graphic file (type pdf)
 <use figures/compare_62.pdf>
-Package pdftex.def Info: figures/compare_62.pdf  used on input line 866.
+Package pdftex.def Info: figures/compare_62.pdf  used on input line 872.
 (pdftex.def)             Requested size: 430.20639pt x 226.8718pt.
  [16]
-<figures/plotmatrix.pdf, id=363, 578.16pt x 578.16pt>
+<figures/plotmatrix.pdf, id=362, 578.16pt x 578.16pt>
 File: figures/plotmatrix.pdf Graphic file (type pdf)
 <use figures/plotmatrix.pdf>
-Package pdftex.def Info: figures/plotmatrix.pdf  used on input line 917.
+Package pdftex.def Info: figures/plotmatrix.pdf  used on input line 923.
 (pdftex.def)             Requested size: 430.20639pt x 430.20482pt.
  [17 <./figures/compare_62.pdf, page is rotated 90 degrees>] [18 <./figures/plo
 tmatrix.pdf>]
-<figures/testtoy-tmuscan.pdf, id=471, 462.52798pt x 346.89601pt>
+<figures/testtoy-tmuscan.pdf, id=470, 462.52798pt x 346.89601pt>
 File: figures/testtoy-tmuscan.pdf Graphic file (type pdf)
 <use figures/testtoy-tmuscan.pdf>
-Package pdftex.def Info: figures/testtoy-tmuscan.pdf  used on input line 970.
+Package pdftex.def Info: figures/testtoy-tmuscan.pdf  used on input line 976.
 (pdftex.def)             Requested size: 301.14316pt x 225.86613pt.
 
 [19 <./figures/testtoy-tmuscan.pdf>]
-<figures/varAll_A.pdf, id=540, 569.12625pt x 543.02875pt>
+<figures/varAll_A.pdf, id=539, 569.12625pt x 543.02875pt>
 File: figures/varAll_A.pdf Graphic file (type pdf)
 <use figures/varAll_A.pdf>
-Package pdftex.def Info: figures/varAll_A.pdf  used on input line 995.
+Package pdftex.def Info: figures/varAll_A.pdf  used on input line 1001.
 (pdftex.def)             Requested size: 137.66919pt x 131.35701pt.
-<figures/varAll_B.pdf, id=541, 569.12625pt x 543.02875pt>
+<figures/varAll_B.pdf, id=540, 569.12625pt x 543.02875pt>
 File: figures/varAll_B.pdf Graphic file (type pdf)
 <use figures/varAll_B.pdf>
-Package pdftex.def Info: figures/varAll_B.pdf  used on input line 996.
+Package pdftex.def Info: figures/varAll_B.pdf  used on input line 1002.
 (pdftex.def)             Requested size: 137.66919pt x 131.35701pt.
-<figures/varAll_C.pdf, id=542, 569.12625pt x 543.02875pt>
+<figures/varAll_C.pdf, id=541, 569.12625pt x 543.02875pt>
 File: figures/varAll_C.pdf Graphic file (type pdf)
 <use figures/varAll_C.pdf>
-Package pdftex.def Info: figures/varAll_C.pdf  used on input line 997.
+Package pdftex.def Info: figures/varAll_C.pdf  used on input line 1003.
 (pdftex.def)             Requested size: 137.66919pt x 131.35701pt.
  [20 <./figures/varAll_A.pdf, page is rotated 90 degrees> <./figures/varAll_B.p
 df, page is rotated 90 degrees> <./figures/varAll_C.pdf, page is rotated 90 deg
-rees>] [21]
-Overfull \hbox (41.70515pt too wide) in paragraph at lines 1187--1198
-\OT1/cmr/m/n/10.95 A ref-er-ence im-ple-men-ta-tion in Python code is pro-vided
- in [][]$\OT1/cmtt/m/n/10.95 https : / / github . com / nucleosynthesis /
- []
-
-[22] (./SL1.bbl [23])
+rees>] [21] [22] (./SL1.bbl [23])
 
 FiXme Summary: Number of notes: 0,
 (FiXme)        Number of warnings: 0,
@@ -641,12 +635,12 @@ FiXme Summary: Number of notes: 0,
 (FiXme)        Number of fatal errors: 0,
 (FiXme)        Total: 0.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1226.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1242.
 [24]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1226.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1242.
  (./SL1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1226.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1226.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1242.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1242.
 
 Package rerunfilecheck Info: File `SL1.out' has not changed.
 (rerunfilecheck)             Checksum: 336D26F70CBBF7BE3CDC14B8FCA7F6A8;1254.
@@ -654,19 +648,20 @@ Package rerunfilecheck Info: File `SL1.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1226.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1242.
  ) 
 Here is how much of TeX's memory you used:
- 8982 strings out of 492649
- 131314 string characters out of 6129622
- 245532 words of memory out of 5000000
- 12540 multiletter control sequences out of 15000+600000
- 25696 words of font info for 99 fonts, out of 8000000 for 9000
+ 8984 strings out of 492649
+ 131336 string characters out of 6129622
+ 245780 words of memory out of 5000000
+ 12541 multiletter control sequences out of 15000+600000
+ 25997 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,18n,65p,1171b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,18n,65p,1171b,496s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></
 usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
 sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb>
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -688,9 +683,9 @@ ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2018/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2018/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on SL1.pdf (24 pages, 878690 bytes).
+Output written on SL1.pdf (24 pages, 891444 bytes).
 PDF statistics:
- 836 PDF objects out of 1000 (max. 8388607)
+ 837 PDF objects out of 1000 (max. 8388607)
  557 compressed objects within 6 object streams
  120 named destinations out of 1000 (max. 500000)
  169 words of extra memory for PDF output out of 10000 (max. 10000000)
