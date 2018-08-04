@@ -194,7 +194,7 @@ The data collected in particle physics usually originate from random (quantum) p
 
 A likelihood function $L$ is related to the probability Pr to observe the data given a model $\cal M$, specified by some parameters,
 \be L({\rm parameters})={\rm Pr}({\rm data}|{\cal M},{\rm parameters})\,.\ee
-We denote the observed  quantity as $\hat{n}$ and the expected quantity by $n$, where $n$ depends on the model parameters.   For example, in the case of
+We denote the observed  quantity as $n^{\rm obs}$ and the expected quantity by $n$, where $n$ depends on the model parameters.   For example, in the case of
 a particle physics experiment, these quantities can be the observed and expected number of events that satisfy some selection criteria.
 The full set of parameters includes parameters of interest, here collectively denoted by $\bm{\alpha}$, and \textit{elementary} nuisance parameters $\bm{\delta}=(\delta_1,\ldots,\delta_{j}\ldots,\delta_N)^{\rm{T}}$, which model the systematic uncertainties.
 In the SL framework, we derive a set of \textit{combined} nuisance parameters $\bm{\theta}$. For $P$ independent measurements, there will be $P$ combined nuisance parameters, $\bm{\theta}=(\theta_1,\ldots,\theta_{I},\ldots,\theta_P)^{\rm{T}}$.
@@ -204,8 +204,8 @@ The key result at the basis of  the SL framework is the approximation
 %\fxnote{Need to define all symbols, esp $\hat{n}$}
 \begin{align}
   & L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})
-   = \prod_{I=1}^P \mathrm{Pr}\Big(  \hat{n}_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
-  & \quad \approx \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big) \cdot
+   = \prod_{I=1}^P \mathrm{Pr}\Big(  n^{\rm obs}_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
+  & \quad \approx \prod_{I=1}^P \mathrm{Pr}\Big( n^{\rm obs}_I\,\Big|\,a_{I}(\bm \alpha)+b_I(\bm \alpha)\theta_I+c_I(\bm \alpha)\theta_I^2  \Big) \cdot
     \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1}(\bm \alpha) \bm \theta}}}{\sqrt{(2\pi)^P }}  \equiv L_{\rm{S}}(\bm{\alpha},\bm{\theta})\,, \label{eq:SL_master}
 \end{align}
 where the first line is the exact ``experimental likelihood'' and the second line is the SL. Here $\pi(\bm \delta)$ is the joint probability density distribution for the elementary nuisance parameters. In our assumptions  these are independent from each other, hence the prior factorises as $\pi(\bm \delta)=\prod_{i=1}^N \pi_i(\delta_i)$. The SL formalism  is relevant for $N>P$, which is also the most common case.\footnote{If $P<N$, there are more observed quantities than nuisance parameters.
@@ -224,16 +224,16 @@ The coefficients $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix 
 %\ee
 %In the SL, neglecting 
 Neglecting the systematic uncertainties affecting the signal implies in turn that the parameters of the SL are independent of $\bm \alpha$. Hence the SL Eq.~\eqref{eq:SL_master} takes the form\,\footnote{We have substituted
-$a_I(\alpha)\rightarrow a_I+n_{s,I}(\alpha),~b_I(\alpha)\rightarrow b_I$ and $c_I(\alpha)\rightarrow c_I$.}
+$a_I(\alpha) \equiv a_I+n_{s,I}(\alpha),~b_I(\alpha) \equiv b_I$ and $c_I(\alpha)\equiv c_I$.}
 \begin{equation}
  L_{\rm{S}}(\bm{\alpha},\bm{\theta})=
-\prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
+\prod_{I=1}^P \mathrm{Pr}\Big( n^{\rm obs}_I \, \Big| \, n_{s,I}(\bm{\alpha})+a_I+ b_I\theta_I+c_I\theta_I^2  \Big) \cdot
 \frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
 \end{equation}
 which is the expression we use in the rest of this paper. This expression is valid for data with any statistics of observation, however, since the data in particle physics are often observed event counts, $n_{I}^{\rm{obs}}$, the data will typically follow Poisson statistics such that
 \be
-\textrm{Pr}(\hat{n}_{I}|n_{I})\equiv \textrm{Pois}({n}^{\rm{obs}}_{I}|n_{I}) = \dfrac{(n_{I})^{{n}^{\rm{obs}}_{I}} \mathrm{e}^{-n_{I}}}{{n}^{\rm{obs}}_{I}!} \, .
+\textrm{Pr}(n^{\rm obs}_{I}|n_{I})\equiv \textrm{Pois}({n}^{\rm{obs}}_{I}|n_{I}) = \dfrac{(n_{I})^{{n}^{\rm{obs}}_{I}} \mathrm{e}^{-n_{I}}}{{n}^{\rm{obs}}_{I}!} \, .
 \ee
 
 The parameters of the SL ($a_I, b_I, c_I, \rho_{IJ}$) have analytical expressions
@@ -288,8 +288,8 @@ The reader interested only in the practical aspects of the SL framework can safe
 The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the SL framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information, however, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely when running the analyses. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
 
 
-The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. However, by using the large $N$ expansion, we are able to develop a  trick to express the CLT at next-to-leading order in a very simple way. 
-\textcolor{blue}{[SK: I would prefer to avoid the word `trick' here and in the following two instances below: we are able to express, and below one can say method instead of trick]}
+The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. However, by using the large $N$ expansion, we are able to  to express the CLT at next-to-leading order in a very simple way. 
+%\textcolor{blue}{[SK: I would prefer to avoid the word `trick' here and in the following two instances below: we are able to express, and below one can say method instead of trick]}
 We realize that a random variable $Z$ with characteristic function
 \be
 \varphi_Z(t)=\exp\left(-\frac{\sigma^2 t^2}{2}-i \frac{\gamma t^3}{6 \sqrt{N}} +O\left(\frac{t^4}{N}\right)\right) \label{eq:CF_CLT}
@@ -301,9 +301,9 @@ Z= \theta+\frac{\gamma}{3\sqrt{N}}\theta^2\,,  \quad \textrm{with } \quad \theta
 We will refer to this type of expression as ``normal expansion''. Details about its derivation are given in Appendix~\ref{app:skew}.
 
 
-Equation~\eqref{eq:ZskewCLT}  readily gives the most basic CLT at next-to-leading order when assuming $Z=N^{-1/2}\sum_{j=1}^N \delta_j$, where the $\delta_j$ are  independent identically distributed centred nuisance parameters  of variance $\sigma^2$ and third moment $\gamma$. The trick applies similarly to the Lyapunov CLT, \ie\ when the $\delta_j$ are not identical, in which case one has defined $\sigma^2=N^{-1}\sum_{j=1}^N \sigma_j^2$, $\gamma=N^{-1}\sum_{j=1}^N \gamma_j$,
+Equation~\eqref{eq:ZskewCLT}  readily gives the most basic CLT at next-to-leading order when assuming $Z=N^{-1/2}\sum_{j=1}^N \delta_j$, where the $\delta_j$ are  independent identically distributed centred nuisance parameters  of variance $\sigma^2$ and third moment $\gamma$. The method works similarly with the Lyapunov CLT, \ie\ when the $\delta_j$ are not identical, in which case one has defined $\sigma^2=N^{-1}\sum_{j=1}^N \sigma_j^2$, $\gamma=N^{-1}\sum_{j=1}^N \gamma_j$,
 
-Finally, our trick applies similarly to the multidimensional case where various linear combinations of the $\delta_j$ give rise to various $Z_I$. The $Z_I$ have covariance matrix $\Sigma_{IJ}$ and a skewness tensor $\gamma_{IJK}={\rm E}[Z_IZ_JZ_K]$. For our purposes, we neglect the non-diagonal elements of $\gamma$, keeping only  the diagonal elements, denoted $\gamma_{III}\equiv \gamma_I$. These diagonal elements encode the leading information about asymmetry, while the non-diagonal ones contain subleading information about asymmetry and correlations. With this approximation, we obtain the multidimensional CLT at next-to-leading order,
+Finally, our approach applies similarly to the multidimensional case where various linear combinations of the $\delta_j$ give rise to various $Z_I$. The $Z_I$ have covariance matrix $\Sigma_{IJ}$ and a skewness tensor $\gamma_{IJK}={\rm E}[Z_IZ_JZ_K]$. For our purposes, we neglect the non-diagonal elements of $\gamma$, keeping only  the diagonal elements, denoted $\gamma_{III}\equiv \gamma_I$. These diagonal elements encode the leading information about asymmetry, while the non-diagonal ones contain subleading information about asymmetry and correlations. With this approximation, we obtain the multidimensional CLT at next-to-leading order,
 \be
 Z_I\rightarrow \theta_I+\frac{\gamma_{I}}{3\sqrt{N}}\theta_I^2\,,\,\,N\rightarrow \infty  \quad \textrm{with } \quad \theta_I\sim{\cal N}(0,\Sigma)\,. \label{eq:NLCFT}
 \ee
@@ -439,7 +439,7 @@ n_{I}\approx n^{0}_{I}\left(1+ \Delta_{1,I}\cdot \boldsymbol{\delta}\right)\, \l
 \ee
 from Eq.~\eqref{eq:comb_def}.
 We now make  the key observation that this quantity is the sum of a large number of independent random variables. These are exactly the conditions for a central limit theorem to apply.
-As all the elementary uncertainties have in principle different shape and magnitudes we apply Lyapunov's CLT \cite{Billingsley}. We can for instance use Lyapunov's condition on the third moment, and the theorem read as follows. If 
+As all the elementary uncertainties have in principle different shape and magnitudes we apply Lyapunov's CLT \cite{Billingsley}. We can for instance use Lyapunov's condition on the third moment, and the theorem reads as follows. If 
 \be
 \quad\frac{{\bf E}[(n_I-{\bf E}[n_I])^3]}{{\bf E}[(n_I-{\bf E}[n_I])^2]^{3/2}}\sim\frac{6 c_I}{b_I}\rightarrow 0 \quad \,\textrm{for} \quad N\rightarrow \infty
 \ee
@@ -496,9 +496,9 @@ the distribution is so asymmetric that the variance comes entirely from the $\th
  The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$. It turns out that except near the above mentioned limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield.
 
  Let us finally check how well the approximation performs. The true and approximate densities are compared in Fig.~\ref{fig:approxs}.   When the true density is vanishing in the region $n<0.5$, the approximation is excellent.  For larger asymmetry, $\sigma \sim 0.35-0.4$, the true density starts to be sizeable in the region $n<0.5$. The approximate density is still reasonably good away from $n\sim 0.5$. However, near this boundary, the approximate density tends to increase and possibly peak, somehow to account for  the area at $n<0.5$ that it cannot reproduce.
- This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the LHC-like analysis implemented in next section.
+ This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the LHC-like analysis implemented in Sec.~\ref{se:SL_LHC}.
 
-   Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100-150\%$. This is a moderate value, however one should keep in mind that these considerations apply to the combined uncertainties, for which small skewness is typical. The accuracy of the SL framework will be tested in a realistic setup in the next section.
+   Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100-150\%$. This is a moderate value, however one should keep in mind that these considerations apply to the combined uncertainties, for which small skewness is typical. The accuracy of the SL framework will be tested in a realistic setup in Sec.~\ref{se:SL_LHC}.
 
 
 
@@ -512,7 +512,7 @@ the distribution is so asymmetric that the variance comes entirely from the $\th
 \includegraphics[width=0.7\textwidth]{figures/PlotLogNormal.pdf}
 \end{center}
 \caption{\label{fig:approxs}
-The normal approximation for a Poisson and a log-normal distribution. Black curves show the true distributions, red curves show the approximate distributions. \textcolor{blue}{[SK: it is hard to see what is what in this plot; a journal won't accept this. Please do the lines for $\sigma=0.1$, $0.3$ and $0.45$ in three different colours, with the true distributions as solid lines and the approx ones as dashed ones.]}
+The normal approximation of a log-normal distribution for various values of $\sigma$. Plain curves show the true distributions, dashed curves show the approximate distributions. 
 }
 \end{figure}
 
@@ -537,7 +537,7 @@ An important feature of the SL is that it is flexible in the sense that the comb
 
 For instance, if a single systematic uncertainty $\bm{\theta}$ is left apart from the combination, the SL takes the form
 \be
- L_{\rm{S}}(\bm{\alpha},\bm{\theta}) = \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm{\alpha})+b_I\theta_I+c_I\theta_I^2 + \Delta_I  \delta+   \Big) \cdot
+ L_{\rm{S}}(\bm{\alpha},\bm{\theta}) = \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm{\alpha})+b_I\theta_I+c_I\theta_I^2 + \Delta_I  \delta   \Big) \cdot
     \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1} \bm \theta}}}{\sqrt{(2\pi)^P }}
     \cdot \pi(\delta) \,. \label{eq:SL_variants1}
 \ee
@@ -553,7 +553,7 @@ The SL naturally accommodates any such partitions. It is actually  commonplace i
 This is useful %for mere informative purpose but also for further reinterpretations.
 not only for informative purpose but also for further interpretations. 
 For example the theoretical uncertainties may be improved later on %, hence members of the community should be able to change them with no loss of consistency. 
-and it is clearly of advantage if their effect can re-evaluated without having to re-analyse the whole data (which could only be done by collaboration insiders).\footnote{Such combination of theoretical uncertainties  has been done in \cite{Arbey:2016kqi}  for the Higgs production and decay rates and can be implemented in a Higgs SL.}
+and it is clearly of advantage if their effect can be re-evaluated without having to re-analyse the whole data (which could only be done by collaboration insiders).\footnote{Such combination of theoretical uncertainties  has been done in \cite{Arbey:2016kqi}  for the Higgs production and decay rates and can be implemented in a Higgs SL.}
 Another reason to single out a nuisance parameter  from the combination (as shown in Eq.~\eqref{eq:SL_variants1})
 is if it has a large non-Gaussian PDF that one prefers to take into account exactly.
 In order to profit from the  versatility of the SL, an equally  versatile format is needed to release the SL data. This will be the topic of next subsection.
@@ -647,7 +647,7 @@ mixture of presentation styles:
   sources is indicated via the labels, (\eg, a ''\texttt{stat}'' label to be a
   purely diagonal contribution, a ``\texttt{lumi}'' label to be 100\% correlated
   across all bins, and all other labeled uncertainties treated as orthogonal).
-  The correlation or covariance matrices can be constructed using \textbf{[TODO?]}.
+  The correlation or covariance matrices can be constructed using Eq.~\eqref{eq:sum_errsource}.
   This format presents the second-order data in the form of ``effective''
   elementary uncertainties.
 
@@ -674,7 +674,9 @@ the associations between datasets is trivial.
 
 In the error source format, the $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$ moments are
 \textit{all} encoded in the form of labeled vectors. The $m_{2,IJ}$ matrix is
-reconstructed via a sum of the form \be m_{2,IJ}= \sum {a_{I,i}a_{J,i}} \, \ee
+reconstructed via a sum of the form \be m_{2,IJ}= \sum {a_{I,i}a_{J,i}} \, 
+\label{eq:sum_errsource}
+\ee
 where the $a_{I,i}$ are the released error sources.
 %The statistical uncertainties as well as
 The vector of third order data can be  indicated via a special label.
@@ -780,7 +782,7 @@ It is typical in experimental searches of this type to classify systematic uncer
 bins (eg uncertainties due to limited MC simulation).
 
 The expected (or nominal)\footnote{It should be noted that the expectation value for $n_{b,I}$ is \emph{not} necessarily the same as the mean value. For this reason, we typically refer
-to this as the `nominal' value since it is the value attained when the elementary nuisance parameters are equal to their expectation values $\underline{\delta}=0$.} number of background events, due to a particular process, in a given bin ($I$) in %Eqn.~\ref{se:EL_SL} 
+to this as the `nominal' value since it is the value attained when the elementary nuisance parameters are equal to their expectation values $\mathbf{\delta}=0$.} number of background events, due to a particular process, in a given bin ($I$) in %Eqn.~\ref{se:EL_SL} 
 Eq.~\eqref{eq:SL_master} is denoted by
 %
 \begin{equation}
@@ -788,7 +790,7 @@ Eq.~\eqref{eq:SL_master} is denoted by
   f_{I}(\bm{\delta}) N(\bm{\delta}),
 \end{equation}
 %
-where the process index ($k$) is suppressed here as we only have a single background process. The functions $N(\bm{\delta})$ and  $f_{I}(\bm{\delta})$ are is the total number of expected events for that process in a particular
+where the process index ($k$) is suppressed here as we only have a single background process. The functions $N(\bm{\delta})$ and  $f_{I}(\bm{\delta})$ are the total number of expected events for that process in a particular
 category and the fraction of those events expected in bin $I$, respectively, for a specified value of $\bm{\delta}$. Often, these functions are not known exactly and some interpolation is performed between known
 values of $n_{I}$ at certain values of $\bm{\delta}$. For each uncertainty, $j$, which affect the fractions, $f_{I}$, a number of different interpolation schemes exist. One common method, however, is to interpolate between
 three distribution templates representing three values of $\delta_{j}$. Typically, these are for $\delta_{j}=0$, the nominal value, and $\delta_{j}=\pm1$ representing the plus and minus $1\sigma$ variations due to that uncertainty.
@@ -814,7 +816,8 @@ and linear outside that range such that,
 
 The values of $\kappa_{Ij}^{-}$ and $\kappa_{Ij}^{+}$ are understood to be determined using the ratios of the template for a $-1\sigma$ variation to the nominal one and the $+1\sigma$
 variation to the nominal one, respectively. The choice of using a quadratic interpolation and linear extrapolation is to avoid assuming to large a variation beyond the known
-values\footnote{The validity of this interpolation scheme can (and frequently is) tested by comparing the interpolation to templates for additional, known values of $f_{I}$ for $\delta_{j}$ values other than $0,-1$ and $1$.}.
+values.\footnote{The validity of this interpolation scheme can (and frequently is) tested by comparing the interpolation to templates for additional, known values of $f_{I}$ for $\delta_{j}$ values other than $0,-1$ and $1$.}
+\textbf{[Typo in the previous sentence]}
 
 For uncertainties which directly modify the expected number of events $n_{i}$ of the distributions, an exponent interpolation is used as the parameterization.
 This is advantageous since the number of events for this process in any given bin is always greater than 0 for any value of $\delta_{j}$. For a relative uncertainty $\epsilon_{Ij}$, the fraction varies as
@@ -1021,7 +1024,7 @@ The coefficients are calculated for three bins, $I=4,62$ and $86$, using indepen
 of the resulting distribution of each coefficient provides an estimate for how much variation can be expected in the calculation 
 of the coefficients given a limited pseudo-data sample size. The RMS values are normalised to the RMS of the distributions resulting from a sample size of 
 100,000 pseudo-datasets to give a relative RMS. Figure~\ref{fig:SLConvergence} shows the relative RMS of the distribution of the 
-coefficients calculated using increasing numbers of of pseudo-datasets. 
+coefficients calculated using increasing numbers of pseudo-datasets. 
 
 The coefficients $a$ and $b$ can be calculated with relatively high precision using only 1000 pseudo-datasets in each case. The determination of 
 the $c$ coefficient for bin 4 
@@ -1129,8 +1132,10 @@ an important gain
 in accuracy, and  that it is unlikely that higher moments will be needed. %We find 
 We also note that the SL tends to become inaccurate in bins with only a few events. Finally, this pseudo-search is used to provide an example of SL data release.  The SL data are available on the HepData repository at \textbf{[URL...]}.  
 
-\textcolor{blue}{[SK: concluding remark?]}
-We hope our method will be adopted by both the experimental and theory communities for a better documentation and re-interpretation of the LHC results. Or: If systematically adopted by the experimental and theory communities, the SL has the potential to considerably improve both the documentation and the re-interpretation of the LHC results.
+%\textcolor{blue}{[SK: concluding remark?]}
+%We hope our method will be adopted by both the experimental and theory communities for a better documentation and re-interpretation of the LHC results. Or:
+
+ If systematically adopted by the experimental and theory communities, the SL has the potential to considerably improve both the documentation and the re-interpretation of the LHC results.
 
 
 
