@@ -734,11 +734,11 @@ The results of this pseudo-analysis can be reproduced using \textbf{[codes...]}.
 
 %This section contains LHC-specific comments and details in relation to the simplified likelihood framework.
 
-As already mentioned in Section~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. Indeed, any misestimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
-There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of the variations observed in a given process under variations of some underlying parameter of the simulation model, theory, detector resolution, etc. Estimates of the contribution from background processes are obtained either from simulation or through  data-driven methods. Often such methods are accompanied by associated  uncertainties which reduce the ability to make precise statements about the expectation from the background.
-These systematic uncertainties are important for new physics searches. 
-\textcolor{blue}{[SK: I don't understand the purpose of the previous two sentences]}
-In the following section, we describe a pseudo-search for new physics, inspired by those performed at the LHC, and derive the SL parameters for it.
+As already mentioned in Section~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. 
+Imperfect knowledge of detector effects or approximations used in the underlying theoretical models will lead to uncertainties in the predictions of these processes.
+Any mis-estimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
+There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of how the estimation of a given process which change under variations of some underlying parameter of the simulation model, theory, detector resolution, etc. Estimates of the contribution from background processes are obtained either from simulation or through  data-driven methods.
+In the following section, we describe a pseudo-search for new physics, inspired by those performed at the LHC, in which s and derive the SL parameters for it.
 
 
 
@@ -815,9 +815,7 @@ and linear outside that range such that,
 \end{equation}
 
 The values of $\kappa_{Ij}^{-}$ and $\kappa_{Ij}^{+}$ are understood to be determined using the ratios of the template for a $-1\sigma$ variation to the nominal one and the $+1\sigma$
-variation to the nominal one, respectively. The choice of using a quadratic interpolation and linear extrapolation is to avoid assuming to large a variation beyond the known
-values.\footnote{The validity of this interpolation scheme can (and frequently is) tested by comparing the interpolation to templates for additional, known values of $f_{I}$ for $\delta_{j}$ values other than $0,-1$ and $1$.}
-\textbf{[Typo in the previous sentence]}
+variation to the nominal one, respectively\footnote{The accuracy of this interpolation scheme can be (and frequently is) tested by comparing the interpolation to templates for additional, known values of $f_{I}$ for $\delta_{j}$ values other than $0,-1$ and $1$.}.
 
 For uncertainties which directly modify the expected number of events $n_{i}$ of the distributions, an exponent interpolation is used as the parameterization.
 This is advantageous since the number of events for this process in any given bin is always greater than 0 for any value of $\delta_{j}$. For a relative uncertainty $\epsilon_{Ij}$, the fraction varies as
