@@ -270,7 +270,10 @@ Near this limit,  the asymmetry becomes large and the approximation inaccurate
 because higher order terms $O(\theta_I^3)$  would need to be included in %the expressions of the SL 
 Eq.~\eqref{eq:SL_master}. In practice, however, this requires a high skewness of the nuisance parameters, and the SL framework up to quadratic order is sufficient for most applications.
 
-This method will be used in the examples shown in the rest of the paper. This means that if one is provided with the moments $m_{1}$ and $m_{3}$ for each bin and the covariance matrix $m_{2,IJ}$, the SL parameters are completely defined. Moreover, in the case where the nuisance parameters affect only the background rate Eq.~\eqref{eq:SL_LHC}, this computation has to be realized only once and the resulting likelihood can be used for any kind of signal by appropriate substitution of $n_{s}(\bm{\alpha})$.
+This method will be used in the examples shown in the rest of the paper. 
+ This means that if one is provided with the moments $m_{1}$ and $m_{3}$ for each bin and the covariance matrix $m_{2,IJ}$, the SL parameters are completely defined. Moreover, in the case where the nuisance parameters affect only the background rate Eq.~\eqref{eq:SL_LHC}, this computation has to be realized only once and the resulting likelihood can be used for any kind of signal by appropriate substitution of $n_{s}(\bm{\alpha})$.
+
+A reference code implementing the SL and subsequent test statistics is described in App.~\ref{sec:reference_code} and is available at \textbf{[URL]}.   
 
 % We close this section with more specific remarks about LHC likelihoods.
 
@@ -424,9 +427,7 @@ c_I=\frac{a_I}{6}\sum_{i=1}^N \gamma_i(\Delta_{1,i})^3+O(\Delta^4) \label{eq:gam
 %\gamma_I=\frac{1}{6}\sum_{i=1}^N \gamma_i\Delta_{1,i}^3+O(\Delta^4) \label{eq:gam_comb}
 %\ee
 where the $O(\Delta^4)$ denotes higher order terms like $\tr(\Delta_{2,I}^{\rm T}\cdot\Delta_{2,I})$, $(\tr\Delta_{2,I})^2$, $\Delta_{1,I}^{\rm T}\cdot\Delta_{1,I}\tr\Delta_{2,I}$ which are neglected.
-When $\gamma_i\rightarrow 0$  one recovers the expressions obtained in Ref.~\cite{Fichet:2016gvx}.\footnote{For simplicity we show here the expressions assuming $c_I\ll b_I$, as it is sufficient in the scope of the proof. For sizeable $c_I$, one should instead solve the system  
-%shown in Eqs.~\eqref{eq:moments1}-\eqref{eq:moments2}, \eqref{eq:solutions1}-\eqref{eq:solutions2}.  
-of Eqs.~\eqref{eq:moments1}---\eqref{eq:solutions2}}
+When $\gamma_i\rightarrow 0$  one recovers the expressions obtained in Ref.~\cite{Fichet:2016gvx}.\footnote{For simplicity we show here the expressions assuming $c_I\ll b_I$, as it is sufficient in the scope of the proof. For sizeable $c_I$, one should instead use the exact solutions of the system, Eqs.~\eqref{eq:solutions1}---\eqref{eq:solutions2}.}
 
 
 Importantly,    the $\Delta_2$ term contributes at leading order only in the mean value
@@ -727,7 +728,9 @@ Summarizing, our recommendation is to release the moments of the combined uncert
 In this section we introduce a realistic pseudo-analysis that is representative of a search for new physics at the LHC. This analysis will be used to validate the SL method and to test  its accuracy in realistic conditions. It is also used to validate the SL reference code %provided in \textbf{[...]}. 
 presented in Appendix~B.
 Finally, this pseudo-analysis  provides a concrete example  of  SL data release via the HepData error source format. 
-The results of this pseudo-analysis can be reproduced using \textbf{[codes...]}.
+The SL and subsequent results of the pseudo-search can be reproduced using these data. 
+
+
 
 
 
@@ -738,7 +741,7 @@ As already mentioned in Section~\ref{se:EL_SL}, the dominant systematic uncertai
 Imperfect knowledge of detector effects or approximations used in the underlying theoretical models will lead to uncertainties in the predictions of these processes.
 Any mis-estimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
 There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of how the estimation of a given process which change under variations of some underlying parameter of the simulation model, theory, detector resolution, etc. Estimates of the contribution from background processes are obtained either from simulation or through  data-driven methods.
-In the following section, we describe a pseudo-search for new physics, inspired by those performed at the LHC, in which s and derive the SL parameters for it.
+In the following section, we describe a pseudo-search for new physics, inspired by those performed at the LHC, in which systematic uncertainties are included, and derive the SL parameters for it.
 
 
 
@@ -862,10 +865,13 @@ Only by summing over all of these backgrounds (\ie\ $n_{b,I}=\sum_{p}n_{b,p,I}$ 
 
 %Using our pseudo-search, we compare the experimental and simplified likelihoods. \fxnote{Do we want a whole separate section for this after setting up the toy? We can compare 1. distributions (1D and 2D), 2. frequentist (profiled) and Bayesian (marginalised) likelihoods.}
 
+Here we compare the true and simplified likelihoods arising from the pseudo-search. It is also instructive to consider the simplified likelihood obtained when neglecting the third moments, \textit{i.e.} when setting the coefficients of the quadratic terms $c_I$ to zero in Eq.~\eqref{eq:SL_master}. This less accurate version of the SL will be  referred to as ``symmetric SL'', as opposed to the more precise ``asymmetric SL'' developed in this work. 
+
+
 We constructed 100,000 pseudo-datasets by taking random values ${\hat{\bm{\delta}}}$, generated according to $\pi(\bm{\delta})$, and evaluating
 $n_{b,I}(\hat{\bm{\delta}})$ for each dataset according to the Eq.~\eqref{eqn:expt_param}. Figure~\ref{fig:distributions} shows the distribution of $\hat{n}_{i}$, for an example bin, $i=62$,
 from the SL. The values of $m_{1},~m_{2}$ and $m_{3}$ are calculated using the pseudo-datasets and subsequently used to calculate the coefficients for the SL.
-For comparison, the distribution obtained if the third moment is neglected is also shown.
+
 %In this case, the In the case where the skew of the distribution, defined as $m_{3,I}/(m_{2,II})^{\frac{3}{2}}$, is small
 
 \begin{figure}[t]
@@ -900,20 +906,26 @@ For comparison, the distribution obtained if the third moment is neglected is al
 
 In Figure~\ref{fig:distributions2d} 2D projections of the background
 distributions are shown between four pairs of signal-region bins: bin pair
-$(4,7)$ shows a projection for high-statistics bins where both the linear and
-quadratic forms of the SL agree closely with the true distribution (that obtained in the pseudo-datasets);
+$(4,7)$ shows a projection for high-statistics bins where both the asymmetric and symmetric  SL agree closely with the true distribution (that obtained in the pseudo-datasets);
 the true distribution in $(4,62)$ starts to display deviations from the multivariate
-normal approximation which are well captured by the quadratic approximation. This is
+normal approximation which are well captured by the asymmetric SL. This is
 expected when the skew, defined as $m_{3,I}/(m_{2,II})^{\frac{3}{2}}$, is small.
 However, in the bottom pair of plots with bins~4 and~62 joint with the low-statistics
 bin~86, the proximity of the mean rate to zero induces a highly asymmetric
-Poisson distribution which neither approximation can model well. In these last
-two plots, it can be seen that the quadratic-order SL peaks at too low a value,
+Poisson distribution which neither SLs can model well. In these last
+two plots, it can be seen that the asymmetric SL peaks at too low a value,
 near a sudden cutoff also seen in Figure~\ref{fig:distributions}, while the
-linear form peaks at too high a value.  Systematic relaxation of the
-quadratic-form cutoff to more closely model the true pdf would require
+symmetric SL peaks at too high a value. 
+In this region a better modelling would  require
 evaluation of higher-order coefficients (and/or off-diagonal skew terms) and
 hence higher moments of the experimental distributions.
+
+
+% Systematic relaxation of the
+%quadratic-form cutoff to more closely model the true pdf
+% would require
+%evaluation of higher-order coefficients (and/or off-diagonal skew terms) and
+%hence higher moments of the experimental distributions.
 
 \begin{figure}[t]
   \centering
@@ -926,15 +938,15 @@ hence higher moments of the experimental distributions.
     % $I=4, 7, 31$ and 62 in pseudo-datasets generated from the
     experimental pseudo-search (black points) as described in the text. The
     background heat map is generated from 100,000 samples from the true 
-    model, the dashed red contours from the linear SL form, and the solid
-    green contours from the quadratic SL form. The diagonal panels show the
+    model, the dashed red contours from the symmetric SL, and the solid
+    green contours from the asymmetric SL. The diagonal panels show the
     1D distribution in each of the bins for the toys (black histograms), and the
-    symmetric (red histograms) and asymmetric (green histograms) SL approximations.
+    symmetric (red histograms) and asymmetric (green histograms) SLs.
     In the pair of
     high-statistics bins in the top-left plot, clear agreement is seen between
-    the linear and quadratic SL forms; in the top-right, deviations start to
+    the symmetric and asymmetric  SLs; in the top-right, deviations start to
     appear, and in the low-statistics bin~$J=86$ of the bottom plot the
-    asymmetry is seen to become very significant, and the linear SL form has a
+    asymmetry is seen to become very significant, and the symmetric  SL form has a
     significant probability density fraction in the negative-yield region.}
   \label{fig:distributions2d}
 \end{figure}
@@ -946,16 +958,15 @@ hence higher moments of the experimental distributions.
 %  \caption{1D and 2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{J}$ for $\{I,J\}=4,7,31,62,86$.}
 %\end{figure}
 
-An advantage of the quadratic form cutoff is that a strictly positive
-approximate distribution can be guaranteed, while the linear form can have a
+An advantage of the asymmetric SL is that a strictly positive
+approximate distribution can be guaranteed, while the symmetric SL can have a
 significant negative yield fraction as seen in the figures for bin~86. Sampling
-from the linear SL form, \eg\ for likelihood marginalisation, requires that the
+from the symmetric SL, \eg\ for likelihood marginalisation, requires that the
 background rates be positive since they are propagated through the Poisson
-distribution. The quadratic SL provides a controlled solution to this issue,
+distribution. The asymmetric SL provides a controlled solution to this issue,
 as opposed to \emph{ad hoc} methods like use of a log-normal distribution or
-setting negative-rate samples to zero or an infinitesimal value: the 
-linear approximation has a negative fraction of $\sim\!11.6\%$, while the
-quadratic form has a negative fraction of exactly zero.
+setting negative-rate samples to zero or an infinitesimal value: the symmetric SL has a negative fraction of $\sim\!11.6\%$, while the
+asymmetric SL has a negative fraction of exactly zero.
 
 Typically in searches for new physics, limits on models for new physics
 are determined using ratios of the likelihood at different values of the parameters of interest.
@@ -1012,7 +1023,7 @@ nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for
 
 
 Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a function of $\mu$ for the pseudo-search between the full (experimental)
-likelihood and the SL. In addition, the result obtained using only the linear terms of the simplified is shown. As expected, the
+likelihood and the asymmetric SL. In addition, the result obtained using only the symmetric SL is shown. As expected, the
 agreement between the full and simplified likelihood is greatly improved when including the quadratic term. A horizontal line is drawn at the value of
 $t_{\mu}= 3.86$. The agreement in this region is particularly relevant due to the fact that asymptotic approximations for the distributions of $t_{\mu}$~\cite{Cowan:2010js} allow one to determine the 95\% confidence level (CL) upper limit on the signal strength, $\mu_{\rm{up}}$.
 The signal hypothesis is `excluded' at 95\% CL if $\mu_{\rm{up}} < 1$.
