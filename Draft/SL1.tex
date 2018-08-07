@@ -1006,7 +1006,8 @@ Similarly, such likelihood ratios are also used for quantifying some excess in t
 of new physics~\cite{CMS-NOTE-2011-005}.
 The test-statistic can also be constructed for the experimental likelihood $L(\mu,\bm{\delta})\pi(\bm{\delta})$, where the same substitution as in Eq.~\eqref{eq:muscale} is applied,
 by profiling the elementary
-nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for the full and simplified likelihoods is therefore possible.
+nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for the full and simplified likelihoods, as a function of $\mu$, 
+is therefore possible.
 
 \begin{figure}[t]
   \centering
@@ -1028,18 +1029,30 @@ agreement between the full and simplified likelihood is greatly improved when in
 $t_{\mu}= 3.86$. The agreement in this region is particularly relevant due to the fact that asymptotic approximations for the distributions of $t_{\mu}$~\cite{Cowan:2010js} allow one to determine the 95\% confidence level (CL) upper limit on the signal strength, $\mu_{\rm{up}}$.
 The signal hypothesis is `excluded' at 95\% CL if $\mu_{\rm{up}} < 1$.
 
-We performed a study of the rate of convergence of the SL coefficients by calculating them using different numbers of pseudo-datasets. 
-The coefficients are calculated for three bins, $I=4,62$ and $86$, using independent sets of a fixed number of pseudo-datasets. The root mean square (RMS) 
-of the resulting distribution of each coefficient provides an estimate for how much variation can be expected in the calculation 
-of the coefficients given a limited pseudo-data sample size. The RMS values are normalised to the RMS of the distributions resulting from a sample size of 
-100,000 pseudo-datasets to give a relative RMS. Figure~\ref{fig:SLConvergence} shows the relative RMS of the distribution of the 
+When determining the SL coefficients, we have relied on pseudo-datasets, as we expect this will often be the case for anyone providing SL 
+inputs for real analyses. The accuracy of the SL coefficients will necessarily depend on the number of pseudo-datasets used to calculate them. 
+To investigate this, we have performed a study of the rate of convergence of the SL coefficients by calculating them using several different 
+numbers of pseudo-datasets, the largest being 100,000 pseudo-datasets.  
+The coefficients for the three bins calculated using 100,000 pseudo-datasets are; $a=84.9,~b=8.27,~c=0.32$ for bin 4, 
+$a=2.61,~b=0.90,~c=0.11$ for bin 62, and $a=0.90,~b=0.47,~c=0.13$ for bin 86. 
+The calculation of the coefficients is repeated using many independent sets of a fixed number of pseudo-datasets, resulting in a distribution of 
+calculations for each coefficient. 
+The root mean square (RMS)  of the resulting distributions provides an estimate for how much variation can be expected in the calculation 
+of the SL coefficients given a limited pseudo-data sample size. 
+The RMS values are normalised to the RMS of the distributions resulting from a sample size of 
+100,000 pseudo-datasets to give a relative RMS. 
+Figure~\ref{fig:SLConvergence} shows the relative RMS of the distribution of the 
 coefficients calculated using increasing numbers of pseudo-datasets. 
 
-The coefficients $a$ and $b$ can be calculated with relatively high precision using only 1000 pseudo-datasets in each case. The determination of 
+The coefficients $a$ and $b$ can be calculated with relatively high precision using only 1000 pseudo-datasets in each case. This is true 
+whether the value of $b$ is large compared to $a$, as in the case of bin 86, or not, as in the case of bin 4. The determination of 
 the $c$ coefficient for bin 4 
-however is slower to converge, requiring 5000--10,000 pseudo-datasets to calculate accurately. However, since the value of $m_{3}$ for this bin is 
-relatively small compared to $m_{2}$, the coefficient $c$ is less relevant in this case and so a poor accuracy will have little effect on the accuracy of 
-the SL.
+however is slower to converge, requiring 5000--10,000 pseudo-datasets to calculate accurately. However, since the value of $c$ for this bin is 
+relatively small compared to $b$, the coefficient $c$ is less relevant so that a poor accuracy will have little effect on the accuracy of 
+the SL. In bin 86, the value of $c$ is relatively large, compared to $b$, meaning it will significantly contribute to the SL. In this case, 
+the convergence is quite fast, with only 2,500 pseudo-datasets required to acheive a 10\% accuracy in the value of $c$. We find the property 
+that bins with large $c$ values, compared to $b$ values, require fewer pseudo-datasets to acheive a good accuracy than bins for which the $c$ value 
+is less relevant generally holds in this study. 
 
 %\fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
 %  extractions between true, symm/linear, and asymm/quadratic forms}
@@ -1157,7 +1170,7 @@ We also note that the SL tends to become inaccurate in bins with only a few even
  This work has been initiated at the \textit{LHC Chapter II: The Run for New Physics} workshop held at IIP Natal, Brazil,  6--17 Nov.\ 2017. 
  AB's work is supported by a Royal Society University Research Fellowship grant.
  SF's work is supported by the S\~ao Paulo Research Foundation (FAPESP) under grants \#2011/11973 and \#2014/21477-2.
-
+ NW's work is funded through a Science and Techologies Facility Council (STFC) Fellowship grant \#ST/N003985/1.
 
 \appendix
 
