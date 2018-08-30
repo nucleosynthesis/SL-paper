@@ -1,0 +1,21 @@
+# Start a new YAML document to indicate a new data table.
+name: "Table 1 - observation and expected signal"
+description: Observed event yields and expected signal contribution in each bin of the search.
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [P P --> X]}
+  - {name: phrases, values: [BSM Searches, Simplified Likelihoods]}
+data_file: Table_1.yaml
+---
+name: "Table 2 - first and third moments"
+description: Moments $m_{1}$ and $m_{3}$ for each bin of the search.
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [P P --> X]}
+  - {name: phrases, values: [BSM Searches, Simplified Likelihoods]}
+data_file: Table_2.yaml
+---
+name: "Table 3 - second moments"
+description: Moments $m_{2}$ for each pair of bins in the search.
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [P P --> X]}
+  - {name: phrases, values: [BSM Searches, Simplified Likelihoods]}
+data_file: Table_3.yaml
