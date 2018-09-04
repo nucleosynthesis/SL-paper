@@ -1,6 +1,6 @@
 dependent_variables:
 - header:
-    name: $m_1$
+    name: $m_3$
   values:
   - value: 727.167
   - value: 464.812
@@ -94,7 +94,7 @@ dependent_variables:
   - value: 0.296005
 independent_variables:
 - header:
-    name: $m_3$
+    name: Bin Number
   values:
   - value: 1
   - value: 2

@@ -94,7 +94,7 @@ dependent_variables:
   - value: 1.32151
 independent_variables:
 - header:
-    name: $m_3$
+    name: Bin Number
   values:
   - value: 1
   - value: 2
