@@ -2,189 +2,189 @@ dependent_variables:
 - header:
     name: Data Events
   values:
-    - value: 281
-    - value: 266
-    - value: 205
-    - value: 186
-    - value: 171
-    - value: 161
-    - value: 116
-    - value: 94
-    - value: 89
-    - value: 73
-    - value: 67
-    - value: 59
-    - value: 54
-    - value: 44
-    - value: 37
-    - value: 24
-    - value: 30
+    - value: 140
+    - value: 135
+    - value: 102
+    - value: 80
+    - value: 84
+    - value: 75
+    - value: 75
+    - value: 47
+    - value: 39
+    - value: 42
+    - value: 34
+    - value: 29
+    - value: 16
     - value: 17
-    - value: 20
-    - value: 15
-    - value: 16
-    - value: 12
-    - value: 10
-    - value: 10
-    - value: 9
-    - value: 2
-    - value: 6
-    - value: 5
-    - value: 4
-    - value: 6
-    - value: 59
-    - value: 52
-    - value: 33
-    - value: 45
-    - value: 31
-    - value: 33
-    - value: 18
-    - value: 28
-    - value: 33
-    - value: 20
-    - value: 20
-    - value: 16
-    - value: 10
-    - value: 12
     - value: 19
-    - value: 13
+    - value: 14
+    - value: 12
+    - value: 15
+    - value: 7
+    - value: 7
     - value: 11
-    - value: 5
-    - value: 12
+    - value: 7
+    - value: 1
+    - value: 1
     - value: 8
-    - value: 10
-    - value: 12
-    - value: 12
-    - value: 6
-    - value: 7
     - value: 2
+    - value: 3
+    - value: 5
+    - value: 1
+    - value: 1
+    - value: 21
+    - value: 32
+    - value: 12
+    - value: 17
+    - value: 14
+    - value: 15
+    - value: 11
+    - value: 11
+    - value: 16
+    - value: 12
+    - value: 6
+    - value: 9
+    - value: 6
     - value: 7
     - value: 6
-    - value: 3
-    - value: 3
-    - value: 4
+    - value: 7
+    - value: 6
+    - value: 7
+    - value: 5
+    - value: 8
     - value: 7
     - value: 4
-    - value: 6
     - value: 2
-    - value: 5
-    - value: 5
-    - value: 3
-    - value: 7
-    - value: 3
+    - value: 1
+    - value: 1
+    - value: 2
     - value: 4
+    - value: 1
     - value: 3
+    - value: 3
+    - value: 2
+    - value: 2
+    - value: 1
+    - value: 7
+    - value: 1
+    - value: 1
+    - value: 2
+    - value: 2
     - value: 3
     - value: 1
     - value: 0
-    - value: 4
-    - value: 4
-    - value: 5
     - value: 1
-    - value: 1
-    - value: 5
     - value: 3
-    - value: 4
+    - value: 2
+    - value: 2
+    - value: 2
     - value: 0
     - value: 3
     - value: 2
-    - value: 5
     - value: 2
     - value: 1
+    - value: 2
+    - value: 2
+    - value: 2
+    - value: 1
+    - value: 1
+    - value: 0
+    - value: 1
+    - value: 0
     - value: 1
 - header:
     name: Signal Events
   values:
     - value: 0
-    - value: 0.876068
-    - value: 1.6501
-    - value: 2.33101
-    - value: 2.92701
-    - value: 3.4457
-    - value: 3.89404
-    - value: 4.27848
-    - value: 4.60494
-    - value: 4.87886
-    - value: 5.10527
-    - value: 5.28876
-    - value: 5.43356
-    - value: 5.54356
-    - value: 5.62233
-    - value: 5.67311
-    - value: 5.34274
-    - value: 5.0316
-    - value: 4.73858
-    - value: 4.46263
-    - value: 4.20275
-    - value: 3.958
-    - value: 3.7275
-    - value: 3.51043
-    - value: 3.306
-    - value: 3.11347
-    - value: 2.93216
-    - value: 2.7614
-    - value: 2.60059
-    - value: 2.44914
+    - value: 0.438034
+    - value: 0.825049
+    - value: 1.1655
+    - value: 1.46351
+    - value: 1.72285
+    - value: 1.94702
+    - value: 2.13924
+    - value: 2.30247
+    - value: 2.43943
+    - value: 2.55263
+    - value: 2.64438
+    - value: 2.71678
+    - value: 2.77178
+    - value: 2.81116
+    - value: 2.83656
+    - value: 2.67137
+    - value: 2.5158
+    - value: 2.36929
+    - value: 2.23131
+    - value: 2.10137
+    - value: 1.979
+    - value: 1.86375
+    - value: 1.75521
+    - value: 1.653
+    - value: 1.55674
+    - value: 1.46608
+    - value: 1.3807
+    - value: 1.30029
+    - value: 1.22457
     - value: 0
-    - value: 0.225544
-    - value: 0.437756
-    - value: 0.637228
-    - value: 0.824527
-    - value: 1.0002
-    - value: 1.16477
-    - value: 1.31873
-    - value: 1.46258
-    - value: 1.59677
-    - value: 1.72176
-    - value: 1.83796
-    - value: 1.94579
-    - value: 2.04564
-    - value: 2.13789
-    - value: 2.22289
-    - value: 2.1572
-    - value: 2.09344
-    - value: 2.03157
-    - value: 1.97153
-    - value: 1.91326
-    - value: 1.85672
-    - value: 1.80184
-    - value: 1.74859
-    - value: 1.69691
-    - value: 1.64676
-    - value: 1.59809
-    - value: 1.55086
-    - value: 1.50503
-    - value: 1.46055
+    - value: 0.112772
+    - value: 0.218878
+    - value: 0.318614
+    - value: 0.412263
+    - value: 0.500099
+    - value: 0.582383
+    - value: 0.659366
+    - value: 0.73129
+    - value: 0.798386
+    - value: 0.860878
+    - value: 0.918979
+    - value: 0.972894
+    - value: 1.02282
+    - value: 1.06894
+    - value: 1.11145
+    - value: 1.0786
+    - value: 1.04672
+    - value: 1.01579
+    - value: 0.985765
+    - value: 0.956632
+    - value: 0.928359
+    - value: 0.900922
+    - value: 0.874295
+    - value: 0.848456
+    - value: 0.82338
+    - value: 0.799046
+    - value: 0.775431
+    - value: 0.752513
+    - value: 0.730273
     - value: 0
-    - value: 0.129949
-    - value: 0.256798
-    - value: 0.380602
-    - value: 0.501416
-    - value: 0.619294
-    - value: 0.734289
-    - value: 0.846451
-    - value: 0.955834
-    - value: 1.06249
-    - value: 1.16646
-    - value: 1.2678
-    - value: 1.36656
-    - value: 1.46278
-    - value: 1.55651
-    - value: 1.64779
-    - value: 1.62814
-    - value: 1.60872
-    - value: 1.58953
-    - value: 1.57057
-    - value: 1.55183
-    - value: 1.53332
-    - value: 1.51503
-    - value: 1.49696
-    - value: 1.47911
-    - value: 1.46146
-    - value: 1.44403
-    - value: 1.4268
-    - value: 1.40979
-    - value: 1.39297
+    - value: 0.0649745
+    - value: 0.128399
+    - value: 0.190301
+    - value: 0.250708
+    - value: 0.309647
+    - value: 0.367144
+    - value: 0.423226
+    - value: 0.477917
+    - value: 0.531243
+    - value: 0.583229
+    - value: 0.6339
+    - value: 0.683278
+    - value: 0.731388
+    - value: 0.778254
+    - value: 0.823897
+    - value: 0.814069
+    - value: 0.804359
+    - value: 0.794764
+    - value: 0.785284
+    - value: 0.775917
+    - value: 0.766662
+    - value: 0.757517
+    - value: 0.748481
+    - value: 0.739553
+    - value: 0.730731
+    - value: 0.722015
+    - value: 0.713402
+    - value: 0.704893
+    - value: 0.696485
 independent_variables:
 - header:
     name: Bin Number
