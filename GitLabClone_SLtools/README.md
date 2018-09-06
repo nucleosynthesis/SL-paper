@@ -1,5 +1,5 @@
-The SLtools repository accompanies the paper 
-*The Simplified Likelihood framework*, **arXiv:1809.XXXXX**, by A. Buckley (Un. of Glasgow), M. Citron (Un. of California), S. Fichet (Caltech and ICTP-SAIFR&IFT-UNESP), S. Kraml (LPSC/CNRS/IN2P3), W. Waltenberg (Un. of Vienna) and N. Wardle (Imperial College).
+<sup>The SLtools repository accompanies the paper 
+*The Simplified Likelihood framework*, **arXiv:1809.XXXXX**, by A. Buckley (Un. of Glasgow), M. Citron (Un. of California), S. Fichet (Caltech and ICTP-SAIFR&IFT-UNESP), S. Kraml (LPSC/CNRS/IN2P3), W. Waltenberg (Un. of Vienna) and N. Wardle (Imperial College).</sup>
 
 
 
