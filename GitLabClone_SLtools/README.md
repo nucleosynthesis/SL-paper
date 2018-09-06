@@ -1,19 +1,44 @@
-Calculation of next-to-leading order simplified likelihood coefficients
+SLtools
 -----------------------------------------------------------------------
 
-SL backgrounds $`b_I`$ for signal region $`I`$ are parametrised as
-```math
-b_I = A_I + B_I \theta_I + C_I/2 \, \theta_I^2
-```
-where the $`\theta_I`$ are distributed as a multivariate normal.
+SLtools is a package for reference functions meant to accompany the paper 
+``The Simplified Likelihood framework'', arXiv:1809.XXXXX, by A. Buckley (Un. of Glasgow), M. Citron (Un. of California), S. Fichet (Caltech and ICTP-SAIFR&IFT-UNESP), S. Kraml (LPSC/CNRS/IN2P3), W. Waltenberg (Un. of Vienna) and N. Wardle (Imperial College) [1].
 
-This reference code has been written with reverse engineering and
+The package includes the construction of the Simplified Likelihood (SL) following a method given in Ref. [1]. This reference code has been written with reverse engineering and
 comprehensibility of the calculations explicitly in mind. While it computes
 likelihood statistics on a reasonable timescale, further (but less readable)
 optimisations can be added for production code.
 
-This package includes functions to calculate the SL $`a_I`$, $`b_I`$, $`c_I`$, and
-$`\rho_{IJ}`$ coefficients from provided moments $`m_{1,I}`$, $`m_{2,IJ}`$ and
-$`m_{3,I}`$; and an `SLParams` class which computes these and higher-level
+
+
+Calculation of the Simplified Likelihood parameters
+-----------------------------------------------------------------------
+
+In the SL framework the SL backgrounds $`b_I`$ for signal region $`I`$ are parametrised as
+```math
+n_{b,I} = a_I + b_I \theta_I + c_I \, \theta_I^2
+```
+where the $`\theta_I`$ are distributed as a multivariate normal.
+
+The SLtools package includes functions to calculate the SL $`a_I`$, $`b_I`$, $`c_I`$, and
+$`\rho_{IJ}`$ parameters from provided moments $`m_{1,I}`$, $`m_{2,IJ}`$ and
+$`m_{3,I}`$. It also include the `SLParams` class which computes these parameters and higher-level
 statistics such as profile likelihoods, log likelihood-ratios, and related
 limit-setting measures computed using observed and expected signal yields.
+
+
+
+Citation Policy
+-------------------------------------------------------------------------
+
+When using the Simplified Likelihood framework or any part of the SLtools package, please refer to the following papers:
+
+
+``The Simplified Likelihood framework'', A. Buckley, M. Citron, S. Fichet, S. Kraml, W. Waltenberg, N. Wardle, arXiv:1809.XXXXX
+
+``Simplified likelihood for the re-interpretation
+  of public CMS results'', The CMS Collaboration, Tech. Rep. CMS-NOTE-2017-001
+
+``Taming systematic uncertainties at the LHC with the central
+  limit theorem'', S. Fichet, Nucl.Phys. B911 (2016) 623-637, arXiv:1603.03061
+ 

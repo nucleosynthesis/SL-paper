@@ -4,10 +4,10 @@ from __future__ import division
 import numpy as np
 
 """
-Calculation of next-to-leading order simplified likelihood coefficients
+Calculation of Simplified Likelihood parameters
 
 SL backgrounds b_i for signal region i are parametrised as
-  b_i = A_i + B_i*th_i + C_i/2 * th_i^2,
+  n_{b,i} = a_i + b_i*th_i + c_i * th_i^2,
 where the th_i are distributed as a multivariate normal.
 """
 
@@ -66,8 +66,8 @@ def getCoeffsABC(m1, m2, m3=None, skew=True):
 
 def getRhoIJ(m1i, m2ii, m3iii, m1j, m2jj, m3jjj, m2ij, skew=True):
     "Compute the SL correlation matrix element rho_ij"
-    if skew and (m3iii or m3jjj): #< TODO: not correct if only one m3 coeff is zero: FIX!
-        epsilon = 1e-10
+    if skew and (m3iii or m3jjj): 
+        epsilon = 1e-5
         ci = getCoeffCi_fast(m2ii, m3iii)
         cj = getCoeffCi_fast(m2jj, m3jjj)
         ci += epsilon if ci >= 0 else -epsilon
@@ -89,7 +89,6 @@ def getRhoIJ(m1i, m2ii, m3iii, m1j, m2jj, m3jjj, m2ij, skew=True):
 
 def getRho(m1, m2, m3, skew=True):
     "Compute the SL correlation matrix rho"
-    # Is there a better, vectorised way to calculate this?
     rho = np.ones(m2.shape)
     for i in range(m2.shape[0]):
         for j in range(m2.shape[1]):
