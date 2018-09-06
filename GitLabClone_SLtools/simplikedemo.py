@@ -1,8 +1,21 @@
 #! /usr/bin/env python
-
-## Load date from the model script into the SL params objects
 import simplike as sl
-execfile("model-90_100000toys.py")
+
+USE_YAML_FILES = False
+
+if USE_YAML_FILES:
+  ## Load data from .yaml files
+  from convert_yaml import *
+  data   = yaml_table_to_pylist("HEPData-1535641814-v1-yaml/Table_1.yaml", 0)              # Table 1 contains data, signal 
+  signal = yaml_table_to_pylist("HEPData-1535641814-v1-yaml/Table_1.yaml", 1)        
+  background = yaml_table_to_pylist("HEPData-1535641814-v1-yaml/Table_2.yaml", 0)          # Table 2 contains the m_1 values
+  covariance   = yaml_multi_table_to_pylist("HEPData-1535641814-v1-yaml/Table_3.yaml")     # Table 3 contains the m_2 matrix
+  third_moment = yaml_table_to_pylist("HEPData-1535641814-v1-yaml/Table_4.yaml", 0)        # Table 4 contains the m_3 values
+  
+else:
+  ## Alternatively, load data from a pre-prepared python module into the SL params objects
+  execfile("model-90_100000toys.py")
+
 slp1 = sl.SLParams(background, covariance, obs=data, sig=signal)
 slp2 = sl.SLParams(background, covariance, third_moment, obs=data, sig=signal)
 
