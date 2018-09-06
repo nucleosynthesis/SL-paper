@@ -37,9 +37,9 @@ Citation Policy
 
 When using the Simplified Likelihood framework or the reference SL code, please refer to the three following papers:
 
-*The Simplified Likelihood framework*, A. Buckley, M. Citron, S. Fichet, S. Kraml, W. Waltenberg, N. Wardle, arXiv:1809.XXXXX
+   - *The Simplified Likelihood framework*, A. Buckley, M. Citron, S. Fichet, S. Kraml, W. Waltenberg, N. Wardle, arXiv:1809.XXXXX
 
-*Simplified likelihood for the re-interpretation of public CMS results*, The CMS Collaboration, Tech. Rep. CMS-NOTE-2017-001
+   - *Simplified likelihood for the re-interpretation of public CMS results*, The CMS Collaboration, Tech. Rep. CMS-NOTE-2017-001
 
-*Taming systematic uncertainties at the LHC with the central limit theorem*, S. Fichet, Nucl.Phys. B911 (2016) 623-637, arXiv:1603.03061
+   - *Taming systematic uncertainties at the LHC with the central limit theorem*, S. Fichet, Nucl.Phys. B911 (2016) 623-637, arXiv:1603.03061
  
