@@ -87,7 +87,7 @@
 \abstract{We discuss the simplified likelihood framework 
 as a systematic approximation scheme for experimental likelihoods such as those originating from LHC experiments.
 We develop the simplified likelihood from the Central Limit Theorem keeping the next-to-leading term in the large $N$ expansion to correctly account for asymmetries. Moreover, we present an efficient method to compute the parameters of the simplified likelihood  from Monte Carlo simulations. The approach is validated using a realistic LHC-like analysis, and the limits of the approximation are explored. 
-Finally we discuss how the simplified likelihood data can be conveniently released in the  HepData error source format and automatically 
+Finally, we discuss how the simplified likelihood data can be conveniently released in the  HepData error source format and automatically 
 built from it, making this framework a convenient tool to transmit realistic experimental likelihoods to the community.}
 
 
@@ -131,7 +131,7 @@ Section~\ref{se:practice}.
 Finally a validation of the SL framework in a realistic pseudo-search at the LHC is presented in Section~\ref{se:SL_LHC}. 
 Section~\ref{se:conclusions} contains our conclusions. 
 Two appendices give some more useful details: 
-Appendix~\ref{app:skew} contains a 1D example how the skew appears in the asymptotic distribution, and 
+Appendix~\ref{app:skew} contains a 1D example of how the skew appears in the asymptotic distribution, and 
 Appendix~\ref{app:reference_code} presents a reference implementation of the SL written in Python. 
 
 
@@ -831,11 +831,11 @@ has been a long standing issue. % The SL framework, besides having a sound theor
 In this paper, we proposed a simplified likelihood framework which can account for non-Gaussianities as a convenient way of presentation 
 with a sound theoretical basis. %, which will hopefully satisfy both sides.
 
-Although the SL is  accurate, it is still a mere approximation of the actual experimental likelihood, hence the collaborations 
+Although the SL is  accurate, it is still an approximation of the full experimental likelihood, hence the collaborations 
 do not have to release their full %likelihood.
 model.
 Meanwhile, for the public, having a good approximation of the true likelihood is sufficient for most phenomenology purposes. 
-Moreover, the SL is very simple to transmit requiring neither a big effort for the experimentalists to release it nor for the user to construct it. Additionally, with some standardization effort, part of this transmission process can be automated. 
+Moreover, the SL is very simple to transmit, requiring neither a big effort for the experimentalists to release it nor for the user to construct it. Additionally, with some standardization effort, part of this transmission process can be automated. 
 
 In this paper we introduced the formalism for the asymmetric version of the SL. 
 This formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: asymmetry is recognized as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
