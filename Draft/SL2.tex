@@ -1,26 +1,8 @@
-%% ****** Start of file template.aps ****** % measurement
-%%
-%%
-%%   This file is part of the APS files in the REVTeX 4 distribution.
-%%   Version 4.0 of REVTeX, August 2001
-%%
-%%
-%%   Copyright (c) 2001 The American Physical Society.
-%%
-%%   See the REVTeX 4 README file for restrictions and more information.
-%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% This is a template for producing manuscripts for use with REVTEX 4.0
-% Copy this file to another name and then work on that file.
-% That way, you always have this original template file to use.
+%   The Simplified Likelihood Framework 
 %
-% Group addresses by affiliation; use superscriptaddress for long
-% author lists, or if there are many overlapping affiliations.
-% For Phys. Rev. appearance, change preprint to twocolumn.
-% Choose pra, prb, prc, prd, pre, prl, prstab, or rmp for journal
-%  Add 'draft' option to mark overfull boxes with black boxes
-%  Add 'showpacs' option to make PACS codes appear
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[11pt]{article}
 \pdfoutput=1
@@ -66,9 +48,6 @@
 
 \renewcommand{\arraystretch}{1.2} % space between table rows
 
-
-% avoids incorrect hyphenation, added Nov/08 by SSR
-
 \makeatletter
 \g@addto@macro\bfseries{\boldmath}
 \makeatother
@@ -78,78 +57,56 @@
 
 
 %==================================================================
-\begin{document}
+% front matter
+%==================================================================
+
+\title{The Simplified Likelihood Framework}
+
+\author[a]{Andy~Buckley,} 
+\author[b]{Matthew~Citron,} 
+\author[c]{Sylvain~Fichet,}
+\author[d]{Sabine Kraml,}
+\author[e]{Wolfgang~Waltenberger,}
+\author[f]{Nicholas~Wardle}
 
 
-\vspace*{30mm}
+\affiliation[a]{School of Physics \& Astronomy, University of Glasgow, Glasgow, Scotland, UK}
+\affiliation[b]{University of California, Santa Barbara, California, USA}
+\affiliation[c]{ICTP-SAIFR \& IFT-UNESP, R.\ Dr.\ Bento Teobaldo Ferraz 271, S\~ao Paulo, Brazil}
+\affiliation[d]{Laboratoire de Physique Subatomique et de Cosmologie, Universit\'e Grenoble-Alpes, CNRS/IN2P3, 53 Avenue des Martyrs, F-38026 Grenoble, France}
+ \affiliation[e]{Institut f\"ur Hochenergiephysik,  \"Osterreichische Akademie der Wissenschaften, Nikolsdorfer Gasse 18, 1050 Wien, Austria}
+\affiliation[f]{Imperial College London, South Kensington, London, UK}
 
-\begin{center}
-{\LARGE \bf The Simplified Likelihood Framework
-}
-\par\vspace*{20mm}\par
+\emailAdd{andy.buckley@ed.ac.uk}
+\emailAdd{matthew.citron@cern.ch}
+\emailAdd{sylvain.fichet@gmail.com}
+\emailAdd{sabine.kraml@lpsc.in2p3.fr}
+\emailAdd{walten@hephy.oeaw.ac.at}
+\emailAdd{nckw@cern.ch}
 
-{\large \bf Andy~Buckley$^{\,a}$, Matthew~Citron$^{\,b}$,  Sylvain~Fichet$^{\,c}$, Sabine~Kraml$^{\,d}$, Wolfgang~Waltenberger$^{\,e}$, Nicholas~Wardle$^{\,f}$}
-
-\bigskip
-
-{\em $^a$ School of Physics \& Astronomy, University of Glasgow, Glasgow, Scotland, UK}
-\\
-{\em $^b$ University of California, Santa Barbara, California, USA}
-\\
-{\em $^c$ ICTP-SAIFR \& IFT-UNESP, R.\ Dr.\ Bento Teobaldo Ferraz 271, S\~ao Paulo, Brazil}
-\\
-{\em $^d$ Laboratoire de Physique Subatomique et de Cosmologie, Universit\'e Grenoble-Alpes, CNRS/IN2P3, 53 Avenue des Martyrs, F-38026 Grenoble, France}
-\\
-{\em $^e$ Institut f\"ur Hochenergiephysik,  \"Osterreichische Akademie der Wissenschaften, Nikolsdorfer Gasse 18, 1050 Wien, Austria}
-\\
-{\em $^f$ Imperial College London, South Kensington, London, UK}
-\vspace*{5mm}
-
-
-
-\vspace*{15mm}
-
-{  \bf  Abstract }
-
-\end{center}
-\vspace*{1mm}
-
-
-
-\noindent
-\begin{abstract}
-
-We %present 
-discuss the simplified likelihood framework %, a
-as a systematic approximation scheme  for experimental likelihoods such as those originating from LHC experiments.
-%This framework  is useful  to simplify data analyses and to transmit realistic experimental likelihoods to the community. 
+\abstract{We discuss the simplified likelihood framework 
+as a systematic approximation scheme for experimental likelihoods such as those originating from LHC experiments.
 We develop the simplified likelihood from the Central Limit Theorem keeping the next-to-leading term in the large $N$ expansion to correctly account for asymmetries. Moreover, we present an efficient method to compute the parameters of the simplified likelihood  from Monte Carlo simulations. The approach is validated using a realistic LHC-like analysis, and the limits of the approximation are explored. 
 Finally we discuss how the simplified likelihood data can be conveniently released in the  HepData error source format and automatically 
-built from it, making this framework a convenient tool to transmit realistic experimental likelihoods to the community.
+built from it, making this framework a convenient tool to transmit realistic experimental likelihoods to the community.}
 
 
-\end{abstract}
+%==================================================================
 
-%\vspace{5.2cm }
-%\noindent
-%{\em E-mail:\\
-%philippe.brax@ipht.fr \\ sylvain@ift.unesp.br\\ guillaume.pignol@lpsc.in2p3.fr
-%\\
-%}
+\begin{document} 
+\maketitle
+\flushbottom
 
+%==================================================================
 
 
-\noindent
-\newpage
-
-
-
-
+%==================================================================
 \section{Introduction}
+%==================================================================
 
 
 Scientific observations of the real world are by nature imperfect in the sense that they always contain some amount of
-uncertainty unrelated to data, the \textit{systematic}   uncertainty. Identifying, measuring and modelling all the sources of systematic uncertainty is an important part of running a scientific experiment. A thorough treatment of such uncertainties is especially important in exploratory fields like particle physics and cosmology. In these fields of research,  %where one often searches for a small unexpected signal hidden in a large background.
+uncertainty unrelated to data, the \textit{systematic}   uncertainty. Identifying, measuring and modelling all the sources of systematic uncertainty is an important part of running a scientific experiment. A thorough treatment of such uncertainties is especially important in exploratory fields like particle physics and cosmology. In these fields of research,  
 today's experiments  can be of large scale and can contain a huge number of these  uncertainties. In the case of the Large Hadron Collider (LHC) experiments, for instance, the experimental likelihood functions used in Standard Model measurements and searches for new physics can contain several thousands of systematic uncertainties.
 
 Although sources of systematic uncertainty can be numerous and of very different nature, a general feature they share is that their most elementary components tend to be independent from each other. This property of independence between the elementary systematic uncertainties has profound consequences, and, as discussed below, is the reason why the approach presented in this work is so effective. Namely, independence of the uncertainties can be used in order to drastically simplify the experimental likelihood function, for the price of an often-negligible error that will be discussed at length in this paper.
@@ -157,36 +114,32 @@ Although sources of systematic uncertainty can be numerous and of very different
 The \textit{simplified likelihood} (SL) framework we present in this paper is a well-defined approximation scheme for experimental likelihoods. It can be used to simplify subsequent experimental analyses, to allow a uniform statistical treatment of published search-analysis data and to ease the transmission of results between an experiment and the scientific community.
 We build on the proposals for approximating likelihoods recently suggested in Refs.~\cite{Fichet:2016gvx,SL_note}, in which promising preliminary results have been shown.
 
-In the context of the LHC, %communicating the full experimental likelihoods via the \texttt{RooFit/Roostats} software framework~\cite{Verkerke:2003ir,Moneta:2010pm} has been suggested in Refs.~\cite{Kraml:2012sg,Boudjema:2013qla}. 
-communicating the experimental likelihoods, in their full form or in convenient approximations, was advocated in Refs.~\cite{Kraml:2012sg,Boudjema:2013qla}. 
+In the context of the LHC, communicating the experimental likelihoods, in their full form or in convenient approximations, was advocated in Refs.~\cite{Kraml:2012sg,Boudjema:2013qla}. 
 One possibility is to communicate the full experimental likelihoods via the \texttt{RooFit/Roostats} software framework~\cite{Verkerke:2003ir,Moneta:2010pm}.  
 The presentation method we propose in this paper is complementary in that it is technically straightforward to carry out, without relying on any
 particular software package. Additionally, the proposal of presenting LHC results decoupled from systematic uncertainties has been pursued in Ref.~\cite{Cranmer:2013hia} in the context of theoretical errors on Higgs cross-sections. For Higgs cross-sections and decays, the combined covariance of the Higgs theoretical uncertainties consistent with the SL framework presented here has been determined in Ref.~\cite{Arbey:2016kqi}.
 
 In this paper we unify and extend the initial proposals of Refs.~\cite{Fichet:2016gvx,SL_note}, and thoroughly test the accuracy of the approximations using simulated LHC searches for new phenomena.
-Compared to Refs.~\cite{Fichet:2016gvx,SL_note}, an important %progression is that we have been able 
-refinement is that we provide a way 
+Compared to Refs.~\cite{Fichet:2016gvx,SL_note}, an important  refinement is that we provide a way 
 to rigorously include asymmetries in the combined uncertainties, which is useful in order to avoid inconsistencies such as a negative event yield. Technically this is done by taking into account the next-to-leading term in the limit given by an appropriate version of the Central Limit Theorem (CLT).
 
-The paper is organized as follows. %A summary of the main results is given in Section~\ref{se:EL_SL}. 
+The paper is organized as follows. 
 Section~\ref{se:EL_SL} introduces the formalism and key points of our approach.  
-%Section~\ref{se:SL_theory} contains the formal material, including an interesting result about the next-to-leading term of the CLT and the derivation of the simplified likelihood formula.
 The formal material, including an in-depth discussion of the next-to-leading term of the CLT and the derivation of the SL formula, is presented in Section~\ref{se:SL_theory}. 
 Practical considerations regarding the SL flexibility and the release of the SL via HepData are given in 
 Section~\ref{se:practice}.
 Finally a validation of the SL framework in a realistic pseudo-search at the LHC is presented in Section~\ref{se:SL_LHC}. 
 Section~\ref{se:conclusions} contains our conclusions. 
-Two appendices give some more useful details: Appendix~A contains a 1D example how the skew appears in the asymptotic distribution, and 
-Appendix~B presents a reference implementation of the SL written in Python. 
+Two appendices give some more useful details: 
+Appendix~\ref{app:skew} contains a 1D example how the skew appears in the asymptotic distribution, and 
+Appendix~\ref{app:reference_code} presents a reference implementation of the SL written in Python. 
 
 
-%The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the simplified framework, however, there is a number of reasons to keep the next-to-leading
-% term in the large-$N$ expansion of the CLT. The next-to-leading term encodes skewness: it is the main information about asymmetry of the distribution. The asymmetry of the distribution can be a relevant feature for the analyses hence it is safer to keep this information. Moreover a normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. A normal distribution of the nuisance parameter can give inconsistencies, such as a negative yield. This is a problem both conceptually and at the level of the concrete analyses. This happens because the pure Gaussian approximation is too rough.
-% To have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, hence the skew has to be taken into account.
-
-
+\clearpage
+%==================================================================
 \section{From the experimental likelihood to the simplified likelihood}
 \label{se:EL_SL}
+%==================================================================
 
 This section introduces the formalism, presents the main theoretical results and an efficient Monte-Carlo based calculation method. We will focus on the typical experimental likelihood used in searches for new phenomena at particle physics experiments. However, we stress that the SL approach can be easily generalized to other physics contexts.
 The data collected in particle physics usually originate from random (quantum) processes, and have thus an intrinsic \textit{statistical} uncertainty--which vanishes in the limit of large data sets. Our interest rather lies in the \textit{systematic} uncertainties, which are independent of the amount of data.
@@ -201,7 +154,6 @@ In the SL framework, we derive a set of \textit{combined} nuisance parameters $\
 
 
 The key result at the basis of  the SL framework is the approximation
-%\fxnote{Need to define all symbols, esp $\hat{n}$}
 \begin{align}
   & L(\bm{\alpha},\bm{\delta} )\pi(\bm{\delta})
    = \prod_{I=1}^P \mathrm{Pr}\Big(  n^{\rm obs}_I\,\Big|\,n_I(\bm{\alpha},\bm{\delta})  \Big) \pi(\bm{\delta}) \label{eq:EL} \\
@@ -214,15 +166,6 @@ where the first line is the exact ``experimental likelihood'' and the second lin
 }
 
 The coefficients $a_I$, $b_I$ and $c_I$, and the $P\times P$ correlation matrix $\bm{\rho}=\rho_{IJ}$ define the SL and are in general functions of the parameters of interest. However, in concrete cases, this dependence will often be negligible. This is in particular the case in particle physics searches for new physics when the expected event number decomposes into signal ($n_s$) plus background ($n_b$) contributions. The parameters of interest that model the new physics enter in $n_s$ while $n_b$ is independent of them.  Whenever the expected signal is small with respect to the background, the dominant uncertainties in searches for new physics are those related to the background.
-% [SF: move this] In searches for new physics, often the observations $\hat{n}_{I}$ are integer counts of events in bins of distributed along observables
-%such as particle transverse momentum.
-%This provides improved sensitivity over more simple `cut-and-count' approaches which do not take into account the power of these observables to
-%separate the signal from the background.
-% [SF: move this]As the event counts in each bin (\textit{i.e.} each piece of the distribution) are independent from each other, the simplified likelihood framework is applied to these kinds of analyses (see also Refs.~\cite{Fichet:2016gvx,SL_note}) by identifying the $P$ independent measurements as event counts $\hat{n}_{I}$ and defining the probabilities $\mathrm{Pr}$ of Eqn.~\ref{eq:SL_LHC} as Poisson probabilities for each bin $I$,
-%\be
-%\textrm{Pr}(\hat{n}_{I}|n_{I}) \equiv \textrm{Pois}(\hat{n}_{I}|n_{I}) = \dfrac{(n_{I})^{\hat{n}_{I}} \mathrm{e}^{-n_{I}}}{\hat{n}_{I}!} \, .
-%\ee
-%In the SL, neglecting 
 Neglecting the systematic uncertainties affecting the signal implies in turn that the parameters of the SL are independent of $\bm \alpha$. Hence the SL Eq.~\eqref{eq:SL_master} takes the form\,\footnote{We have substituted
 $a_I(\alpha) \equiv a_I+n_{s,I}(\alpha),~b_I(\alpha) \equiv b_I$ and $c_I(\alpha)\equiv c_I$.}
 \begin{equation}
@@ -237,16 +180,13 @@ which is the expression we use in the rest of this paper. This expression is val
 \ee
 
 The parameters of the SL ($a_I, b_I, c_I, \rho_{IJ}$) have analytical expressions
-as a function of the variance and the skew  of each elementary nuisance parameter (see Section~\ref{se:analytic}). However, often the elementary uncertainties and the event yields are already coded in a Monte Carlo (MC) generator. In such case, %instead of using Eqs.~\eqref{eq:n_comb}- \eqref{eq:gam_comb},
-an elegant method to obtain the SL parameters  is the following. From the estimators of the event yields $\hat n_I$, one can evaluate the three first moments of the $\hat n_I$ distribution and deduce the parameters of the SL directly from these moments.
-What is needed is the mean $m_{1,I}$, the covariance matrix $m_{2,IJ}$ and the diagonal component of the third moment $m_{3,I} \equiv m_{3,III}$. % for bin indices $I$ and $J$.
-% The centered moments are denoted as $m_n$.
+as a function of the variance and the skew  of each elementary nuisance parameter (see Section~\ref{se:analytic}). However, often the elementary uncertainties and the event yields are already coded in a Monte Carlo (MC) generator. In this case, an elegant method to obtain the SL parameters  is the following. From the estimators of the event yields $\hat n_I$, one can evaluate the three first moments of the $\hat n_I$ distribution and deduce the parameters of the SL directly from these moments.
+What is needed is the mean $m_{1,I}$, the covariance matrix $m_{2,IJ}$ and the diagonal component of the third moment $m_{3,I} \equiv m_{3,III}$. 
 
 Using the definition $ n_I= a_I+b_I \theta_I+c_I \theta_I^2 $, we have the relations
 %
 \begin{align} \label{eq:moments1}
   m_{1,I} &= \mathbf{E}[\hat n_I]= a_I+c_I\,,\\
-  % {\bf E}[(\hat n_I - {\bf E}[\hat n_I])^2 ]= n_{0,I}^2(\Delta_I^2+2\gamma_I^2)\,,
   m_{2,IJ} &= \mathbf{E}[(\hat n_I - \mathbf{E}[\hat n_I])(\hat n_J - \mathbf{E}[\hat n_J]) ]= b_I b_J \rho_{IJ}+2 c_I c_J\rho_{IJ}^2\,,\\
   m_{3,I} &= \mathbf{E}[(\hat n_I - \mathbf{E}[\hat n_I])^3 ]=   6 b_I^2 c_I+8 c_I^3 \, ,
   \label{eq:moments2}
@@ -264,23 +204,23 @@ a_I &= \, m_{1,I}- c_I\,,\\
 \label{eq:solutions2}
 \end{align}
 %
-These formulae apply if the condition $8 m_{2,II}^3\geq m_{3,I}^2$ is satisfied. %This limit is approached when the asymmetry becomes large. 
-%Near this limit, the approximation typically tends to become inaccurate  
+These formulae apply if the condition $8 m_{2,II}^3\geq m_{3,I}^2$ is satisfied.   
 Near this limit,  the asymmetry becomes large and the approximation inaccurate  
-because higher order terms $O(\theta_I^3)$  would need to be included in %the expressions of the SL 
-Eq.~\eqref{eq:SL_master}. In practice, however, this requires a high skewness of the nuisance parameters, and the SL framework up to quadratic order is sufficient for most applications.
+because higher order terms $O(\theta_I^3)$  would need to be included in Eq.~\eqref{eq:SL_master}. 
+In practice, however, this requires a high skewness of the nuisance parameters, and the SL framework up to quadratic order is sufficient for most applications.
 
 This method will be used in the examples shown in the rest of the paper. 
  This means that if one is provided with the moments $m_{1}$ and $m_{3}$ for each bin and the covariance matrix $m_{2,IJ}$, the SL parameters are completely defined. Moreover, in the case where the nuisance parameters affect only the background rate Eq.~\eqref{eq:SL_LHC}, this computation has to be realized only once and the resulting likelihood can be used for any kind of signal by appropriate substitution of $n_{s}(\bm{\alpha})$.
 
-A reference code implementing the SL and subsequent test statistics is described in App.~\ref{sec:reference_code} and is available at \textbf{[URL]}.   
-
-% We close this section with more specific remarks about LHC likelihoods.
-
+A reference code implementing the SL and subsequent test statistics is described in Appendix~\ref{app:reference_code}
+and publicly available at \url{https://gitlab.cern.ch/SimplifiedLikelihood/SLtools}.
 
 
+
+%==================================================================
 \section{The simplified likelihood from the central limit theorem}
 \label{se:SL_theory}
+%==================================================================
 
 This section contains the derivation of the SL formula Eq.~\eqref{eq:SL_master}.
 The reader interested only in the practical aspects of the SL framework can safely skip it. In Section~\ref{se:skew_CLT} we lay down a  result about the next-to-leading term of the CLT. In Section~\ref{se:analytic} we then demonstrate Eq.~\eqref{eq:SL_master} and give the analytical expressions of the SL parameters as a function of the elementary uncertainties. The precision of the expansion is discussed in Section~\ref{se:precision}. 
@@ -291,8 +231,8 @@ The reader interested only in the practical aspects of the SL framework can safe
 The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the SL framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information, however, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely when running the analyses. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
 
 
-The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. However, by using the large $N$ expansion, we are able to  to express the CLT at next-to-leading order in a very simple way. 
-%\textcolor{blue}{[SK: I would prefer to avoid the word `trick' here and in the following two instances below: we are able to express, and below one can say method instead of trick]}
+The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. 
+However, by using the large $N$ expansion, we are able to  to express the CLT at next-to-leading order in a very simple way. 
 We realize that a random variable $Z$ with characteristic function
 \be
 \varphi_Z(t)=\exp\left(-\frac{\sigma^2 t^2}{2}-i \frac{\gamma t^3}{6 \sqrt{N}} +O\left(\frac{t^4}{N}\right)\right) \label{eq:CF_CLT}
@@ -314,12 +254,11 @@ Z_I\rightarrow \theta_I+\frac{\gamma_{I}}{3\sqrt{N}}\theta_I^2\,,\,\,N\rightarro
 
 
 
-
-
+%==================================================================
 \subsection{Calculation of the simplified likelihood}
 \label{se:analytic}
+%==================================================================
 
-%In this section we 
 Let us now prove Eq.~\eqref{eq:SL_master}.  The dependence on the parameters of interest $\bm{\alpha}$ is left implicit in this section. We will first perform a step of  propagation of the uncertainties, then a step of combination. This is a generalization of the approach of \cite{Fichet:2016gvx}. Here we take into account the skew, hence there is no need to use an exponential parameterization like in \cite{Fichet:2016gvx}.
 
 In this section the elementary nuisance parameters $\delta_i$ are independent, centered, have unit variance, and have skew $\gamma_i$, \ie
@@ -328,31 +267,10 @@ In this section the elementary nuisance parameters $\delta_i$ are independent, c
 \ee
 It is  convenient to use a vector notation for the set of these elementary nuisance parameters, $(\delta_i)\equiv \boldsymbol{\delta} $.
 
-
-
 As a first step, we want to propagate the systematic uncertainties at the level of the event numbers.  For an event number $n$ depending on a quantity $Q$ subject to uncertainty, we have
 \be n[Q]\equiv n[Q_0(1+\Delta_Q \delta)]\,.
 \ee
 The propagation amounts to performing a Taylor expansion with respect to $\Delta_Q $. This expansion should be truncated appropriately  to retain the leading effects of the systematic uncertainties in the likelihood. It was shown in \cite{Fichet:2016gvx} that  the expansion should be truncated above second order.
-
-
-
-
-
-
-%In a one-parameter case, second order propagation leads to
-%\be n\equiv n_0\exp\left( \frac{n'}{n_0} \Delta_Q \, \delta+
-%\left(\frac{n''}{n_0}-\frac{n'^2}{n_0^2}\right) \frac{\Delta_Q^2 \, \delta^2}{2}
-%+O\left(\frac{n^{(3)}}{n_0}\Delta_Q^3\right)
-%\right)\,.
-%\label{eq:prop}
-%\ee
-%This is most easily obtained by expanding $\log n$.
-%Clearly, the validity of this expansion relies on neglecting higher powers of $\Delta_Q$ times the appropriate derivative of $\log n$. As long as $n$ is well-behaved, which should be checked in practice, this expansion is valid for uncertainties  that have a small relative magnitude, \ie
-%\be
-%\Delta_Q \ll 1\,.
-%\ee
-%For example, for elementary systematic uncertainties that do not exceed $\Delta \sim 10\%$, keeping the expansion up to second degree implies that the neglected higher order terms are  $O(0.1\%)$.
 
 For multiple sources of uncertainty, we have a vector $\boldsymbol{\delta}$ and the relative uncertainties propagated to $n$ are written as
 \be n\equiv n^{0}\left( 1+ \Delta_{1}^T\cdot \, \boldsymbol{\delta}+\boldsymbol{\delta}^{\rm T}\cdot\Delta_{2} \cdot \boldsymbol{\delta} +O\left(\frac{n^{(3)}}{n^{0}}\Delta_Q^3\right)
@@ -366,36 +284,18 @@ with
 \ee
 and the $n^{(3)}$ denoting schematically the third derivatives of $n$.
 
-%After this step of error propagation, the likelihood takes the form
-%\be
-%L(\theta,\delta ) \equiv \prod_I
-%{\rm Pr}\Big(\hat n_I\,\Big|\,n^{0}_{I}}(1+\Delta_{1,I}\cdot\boldsymbol{\delta}+\boldsymbol{\delta}\cdot\Delta_{2,I}\cdot\boldsymbol{\delta}), \theta, \delta  \Big)\,.
-%\label{eq:Likeind}
-%\ee
-%All the $n_{0,I}$, $\Delta_{1,I}$, $\Delta_{2,I}$  depend in principle on the parameters of interest $\theta$.
-
 The second step is to combine the elementary nuisance parameters. We introduce combined nuisance parameters $\theta_I$ which  are chosen to be centred and with unit variance without loss of generality, and whose correlation matrix  is denoted $\rho_{IJ}$,\ie
 \be
  {\bf E}[\theta_I]=0\,, \quad{\bf E}[\theta^2_I]=1\,,\quad{\bf E}[\theta_I \theta_J]=\rho_{IJ}\,.
 \ee
 Moreover we define the expected event number in terms of the combined nuisance parameters as
-%\be
-%n_I=n^{0}_{I}(1+\Delta_{1,I}\cdot\boldsymbol{\delta}+\boldsymbol{\delta}\cdot\Delta_{2,I}\cdot\boldsymbol{\delta}) \equiv
-%\bar n^{0}_{I}(1+\Delta_{I}\theta_I+ \gamma_I\theta_I^2) \label{eq:comb_def}\,.
-%\ee
 \be
 n_I=n^{0}_{I}(1+\Delta_{1,I}\cdot\boldsymbol{\delta}+\boldsymbol{\delta}\cdot\Delta_{2,I}\cdot\boldsymbol{\delta}) \equiv
 a_I+b_{I}\theta_I+ c_I\theta_I^2 \label{eq:comb_def}\,.
 \ee
 The $a_I, b_I, c_I$ parameters together with  the correlation matrix $\rho_{IJ}$ fully describe the combined effect of the elementary uncertainties.
 %
-To determine them we shall identify the three first moments on each side of Eq.~\eqref{eq:comb_def}.
-%. The complete covariance matrix between the event numbers is given by $\Sigma_{IJ}=\rho_{IJ} \Delta_I\Delta_J$.
-%
-%
-%
-%To determine $\bar{n}^{0}_{I}$, $\Delta_{I}$, $\rho_{IJ}$ and $\gamma_I$, we identify the three first moments on each side of Eq.~\eqref{eq:comb_def}.
- We obtain
+To determine them we shall identify the three first moments on each side of Eq.~\eqref{eq:comb_def}. We obtain
  \be
 a_{I}=n^{0}_{I}\left(
 1+\tr \Delta_{2,I}-\frac{1}{6}\sum_{i=1}^N \gamma_i(\Delta_{1,I,i})^3+O(\Delta^4) \right) \label{eq:n_comb}
@@ -411,30 +311,13 @@ b_I=a_I\left(\Delta_{1,I}^{\rm T}.\Delta_{1,I}  +2\sum_{i=1}^N \gamma_i\Delta_{1
 \be
 c_I=\frac{a_I}{6}\sum_{i=1}^N \gamma_i(\Delta_{1,i})^3+O(\Delta^4) \label{eq:gam_comb}\,,
 \ee
-%\be
-%\bar{n}^{0}_{I}=n^{0}_{I}\left(
-%1+\tr \Delta_{2,I}-\frac{1}{6}\sum_{i=1}^N \gamma_i\Delta_{1,I,i}^3+O(\Delta^4) \right) \label{eq:n_comb}
-%\,,
-%\ee
-%\be
-%\Delta_{I}=\left(\Delta_{1,I}^{\rm T}.\Delta_{1,I}  +2\sum_{i=1}^N \gamma_i\Delta_{1,I,i}\Delta_{2,I,i}+O(\Delta^4)\right)^{1/2}\,,
-%\ee
-%\be
-%\rho_{IJ}= \frac{1}{\Delta_I \Delta_J}\left(\Delta_{1,I}^{\rm T}.\Delta_{1,J}  +\sum_{i=1}^N \gamma_i(\Delta_{1,I,i}\Delta_{2,J,i}+\Delta_{1,J,i}\Delta_{2,I,i})\right)+O(\Delta^4)
-%\,,
-%\ee
-%\be
-%\gamma_I=\frac{1}{6}\sum_{i=1}^N \gamma_i\Delta_{1,i}^3+O(\Delta^4) \label{eq:gam_comb}
-%\ee
 where the $O(\Delta^4)$ denotes higher order terms like $\tr(\Delta_{2,I}^{\rm T}\cdot\Delta_{2,I})$, $(\tr\Delta_{2,I})^2$, $\Delta_{1,I}^{\rm T}\cdot\Delta_{1,I}\tr\Delta_{2,I}$ which are neglected.
-When $\gamma_i\rightarrow 0$  one recovers the expressions obtained in Ref.~\cite{Fichet:2016gvx}.\footnote{For simplicity we show here the expressions assuming $c_I\ll b_I$, as it is sufficient in the scope of the proof. For sizeable $c_I$, one should instead use the exact solutions of the system, Eqs.~\eqref{eq:solutions1}---\eqref{eq:solutions2}.}
+When $\gamma_i\rightarrow 0$  one recovers the expressions obtained in Ref.~\cite{Fichet:2016gvx}.\footnote{For simplicity we show here the expressions assuming $c_I\ll b_I$, as it is sufficient in the scope of the proof. For sizeable $c_I$, one should instead use the exact solutions of the system, Eqs.~\eqref{eq:solutions1}--\eqref{eq:solutions2}.}
 
 
-Importantly,    the $\Delta_2$ term contributes at leading order only in the mean value
-%$\bar n_{0,I}$
-$a_I$
- and always gives subleading contributions to higher moments.
- Hence, for considerations on higher moments, which define the  shape of the combined distribution, we can safely take the approximation
+Importantly, the $\Delta_2$ term contributes at leading order only in the mean value $a_I$ and always gives 
+subleading contributions to higher moments. Hence, for considerations on higher moments, which define the  
+shape of the combined distribution, we can safely take the approximation
 \be
 n_{I}\approx n^{0}_{I}\left(1+ \Delta_{1,I}\cdot \boldsymbol{\delta}\right)\, \label{eq:n_approx}
 \ee
@@ -449,91 +332,69 @@ then
 \theta_I\sim {\cal N }(0,\rho) \quad \,\textrm{for} \quad N\rightarrow \infty \,.
 \ee
 
-Furthermore we can see that the expression of $n_I$ in terms of the combined nuisance parameters, $n_I=a_I+b_{I}\theta_I+ c_I\theta_I^2$ (first defined in Eq.~\eqref{eq:comb_def}), takes the form of a normal expansion, % as defined  in  subsection \ref{se:skew_CLT}  (see Eq.~\eqref{eq:NLCFT}). 
-see Eq.~\eqref{eq:NLCFT}. 
+Furthermore we can see that the expression of $n_I$ in terms of the combined nuisance parameters, $n_I=a_I+b_{I}\theta_I+ c_I\theta_I^2$ (first defined in Eq.~\eqref{eq:comb_def}), takes the form of a normal expansion, see Eq.~\eqref{eq:NLCFT}. 
 This means that the $c_I \theta_I^2$ term  corresponds  precisely to the leading deformation  described by the next-to-leading term of the CLT.  This deformation encodes the skewness induced by the asymmetric elementary uncertainties. We have therefore obtained  a  description of the main collective effects of asymmetric elementary uncertainties, which is dictated by  the CLT. The resulting  simplified likelihood is given in Eq.~\eqref{eq:SL_master}.
 
 
-% use the result of the previous section (see Eq.~\eqref{eq:NLCFT}) to see that
-%the expression of $n_I$ (Eq.~\eqref{eq:comb_def})
-%
-% which tells that the $c_I \theta_I^2$ term in the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) corresponds  precisely to the leading deformation away from the Gaussian described by the next-to-leading term of the CLT.  This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}.
 
-%Furthermore we can use the result of the previous section (see Eq.~\eqref{eq:NLCFT}),
-% which tells that the $c_I \theta_I^2$ term in the expression of $n_I$ (Eq.~\eqref{eq:comb_def}) corresponds  precisely to the leading deformation away from the Gaussian described by the next-to-leading term of the CLT.  This leads to the expression of the simplified likelihood given in Eq.~\eqref{eq:SL_master}.
-
-
-%We remind that the next-to-leading term of the CLT is tied to asymmetry. We have therefore obtained an expression which encodes the asymmetries from the elementary sources of  uncertainties in a way directly dictated by the CLT. For symmetric elementary uncertainties, $\gamma_i\rightarrow 0$, hence $c_I\rightarrow 0$. Interestingly the Lyapunov condition is automatically satisfied in that case.
-%
-
-
-
-
-%\footnote{If the asymmetries of the elementary uncertainties are vanishing,  $\gamma_i\rightarrow 0$, then $c_I=0$. Inteerstingly the Lyapunov condition is automatically satisfied in this case.}
-
-
-
-% where we  introduced a simpler notation
-%\be
-%a_I=n^{0}_{I}\,, b_I=n^{0}_{I}\Delta_{I}\,, c_I = n^{0}_{I}\gamma_{I}
-%\ee
-%so that  $n_I= a_I+b_I \theta_I+c_I \theta_I^2$.
-
+%==================================================================
 \subsection{Precision of the normal expansion}
 \label{se:precision}
+%==================================================================
 
-The accuracy of the normal expansion $n =  a+ b \theta+ c \theta^2$ with $\theta\sim {\cal N}(0,1)$ --- and thus of the  simplified likelihood --- is expected to drop when only a few elementary  uncertainties are present and these depart substantially from the Gaussian shape. This is the combination of conditions for which the
- next-to-leading CLT, Eq.~\eqref{eq:NLCFT}, tends to fail.  It is instructive to check  on a simple distribution how the normal expansion  approximates the true distribution, and in which way the discrepancies tend to appear.
+The accuracy of the normal expansion $n =  a+ b \theta+ c \theta^2$ with $\theta\sim {\cal N}(0,1)$ --- and thus of the  simplified likelihood --- is expected to drop when only a few elementary  uncertainties are present and these depart substantially from the Gaussian shape. 
+This is the %combination of conditions for which 
+situation in which the next-to-leading CLT, Eq.~\eqref{eq:NLCFT}, tends to fail.  It is instructive to check  on a simple distribution how the normal expansion approximates the true distribution, and in which way discrepancies tend to appear.
 
-We consider the realistic  case of     a log-normal distribution with parameters $\mu, \sigma$. We fix $\mu=0$ without loss of generality. The three first centered moments are
+We consider the realistic  case of a log-normal distribution with parameters $\mu, \sigma$. We fix $\mu=0$ without loss of generality. The three first centered moments are
 \be
 m_1=e^{\frac{\sigma^2}{2}}\,,\quad m_2=e^{2\sigma^2}-e^{\sigma^2}\,,\quad
 m_3=e^{\frac{9\sigma^2}{2}}-3 e^{\frac{5\sigma^2}{2}}+2 e^{\frac{3\sigma^2}{2}}
 \ee
-and  $a,b,c$ are obtained  using  Eqs.~\eqref{eq:solutions1}-\eqref{eq:solutions2}.
+and  $a,b,c$ are obtained  using  Eqs.~\eqref{eq:solutions1}--\eqref{eq:solutions2}.
 
-For $\sigma\sim 0.69$, the bound $8m_2^3\approx m_3^2$  is reached (see Section~\ref{se:EL_SL}). This is the bound where
-the distribution is so asymmetric that the variance comes entirely from the $\theta^2$ term. Beyond this bound the  normal expansion cannot be used at all as Eqs.~\eqref{eq:solutions1}-\eqref{eq:solutions2} have no solutions.
- The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$. It turns out that except near the above mentioned limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield.
+For $\sigma\sim 0.69$, the bound $8m_2^3\approx m_3^2$  is reached (see Section~\ref{se:EL_SL}). This is the limit where
+the distribution is so asymmetric that the variance comes entirely from the $\theta^2$ term. Beyond this bound the  normal expansion cannot be used at all as Eqs.~\eqref{eq:solutions1}--\eqref{eq:solutions2} have no solutions.
+The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$. 
+%It turns out that except near the above mentioned 
+Below this limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield.
 
- Let us finally check how well the approximation performs. The true and approximate densities are compared in Fig.~\ref{fig:approxs}.   When the true density is vanishing in the region $n<0.5$, the approximation is excellent.  For larger asymmetry, $\sigma \sim 0.35-0.4$, the true density starts to be sizeable in the region $n<0.5$. The approximate density is still reasonably good away from $n\sim 0.5$. However, near this boundary, the approximate density tends to increase and possibly peak, somehow to account for  the area at $n<0.5$ that it cannot reproduce.
- This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the LHC-like analysis implemented in Sec.~\ref{se:SL_LHC}.
+%Let us finally check how well the approximation performs. The true and approximate densities are compared in Fig.~\ref{fig:approxs} for various values of $\sigma$.  
+To check numerically how well the approximation performs, the true and approximate densities are compared in Fig.~\ref{fig:approxs} for various values of $\sigma$.  
+%When the true density is vanishing in the region $n<0.5$, the approximation is excellent.  For larger asymmetry, $\sigma \sim 0.35-0.4$, the true density starts to be sizeable in the region $n<0.5$. The approximate density is still reasonably good away from $n\sim 0.5$. However, near this boundary, the approximate density tends to increase and possibly peak, somehow to account for  the area at $n<0.5$ that it cannot reproduce.
+%This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the LHC-like analysis implemented in Sec.~\ref{se:SL_LHC}.
+For small asymmetries, $\sigma \sim 0.1$--$0.3$ or when true density is vanishing, the approximation is excellent.  
+For larger asymmetries, $\sigma = 0.45$ in our example, the true density starts to be sizeable in the region $n<0.5$. 
+The approximation still performs reasonably well %away from $n\sim 0.5$. 
+for large enough $n$. 
+However, near %this boundary, 
+$n\sim 0.5$, the approximate density tends to increase and possibly peak, somehow to account for the area at $n<0.5$ that it cannot reproduce. 
+This behaviour will also be observed for certain bins in the LHC-like analysis implemented in Sec.~\ref{se:SL_LHC}.
 
-   Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100-150\%$. This is a moderate value, however one should keep in mind that these considerations apply to the combined uncertainties, for which small skewness is typical. The accuracy of the SL framework will be tested in a realistic setup in Sec.~\ref{se:SL_LHC}.
+Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100$--$150\%$. 
+This is a moderate value, however one should keep in mind that these considerations apply to the combined uncertainties, for which small skewness is typical. The accuracy of the SL framework will be tested in a realistic setup in Sec.~\ref{se:SL_LHC}.
 
-
-
-
-
-%For the Poisson the three third centered moments are equal to $\lambda$. For the lognormal the  moments are equal to $$.
 
 \begin{figure}[t]
 \begin{center}
-%\includegraphics[width=7.5cm]{figures/PlotPoisson.pdf}
 \includegraphics[width=0.7\textwidth]{figures/PlotLogNormal.pdf}
 \end{center}
-\caption{\label{fig:approxs}
-The normal approximation of a log-normal distribution for various values of $\sigma$. Plain curves show the true distributions, dashed curves show the approximate distributions. 
-}
+\caption{\label{fig:approxs} 
+The normal approximation of a log-normal distribution for various values of $\sigma$. The full curves show the true, 
+the dashed curves the approximate distributions.}
 \end{figure}
 
 
 
 
-
-
-
-
+%==================================================================
 \section{Practical aspects of the simplified likelihood framework}
 \label{se:practice}
+%==================================================================
 
 \subsection{Range of application}
 
 An important feature of the SL is that it is flexible in the sense that the combination of the systematic uncertainties does not have to be applied to the whole set.  The only requirement to combine a subset of the  uncertainties is that it should have a convergent enough  CLT behaviour in order  for the SL to be accurate. There is thus a freedom in partitioning the set of systematic uncertainties, giving rise to variants of the SL that can be either equivalent or slightly different upon  marginalizing.
-
-
-% described in Sec.~\ref{se:SL_theory}.
-
 
 
 For instance, if a single systematic uncertainty $\bm{\theta}$ is left apart from the combination, the SL takes the form
@@ -542,7 +403,7 @@ For instance, if a single systematic uncertainty $\bm{\theta}$ is left apart fro
     \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1} \bm \theta}}}{\sqrt{(2\pi)^P }}
     \cdot \pi(\delta) \,. \label{eq:SL_variants1}
 \ee
-Similarly, if two subsets of systematic uncertainties $\bm{\theta}$ and $\bm{\tilde \theta}$ tend to  separately satisfy the CLT conditions,  they can be separately combined, giving %the simplified likelihood
+Similarly, if two subsets of systematic uncertainties $\bm{\theta}$ and $\bm{\tilde \theta}$ tend to  separately satisfy the CLT conditions,  they can be separately combined, giving  
 \be
  L_{\rm{S}}(\bm{\alpha},\bm{\theta},\bm{\tilde \theta}) = \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm{\alpha})+b_I\theta_I+c_I\theta_I^2 + \tilde b_I \tilde \theta_I+ \tilde c_I \tilde \theta_I^2  \Big) \cdot
     \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1} \bm \theta}}}{\sqrt{(2\pi)^P }}
@@ -551,9 +412,8 @@ Similarly, if two subsets of systematic uncertainties $\bm{\theta}$ and $\bm{\ti
 \ee
 
 The SL naturally accommodates any such partitions. It is actually  commonplace in LHC analyses   to present systematic uncertainties combined in subsets, for example ``theoretical'', ``experimental'', ``luminosity'', ``MC'' uncertainties. 
-This is useful %for mere informative purpose but also for further reinterpretations.
-not only for informative purpose but also for further interpretations. 
-For example the theoretical uncertainties may be improved later on %, hence members of the community should be able to change them with no loss of consistency. 
+This is useful not only for informative purpose but also for further interpretations. 
+For example the theoretical uncertainties may be improved later on 
 and it is clearly of advantage if their effect can be re-evaluated without having to re-analyse the whole data (which could only be done by collaboration insiders).\footnote{Such combination of theoretical uncertainties  has been done in \cite{Arbey:2016kqi}  for the Higgs production and decay rates and can be implemented in a Higgs SL.}
 Another reason to single out a nuisance parameter  from the combination (as shown in Eq.~\eqref{eq:SL_variants1})
 is if it has a large non-Gaussian PDF that one prefers to take into account exactly.
@@ -562,18 +422,7 @@ In order to profit from the  versatility of the SL, an equally  versatile format
 Finally, if systematic uncertainties on the \textit{signal} are taken into account, the $b,c,\rho$ parameters  become dependent on the parameter of interest ${\bm \alpha}$. While there is no conceptual difference with the case  of background-only systematics, there are important practical differences. Numerical evaluations  become heavier  since  the parameters of the SL---especially $\rho_{IJ}(\alpha)$ which requires a matrix inversion---have to be evaluated for each value of ${\bm \alpha}$. Furthermore, the presentation of the SL data may also become more evolved.
 
 
-%\section{Presentation of Simplified Likelihood data}
-
-%\fxfatal{Give an introduction to the experimental/stats issues in extraction of
-%  stable and consistent 2nd and 3rd order correlation moments. Note the
-%  necessity of cross-checking and sanity-checking moment estimates: covariances
-%  have previously been published which, due to numerical rounding issues, are
-%  singular and hence unusable.}
-
-
 \subsection{Construction and  presentation}
-
-
 
 
 There are in principle two ways of releasing the data needed to build the simplified likelihood. One way %could be 
@@ -584,7 +433,7 @@ is to release the whole set of elementary systematic uncertainties, the other to
 
 
 We thus focus on the release of the  SL data via the  $m_{1,I}$, $m_{2,IJ}$, $m_{3,I}$
-moments   of the PDF of the combined systematic uncertainties,  already defined in Eqs.~\eqref{eq:moments1}--\eqref{eq:moments2}, where $m_{3,I}$ is the diagonal part of the third-rank tensor $m_{3,IJK}$.  Evaluating these moments via MC toys is straightforward for the experimental analysis. However, their way of presentation needs to be %discussed in great detail, 
+moments   of the PDF of the combined systematic uncertainties,  already defined in Eqs.~\eqref{eq:moments1}--\eqref{eq:moments2}, where $m_{3,I}$ is the diagonal part of the third-rank tensor $m_{3,IJK}$.  Evaluating these moments via MC toys is straightforward for the experimental analysis. However, their way of presentation needs to be  
 considered in detail, taking into account  the available tools and the current practices. This is the purpose of this subsection.
 
 
@@ -597,12 +446,6 @@ standard location is also necessary, for which the obvious choice is the longsta
 HEP data repository, HepData~\cite{hepdata}.
 
 
-
-%In this section we will first review the current status of data presentation, then present our proposal  for the simplified likelihood data.
-
-
-%Before describing the current status of data release and our subsequent proposal,
-% to improve and normalize it in the context of the simplified likelihood framework,
 It is convenient to refer to the data in terms of
 the order of the moment from which they originate. We will use the term ``$n$-th
 order data'' to refer to information coming from a moment of order $n$; here, $n$
@@ -613,19 +456,6 @@ third-order data but this does not need to be discussed here. In addition to the
 moments of the combined systematic uncertainties, this terminology will also
 apply to the observed central values and statistical uncertainties usually
 presented by the experiments.
-
-
-  %The origin of this information can be from the measurement described by the likelihood, by auxiliary measurements, or can even be of non-experimental origin, as in case of theoretical uncertainties.
-%First order data corresponds simply to mean values.  Concretely, the first order data that will be encountered here are  the observed event counts or (quantities derived from them),  and  contributions  to the expected event counts (\textit{i.e.} ``shifts'') induced by the combined systematic uncertainties.
-%
-%Second order data  can be  the covariance matrix itself, or quantities derived from it: the diagonal uncertainties (which can be presented either in a relative or absolute form) and the correlation matrix.
-%The second order data that will be encountered here are the statistical uncertainties,
-%%(which for Poisson process are not independent of mean values, but are rather given for convenience)
-% and the covariance matrix describing the combined systematic uncertainties.
-%
-%
-%Third order data  can be  the third moment tensor itself, or a normalized  version of it, for instance  the skew. Here we will encounter the third order data of the combined systematic uncertainties. Moreover, although the third moment is in general a rank-3 tensor, only its diagonal component will be used here.
-%
 
 Let us review the current formats of presentation of likelihood data. The presentation
 of first-order data is standardised while currently no third-order data are usually given.
@@ -690,18 +520,12 @@ This format requires some keyword standardization.  The final scheme should
 be capable of equally applying to any kind of experimental data and systematic uncertainties. In particular it should be valid for event counts,  differential cross-sections with bins correlated by the systematic uncertainties, correlations between  the bins of different distributions/datasets, and so on.
 
 
-%Can you thread in the thought I had a few emails ago about using prefixes to guide the structuring, e.g. current error source names look like "stat" and "sys,jesNp1" but we could extend this to e.g. a "th" prefix to allow separation of experimental and theory systematics (since the theory can in principle be improved on in future reinterpretations). Perhaps also "lumi" and "stat,MC" errors which could need to be treated differently. The decomposed covariance error sources would just get bland names like "sys,NP1" of course, but separating out classes of fundamental uncertainty origin will allow for more powerful combination -- separate & independent covariances can be coded for expt and theory systematics for example, and just added together if the simplest treatment is what's desired.
+Summarizing, our recommendation is to release the moments of the combined uncertainty distributions via the HepData error source format, which has built-in semantics of arbitrary complexity and can thus make the most of the SL framework.
 
 
-Summarizing, our recommendation is to release the moments of the combined uncertainty distributions via the HepData error source format, which has built-in semantics of arbitrary complexity and can thus  make the most of the SL framework.
-
-
-
-
-%Both forms require some keyword standardisation: in the first case to express
-%the semantic types of datasets and the relationships between them, and in the
-%second case to identify the statistical and skew error sources which should be
-%treated distinctly from the SL systematic uncertainties.
+%%%
+As a showcase example, we provide the pseudo-data used in the next section as a sandbox HepData record at \url{https://www.hepdata.net/record/sandbox/1535641814}.
+%%%
 
 
 
@@ -710,32 +534,16 @@ Summarizing, our recommendation is to release the moments of the combined uncert
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+%==================================================================
 \section{Simplified likelihood in a  realistic LHC-like analysis }
 \label{se:SL_LHC}
+%==================================================================
 
-
-In this section we introduce a realistic pseudo-analysis that is representative of a search for new physics at the LHC. This analysis will be used to validate the SL method and to test  its accuracy in realistic conditions. It is also used to validate the SL reference code %provided in \textbf{[...]}. 
-presented in Appendix~B.
-Finally, this pseudo-analysis  provides a concrete example  of  SL data release via the HepData error source format. 
+In this section we introduce a realistic pseudo-analysis that is representative of a search for new physics at the LHC. 
+This analysis will be used to validate the SL method and to test its accuracy in realistic conditions. 
+It is also used to validate the SL reference code presented in Appendix~\ref{app:reference_code}. 
+Finally, this pseudo-analysis  provides a concrete example  of  SL data release via the HepData error source format (see above). 
 The SL and subsequent results of the pseudo-search can be reproduced using these data. 
-
-
-
-
-
-
-%This section contains LHC-specific comments and details in relation to the simplified likelihood framework.
 
 As already mentioned in Section~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. 
 Imperfect knowledge of detector effects or approximations used in the underlying theoretical models will lead to uncertainties in the predictions of these processes.
@@ -744,21 +552,14 @@ There are a number of different ways in which an experimentalist may assess the 
 In the following section, we describe a pseudo-search for new physics, inspired by those performed at the LHC, in which systematic uncertainties are included, and derive the SL parameters for it.
 
 
-
-% \cite{SL_note,Fichet:2016gvx,Verkerke:2003ir,Moneta:2010pm,Kraml:2012sg,Boudjema:2013qla,Fichet:2015xla,Arbey:2016kqi,Cranmer:2013hia,Berry,Esseen,Feller,Billingsley}
-
-
-
 \subsection{A LHC-like pseudo-search for new physics}
 \label{se:toy_search}
 
 In order to illustrate the construction of the SL, a model has been constructed which is representative of a search for new physics at the LHC. Typically, in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides crucial information to identify a potential signal.
 
-% provides the separation needed to identify a potential signal.
-
-Our pseudo-search requires to make  assumptions for an ``observed'' dataset, for the corresponding background, and for the new physics signal.  These ingredients are summarized in Figure~\ref{fig:toy}, %. Figure~\ref{fig:toy} shows 
-which shows the distribution of events, in each of three categories along with the expected contribution from the background %, along with its uncertainties, 
-and the uncertainties theron, 
+Our pseudo-search requires to make  assumptions for an ``observed'' dataset, for the corresponding background, and for the new physics signal.  These ingredients are summarized in Figure~\ref{fig:toy},   
+which shows the distribution of events, in each of three categories along with the expected contribution from the background 
+and the uncertainties thereon, 
 and from some new physics signal.
 The `nominal' background follows a typical exponential distribution where fluctuations are present, representing a scenario in which limited MC  simulation (or limited data in some control sample) was used
 to derive the expected background contribution. The uncertainties due to this, indicated by the blue band, are uncorrelated between the different bins. Additionally, there are two uncertainties which modify the `shape' of
@@ -775,6 +576,7 @@ background and from the new physics signal is shown by the blue and red lines, r
 uncertainty while the blue shaded band shows the uncorrelated uncertainty in each bin due to limited MC simulation. The observed number of events in data in each bin is indicated by the black points.}
 \label{fig:toy}
 \end{sidewaysfigure}
+
 
 \clearpage
 
@@ -863,7 +665,6 @@ Only by summing over all of these backgrounds (\ie\ $n_{b,I}=\sum_{p}n_{b,p,I}$ 
 
 \subsection{Validation of the simplified likelihood}
 
-%Using our pseudo-search, we compare the experimental and simplified likelihoods. \fxnote{Do we want a whole separate section for this after setting up the toy? We can compare 1. distributions (1D and 2D), 2. frequentist (profiled) and Bayesian (marginalised) likelihoods.}
 
 Here we compare the true and simplified likelihoods arising from the pseudo-search. It is also instructive to consider the simplified likelihood obtained when neglecting the third moments, \textit{i.e.} when setting the coefficients of the quadratic terms $c_I$ to zero in Eq.~\eqref{eq:SL_master}. This less accurate version of the SL will be  referred to as ``symmetric SL'', as opposed to the more precise ``asymmetric SL'' developed in this work. 
 
@@ -872,9 +673,8 @@ We constructed 100,000 pseudo-datasets by taking random values ${\hat{\bm{\delta
 $n_{b,I}(\hat{\bm{\delta}})$ for each dataset according to the Eq.~\eqref{eqn:expt_param}. Figure~\ref{fig:distributions} shows the distribution of $\hat{n}_{i}$, for an example bin, $i=62$,
 from the SL. The values of $m_{1},~m_{2}$ and $m_{3}$ are calculated using the pseudo-datasets and subsequently used to calculate the coefficients for the SL.
 
-%In this case, the In the case where the skew of the distribution, defined as $m_{3,I}/(m_{2,II})^{\frac{3}{2}}$, is small
 
-\begin{figure}[t]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{figures/compare_62}
   \caption{Distributions of $\hat{n}_{I}$ for $I=62$ for the SL.
@@ -886,25 +686,7 @@ from the SL. The values of $m_{1},~m_{2}$ and $m_{3}$ are calculated using the p
 \end{figure}
 
 
-%In the case where the skew of the distribution, defined as $m_{3,I}/(m_{2,II})^{\frac{3}{2}}$, is small,
-%both the linear and quadratic form produce a similar distribution as those from the pseudo-data.
-%Instead, for large values of the skew, the linear form leads to a shift of the peak in the distribution and overall poorer
-%agreement than the quadratic form. Moreover, in the quadratic form, the probability for $\hat{n}_{I}<0$
-%is much smaller when $n^{0}_{b,I}$ is small, as in the tails of the distributions (eg bin $86$), compared to the linear form.
-
-%The simplified likelihood coefficients
-%$a_{I},~b_{I}$ and $c_{I}$ are determined from the first three moments, which are calculated from the pseudo-datasets, and the resulting quadratic form shown in the inset panels.
-
-
-%Figure~\ref{distributions2d} shows
-%The color map shows the projection of the pseudo-datasets onto pairs of bins.
-%The green contours show the distribution of $\hat{n}_{b,I}--\hat{n}_{b,J}$
-%when $\hat{n}_{b,I} = a_{I}+b_{I}\hat{\theta}_{I}+c_{I}\hat{\theta}_{I}^{2}$ and .
-%The projections onto a single bin, comparing the distribution of the pseudo-datasets (black histogram)  and the simplified likelihood approximation (green histogram), are also shown.
-%Additionally, the distributions assuming a linear approximation ($\hat{n}_{b,I} = m_{1,I}+\hat{\theta}_{I}\sqrt{m_{2,II}}$), which assumes the third moment is negligible, is provided.
-
-
-In Figure~\ref{fig:distributions2d} 2D projections of the background
+In Figure~\ref{fig:distributions2d}, 2D projections of the background
 distributions are shown between four pairs of signal-region bins: bin pair
 $(4,7)$ shows a projection for high-statistics bins where both the asymmetric and symmetric  SL agree closely with the true distribution (that obtained in the pseudo-datasets);
 the true distribution in $(4,62)$ starts to display deviations from the multivariate
@@ -921,18 +703,7 @@ evaluation of higher-order coefficients (and/or off-diagonal skew terms) and
 hence higher moments of the experimental distributions.
 
 
-% Systematic relaxation of the
-%quadratic-form cutoff to more closely model the true pdf
-% would require
-%evaluation of higher-order coefficients (and/or off-diagonal skew terms) and
-%hence higher moments of the experimental distributions.
-
-\begin{figure}[t]
-  \centering
-  %\includegraphics[width=0.45\textwidth]{figures/corr-4-7}
-  %\includegraphics[width=0.45\textwidth]{figures/corr-4-62}\\
-  %\includegraphics[width=0.45\textwidth]{figures/corr-4-86}
-  %\includegraphics[width=0.45\textwidth]{figures/corr-62-86}
+\begin{figure}[t]  \centering
   \includegraphics[width=\textwidth]{figures/plotmatrix}
   \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{b,J}$ for the LHC-like 
     % $I=4, 7, 31$ and 62 in pseudo-datasets generated from the
@@ -951,12 +722,6 @@ hence higher moments of the experimental distributions.
   \label{fig:distributions2d}
 \end{figure}
 
-%\begin{figure}[t]
-%  \centering
-%  \includegraphics[width=\textwidth]{figures/plotmatrix}
-%  \label{fig:distributionmatrix}
-%  \caption{1D and 2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{J}$ for $\{I,J\}=4,7,31,62,86$.}
-%\end{figure}
 
 An advantage of the asymmetric SL is that a strictly positive
 approximate distribution can be guaranteed, while the symmetric SL can have a
@@ -983,13 +748,15 @@ In order to remove the dependence of the likelihood on the nuisance parameters, 
 commonly adopted. The first, termed `profiling`, involves replacing the nuisance parameters with the values at which
 the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$.
 
-\begin{figure}[t]
+
+\begin{figure}[t!]
   \centering
-  \includegraphics[width=0.7\textwidth]{figures/testtoy-tmuscan}
+  \includegraphics[width=0.66\textwidth]{figures/testtoy-tmuscan}
   \caption{Value of $t_{\mu}$ as a function of $\mu$ for the pseudo-search assuming the experimental likelihood (black solid line) and simplified likelihood retaining (green dashed line) or not (red dashed line) the contribution from the quadratic term. The horizontal lines drawn at $t_{\mu}=1$ and $3.86$ represent the
   values for which the 68\% and 95\% CL exclusions can be determined, assuming certain asymptotic properties of the distribution of $t_{\mu}$.}
   \label{fig:tmucompare}
 \end{figure}
+
 
 
 \begin{equation}
@@ -1009,25 +776,13 @@ by profiling the elementary
 nuisance parameters $\bm{\delta}$. A direct comparison of the test-statistic for the full and simplified likelihoods, as a function of $\mu$, 
 is therefore possible.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.32\textwidth]{figures/varAll_A}
-  \includegraphics[width=0.32\textwidth]{figures/varAll_B}
-  \includegraphics[width=0.32\textwidth]{figures/varAll_C}
-  \caption{RMS of the SL coefficients relative to the mean
-    coefficient value determined from 100,000 pseudo-datasets for $a_{I}$
-    (left), $b_{I}$ (center), and $c_{I}$ (right). The distributions are shown
-    for $I=4$ (black points), $I=62$ (red points) and $I=86$ (blue points).}
-  \label{fig:SLConvergence}
-\end{figure}
-
-
 
 Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a function of $\mu$ for the pseudo-search between the full (experimental)
 likelihood and the asymmetric SL. In addition, the result obtained using only the symmetric SL is shown. As expected, the
 agreement between the full and simplified likelihood is greatly improved when including the quadratic term. A horizontal line is drawn at the value of
 $t_{\mu}= 3.86$. The agreement in this region is particularly relevant due to the fact that asymptotic approximations for the distributions of $t_{\mu}$~\cite{Cowan:2010js} allow one to determine the 95\% confidence level (CL) upper limit on the signal strength, $\mu_{\rm{up}}$.
 The signal hypothesis is `excluded' at 95\% CL if $\mu_{\rm{up}} < 1$.
+
 
 When determining the SL coefficients, we have relied on pseudo-datasets, as we expect this will often be the case for anyone providing SL 
 inputs for real analyses. The accuracy of the SL coefficients will necessarily depend on the number of pseudo-datasets used to calculate them. 
@@ -1037,12 +792,25 @@ The coefficients for the three bins calculated using 100,000 pseudo-datasets are
 $a=2.61,~b=0.90,~c=0.11$ for bin 62, and $a=0.90,~b=0.47,~c=0.13$ for bin 86. 
 The calculation of the coefficients is repeated using many independent sets of a fixed number of pseudo-datasets, resulting in a distribution of 
 calculations for each coefficient. 
+
 The root mean square (RMS)  of the resulting distributions provides an estimate for how much variation can be expected in the calculation 
 of the SL coefficients given a limited pseudo-data sample size. 
 The RMS values are normalised to the RMS of the distributions resulting from a sample size of 
 100,000 pseudo-datasets to give a relative RMS. 
-Figure~\ref{fig:SLConvergence} shows the relative RMS of the distribution of the 
-coefficients calculated using increasing numbers of pseudo-datasets. 
+The relative RMS of the distribution of the 
+coefficients calculated using increasing numbers of pseudo-datasets is shown Fig.~\ref{fig:SLConvergence}.
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=0.34\textwidth]{figures/varAll_A}%
+  \includegraphics[width=0.34\textwidth]{figures/varAll_B}%
+  \includegraphics[width=0.34\textwidth]{figures/varAll_C}
+  \caption{RMS of the SL coefficients relative to the mean
+    coefficient value determined from 100,000 pseudo-datasets for $a_{I}$
+    (left), $b_{I}$ (middle), and $c_{I}$ (right). The distributions are shown
+    for $I=4$ (black points), $I=62$ (red points) and $I=86$ (blue points).}
+  \label{fig:SLConvergence}
+\end{figure}
 
 The coefficients $a$ and $b$ can be calculated with relatively high precision using only 1000 pseudo-datasets in each case. This is true 
 whether the value of $b$ is large compared to $a$, as in the case of bin 86, or not, as in the case of bin 4. The determination of 
@@ -1054,128 +822,65 @@ the convergence is quite fast, with only 2,500 pseudo-datasets required to achei
 that bins with large $c$ values, compared to $b$ values, require fewer pseudo-datasets to acheive a good accuracy than bins for which the $c$ value 
 is less relevant generally holds in this study. 
 
-%\fxfatal{WOLFGANG: Plots showing profile \& marginalisation upper-limit
-%  extractions between true, symm/linear, and asymm/quadratic forms}
 
-
-%\section{Construction and distribution of Simplified Likelihood data}
-
-% For
-%such observables, the Poisson--Gaussian likelihood form presented in this paper
-%may not be the appropriate one to use -- e.g.~a pure multivariate Gaussian
-%cf.~$\chi^2$ testing is more appropriate for normalised differential observables
-%-- and so a further record annotation will be required to identify the
-%appropriate likelihood family into which to cast the provided correlation data.
-
-
-% [original version from AB]
-%Key to the usefulness of any likelihood data for analysis reinterpretation is
-%the availability of that data in a standard format. For global fits, where tens
-%or hundreds of analyses may be used simultaneously, it is crucial that this
-%format be unambiguously parseable by algorithms without human assistance. A
-%standard location is also necessary, for which the obvious choice is the longstanding
-%HEP data repository, HepData~\cite{hepdata}.
-%
-%Unfortunately, at present there is no standard semantic representation of second
-%order (i.e.~covariance) correlation data, let alone the third order ``skew''
-%information. At present a review of the correlation information in HepData and
-%on the experiments' analysis websites reveals a mixture of second-order data
-%presentation styles:
-%%
-%\begin{itemize}
-%\item 2D histograms of either covariance or correlation matrices. This has the
-%  difficulties that the convention used is not made clear (other than by
-%  inspection of the matrix diagonal), and without a structural association with
-%  a ``primary'' dataset of values/first moments it is impossible for computer
-%  codes to unambiguously construct the relevant likelihood. In the case of a
-%  normalised correlation representation cf.~$\rho$, the primary dataset must
-%  also provide the diagonal variances.
-%\item A breakdown by error-source, e.g. a series of labelled $\pm$ terms for
-%  each value in the primary dataset. From this, with some conventions (e.g.~a
-%  ''stat'' label to be a purely diagonal contribution, a ``lumi'' label to be
-%  100\% correlated across all bins, and all other labelled uncertainties treated
-%  as orthogonal) the correlation or covariance matrices can be constructed.
-%\item auxiliary files in arbitrary format: the \emph{ad hoc} nature of these
-%  makes them impossible to be handled by unsupervised algorithms. This includes
-%  2D histograms in ROOT data files, since variations in path structure and the
-%  ambiguity between covariance or correlation forms are an impediment to
-%  automated use.
-%\end{itemize}
-%
-%The first two of these forms may be readily extended for automated correlation
-%handling. In the first case, the HepData table headers may be augmented to
-%express relationships between tables, i.e.~identifying the second (and third)
-%moment data tables associated with a primary dataset in a standardised
-%fashion. And in the second case, the SL covariance matrices may be represented
-%in error-source form, with each bin $I$ reporting $N$ different error sources of
-%value $\sqrt{m_{2,IJ}}$ as well as specially identified skew and statistical
-%error components.
-%
-%Both forms require some keyword standardisation: in the first case to express
-%the semantic types of datasets and the relationships between them, and in the
-%second case to identify the statistical and skew error sources which should be
-%treated distinctly from the SL systematic uncertainties. The final scheme should
-%be capable of equally applying to search-analysis signal regions as discussed
-%here, and to bins of differential cross-section observables where correlations
-%may also be available between the bins of different distributions/datasets.  For
-%such observables, the Poisson--Gaussian likelihood form presented in this paper
-%may not be the appropriate one to use -- e.g.~a pure multivariate Gaussian
-%cf.~$\chi^2$ testing is more appropriate for normalised differential observables
-%-- and so a further record annotation will be required to identify the
-%appropriate likelihood family into which to cast the provided correlation data.
-
-
+%==================================================================
 \section{Conclusions}
 \label{se:conclusions}
+%==================================================================
 
 
-The transmission of highly complex LHC likelihoods 
-from the experimental collaborations to the scientific community
- has been a long standing issue. % The SL framework, besides having a sound theoretical basis, should satisfy both sides.
+The transmission of highly complex LHC likelihoods from the experimental collaborations to the scientific community
+has been a long standing issue. % The SL framework, besides having a sound theoretical basis, should satisfy both sides.
 In this paper, we proposed a simplified likelihood framework which can account for non-Gaussianities as a convenient way of presentation 
 with a sound theoretical basis. %, which will hopefully satisfy both sides.
 
-Although the SL is  accurate, it is still a mere approximation of the actual experimental likelihood, hence experimentalists do not have to release their full likelihood. Meanwhile, for the public, having a good approximation of the true likelihood is sufficient for most phenomenology purposes. 
+Although the SL is  accurate, it is still a mere approximation of the actual experimental likelihood, hence the collaborations 
+do not have to release their full %likelihood.
+model.
+Meanwhile, for the public, having a good approximation of the true likelihood is sufficient for most phenomenology purposes. 
 Moreover, the SL is very simple to transmit requiring neither a big effort for the experimentalists to release it nor for the user to construct it. Additionally, with some standardization effort, part of this transmission process can be automated. 
 
-In this paper we have introduced the formalism of the asymmetric version of the SL. 
-The formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: asymmetry is recognized as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
+In this paper we introduced the formalism for the asymmetric version of the SL. 
+This formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: asymmetry is recognized as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
 The inclusion of asymmetry completes the SL and provides a fully reliable framework.
 
 The asymmetric SL can be built either from the elementary systematic uncertainties themselves or from the three first moments  of the combination of the systematic uncertainties, which are easily obtained via MC generators. 
-In practice, for the transmission of the SL data from an experiment to the public, our recommendation is to simply release the three first moments of the combined uncertainties, preferably via the HepData repository in the error source format.  The SL framework is flexible in the sense that it can apply to one or more subsets of the systematic uncertainties,  and the HepData error source format  has adequate flexibility to account for any partitions of the uncertainties
-the releaser wishes to make.
+Using a realistic LHC-like pseudo-search for new physics, we demonstrated that including asymmetry in the SL provides  
+an important gain in accuracy, and  that it is unlikely that higher moments will be needed.
+
+In practice, for the transmission of the SL data from an experiment to the public, our recommendation is to simply release the three first moments of the combined uncertainties, preferably via the HepData repository in the error source format.  The SL framework is flexible in the sense that it can apply to one or more subsets of the systematic uncertainties,  and the HepData error source format  has adequate flexibility to account for any partitions of the uncertainties the releaser wishes to make.
+
+%The construction and use of the SL has been exemplified via  a realistic LHC-like pseudo-search for new physics, which is then used to validate the SL method and test its accuracy. 
+%This realistic example makes clear that including asymmetry in the SL provides %a sensible gain 
+%an important gain in accuracy, and  that it is unlikely that higher moments will be needed. %We find 
+%We also note that the SL tends to become inaccurate in bins with only a few events. Finally, this pseudo-search is used to provide an example of SL data release.  The SL pseudo-data are available on the HepData repository at \textbf{[URL...]}.  
 
 
-
-The construction and use of the SL has been exemplified via  a realistic LHC-like pseudo-search for new physics, which is then used to validate the SL method and test its accuracy. 
-This realistic example makes clear that including asymmetry in the SL provides %a sensible gain 
-an important gain 
-in accuracy, and  that it is unlikely that higher moments will be needed. %We find 
-We also note that the SL tends to become inaccurate in bins with only a few events. Finally, this pseudo-search is used to provide an example of SL data release.  The SL data are available on the HepData repository at \textbf{[URL...]}.  
-
-%\textcolor{blue}{[SK: concluding remark?]}
-%We hope our method will be adopted by both the experimental and theory communities for a better documentation and re-interpretation of the LHC results. Or:
-
- If systematically adopted by the experimental and theory communities, the SL has the potential to considerably improve both the documentation and the re-interpretation of the LHC results.
-
+If systematically adopted by the experimental and theory communities, the SL has the potential to considerably improve both the documentation and the re-interpretation of the LHC results.
 
 
 
 
 
-
+%==================================================================
 \section*{Acknowledgements}
+%==================================================================
 
- This work has been initiated at the \textit{LHC Chapter II: The Run for New Physics} workshop held at IIP Natal, Brazil,  6--17 Nov.\ 2017. 
- AB's work is supported by a Royal Society University Research Fellowship grant.
- SF's work is supported by the S\~ao Paulo Research Foundation (FAPESP) under grants \#2011/11973 and \#2014/21477-2.
- NW's work is funded through a Science and Techologies Facility Council (STFC) Fellowship grant \#ST/N003985/1.
+This work has been initiated at the \textit{LHC Chapter II: The Run for New Physics} workshop held at IIP Natal, Brazil,  6--17 Nov.\ 2017. 
+AB is supported by a Royal Society University Research Fellowship grant.
+SF is supported by the S\~ao Paulo Research Foundation (FAPESP) under grants \#2011/11973 and \#2014/21477-2. 
+SK is supported by the IN2P3 project ``Th\'eorie -- LHCiTools'' and the CNRS-FAPESP collaboration grant PRC275431. 
+NW is funded through a Science and Techologies Facility Council (STFC) Fellowship grant \#ST/N003985/1.
 
+
+%==================================================================
 \appendix
+%==================================================================
 
+%------------------------------------------------------------
 \section{The CLT at next-to-leading order}
 \label{app:skew}
+%------------------------------------------------------------
 
 
 Let us show in a 1D example how the skew appears  in the asymptotic distribution. Consider $N$ independent centered nuisance parameters $\delta_j$ of variance $\sigma^2$ and third moment $\gamma$. Define \be Z=\frac{\sum_{j=1}^N \delta_j}{\sqrt{N}}\,.
@@ -1205,7 +910,6 @@ Let us now compare the characteristic function of  this expansion to Eq.~\eqref{
 We find that the characteristic function is given by
 \be
 \varphi_Z(t)={\bf E} \left[ \mathrm{e}^{it \left(\theta+\frac{c}{2\sqrt{N}}\theta^2+O\left(\frac{1}{N}\right)\right)} \right]
-%=\exp\left(-\frac{\sigma^2}{1-\frac{i c t}{\sqrt{n}}  +O(n^{-1})}\frac{t^2}{2}\right)
 =\exp\left(-\frac{\sigma^2 t^2}{2}-i \frac{c t^3}{ 2 \sqrt{N}} +O\left(\frac{1}{N}\right)\right)
 \label{eq:CF_exp}
 \ee
@@ -1216,11 +920,13 @@ Z\rightarrow \theta+\frac{\gamma}{3\sqrt{N}}\theta^2\,,\,\,N\rightarrow \infty  
 When the quadratic term becomes negligible the distribution becomes symmetric, and we recover the usual CLT.
 As expected, for finite $N$, we can see that  the support of $Z$ is not $\bf R$. For example for $\gamma>0$, we have
 $Z > -3\sqrt{N}/4\gamma$.
-%This normal expansion will be very useful in the simplified likelihood framework and
-%will be extensively used in the following.
 
+
+
+%------------------------------------------------------------
 \section{Reference Code}
-\label{sec:reference_code}
+\label{app:reference_code}
+%------------------------------------------------------------
 
 A reference implementation in Python code, {\tt simplike.py}, is provided in
 \begin{quote}
@@ -1243,7 +949,6 @@ which we reproduce here to assist independent implementations:
     &- \frac{1}{2} \bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} - \frac{P}{2} \ln 2\pi
   \end{split}\\[2ex]
   %
-%  \Rightarrow \qquad
   \frac{\partial\ln L_{\rm{S}}}{\partial\mu} =& \sum_I^P \left( \frac{n^{\rm{obs}}_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot n_{s,I} \\
   %
   \frac{\partial\ln L_{\rm{S}}}{\partial\theta_{\!A}} =& \left( \frac{n^{\rm{obs}}_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
@@ -1257,11 +962,13 @@ comprehensibility of the calculations explicitly in mind. While it computes
 likelihood statistics on a reasonable timescale, further (but less readable)
 optimisations can be added for production code.
 
-%For simplicity, in our upcoming LHC-like analysis models, we will consider a single parameter-of-interest, the ratio of the observed to the predicted signal production cross-section $\mu=\sigma/\sigma_{\mathrm{TH}}$ (or `signal strength').
-%This is very commonly used in experimental searches for some hypothetical new signal processes and demonstrates the simplified likelihood formalism without loss of generality.
+A demo of the construction of the simplified likelihood, and profiling as a function of a signal strength parameter, is given in {\tt simplikedemo.py}.
+Finally, the SL pseudo-data are available on the HepData repository at \url{https://www.hepdata.net/record/sandbox/1535641814}.
 
+
+%==================================================================
 \bibliographystyle{jhep}
-
 \bibliography{biblio}
+%==================================================================
 
 \end{document}
