@@ -360,7 +360,9 @@ The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$.
 Below this limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield.
 
 To check numerically how well the approximation performs, the true and approximate PDFs are compared in Fig.~\ref{fig:approxs} for various values of $\sigma$.  
-For small asymmetries, $\sigma \sim 0.1$--$0.3$ when the true PDF is vanishing in the region $n < 0.5$, the approximation is excellent.  
+%For small asymmetries, $\sigma \sim 0.1$--$0.3$ when the true PDF is vanishing in the region $n < 0.5$, the approximation is excellent.  
+Since the approximate PDF never gives $n<0.5$, it can only be a good approximation if the true PDF is vanishing in this region. This is the case for
+asymmetries $\sigma \lesssim 0.3$, and as can be seen in the figure the normal approximation indeed works very well.
 For larger asymmetries, $\sigma = 0.45$ in our example, the true PDF becomes sizeable in the region $n<0.5$. 
 The approximation still performs reasonably well for larger $n$, however, near $n\sim 0.5$, 
 the approximate PDF tends to increase and become peaked to account for the area at $n<0.5$ that it cannot reproduce. 
