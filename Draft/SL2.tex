@@ -359,16 +359,11 @@ The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$.
 %It turns out that except near the above mentioned 
 Below this limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield.
 
-%Let us finally check how well the approximation performs. The true and approximate densities are compared in Fig.~\ref{fig:approxs} for various values of $\sigma$.  
-To check numerically how well the approximation performs, the true and approximate densities are compared in Fig.~\ref{fig:approxs} for various values of $\sigma$.  
-%When the true density is vanishing in the region $n<0.5$, the approximation is excellent.  For larger asymmetry, $\sigma \sim 0.35-0.4$, the true density starts to be sizeable in the region $n<0.5$. The approximate density is still reasonably good away from $n\sim 0.5$. However, near this boundary, the approximate density tends to increase and possibly peak, somehow to account for  the area at $n<0.5$ that it cannot reproduce.
-%This behaviour can be seen in Fig.~\ref{fig:approxs}, and will also be observed for certain bins in the LHC-like analysis implemented in Sec.~\ref{se:SL_LHC}.
-For small asymmetries, $\sigma \sim 0.1$--$0.3$ or when true density is vanishing, the approximation is excellent.  
-For larger asymmetries, $\sigma = 0.45$ in our example, the true density starts to be sizeable in the region $n<0.5$. 
-The approximation still performs reasonably well %away from $n\sim 0.5$. 
-for large enough $n$. 
-However, near %this boundary, 
-$n\sim 0.5$, the approximate density tends to increase and possibly peak, somehow to account for the area at $n<0.5$ that it cannot reproduce. 
+To check numerically how well the approximation performs, the true and approximate PDFs are compared in Fig.~\ref{fig:approxs} for various values of $\sigma$.  
+For small asymmetries, $\sigma \sim 0.1$--$0.3$ when the true PDF is vanishing in the region $n < 0.5$, the approximation is excellent.  
+For larger asymmetries, $\sigma = 0.45$ in our example, the true PDF becomes sizeable in the region $n<0.5$. 
+The approximation still performs reasonably well for larger $n$, however, near $n\sim 0.5$, 
+the approximate PDF tends to increase and become peaked to account for the area at $n<0.5$ that it cannot reproduce. 
 This behaviour will also be observed for certain bins in the LHC-like analysis implemented in Sec.~\ref{se:SL_LHC}.
 
 Overall, through this example, we can see that the normal approximation tends to become inaccurate for a skewness of $\sim 100$--$150\%$. 
@@ -380,8 +375,8 @@ This is a moderate value, however one should keep in mind that these considerati
 \includegraphics[width=0.7\textwidth]{figures/PlotLogNormal.pdf}
 \end{center}
 \caption{\label{fig:approxs} 
-The normal approximation of a log-normal distribution for various values of $\sigma$. The full curves show the true, 
-the dashed curves the approximate distributions.}
+The log normal PDFs and corresponding normal approximations for $\sigma = 0.1$, 0.3 and 0.45 are shown in blue, cyan and purple respectively. Solid curves show the true distributions, dashed curves show the approximate distributions. 
+}
 \end{figure}
 
 
