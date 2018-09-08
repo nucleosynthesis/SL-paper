@@ -945,17 +945,17 @@ which we reproduce here to assist independent implementations:
 \begin{align}
   \begin{split}
     \ln\! \big( L_{\rm{S}}(\mu,\bm{\theta} )\pi(\bm{\theta}) \big) =&
-    \sum_I^P \Big[ n^{\rm{obs}}_{I} \ln \left(\mu n_{s,I} + n_{I}(\theta_{I}) \right) - \left( \mu n_{s,I} + n_{b,I}(\theta_{I}) \right) - n^{\rm{obs}}_{I}! \Big]\\
+    \sum_I^P \Big[ n^{\rm{obs}}_{I} \ln \left(\mu n_{s,I} + n_{b,I}({\bm \theta}) \right) - \left( \mu n_{s,I} + n_{b,I}({\bm \theta}) \right) - n^{\rm{obs}}_{I}! \Big]\\
     &- \frac{1}{2} \bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} - \frac{P}{2} \ln 2\pi
   \end{split}\\[2ex]
   %
-  \frac{\partial\ln L_{\rm{S}}}{\partial\mu} =& \sum_I^P \left( \frac{n^{\rm{obs}}_I}{\mu n_{s,I} + n_{b,I}(\theta_{I})} - 1 \right) \cdot n_{s,I} \\
+  \frac{\partial\ln L_{\rm{S}}}{\partial\mu} =& \sum_I^P \left( \frac{n^{\rm{obs}}_I}{\mu n_{s,I} + n_{b,I}(\bm{\theta})} - 1 \right) \cdot n_{s,I} \\
   %
-  \frac{\partial\ln L_{\rm{S}}}{\partial\theta_{\!A}} =& \left( \frac{n^{\rm{obs}}_A}{\mu n_{s,A} + n_{b,A}(\theta_{\!A}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
+  \frac{\partial\ln L_{\rm{S}}}{\partial\theta_{\!A}} =& \left( \frac{n^{\rm{obs}}_A}{\mu n_{s,A} + n_{b,A}({\bm \theta}) } - 1 \right) \cdot \big( b_A + 2 c_A \theta_{\!A} \big) - \sum_I^P \rho_{\mspace{-1mu}AI}^{-1} \, \theta_I ~,
 \label{eq:SL_LHC_refcode}
 \end{align}
 %
-where $n_{b,I}(\theta_{I}) = a_{I} + b_{I}\theta_{I} + c_{I}\theta_{I}^{2}$.
+where $n_{b,I}({\bm\theta}) = a_{I} + b_{I}\theta_{I} + c_{I}\theta_{I}^{2}$.
 
 The reference code has been written with reverse engineering and
 comprehensibility of the calculations explicitly in mind. While it computes
