@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}From the experimental likelihood to the simplified likelihood}{3}{section.2}
+\contentsline {section}{\numberline {3}The simplified likelihood from the central limit theorem}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Asymmetries and CLT at next-to-leading order}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Calculation of the simplified likelihood}{6}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Precision of the normal expansion}{8}{subsection.3.3}
+\contentsline {section}{\numberline {4}Practical aspects of the simplified likelihood framework}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}Range of application}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Construction and presentation}{10}{subsection.4.2}
+\contentsline {section}{\numberline {5}Simplified likelihood in a realistic LHC-like analysis }{12}{section.5}
+\contentsline {subsection}{\numberline {5.1}A LHC-like pseudo-search for new physics}{13}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Parameterization of backgrounds}{15}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Validation of the simplified likelihood}{16}{subsection.5.3}
+\contentsline {section}{\numberline {6}Conclusions}{21}{section.6}
+\contentsline {section}{\numberline {A}The CLT at next-to-leading order}{22}{appendix.A}
+\contentsline {section}{\numberline {B}Reference Code}{23}{appendix.B}
