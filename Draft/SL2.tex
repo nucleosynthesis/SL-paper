@@ -125,7 +125,7 @@ In this paper we unify and extend the initial proposals of Refs.~\cite{Fichet:20
 Compared to Refs.~\cite{Fichet:2016gvx,SL_note}, an important  refinement is that we provide a way 
 to rigorously include asymmetries in the combined uncertainties, which is useful in order to avoid inconsistencies such as a negative event yield. Technically this is done by taking into account the next-to-leading term in the limit given by an appropriate version of the Central Limit Theorem (CLT).
 
-The paper is organized as follows. 
+The paper is organised as follows. 
 Section~\ref{se:EL_SL} introduces the formalism and key points of our approach.  
 The formal material, including an in-depth discussion of the next-to-leading term of the CLT and the derivation of the SL formula, is presented in Section~\ref{se:SL_theory}. 
 Practical considerations regarding the SL flexibility and the release of the SL via HepData are given in 
@@ -143,7 +143,7 @@ Appendix~\ref{app:reference_code} presents a reference implementation of the SL 
 \label{se:EL_SL}
 %==================================================================
 
-This section introduces the formalism, presents the main theoretical results and an efficient Monte-Carlo based calculation method. We will focus on the typical experimental likelihood used in searches for new phenomena at particle physics experiments. However, we stress that the SL approach can be easily generalized to other physics contexts.
+This section introduces the formalism, presents the main theoretical results and an efficient Monte-Carlo based calculation method. We will focus on the typical experimental likelihood used in searches for new phenomena at particle physics experiments. However, we stress that the SL approach can be easily generalised to other physics contexts.
 The data collected in particle physics usually originate from random (quantum) processes, and have thus an intrinsic \textit{statistical} uncertainty--which vanishes in the limit of large data sets. Our interest rather lies in the \textit{systematic} uncertainties, which are independent of the amount of data.
 
 
@@ -212,7 +212,7 @@ because higher order terms $O(\theta_I^3)$  would need to be included in Eq.~\eq
 In practice, however, this requires a high skewness of the nuisance parameters, and the SL framework up to quadratic order is sufficient for most applications.
 
 This method will be used in the examples shown in the rest of the paper. 
- This means that if one is provided with the moments $m_{1}$ and $m_{3}$ for each bin and the covariance matrix $m_{2,IJ}$, the SL parameters are completely defined. Moreover, in the case where the nuisance parameters affect only the background rate Eq.~\eqref{eq:SL_LHC}, this computation has to be realized only once and the resulting likelihood can be used for any kind of signal by appropriate substitution of $n_{s}(\bm{\alpha})$.
+ This means that if one is provided with the moments $m_{1}$ and $m_{3}$ for each bin and the covariance matrix $m_{2,IJ}$, the SL parameters are completely defined. Moreover, in the case where the nuisance parameters affect only the background rate Eq.~\eqref{eq:SL_LHC}, this computation has to be realised only once and the resulting likelihood can be used for any kind of signal by appropriate substitution of $n_{s}(\bm{\alpha})$.
 
 A reference code implementing the SL and subsequent test statistics is described in Appendix~\ref{app:reference_code}
 and publicly available at \url{https://gitlab.cern.ch/SimplifiedLikelihood/SLtools}.
@@ -235,7 +235,7 @@ The CLT is often used in its asymptotic limit where the distribution becomes exa
 
 The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. 
 However, by using the large $N$ expansion, we are able to  to express the CLT at next-to-leading order in a very simple way. 
-We realize that a random variable $Z$ with characteristic function
+We realise that a random variable $Z$ with characteristic function
 \be
 \varphi_Z(t)=\exp\left(-\frac{\sigma^2 t^2}{2}-i \frac{\gamma t^3}{6 \sqrt{N}} +O\left(\frac{t^4}{N}\right)\right) \label{eq:CF_CLT}
  \ee
@@ -519,12 +519,7 @@ This format requires some keyword standardization.  The final scheme should
 be capable of equally applying to any kind of experimental data and systematic uncertainties. In particular it should be valid for event counts,  differential cross-sections with bins correlated by the systematic uncertainties, correlations between  the bins of different distributions/datasets, and so on.
 
 
-Summarizing, our recommendation is to release the moments of the combined uncertainty distributions via the HepData error source format, which has built-in semantics of arbitrary complexity and can thus make the most of the SL framework.
-
-
-%%%
-As a showcase example, we provide the pseudo-data used in the next section as a sandbox HepData record at \url{https://www.hepdata.net/record/sandbox/1535641814}.
-%%%
+Summarizing, our recommendation is to release the moments of the combined uncertainty distributions via the HepData error source format, which has built-in semantics of arbitrary complexity and can thus make the most of the SL framework. As a showcase example, we provide the pseudo-data used in the next section as a sandbox HepData record at \url{https://www.hepdata.net/record/sandbox/1535641814}.
 
 
 
@@ -541,13 +536,13 @@ As a showcase example, we provide the pseudo-data used in the next section as a 
 In this section we introduce a realistic pseudo-analysis that is representative of a search for new physics at the LHC. 
 This analysis will be used to validate the SL method and to test its accuracy in realistic conditions. 
 It is also used to validate the SL reference code presented in Appendix~\ref{app:reference_code}. 
-Finally, this pseudo-analysis  provides a concrete example  of  SL data release via the HepData error source format (see above). 
+Finally, this pseudo-analysis provides a concrete example of SL data release via the HepData table format (see above). 
 The SL and subsequent results of the pseudo-search can be reproduced using these data. 
 
 As already mentioned in Section~\ref{se:EL_SL}, the dominant systematic uncertainties relevant in searches for new physics are those related to the background processes. 
 Imperfect knowledge of detector effects or approximations used in the underlying theoretical models will lead to uncertainties in the predictions of these processes.
 Any mis-estimation of the background could result in an erroneous conclusion regarding the presence (or absence) of a signal.
-There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterized using knowledge of how the estimation of a given process which change under variations of some underlying parameter of the simulation model, theory, detector resolution, etc. Estimates of the contribution from background processes are obtained either from simulation or through  data-driven methods.
+There are a number of different ways in which an experimentalist may assess the effect of a given systematic uncertainty, but generally, these effects are parameterised using knowledge of how the estimation of a given process which change under variations of some underlying parameter of the simulation model, theory, detector resolution, etc. Estimates of the contribution from background processes are obtained either from simulation or through  data-driven methods.
 In the following section, we describe a pseudo-search for new physics, inspired by those performed at the LHC, in which systematic uncertainties are included, and derive the SL parameters for it.
 
 
@@ -556,7 +551,7 @@ In the following section, we describe a pseudo-search for new physics, inspired 
 
 In order to illustrate the construction of the SL, a model has been constructed which is representative of a search for new physics at the LHC. Typically, in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides crucial information to identify a potential signal.
 
-Our pseudo-search requires to make  assumptions for an ``observed'' dataset, for the corresponding background, and for the new physics signal.  These ingredients are summarized in Figure~\ref{fig:toy},   
+Our pseudo-search requires to make  assumptions for an ``observed'' dataset, for the corresponding background, and for the new physics signal.  These ingredients are summarised in Figure~\ref{fig:toy},   
 which shows the distribution of events, in each of three categories along with the expected contribution from the background 
 and the uncertainties thereon, 
 and from some new physics signal.
@@ -743,10 +738,13 @@ of the signal across all regions of the search, giving,
 \label{eq:muscale}
 \end{equation}
 where the yields $n_{s,I}$ here refer explicitly to the expected contributions from signal for a specified hypothesis.
-In order to remove the dependence of the likelihood on the nuisance parameters, $\bm{\theta}$, two approaches are
-commonly adopted. The first, termed `profiling`, involves replacing the nuisance parameters with the values at which
-the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$.
-
+In order to remove the dependence of the likelihood on the nuisance parameters, $\bm{\theta}$, the nuisance parameter vaues are set to those at which
+the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$. This is 
+commonly referred to as `profiling' over the nuisance parameters\footnote{Other 
+procedures, such as marginalisation, can also be used to remove the dependence on 
+the nuisance parameters. For 
+reviews on how likelihoods, such as the simplified likelihood presented here, are
+used in searches for new physics, see Refs~\ref{CowanPDGProb,0954-3899-45-3-033001}}. 
 
 \begin{figure}[t!]
   \centering
@@ -840,7 +838,7 @@ Meanwhile, for the public, having a good approximation of the true likelihood is
 Moreover, the SL is very simple to transmit, requiring neither a big effort for the experimentalists to release it nor for the user to construct it. Additionally, with some standardization effort, part of this transmission process can be automated. 
 
 In this paper we introduced the formalism for the asymmetric version of the SL. 
-This formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: asymmetry is recognized as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
+This formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: asymmetry is recognised as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
 The inclusion of asymmetry completes the SL and provides a fully reliable framework.
 
 The asymmetric SL can be built either from the elementary systematic uncertainties themselves or from the three first moments  of the combination of the systematic uncertainties, which are easily obtained via MC generators. 
