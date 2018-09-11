@@ -111,7 +111,7 @@ Scientific observations of the real world are by nature imperfect in the sense t
 uncertainty unrelated to data, the \textit{systematic}   uncertainty. Identifying, measuring and modelling all the sources of systematic uncertainty is an important part of running a scientific experiment. A thorough treatment of such uncertainties is especially important in exploratory fields like particle physics and cosmology. In these fields of research,  
 today's experiments  can be of large scale and can contain a huge number of these  uncertainties. In the case of the Large Hadron Collider (LHC) experiments, for instance, the experimental likelihood functions used in Standard Model measurements and searches for new physics can contain several thousands of systematic uncertainties.
 
-Although sources of systematic uncertainty can be numerous and of very different nature, a general feature they share is that their most elementary components tend to be independent from each other. This property of independence between the elementary systematic uncertainties has profound consequences, and, as discussed below, is the reason why the approach presented in this work is so effective. Namely, independence of the uncertainties can be used in order to drastically simplify the experimental likelihood function, for the price of an often-negligible error that will be discussed at length in this paper.
+Although sources of systematic uncertainty can be numerous and of very different nature, a general feature they share is that their most elementary components tend to be independent from each other. This property of independence between the elementary systematic uncertainties has profound consequences, and, as discussed below, is the reason why the approach presented in this work is so effective. Namely, independence of the uncertainties can be used to drastically simplify the experimental likelihood function, for the price of an often-negligible error that will be discussed at length in this paper.
 
 The \textit{simplified likelihood} (SL) framework we present in this paper is a well-defined approximation scheme for experimental likelihoods. It can be used to simplify subsequent experimental analyses, to allow a uniform statistical treatment of published search-analysis data and to ease the transmission of results between an experiment and the scientific community.
 We build on the proposals for approximating likelihoods recently suggested in Refs.~\cite{Fichet:2016gvx,SL_note}, in which promising preliminary results have been shown.
@@ -176,7 +176,7 @@ $a_I(\alpha) \equiv a_I+n_{s,I}(\alpha),~b_I(\alpha) \equiv b_I$ and $c_I(\alpha
 \frac{ \mathrm{e}^{ \textstyle-\frac{1}{2}\bm{\theta}^\mathrm{T} \bm{\rho}^{-1} \bm{\theta} }}{\sqrt{(2\pi)^P}},
 \label{eq:SL_LHC}
 \end{equation}
-which is the expression we use in the rest of this paper. This expression is valid for data with any statistics of observation, however, since the data in particle physics are often observed event counts, $n_{I}^{\rm{obs}}$, the data will typically follow Poisson statistics such that
+which is the expression we use in the rest of this paper. This expression is valid for data with any statistics of observation. However, since the data in particle physics are often observed event counts, $n_{I}^{\rm{obs}}$, the data will typically follow Poisson statistics such that
 \be
 \textrm{Pr}(n^{\rm obs}_{I}|n_{I})\equiv \textrm{Pois}({n}^{\rm{obs}}_{I}|n_{I}) = \dfrac{(n_{I})^{{n}^{\rm{obs}}_{I}} \mathrm{e}^{-n_{I}}}{{n}^{\rm{obs}}_{I}!} \, .
 \ee
@@ -230,11 +230,11 @@ The reader interested only in the practical aspects of the SL framework can safe
 \subsection{Asymmetries and CLT at next-to-leading order}
 \label{se:skew_CLT}
 
-The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the SL framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information, however, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely when running the analyses. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
+The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the SL framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. However, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely when running the analyses. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
 
 
 The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. 
-However, by using the large $N$ expansion, we are able to  to express the CLT at next-to-leading order in a very simple way. 
+However, by using the large $N$ expansion, we are able to express the CLT at next-to-leading order in a very simple way. 
 We realise that a random variable $Z$ with characteristic function
 \be
 \varphi_Z(t)=\exp\left(-\frac{\sigma^2 t^2}{2}-i \frac{\gamma t^3}{6 \sqrt{N}} +O\left(\frac{t^4}{N}\right)\right) \label{eq:CF_CLT}
@@ -248,7 +248,7 @@ We will refer to this type of expression as ``normal expansion''. Details about 
 
 Equation~\eqref{eq:ZskewCLT}  readily gives the most basic CLT at next-to-leading order when assuming $Z=N^{-1/2}\sum_{j=1}^N \delta_j$, where the $\delta_j$ are  independent identically distributed centred nuisance parameters  of variance $\sigma^2$ and third moment $\gamma$. The method works similarly with the Lyapunov CLT, \ie\ when the $\delta_j$ are not identical, in which case one has defined $\sigma^2=N^{-1}\sum_{j=1}^N \sigma_j^2$, $\gamma=N^{-1}\sum_{j=1}^N \gamma_j$,
 
-Finally, our approach applies similarly to the multidimensional case where various linear combinations of the $\delta_j$ give rise to various $Z_I$. The $Z_I$ have covariance matrix $\Sigma_{IJ}$ and a skewness tensor $\gamma_{IJK}={\rm E}[Z_IZ_JZ_K]$. For our purposes, we neglect the non-diagonal elements of $\gamma$, keeping only  the diagonal elements, denoted $\gamma_{III}\equiv \gamma_I$. These diagonal elements encode the leading information about asymmetry, while the non-diagonal ones contain subleading information about asymmetry and correlations. With this approximation, we obtain the multidimensional CLT at next-to-leading order,
+Finally, our approach applies similarly to the multidimensional case where various linear combinations of the $\delta_j$ give rise to various $Z_I$. The $Z_I$ have a covariance matrix $\Sigma_{IJ}$ and a skewness tensor $\gamma_{IJK}={\rm E}[Z_IZ_JZ_K]$. For our purposes, we neglect the non-diagonal elements of $\gamma$, keeping only  the diagonal elements, denoted $\gamma_{III}\equiv \gamma_I$. These diagonal elements encode the leading information about asymmetry, while the non-diagonal ones contain subleading information about asymmetry and correlations. With this approximation, we obtain the multidimensional CLT at next-to-leading order,
 \be
 Z_I\rightarrow \theta_I+\frac{\gamma_{I}}{3\sqrt{N}}\theta_I^2\,,\,\,N\rightarrow \infty  \quad \textrm{with } \quad \theta_I\sim{\cal N}(0,\Sigma)\,. \label{eq:NLCFT}
 \ee
@@ -346,7 +346,7 @@ This means that the $c_I \theta_I^2$ term  corresponds  precisely to the leading
 
 The accuracy of the normal expansion $n =  a+ b \theta+ c \theta^2$ with $\theta\sim {\cal N}(0,1)$ --- and thus of the  simplified likelihood --- is expected to drop when only a few elementary  uncertainties are present and these depart substantially from the Gaussian shape. 
 This is the %combination of conditions for which 
-situation in which the next-to-leading CLT, Eq.~\eqref{eq:NLCFT}, tends to fail.  It is instructive to check  on a simple distribution how the normal expansion approximates the true distribution, and in which way discrepancies tend to appear.
+situation in which the next-to-leading CLT, Eq.~\eqref{eq:NLCFT}, tends to fail.  It is instructive to check  on a simple case how the normal expansion approximates the true distribution, and in which way discrepancies tend to appear.
 
 We consider the realistic  case of a log-normal distribution with parameters $\mu, \sigma$. We fix $\mu=0$ without loss of generality. The three first centered moments are
 \be
@@ -465,7 +465,7 @@ mixture of presentation styles:
 %
 \begin{itemize}
 \item \textit{Table format:} 2D histograms of either covariance or correlation
-  matrices. This has the difficulties that the convention used is not made clear
+  matrices. This has the difficulty that the convention used is not made clear
   (other than by inspection of the matrix diagonal), and without a structural
   association with first order dataset it is impossible for computer codes to
   unambiguously construct the relevant likelihood. In the case of the
@@ -701,7 +701,8 @@ hence higher moments of the experimental distributions.
   \includegraphics[width=\textwidth]{figures/plotmatrix}
   \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{b,J}$ for the LHC-like 
     % $I=4, 7, 31$ and 62 in pseudo-datasets generated from the
-    experimental pseudo-search (black points) as described in the text. The
+    experimental pseudo-search %(black points) 
+    as described in the text. The
     background heat map is generated from 100,000 samples from the true 
     model, the dashed red contours from the symmetric SL, and the solid
     green contours from the asymmetric SL. The diagonal panels show the
@@ -738,13 +739,13 @@ of the signal across all regions of the search, giving,
 \label{eq:muscale}
 \end{equation}
 where the yields $n_{s,I}$ here refer explicitly to the expected contributions from signal for a specified hypothesis.
-In order to remove the dependence of the likelihood on the nuisance parameters, $\bm{\theta}$, the nuisance parameter vaues are set to those at which
-the likelihood attains it maximum for a given set of $n^{\rm{obs}}_{I}$. This is 
+In order to remove the dependence of the likelihood on the nuisance parameters, $\bm{\theta}$, the nuisance parameter values are set to those at which
+the likelihood attains its maximum for a given set of $n^{\rm{obs}}_{I}$. This is 
 commonly referred to as `profiling' over the nuisance parameters\footnote{Other 
 procedures, such as marginalisation, can also be used to remove the dependence on 
 the nuisance parameters. For 
 reviews on how likelihoods, such as the simplified likelihood presented here, are
-used in searches for new physics, see Refs~\ref{CowanPDGProb,0954-3899-45-3-033001}}. 
+used in searches for new physics, see Refs.~\cite{CowanPDGProb,0954-3899-45-3-033001}}. 
 
 \begin{figure}[t!]
   \centering
@@ -815,8 +816,8 @@ the $c$ coefficient for bin 4
 however is slower to converge, requiring 5000--10,000 pseudo-datasets to calculate accurately. However, since the value of $c$ for this bin is 
 relatively small compared to $b$, the coefficient $c$ is less relevant so that a poor accuracy will have little effect on the accuracy of 
 the SL. In bin 86, the value of $c$ is relatively large, compared to $b$, meaning it will significantly contribute to the SL. In this case, 
-the convergence is quite fast, with only 2,500 pseudo-datasets required to acheive a 10\% accuracy in the value of $c$. We find the property 
-that bins with large $c$ values, compared to $b$ values, require fewer pseudo-datasets to acheive a good accuracy than bins for which the $c$ value 
+the convergence is quite fast, with only 2,500 pseudo-datasets required to achieve a 10\% accuracy in the value of $c$. We find the property 
+that bins with large $c$ values, compared to $b$ values, require fewer pseudo-datasets to achieve a good accuracy than bins for which the $c$ value 
 is less relevant generally holds in this study. 
 
 
@@ -864,10 +865,12 @@ If systematically adopted by the experimental and theory communities, the SL has
 %==================================================================
 
 This work has been initiated at the \textit{LHC Chapter II: The Run for New Physics} workshop held at IIP Natal, Brazil,  6--17 Nov.\ 2017. 
-AB is supported by a Royal Society University Research Fellowship grant.
+We thank the IIP Natal for hosting the workshop and creating a most inspiring working atmosphere.
+
+AB is supported by a Royal Society University Research Fellowship grant. 
 SF is supported by the S\~ao Paulo Research Foundation (FAPESP) under grants \#2011/11973, \#2014/21477-2 and  	
 \#2018/11721-4. 
-SK is supported by the IN2P3 project ``Th\'eorie -- LHCiTools'' and the CNRS-FAPESP collaboration grant PRC275431. 
+SK is supported by the IN2P3 project ``Th\'eorie LHCiTools'' and the CNRS-FAPESP collaboration grant PRC275431. 
 NW is funded through a Science and Techologies Facility Council (STFC) Fellowship grant \#ST/N003985/1.
 
 
