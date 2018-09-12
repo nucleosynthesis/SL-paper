@@ -113,7 +113,7 @@ today's experiments  can be of large scale and can contain a huge number of thes
 
 Although sources of systematic uncertainty can be numerous and of very different nature, a general feature they share is that their most elementary components tend to be independent from each other. This property of independence between the elementary systematic uncertainties has profound consequences, and, as discussed below, is the reason why the approach presented in this work is so effective. Namely, independence of the uncertainties can be used to drastically simplify the experimental likelihood function, for the price of an often-negligible error that will be discussed at length in this paper.
 
-The \textit{simplified likelihood} (SL) framework we present in this paper is a well-defined approximation scheme for experimental likelihoods. It can be used to simplify subsequent experimental analyses, to allow a uniform statistical treatment of published search-analysis data and to ease the transmission of results between an experiment and the scientific community.
+The \textit{simplified likelihood} (SL) framework we present in this paper is a well-defined approximation scheme for experimental likelihoods. It can be used to  computationally alleviate subsequent  analyses, to allow a uniform statistical treatment of published search-analysis data and to ease the transmission of results between an experiment and the scientific community.
 We build on the proposals for approximating likelihoods recently suggested in Refs.~\cite{Fichet:2016gvx,SL_note}, in which promising preliminary results have been shown.
 
 In the context of the LHC, communicating the experimental likelihoods, in their full form or in convenient approximations, was advocated in Refs.~\cite{Kraml:2012sg,Boudjema:2013qla}. 
@@ -230,7 +230,7 @@ The reader interested only in the practical aspects of the SL framework can safe
 \subsection{Asymmetries and CLT at next-to-leading order}
 \label{se:skew_CLT}
 
-The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the SL framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. However, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely when running the analyses. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
+The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the SL framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. However, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely, when marginalizing. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
 
 
 The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. 
@@ -246,7 +246,7 @@ Z= \theta+\frac{\gamma}{3\sqrt{N}}\theta^2\,,  \quad \textrm{with } \quad \theta
 We will refer to this type of expression as ``normal expansion''. Details about its derivation are given in Appendix~\ref{app:skew}.
 
 
-Equation~\eqref{eq:ZskewCLT}  readily gives the most basic CLT at next-to-leading order when assuming $Z=N^{-1/2}\sum_{j=1}^N \delta_j$, where the $\delta_j$ are  independent identically distributed centred nuisance parameters  of variance $\sigma^2$ and third moment $\gamma$. The method works similarly with the Lyapunov CLT, \ie\ when the $\delta_j$ are not identical, in which case one has defined $\sigma^2=N^{-1}\sum_{j=1}^N \sigma_j^2$, $\gamma=N^{-1}\sum_{j=1}^N \gamma_j$,
+Equation~\eqref{eq:ZskewCLT}  readily gives the most basic CLT at next-to-leading order when assuming $Z=N^{-1/2}\sum_{j=1}^N \delta_j$, where the $\delta_j$ are  independent identically distributed centred nuisance parameters  of variance $\sigma^2$ and third moment $\gamma$. The method works similarly with the Lyapunov CLT, \ie\ when the $\delta_j$ are not identical and have different moments $\sigma^2_j$, $\gamma_j$, in which case one has defined $\sigma^2=N^{-1}\sum_{j=1}^N \sigma_j^2$, $\gamma=N^{-1}\sum_{j=1}^N \gamma_j$,
 
 Finally, our approach applies similarly to the multidimensional case where various linear combinations of the $\delta_j$ give rise to various $Z_I$. The $Z_I$ have a covariance matrix $\Sigma_{IJ}$ and a skewness tensor $\gamma_{IJK}={\rm E}[Z_IZ_JZ_K]$. For our purposes, we neglect the non-diagonal elements of $\gamma$, keeping only  the diagonal elements, denoted $\gamma_{III}\equiv \gamma_I$. These diagonal elements encode the leading information about asymmetry, while the non-diagonal ones contain subleading information about asymmetry and correlations. With this approximation, we obtain the multidimensional CLT at next-to-leading order,
 \be
@@ -396,7 +396,7 @@ The log normal PDFs and corresponding normal approximations for $\sigma = 0.1$, 
 An important feature of the SL is that it is flexible in the sense that the combination of the systematic uncertainties does not have to be applied to the whole set.  The only requirement to combine a subset of the  uncertainties is that it should have a convergent enough  CLT behaviour in order  for the SL to be accurate. There is thus a freedom in partitioning the set of systematic uncertainties, giving rise to variants of the SL that can be either equivalent or slightly different upon  marginalizing.
 
 
-For instance, if a single systematic uncertainty $\bm{\theta}$ is left apart from the combination, the SL takes the form
+For instance, if a single systematic uncertainty $\delta$ is left apart from the combination, the SL takes the form
 \be
  L_{\rm{S}}(\bm{\alpha},\bm{\theta}) = \prod_{I=1}^P \mathrm{Pr}\Big( \hat{n}_I\,\Big|\,a_{I}(\bm{\alpha})+b_I\theta_I+c_I\theta_I^2 + \Delta_I  \delta   \Big) \cdot
     \frac{ \mathrm{e}^{{\textstyle-\frac{1}{2}\bm \theta^{\rm T} \bm{\rho}^{-1} \bm \theta}}}{\sqrt{(2\pi)^P }}
@@ -467,7 +467,7 @@ mixture of presentation styles:
 \item \textit{Table format:} 2D histograms of either covariance or correlation
   matrices. This has the difficulty that the convention used is not made clear
   (other than by inspection of the matrix diagonal), and without a structural
-  association with first order dataset it is impossible for computer codes to
+  association with a first order dataset it is impossible for computer codes to
   unambiguously construct the relevant likelihood. In the case of the
   presentation of a correlation (as opposed to covariance) matrix, the diagonal
   variances must be provided with the first-order dataset.
@@ -919,7 +919,7 @@ after using the large $N$ expansion. This function matches Eq.~\eqref{eq:CF_CLT}
 Z\rightarrow \theta+\frac{\gamma}{3\sqrt{N}}\theta^2\,,\,\,N\rightarrow \infty  \quad \textrm{with } \quad \theta\sim{\cal N}(0,\sigma^2)\,.
 \ee
 When the quadratic term becomes negligible the distribution becomes symmetric, and we recover the usual CLT.
-As expected, for finite $N$, we can see that  the support of $Z$ is not $\bf R$. For example for $\gamma>0$, we have
+We can see that  for finite $N$ (as opposed to $N\rightarrow \infty$) the support of $Z$ is not $\bf R$. For example for $\gamma>0$, we have
 $Z > -3\sqrt{N}/4\gamma$.
 
 
