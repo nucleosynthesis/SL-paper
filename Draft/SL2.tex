@@ -230,7 +230,7 @@ The reader interested only in the practical aspects of the SL framework can safe
 \subsection{Asymmetries and CLT at next-to-leading order}
 \label{se:skew_CLT}
 
-The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the SL framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. However, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely, when marginalizing or profiling the likelihood. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
+The CLT is often used in its asymptotic limit where the distribution becomes exactly normal. In the context of the SL framework, however, it is mandatory to keep the next-to-leading  term in the CLT's large $N$ expansion. This next-to-leading term encodes skewness: this is the main information about the asymmetry of the distribution. This asymmetry is a relevant feature for the analyses hence it is in principle safer to keep this information. However, keeping the asymmetry is truly critical for a slightly different reason discussed below. A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can, therefore, give inconsistencies such as a negative yield. This is a problem both conceptually and concretely, when marginalising or profiling the likelihood. This issue occurs because the Gaussian limit of the CLT loses information about the support. Using this limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric, therefore the skew must be taken into account.
 
 
 The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. 
@@ -261,7 +261,7 @@ Z_I\rightarrow \theta_I+\frac{\gamma_{I}}{3\sqrt{N}}\theta_I^2\,,\,\,N\rightarro
 \label{se:analytic}
 %==================================================================
 
-Let us now prove Eq.~\eqref{eq:SL_master}.  The dependence on the parameters of interest $\bm{\alpha}$ is left implicit in this section. We will first perform a step of  propagation of the uncertainties, then a step of combination. This is a generalization of the approach of \cite{Fichet:2016gvx}. Here we take into account the skew, hence there is no need to use an exponential parameterization like in \cite{Fichet:2016gvx}.
+Let us now prove Eq.~\eqref{eq:SL_master}.  The dependence on the parameters of interest $\bm{\alpha}$ is left implicit in this section. We will first perform a step of  propagation of the uncertainties, then a step of combination. This is a generalisation of the approach of \cite{Fichet:2016gvx}. Here we take into account the skew, hence there is no need to use an exponential parameterisation like in \cite{Fichet:2016gvx}.
 
 In this section the elementary nuisance parameters $\delta_i$ are independent, centered, have unit variance, and have skew $\gamma_i$, \ie
 \be
@@ -393,7 +393,7 @@ The log normal PDFs and corresponding normal approximations for $\sigma = 0.1$, 
 
 \subsection{Range of application}
 
-An important feature of the SL is that it is flexible in the sense that the combination of the systematic uncertainties does not have to be applied to the whole set.  The only requirement to combine a subset of the  uncertainties is that it should have a convergent enough  CLT behaviour in order  for the SL to be accurate. There is thus a freedom in partitioning the set of systematic uncertainties, giving rise to variants of the SL that can be either equivalent or slightly different upon  marginalizing.
+An important feature of the SL is that it is flexible in the sense that the combination of the systematic uncertainties does not have to be applied to the whole set.  The only requirement to combine a subset of the  uncertainties is that it should have a convergent enough  CLT behaviour in order  for the SL to be accurate. There is thus a freedom in partitioning the set of systematic uncertainties, giving rise to variants of the SL that can be either equivalent or slightly different upon  marginalising.
 
 
 For instance, if a single systematic uncertainty $\delta$ is left apart from the combination, the SL takes the form
@@ -450,7 +450,7 @@ the order of the moment from which they originate. We will use the term ``$n$-th
 order data'' to refer to information coming from a moment of order $n$; here, $n$
 will go only up to $3$. Second-order data includes the covariance matrix,
 correlation matrix, and/or diagonal uncertainties: these can be given either in a
-relative or absolute parametrization. There is the same kind of freedom for
+relative or absolute parametrisation. There is the same kind of freedom for
 third-order data but this does not need to be discussed here. In addition to the
 moments of the combined systematic uncertainties, this terminology will also
 apply to the observed central values and statistical uncertainties usually
@@ -515,11 +515,11 @@ There is not limit in the number of labels associated to an element hence this f
 For instance the $a_{I,i}$ error sources corresponding to the decomposed covariance  can just get bland names such as "{\tt sys,NP1}", but  can also be extended with, \eg, a ``{\tt th}'' prefix to allow separation of experimental and theory systematics (since the theory can in principle be improved on in future reinterpretations).
 
 
-This format requires some keyword standardization.  The final scheme should
+This format requires some keyword standardisation.  The final scheme should
 be capable of equally applying to any kind of experimental data and systematic uncertainties. In particular it should be valid for event counts,  differential cross-sections with bins correlated by the systematic uncertainties, correlations between  the bins of different distributions/datasets, and so on.
 
 
-Summarizing, our recommendation is to release the moments of the combined uncertainty distributions via the HepData error source format, which has built-in semantics of arbitrary complexity and can thus make the most of the SL framework. As a showcase example, we provide the pseudo-data used in the next section as a sandbox HepData record at \url{https://www.hepdata.net/record/sandbox/1535641814}.
+Summarising, our recommendation is to release the moments of the combined uncertainty distributions via the HepData error source format, which has built-in semantics of arbitrary complexity and can thus make the most of the SL framework. As a showcase example, we provide the pseudo-data used in the next section as a sandbox HepData record at \url{https://www.hepdata.net/record/sandbox/1535641814}.
 
 
 
@@ -574,10 +574,10 @@ uncertainty while the blue shaded band shows the uncorrelated uncertainty in eac
 
 \clearpage
 
-\subsection{Parameterization of backgrounds}
+\subsection{Parameterisation of backgrounds}
 
-It is typical in experimental searches of this type to classify systematic uncertainties into three broad categories, namely; those which affect only the normalization of a given process, those which effect both the
-`shape' or `distribution' of events of that process in addition to its normalization, and those which affect only a small number of bins or single bin in the distribution and are largely uncorrelated with the other
+It is typical in experimental searches of this type to classify systematic uncertainties into three broad categories, namely; those which affect only the normalisation of a given process, those which effect both the
+`shape' or `distribution' of events of that process in addition to its normalisation, and those which affect only a small number of bins or single bin in the distribution and are largely uncorrelated with the other
 bins (eg uncertainties due to limited MC simulation).
 
 The expected (or nominal)\footnote{It should be noted that the expectation value for $n_{b,I}$ is \emph{not} necessarily the same as the mean value. For this reason, we typically refer
@@ -616,7 +616,7 @@ and linear outside that range such that,
 The values of $\kappa_{Ij}^{-}$ and $\kappa_{Ij}^{+}$ are understood to be determined using the ratios of the template for a $-1\sigma$ variation to the nominal one and the $+1\sigma$
 variation to the nominal one, respectively\footnote{The accuracy of this interpolation scheme can be (and frequently is) tested by comparing the interpolation to templates for additional, known values of $f_{I}$ for $\delta_{j}$ values other than $0,-1$ and $1$.}.
 
-For uncertainties which directly modify the expected number of events $n_{i}$ of the distributions, an exponent interpolation is used as the parameterization.
+For uncertainties which directly modify the expected number of events $n_{i}$ of the distributions, an exponent interpolation is used as the parameterisation.
 This is advantageous since the number of events for this process in any given bin is always greater than 0 for any value of $\delta_{j}$. For a relative uncertainty $\epsilon_{Ij}$, the fraction varies as
 %
 \begin{equation}
@@ -627,7 +627,7 @@ This is advantageous since the number of events for this process in any given bi
 This is most common in the scenario where a limited number of MC simulation events are used to determine the value of $n_{b,I}^{0}$
 and hence there is an associated uncertainty. As these uncertainties will be uncorrelated between bins of the distributions, most of the terms $\epsilon_{Ij}$ will be 0.
 
-Systematic uncertainties that affect only the overall normalization are also interpolated using exponent functions,
+Systematic uncertainties that affect only the overall normalisation are also interpolated using exponent functions,
 %
 \begin{equation}
  N(\bm{\delta})  =   N^{0} \cdot \prod_{j} (1+K_{j})^{\delta_{j}},
@@ -636,10 +636,10 @@ Systematic uncertainties that affect only the overall normalization are also int
 %
 where $N^{0} = N(\bm{\delta}=0)$ and $j$ runs over the elementary nuisance parameters.  A simple extension to this arises if the uncertainty is `asymmetric', as in our pseudo-search;
 the value of $K_{j}$ is set to $K^{+}_{j}$ for $\delta_{j}\geq0$ and to $K^{-}_{j}$ for $\delta_{j} < 0$. Furthermore, any uncertainty which affects both the
-shape and the normalization can be incorporated by including terms such as those in Eq.~\eqref{eqn:frac_function} in addition to one of these normalization terms.
+shape and the normalisation can be incorporated by including terms such as those in Eq.~\eqref{eqn:frac_function} in addition to one of these normalisation terms.
 In our pseudo-search, there will be a separate $N(\bm{\delta})$ term for each category which provides the total expected background rate summing over the 30 bins of that category.
 
-Combining Eqs.~\eqref{eqn:frac_function},~\eqref{eqn:bin_function} and~\eqref{eqn:norm_function} yields the full parameterization,
+Combining Eqs.~\eqref{eqn:frac_function},~\eqref{eqn:bin_function} and~\eqref{eqn:norm_function} yields the full parameterisation,
 %
 \begin{equation}
  n_{b,I}(\bm{\delta}) = N^{0}\cdot \prod_{j}(1+K_{j})^{\delta_{j}} \cdot f^{0}_{I} \cdot\frac{1}{F(\bm{\delta})} \prod_{j} p_{Ij}(\delta_{j}) \cdot \prod_{j} (1+\epsilon_{Ij}\delta_{j}).
@@ -836,7 +836,7 @@ Although the SL is  accurate, it is still an approximation of the full experimen
 do not have to release their full %likelihood.
 model.
 Meanwhile, for the public, having a good approximation of the true likelihood is sufficient for most phenomenology purposes. 
-Moreover, the SL is very simple to transmit, requiring neither a big effort for the experimentalists to release it nor for the user to construct it. Additionally, with some standardization effort, part of this transmission process can be automated. 
+Moreover, the SL is very simple to transmit, requiring neither a big effort for the experimentalists to release it nor for the user to construct it. Additionally, with some standardisation effort, part of this transmission process can be automated. 
 
 In this paper we introduced the formalism for the asymmetric version of the SL. 
 This formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: asymmetry is recognised as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
