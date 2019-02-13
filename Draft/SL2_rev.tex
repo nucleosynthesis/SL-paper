@@ -133,7 +133,6 @@ Practical considerations regarding the SL flexibility and the release of the SL 
 Section~\ref{se:practice}.
 Finally a validation of the SL framework in a realistic pseudo-search at the LHC is presented in Section~\ref{se:SL_LHC}. 
 Section~\ref{se:conclusions} contains our summary and conclusions.
-%%%
 Two appendices give some more useful details: 
 Appendix~\ref{app:skew} contains a 1D example of how the skew appears in the asymptotic distribution, and 
 Appendix~\ref{app:reference_code} presents a reference implementation of the SL written in Python. 
@@ -146,7 +145,6 @@ Appendix~\ref{app:reference_code} presents a reference implementation of the SL 
 %==================================================================
 
 This section introduces the formalism and an efficient Monte-Carlo based calculation method. 
-%%% SK/SF, 08/02/19 %%% 
 Some preliminary remarks are in order.  
 From the conceptual point of view, the SL framework relies only on the convergence of the CLT. In practice however, 
 the representation of the SL will depend on broad, structural features of the dataset under consideration.  
@@ -158,7 +156,6 @@ Moreover, in the scope of a given problem, \eg\ the search for new physics in ou
 may simplify the formalism. Again, this should not be understood as a fundamental limitation, as such approximations  
 could be removed in a different application. A summary of the validity conditions for the SL treated in this paper 
 will be given in Section~\ref{se:conclusions}.
-%%%
 
 In the following, we will focus on the typical experimental likelihood used in searches for new phenomena at particle physics experiments. 
 However, as argued above, the SL approach can be easily generalised to other physics contexts.
@@ -200,7 +197,6 @@ $a_I(\alpha) \equiv a_I+n_{s,I}(\alpha),~b_I(\alpha) \equiv b_I$ and $c_I(\alpha
 \label{eq:SL_LHC}
 \end{equation}
 which is the expression we use in the rest of this paper. 
-%%% SK, 31/01/19 %%% 
 (Non-negligible signal uncertainties will be commented on in Sec.~\ref{se:application}.)
 The expression Eq.~\eqref{eq:SL_LHC} is valid for data with \textit{any statistics of observation}. 
 Since the data in particle physics are often observed event counts, $n_{I}^{\rm{obs}}$, they will typically follow Poisson statistics such that
@@ -208,7 +204,6 @@ Since the data in particle physics are often observed event counts, $n_{I}^{\rm{
 \textrm{Pr}(n^{\rm obs}_{I}|n_{I})\equiv \textrm{Pois}({n}^{\rm{obs}}_{I}|n_{I}) = \dfrac{(n_{I})^{{n}^{\rm{obs}}_{I}} \mathrm{e}^{-n_{I}}}{{n}^{\rm{obs}}_{I}!} \, .
 \ee
 However, as mentioned, the formalism presented here applies regardless of the dependence on the parameters of interest. For example, the likelihood can very well be multimodal in the parameters of interest; this does not affect the validity of the  approach. 
-%%%
 
 
 The parameters of the SL ($a_I, b_I, c_I, \rho_{IJ}$) have analytical expressions
@@ -261,10 +256,6 @@ The reader interested only in the practical aspects of the SL framework can safe
 \label{se:skew_CLT}
 
 
-% A normal distribution has a support on $\mathbf{R}$, while quantities like event yields are defined on $\mathbf{R}^+$. Having a nuisance parameter with a normal distribution can therefore give inconsistencies such as a negative yield. Truncating the normal distribution to keep only the positive values does not solve this paradox,  because the posterior can be improper in such case (see \textit{e.g.} \cite{Obj_Bayes}).~\footnote{ The fact that the posterior is improper is tied to  the fact that the truncated normal density  does not vanish at the point of truncation. } 
-%%This is a problem both conceptually and concretely, when marginalising or profiling the likelihood. 
-%The paradox actually occurs because the Gaussian limit of the CLT loses information about the support. Using the Gaussian limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric. Therefore the skew must be taken into account. %%% SK, 31/01/19 %%%  , which solves the negative yield paradox. 
-
 In the classical proof of the CLT, a Taylor expansion is applied to the characteristic functions of the random variables.
 Within this Taylor expansion, usually only the leading term is considered, resulting in an asymptotically Normal behavior for
 the sum of the random variables.
@@ -274,12 +265,6 @@ Another reason to take the asymmetry  into account is that event yields are defi
  $\mathbf{R}$. Thus, keeping only the leading order distribution can lead to negative yields.
 Such unphysical results can be interpreted as an indicator that the leading order approximation (namely the normal distribution) is too inaccurate. When taking the next-to-leading term into account, an asymmetric support -- such as $\mathbf{R}^+$ --  becomes possible, such that the issue of negative yields disappears. Concrete examples of this feature will be shown in  Fig.~\ref{fig:approxs}. 
 \footnote{It is in principle possible to truncate the Gaussian prior by requiring that the expected background plus signal be positive.  However in the presence of signal uncertainties with truncated Gaussian prior, the posterior can become improper   (see \textit{e.g.}~\cite{Obj_Bayes}). This can be understood as a pathology of such approach. In contrast, the alternative we propose does not require truncation. }
-
-
-
-%
-% the Gaussian limit of the CLT loses information about the support. Using the Gaussian limit is simply too rough an approximation. Instead, to have an asymmetric support such as $\mathbf{R}^+$,  the distribution must be asymmetric. Typical distributions including the asymmetry will be shown in  Fig.~\ref{fig:approxs}. 
-
 
 
 The deformed Gaussian obtained when keeping the skew into account does not seem to have in general an analytical PDF. 
@@ -394,8 +379,7 @@ This means that the $c_I \theta_I^2$ term  corresponds  precisely to the leading
 %==================================================================
 
 The accuracy of the normal expansion $n =  a+ b \theta+ c \theta^2$ with $\theta\sim {\cal N}(0,1)$ --- and thus of the  simplified likelihood --- is expected to drop when only a few elementary  uncertainties are present and these depart substantially from the Gaussian shape. 
-This is the %combination of conditions for which 
-situation in which the next-to-leading CLT, Eq.~\eqref{eq:NLCFT}, tends to fail.  It is instructive to check  on a simple case how the normal expansion approximates the true distribution, and in which way discrepancies tend to appear.
+This is the situation in which the next-to-leading CLT, Eq.~\eqref{eq:NLCFT}, tends to fail.  It is instructive to check  on a simple case how the normal expansion approximates the true distribution, and in which way discrepancies tend to appear.
 
 We consider the realistic  case of a log-normal distribution with parameters $\mu, \sigma$. We fix $\mu=0$ without loss of generality. The three first centered moments are
 \be
@@ -407,11 +391,9 @@ and  $a,b,c$ are obtained  using  Eqs.~\eqref{eq:solutions1}--\eqref{eq:solution
 For $\sigma\sim 0.69$, the bound $8m_2^3\approx m_3^2$  is reached (see Section~\ref{se:EL_SL}). This is the limit where
 the distribution is so asymmetric that the variance comes entirely from the $\theta^2$ term. Beyond this bound the  normal expansion cannot be used at all as Eqs.~\eqref{eq:solutions1}--\eqref{eq:solutions2} have no solutions.
 The distribution has $c>0$ thus $n$ has a lower bound given by $n>a-b^2/4c$. 
-%It turns out that except near the above mentioned 
 Below this limit on $\sigma$, the lower bound on $n$ is roughly $n\gtrsim 0.5$, therefore the approximation can never produce a negative event yield.
 
 To check numerically how well the approximation performs, the true and approximate PDFs are compared in Figure~\ref{fig:approxs} for various values of $\sigma$.  
-%For small asymmetries, $\sigma \sim 0.1$--$0.3$ when the true PDF is vanishing in the region $n < 0.5$, the approximation is excellent.  
 Since the approximate PDF never gives $n<0.5$, it can only be a good approximation if the true PDF is vanishing in this region. This is the case for
 asymmetries $\sigma \lesssim 0.3$, and as can be seen in the figure the normal approximation indeed works very well.
 For larger asymmetries, $\sigma = 0.45$ in our example, the true PDF becomes sizeable in the region $n<0.5$. 
@@ -467,10 +449,6 @@ Another reason to single out a nuisance parameter  from the combination (as show
 is if it has a large non-Gaussian PDF that one prefers to take into account exactly.
 In order to profit from the  versatility of the SL, an equally  versatile format is needed to release the SL data. This will be the topic of next subsection.
 
-%Finally, although systematic uncertainties on the \textit{signal} are easily accounted for (as explained in section~\ref{se:EL_SL}), when uncertainties that are correlated with the background are taken into account, the $b,c,\rho$ parameters  become dependent on the parameter of interest ${\bm \alpha}$. While there is no conceptual difference with the case  of background-only systematics, there are important practical differences. Numerical evaluations  become heavier  since  the parameters of the SL---especially $\rho_{IJ}(\alpha)$ which requires a matrix inversion---have to be evaluated for each value of ${\bm \alpha}$. Furthermore, the presentation of the SL data may also become more evolved.
-
-%Finally, although systematic uncertainties on the \textit{signal} are easily accounted for (as explained in section~\ref{se:EL_SL}), when uncertainties that are correlated with the background are taken into account, the $b,c,\rho$ parameters  become dependent on the parameter of interest ${\bm \alpha}$. 
-
 Finally, some considerations are in order regarding  \textit{signal uncertainties}. 
 The expected rate $n$ given in Eq.~\eqref{eq:propmult} splits as $n=s+b$ where $s$ is the signal and $b$ the background. 
 Each elementary nuisance parameter $\delta_i$ can in principle affect both $s$ and $b$. 
@@ -491,7 +469,6 @@ The signal $s^{0}$ and possibly $\Delta^s_{1}$, $\Delta^s_{2}$ depend on the par
 For discovery or limit-setting, the uncertainties on the signal are a subleading effect. In this paper, as said in Sec.~\ref{se:EL_SL}, 
 we have neglected signal uncertainties ($\Delta_{1}^s=\Delta_{2}^s=0$).
 In this approximation, only the background uncertainties remain in Eq.~\eqref{eq:propmultSB}, 
-%thus the uncertainties do not depend on ${\bm \alpha}$.
 and thus the SL does not depend on ${\bm \alpha}$. 
 A similar discussion of the signal$+$background case and a toy-model testing the SL in this case has been done in \cite{Fichet:2016gvx}. 
 
@@ -597,10 +574,8 @@ reconstructed via a sum of the form \be m_{2,IJ}= \sum {a_{I,i}a_{J,i}} \,
 \label{eq:sum_errsource}
 \ee
 where the $a_{I,i}$ are the released error sources.
-%The statistical uncertainties as well as
 The vector of third order data can be  indicated via a special label.
 There is not limit in the number of labels associated to an element hence this format is very flexible.
-%Current error source names are for instance ``{\tt stat}'' and ``{\tt sys,jesNp1}''.
 For instance the $a_{I,i}$ error sources corresponding to the decomposed covariance  can just get bland names such as "{\tt sys,NP1}", but  can also be extended with, \eg, a ``{\tt th}'' prefix to allow separation of experimental and theory systematics (since the theory can in principle be improved on in future reinterpretations).
 
 
@@ -671,7 +646,7 @@ bins (eg uncertainties due to limited MC simulation).
 
 
 The expected (or nominal)\footnote{It should be noted that the expectation value for $n_{b,I}$ is \emph{not} necessarily the same as the mean value. For this reason, we typically refer
-to this as the `nominal' value since it is the value attained when the elementary nuisance parameters are equal to their expectation values $\mathbf{\delta}=0$.} number of background events, due to a particular process, in a given bin ($I$) in %Eqn.~\ref{se:EL_SL} 
+to this as the `nominal' value since it is the value attained when the elementary nuisance parameters are equal to their expectation values $\mathbf{\delta}=0$.} number of background events, due to a particular process, in a given bin ($I$) in  
 Eq.~\eqref{eq:SL_master} is denoted by
 %
 \begin{equation}
@@ -794,8 +769,7 @@ hence higher moments of the experimental distributions.
 \begin{figure}[t]  \centering
   \includegraphics[width=\textwidth]{figures/plotmatrix}
   \caption{2D distributions of $\hat{n}_{b,I}$ against $\hat{n}_{b,J}$ for the LHC-like 
-    % $I=4, 7, 31$ and 62 in pseudo-datasets generated from the
-    experimental pseudo-search %(black points) 
+    experimental pseudo-search  
     as described in the text. The
     background heat map is generated from 100,000 samples from the true 
     model, the dashed red contours from the symmetric SL, and the solid
@@ -922,15 +896,15 @@ is less relevant generally holds in this study.
 
 
 The transmission of highly complex LHC likelihoods from the experimental collaborations to the scientific community
-has been a long standing issue. % The SL framework, besides having a sound theoretical basis, should satisfy both sides.
+has been a long standing issue. 
 In this paper, we proposed a simplified likelihood framework which can account for non-Gaussianities as a convenient way of presentation 
-with a sound theoretical basis. %, which will hopefully satisfy both sides.
+with a sound theoretical basis. 
 
 Although the SL is  accurate, it is still an approximation of the full experimental likelihood, hence the collaborations 
 do not have to release their full %likelihood.
 model.
 Meanwhile, for the public, having a good approximation of the true likelihood is sufficient for most phenomenology purposes. 
-Moreover, the SL is very simple to transmit, requiring neither a big effort for the experimentalists to release it nor for the user to construct it. Additionally, with some standardisation effort, part of this transmission process can be automated. 
+Moreover, the SL is very simple to transmit, requiring neither a substantial  effort for the experimentalists to release it nor for the user to construct it. Additionally, with some standardisation effort, part of this transmission process can be automated. 
 
 In this paper we introduced the formalism for the asymmetric version of the SL. 
 This formalism follows directly from the central limit behaviour of the combination of systematic uncertainties: asymmetry is recognised as the subleading term of the asymptotic distribution dictated by the CLT, which is then recast in a convenient form in the SL formulation. 
@@ -953,13 +927,12 @@ can be treated as described in this work.
 the SL must not depend on the parameters of interest. This is ensured if signal uncertainties are negligible to good approximation.    
 While the inclusion of pure signal uncertainties is straightforward, systematic uncertainties that are correlated between signal and background must be included in the derivation of the SL coefficients. Without this, the simplification to Eq.~\eqref{eq:SL_LHC} is no longer valid, as discussed in Section~\ref{se:application}. 
 \end{itemize}
-%%%
 
 
 In practice, for the transmission of the SL data from an experiment to the public, our recommendation is to simply release the three first moments of the combined uncertainties, preferably via the HepData repository in the error source format.  The SL framework is flexible in the sense that it can apply to one or more subsets of the systematic uncertainties,  and the HepData error source format  has adequate flexibility to account for any partitions of the uncertainties the releaser wishes to make.
 
-If adopted by the experimental and theory communities, and provided the above validity conditions are respected, the SL framework has the potential to 
-considerably improve both the documentation and the re-interpretation of the LHC results.
+If adopted by the experimental and theory communities, and provided the above validity conditions are respected, 
+the SL framework has the potential to considerably improve both the documentation and the re-interpretation of the LHC results.
 
 
 %==================================================================
