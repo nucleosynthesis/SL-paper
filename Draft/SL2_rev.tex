@@ -576,7 +576,7 @@ reconstructed via a sum of the form \be m_{2,IJ}= \sum {a_{I,i}a_{J,i}} \,
 where the $a_{I,i}$ are the released error sources.
 The vector of third order data can be  indicated via a special label.
 There is not limit in the number of labels associated to an element hence this format is very flexible.
-For instance the $a_{I,i}$ error sources corresponding to the decomposed covariance  can just get bland names such as "{\tt sys,NP1}", but  can also be extended with, \eg, a ``{\tt th}'' prefix to allow separation of experimental and theory systematics (since the theory can in principle be improved on in future reinterpretations).
+For instance the $a_{I,i}$ error sources corresponding to the decomposed covariance  can just get bland names such as ``{\tt sys,NP1}'', but  can also be extended with, \eg, a ``{\tt th}'' prefix to allow separation of experimental and theory systematics (since the theory can in principle be improved on in future reinterpretations).
 
 
 This format requires some keyword standardisation.  The final scheme should
@@ -613,15 +613,15 @@ In the following section, we describe a pseudo-search for new physics, inspired 
 \subsection{A LHC-like pseudo-search for new physics}
 \label{se:toy_search}
 
-In order to illustrate the construction of the SL, a model has been constructed which is representative of a search for new physics at the LHC. Typically, in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a `shape' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides crucial information to identify a potential signal.
+In order to illustrate the construction of the SL, a model has been constructed which is representative of a search for new physics at the LHC. Typically, in these searches the observed events are binned into histograms in which the ratio of signal to background contribution varies with the bin number. A search performed in this way is typically referred to as a ``shape'' analysis as the difference in the distribution (or shape) of the signal events, compared to that of the background, provides crucial information to identify a potential signal.
 
 Our pseudo-search requires to make  assumptions for an ``observed'' dataset, for the corresponding background, and for the new physics signal.  These ingredients are summarised in Figure~\ref{fig:toy},   
 which shows the distribution of events, in each of three categories along with the expected contribution from the background 
 and the uncertainties thereon, 
 and from some new physics signal.
-The `nominal' background follows a typical exponential distribution where fluctuations are present, representing a scenario in which limited MC  simulation (or limited data in some control sample) was used
-to derive the expected background contribution. The uncertainties due to this, indicated by the blue band, are uncorrelated between the different bins. Additionally, there are two uncertainties which modify the `shape' of
-backgrounds, in a correlated way. The effects of these uncertainties are indicated by alternate distributions representing `up' and `down' variations of the systematic uncertainty. Finally, there are two uncertainties
+The ``nominal'' background follows a typical exponential distribution where fluctuations are present, representing a scenario in which limited MC  simulation (or limited data in some control sample) was used
+to derive the expected background contribution. The uncertainties due to this, indicated by the blue band, are uncorrelated between the different bins. Additionally, there are two uncertainties which modify the ``shape'' of
+backgrounds, in a correlated way. The effects of these uncertainties are indicated by alternate distributions representing ``up'' and ``down'' variations of the systematic uncertainty. Finally, there are two uncertainties
 which effect only the overall expected rate of the backgrounds. These are indicated in each category as uncertainties on the normalisation $N$ of the background. These uncertainties are correlated between the three categories
 and represent two typical experimental uncertainties; a veto efficiency uncertainty (eff.) and the uncertainty from some data-simulation scale-factor (s.f.) which has been applied to the simulation.
 
@@ -640,7 +640,7 @@ uncertainty while the blue shaded band shows the uncorrelated uncertainty in eac
 \subsection{Parameterisation of backgrounds}
 
 It is typical in experimental searches of this type to classify systematic uncertainties into three broad categories, namely; those which affect only the normalisation of a given process, those which effect both the
-`shape' or `distribution' of events of that process in addition to its normalisation, and those which affect only a small number of bins or single bin in the distribution and are largely uncorrelated with the other
+``shape'' or ``distribution'' of events of that process in addition to its normalisation, and those which affect only a small number of bins or single bin in the distribution and are largely uncorrelated with the other
 bins (eg uncertainties due to limited MC simulation).
 
 
@@ -703,7 +703,7 @@ Systematic uncertainties that affect only the overall normalisation are also int
  \label{eqn:norm_function}
 \end{equation}
 %
-where $N^{0} = N(\bm{\delta}=0)$ and $j$ runs over the elementary nuisance parameters.  A simple extension to this arises if the uncertainty is `asymmetric', as in our pseudo-search;
+where $N^{0} = N(\bm{\delta}=0)$ and $j$ runs over the elementary nuisance parameters.  A simple extension to this arises if the uncertainty is ``asymmetric'', as in our pseudo-search;
 the value of $K_{j}$ is set to $K^{+}_{j}$ for $\delta_{j}\geq0$ and to $K^{-}_{j}$ for $\delta_{j} < 0$. Furthermore, any uncertainty which affects both the
 shape and the normalisation can be incorporated by including terms such as those in Eq.~\eqref{eqn:frac_function} in addition to one of these normalisation terms.
 In our pseudo-search, there will be a separate $N(\bm{\delta})$ term for each category which provides the total expected background rate summing over the 30 bins of that category.
@@ -809,7 +809,7 @@ of the signal across all regions of the search, giving,
 where the yields $n_{s,I}$ here refer explicitly to the expected contributions from signal for a specified hypothesis.
 In order to remove the dependence of the likelihood on the nuisance parameters, $\bm{\theta}$, the nuisance parameter values are set to those at which
 the likelihood attains its maximum for a given set of $n^{\rm{obs}}_{I}$. This is 
-commonly referred to as `profiling' over the nuisance parameters\footnote{Other 
+commonly referred to as ``profiling'' over the nuisance parameters\footnote{Other 
 procedures, such as marginalisation, can also be used to remove the dependence on 
 the nuisance parameters. For 
 reviews on how likelihoods, such as the simplified likelihood presented here, are
@@ -847,7 +847,7 @@ Figure~\ref{fig:tmucompare} shows a comparison of the value of $t_{\mu}$ as a fu
 likelihood and the asymmetric SL. In addition, the result obtained using only the symmetric SL is shown. As expected, the
 agreement between the full and simplified likelihood is greatly improved when including the quadratic term. A horizontal line is drawn at the value of
 $t_{\mu}= 3.86$. The agreement in this region is particularly relevant due to the fact that asymptotic approximations for the distributions of $t_{\mu}$~\cite{Cowan:2010js} allow one to determine the 95\% confidence level (CL) upper limit on the signal strength, $\mu_{\rm{up}}$.
-The signal hypothesis is `excluded' at 95\% CL if $\mu_{\rm{up}} < 1$.
+The signal hypothesis is ``excluded'' at 95\% CL if $\mu_{\rm{up}} < 1$.
 
 
 When determining the SL coefficients, we have relied on pseudo-datasets, as we expect this will often be the case for anyone providing SL 
