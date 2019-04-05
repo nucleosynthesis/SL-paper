@@ -274,7 +274,7 @@ void makeSimpleLikelihoodToy(){
 
     TLatex *lat = new TLatex();
     lat->SetTextFont(42);
-    lat->SetTextSize(0.038);
+    lat->SetTextSize(0.036);
     //lat->SetNDC();
     
     for (int c=1;c<4;c++){
